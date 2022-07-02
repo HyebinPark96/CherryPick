@@ -9,6 +9,6 @@ public class CherryPickControllerTest {
 	// http://localhost:8080/test/hello
 	@GetMapping("test/hello")
 	public String hello() {
-		return "<h1>Test</h1>";
+		return "<h1>Test2</h1>";
 	}
 }
