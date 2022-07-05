@@ -22,6 +22,8 @@
 
 		</div>
 	</div>
+</div>
+<div th:fragment="header-navbar" class="title">
 	<nav class="title-bottom">
 		<div></div>
 		<Button>HOME</Button>
@@ -46,5 +48,12 @@
 				<input id="mainsearch" placeholder="#인스타 #핫플 #스터디"></input>
 		</div>
 	</div>
+	<div style="color:gray;">▲사이트 이용자에게 표시될 헤더입니다.<br>
+	- 사진이 들어간 타이틀 영역은 홈 화면에만 표시될 예정입니다.(div th:fragment="header-title")<br>
+	- 중앙의 내비게이션 바는 모든 화면에 표시될 예정입니다. (div th:fragment="header-navbar")<br>
+	- 최하단의 검색창 기타 화면에만 표시될 예정입니다.(div th:fragment="header-sub")
+	(현재는 모든 화면에서 세 요소가 모두 표시됩니다.) 
+	</div>
+	
 </div>
 </html>

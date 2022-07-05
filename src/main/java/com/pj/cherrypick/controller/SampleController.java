@@ -22,6 +22,14 @@ public class SampleController {
 		System.out.println("demo3 호출");
 	}
 	
+	@GetMapping(value = "/demologin")
+	public void demologin() {
+	}
+	
+	@GetMapping(value = "/demojoin")
+	public void demojoin() {
+	}
+	
 } 
 
 
