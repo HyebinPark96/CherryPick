@@ -1,0 +1,202 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/layout-admin}">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head>
+
+<body>
+
+	<div class="content" layout:fragment="content">
+
+		<div class="content-top">
+			<div class="row">
+				<div class="col-md-12">
+					<b>CherryPick 관리자 페이지에 접속하셨습니다.</b>
+					<br>Ip : 000.000.000.0
+				</div>
+			</div>
+			<hr>
+		</div>
+
+		<div class="container">
+			<h3>회원관리</h3>
+
+
+			<div class="d-flex justify-content-between">
+				<div class="d-flex">
+					<div class="form-check">
+						<input class="form-check-input" type="radio"
+							name="flexRadioDefault" id="flexRadioDefault0"> <label
+							class="form-check-label" for="flexRadioDefault0"> 전체 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio"
+							name="flexRadioDefault" id="flexRadioDefault1"> <label
+							class="form-check-label" for="flexRadioDefault1"> 일반회원 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio"
+							name="flexRadioDefault" id="flexRadioDefault2" checked> <label
+							class="form-check-label" for="flexRadioDefault2"> 사업자회원 </label>
+					</div>
+				</div>
+				<div class="d-flex">
+					<div>
+						번호순 | 이름순
+					</div>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th scope="col">[ ]</th>
+							<th scope="col">순번</th>
+							<th scope="col">성명</th>
+							<th scope="col">전화번호</th>
+							<th scope="col">이메일</th>
+							<th scope="col">회원분류</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>[ ]</td>
+							<td>1,001</td>
+							<td>random</td>
+							<td>data</td>
+							<td>placeholder</td>
+							<td>사업자</td>
+							<td>X</td>
+						</tr>
+						<tr>
+							<td>[ ]</td>
+							<td>1,001</td>
+							<td>random</td>
+							<td>data</td>
+							<td>placeholder</td>
+							<td>placeholder</td>
+							<td>X</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<Button class="btn btn-danger">선택 탈퇴</Button>
+		</div>
+		
+		<div class="container">
+			<h3>사업장관리</h3>
+
+
+			<div class="d-flex justify-content-between">
+				<div class="d-flex">
+					
+					<div class="form-check">
+						<input class="form-check-input" type="radio"
+							name="flexRadioDefault" id="flexRadioDefault1"> <label
+							class="form-check-label" for="flexRadioDefault1"> 승인대기 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio"
+							name="flexRadioDefault" id="flexRadioDefault2" checked> <label
+							class="form-check-label" for="flexRadioDefault2"> 등록됨 </label>
+					</div>
+				</div>
+				<div class="d-flex">
+					<div>
+						번호순 | 업체명순
+					</div>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th scope="col">[ ]</th>
+							<th scope="col">순번</th>
+							<th scope="col">카페명</th>
+							<th scope="col">대표번호</th>
+							<th scope="col">이메일</th>
+							<th scope="col">[자세히]</th>
+							<th scope="col">[]</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>[ ]</td>
+							<td>1,001</td>
+							<td>random</td>
+							<td>data</td>
+							<td>placeholder</td>
+							<td></td>
+							<td>X</td>
+						</tr>
+						<tr>
+							<td>[ ]</td>
+							<td>1,001</td>
+							<td>random</td>
+							<td>data</td>
+							<td>placeholder</td>
+							<td>placeholder</td>
+							<td>X</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<Button class="btn btn-danger">선택 삭제</Button>
+			
+			<div class="table-responsive">
+				<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th scope="col">[ ]</th>
+							<th scope="col">순번</th>
+							<th scope="col">카페명</th>
+							<th scope="col">대표번호</th>
+							<th scope="col">이메일</th>
+							<th scope="col">[자세히]</th>
+							<th scope="col">[]</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>[ ]</td>
+							<td>1,001</td>
+							<td>random</td>
+							<td>data</td>
+							<td>placeholder</td>
+							<td></td>
+							<td>V</td>
+						</tr>
+						<tr>
+							<td>[ ]</td>
+							<td>1,001</td>
+							<td>random</td>
+							<td>data</td>
+							<td>placeholder</td>
+							<td>placeholder</td>
+							<td>V</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<Button class="btn btn-primary">선택 승인</Button>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

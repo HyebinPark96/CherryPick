@@ -1,18 +1,17 @@
 package com.pj.cherrypick.domain;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @AllArgsConstructor
-@Data
+@Data 
 public class MemberVO {
 
-	private int mno;
 	private String mid;
-	private String mpw;
-	private String mname;
-	private Timestamp regdate;
+	private String pwd;
+	private String name;
+	private String phone;
+	private String email;
+	private int role; // USER, ADMIN 둘 중 하나만 사용 가능
 	
 }
