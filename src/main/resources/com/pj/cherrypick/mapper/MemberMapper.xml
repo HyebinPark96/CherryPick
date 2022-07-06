@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace의 값은, MemberMapper.xml의 쿼리를 호출할 Mapper Class의 경로와 클래스명으로 하도록 해야한다. -->
+<mapper namespace="com.pj.cherrypick.mapper.MemberMapper" >
+
+	<!--  .yml에 type-aliases-package: com.pj.cherrypick.domain 했으므로 resultType 경로 간소화-->
+ 	<select id="listmap" resultType="MemberVO">
+        select * from member
+    </select> 
+    
+</mapper>
