@@ -20,8 +20,11 @@
 		</div>
 		<hr>
 		<div>
-		<h4>아래는 버튼을 클릭하면 나타날 회원가입 폼입니다.</h4>
-		<p>(페이지 이동, 또는 버튼을 숨기고 현재 페이지에 표시)</p>
+			<div style="color: gray;">
+				▼ 회원가입 버튼을 클릭하면 나타날 회원가입 폼입니다.(구현예정)
+				<p>(페이지 이동, 또는 버튼을 숨기고 현재 페이지에 표시)</p>
+			</div>
+
 		</div>
 
 		<div class="input-form-backgroud row">
@@ -38,16 +41,16 @@
 							<button class="btn btn-primary">중복확인</button>
 						</div>
 					</div>
-					
+
 					<div class="col-md-6 mb-3">
-						<label for="nickname">비밀번호</label> <input type="text"
-							class="form-control" id="nickname" placeholder="" value=""
+						<label for="password">비밀번호</label> <input type="password"
+							class="form-control" id="pwd" placeholder="" value=""
 							required>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
 					<div class="col-md-6 mb-3">
-						<label for="nickname">비밀번호 확인</label> <input type="text"
-							class="form-control" id="nickname" placeholder="" value=""
+						<label for="password">비밀번호 확인</label> <input type="password"
+							class="form-control" id="pwdchk" placeholder="" value=""
 							required>
 						<div class="invalid-feedback">비밀번호 확인</div>
 					</div>
@@ -60,12 +63,12 @@
 					</div>
 
 					<div class="mb-3">
-						<label for="email">전화번호</label> <input type="email"
-							class="form-control" id="email" placeholder="you@example.com"
+						<label for="email">전화번호</label> <input type="text"
+							class="form-control" id="phone" placeholder="010-000-0000"
 							required>
 						<div class="invalid-feedback">전화번호를 입력해 주세요.</div>
 					</div>
-					
+
 					<div class="mb-3">
 						<label for="email">이메일</label> <input type="email"
 							class="form-control" id="email" placeholder="you@example.com"
@@ -85,7 +88,6 @@
 				</form>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

@@ -34,6 +34,14 @@ public class SampleController {
 	public void demobmk() {
 	}
 	
+	@GetMapping(value = "/demoreview")
+	public void demoreview() {
+	}
+	
+	@GetMapping(value = "/test")
+	public void test() {
+	}
+	
 } 
 
 
