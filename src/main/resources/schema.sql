@@ -11,4 +11,4 @@ COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB
 ;
 
-INSERT INTO member VALUES ('aaa', '1234', 'aaa', '010-1234-5678', 'aaa@aaa.com', 0);
+INSERT INTO member VALUES ('bbb', '1234', 'aaa', '010-1234-5678', 'aaa@aaa.com', 0);

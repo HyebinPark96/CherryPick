@@ -2,8 +2,6 @@ server:
   port: 80
   
 spring: 
-  schema: classpath:schema.sql # 테이블 자동생성
-
   thymeleaf:
     prefix : classpath:templates/
     suffix : .html
@@ -14,16 +12,19 @@ spring:
     url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul
     username: root
     password: 1234
-        
+  sql:
+    init:
+      mode: never
+      
 mybatis: 
-  type-aliases-package: com.pj.cherrypick.domain
-  configuration:    
-    multiple-result-sets-enabled: false    
-    map-underscore-to-camel-case: true    
-    call-setters-on-nulls: true        
-    jdbc-type-for-null: varchar    
-    default-fetch-size: 500  
-  mapper-locations: com.pj.cherrypick/mapper/*.xml
+    configuration:    
+        multiple-result-sets-enabled: false    
+        map-underscore-to-camel-case: true    
+        call-setters-on-nulls: true        
+        jdbc-type-for-null: varchar    
+        default-fetch-size: 500  
+    mapper-locations: com.pj.cherrypick/mapper/*.xml
+    #type-aliases-package: com.pj.cherrypick.domain
 
         
         
