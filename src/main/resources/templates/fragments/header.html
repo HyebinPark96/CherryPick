@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header-title" class="title">
+	<div class="title-banner">
+		<div class="title-top">
+			<div class="title-top-left">
+				<img src="/img/logo.png" width="150px">
+			</div>
+			<div class="title-top-right">Logout</div>
+		</div>
+		<div class="title-center">
+			<span style="font-size: 12px;
+	color: #ddd;">주목할 만한, 글귀 한 구절!</span>
+			<h3>망고플레이트</h3>
+
+			<div class="title-searchbar">
+				<div>
+					&nbsp;&nbsp;<img src="/img/search-w.png" style="height: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;
+				</div>
+				<input id="title-search-input" placeholder="가고 싶은 카페를 찾아보세요. #인스타 #핫플 #스터디"></input>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div th:fragment="header-navbar" class="title">
+	<nav class="title-bottom">
+		<div></div>
+		<Button>HOME</Button>
+		<Button>LINK A</Button>
+		<Button>LINK B</Button>
+		<Button>LINK C</Button>
+		<Button>LINK D</Button>
+		<Button>LINK E</Button>
+		<div></div>
+	</nav>
+</div>
+
+<div th:fragment="header-sub">
+	<div class="sub">
+		<div class="sub-left">
+			<img class="logo-pink" src="/img/logo-pink.png"></img>
+		</div>
+		<div class="sub-searchbar">
+			<div>
+					&nbsp;&nbsp;<img src="/img/search-b.png" style="height: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;
+				</div>
+				<input id="mainsearch" placeholder="#인스타 #핫플 #스터디"></input>
+		</div>
+	</div>
+	<div style="color:gray;">▲사이트 이용자에게 표시될 헤더입니다.<br>
+	- 사진이 들어간 타이틀 영역은 홈 화면에만 표시될 예정입니다.(div th:fragment="header-title")<br>
+	- 중앙의 내비게이션 바는 모든 화면에 표시될 예정입니다. (div th:fragment="header-navbar")<br>
+	- 최하단의 검색창 기타 화면에만 표시될 예정입니다.(div th:fragment="header-sub")
+	(현재는 모든 화면에서 세 요소가 모두 표시됩니다.) 
+	</div>
+	
+</div>
+</html>

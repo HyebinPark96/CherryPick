@@ -1,0 +1,150 @@
+button {
+	background-color: transparent;
+	border: none;
+}
+
+input {
+	border: none;
+}
+
+textarea:focus, input:focus {
+	outline: none;
+}
+
+.content-top{
+	text-align: center;
+}
+
+.content-top-tab{
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.back-icon{
+	width: 20px;
+}
+
+
+
+/*========header-title 요소========*/
+.title{
+	filter: drop-shadow(0px 6px 4px #bbb);
+}
+.title-banner {
+	height: 300px;
+	text-align: center;
+	background-image: url("/img/banner.jpg");
+	background-size: cover;
+	position: relative;
+	align-items: center;
+}
+
+.title-top {
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px;
+}
+
+
+
+.title-center {
+	color: white;
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.title-bottom {
+	background-color: #a6434b;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.title-bottom * {
+	color: #ddd;
+}
+
+.title-searchbar {
+	color: white;
+	display: flex;
+	align-items: center;
+	margin-left: 25px;
+	margin-right: 25px;
+	min-height: 30px;
+	border: 5px solid #a6434b;
+	border-radius: 50px;
+}
+
+#title-search-input {
+	color: white;
+	height: 100%;
+	width: 80%;
+	background-color: transparent;
+	border: none;
+}
+
+#title-search-input::placeholder {
+	color: #999;
+}
+
+/*========header-sub 요소========*/
+.sub {
+	display: flex;
+	align-items: center;
+	background-color: #EFE9EB;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	filter: drop-shadow(0px 3px 4px #bbb);
+}
+
+.logo-pink {
+	width: 100px;
+}
+
+.sub-searchbar {
+	background-color: white;
+	color: #ccc;
+	display: flex;
+	align-items: center;
+	margin-left: 10px;
+	min-height: 30px;
+	border: 1px solid #bbb;
+	border-radius: 50px;
+	width: 50%;
+}
+
+/*========footer 요소========*/
+.footer-logo {
+	width: 150px;
+}
+
+.footer {
+	color: #ddd;
+	display: flex;
+	flex-direction: column;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	justify-content: center;
+	background-color: #3E3E3E;
+	text-align: center;
+}
+
+.footer-list-container {
+	color: #bbb;
+	display: flex;
+	align-items: top;
+	justify-content: space-evenly;
+}
+
+.footer-list-container ul {
+	padding-left: 0px;
+	list-style: none;
+}
