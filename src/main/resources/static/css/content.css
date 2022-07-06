@@ -200,3 +200,8 @@
 	color : white;
 	font-size: 18px;
 }
+
+/*북마크 화면*/
+.bmk-tab{
+	display: flex;
+}

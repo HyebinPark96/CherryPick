@@ -11,6 +11,19 @@ textarea:focus, input:focus {
 	outline: none;
 }
 
+.content-top{
+	text-align: center;
+}
+
+.content-top-tab{
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.back-icon{
+	width: 20px;
+}
+
 
 
 /*========header-title 요소========*/

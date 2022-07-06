@@ -30,6 +30,10 @@ public class SampleController {
 	public void demojoin() {
 	}
 	
+	@GetMapping(value = "/demobmk")
+	public void demobmk() {
+	}
+	
 } 
 
 
