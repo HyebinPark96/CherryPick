@@ -1,20 +1,33 @@
 server:
   port: 80
+  servlet: 
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
   
 spring: 
   thymeleaf:
-    prefix : classpath:templates/
-    suffix : .html
-    cache : false # thymeleaf 실행시 서버에 저장을 하지 않겠다. (코드 수정 후에 서버 재실행 막기 위함.)
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false # thymeleaf 실행시 서버에 저장을 하지 않겠다. (코드 수정 후에 서버 재실행 막기 위함.)
   
   datasource: 
     driver-class-name: com.mysql.cj.jdbc.Driver
+
     url: jdbc:mysql://34.64.87.234:3306/cherrypick?serverTimezone=Asia/Seoul
     username: cherrypick
     password: F}$IG2"s{{^^H+%}
+
+
   sql:
     init:
       mode: never
+      
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
       
 mybatis: 
     configuration:    

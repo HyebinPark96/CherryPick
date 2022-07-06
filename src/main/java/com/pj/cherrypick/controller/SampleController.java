@@ -29,6 +29,7 @@ public class SampleController {
 	
 	@GetMapping(value = "/demojoin")
 	public void demojoin() {
+		System.out.println("demojoin 호출");
 	}
 	
 	@GetMapping(value = "/demobmk")

@@ -48,11 +48,11 @@
 		</dependency>
 		
 		<!-- 마이바티스 시작 -->
-	<dependency>    
-		<groupId>org.mybatis.spring.boot</groupId>    
-		<artifactId>mybatis-spring-boot-starter</artifactId>    
-		<version>2.1.4</version>
-	</dependency>
+		<dependency>    
+			<groupId>org.mybatis.spring.boot</groupId>    
+			<artifactId>mybatis-spring-boot-starter</artifactId>    
+			<version>2.1.4</version>
+		</dependency>
 		
 		<dependency>
 		    <groupId>mysql</groupId>
@@ -89,6 +89,14 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
+		<!-- 잭슨 라이브러리 : JSON 데이터 구조를 처리해주는 라이브러리 -->
+		<dependency>      
+			<groupId>com.fasterxml.jackson.core</groupId>      
+			<artifactId>jackson-databind</artifactId>      
+			<version>2.12.4</version>    
+		</dependency>
+		
 	</dependencies>
 
 	<build>
