@@ -43,6 +43,11 @@ public class SampleController {
 	public void demoregcafe() {
 	}
 	
+	
+	@GetMapping(value = "/demoadmin")
+	public void demoadmin() {
+	}
+	
 	@GetMapping(value = "/test")
 	public String test(Model model) {
 		
