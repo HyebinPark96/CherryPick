@@ -214,3 +214,9 @@
 .myreview-item{
 	display: flex;
 }
+
+/*카페등록*/
+.newmenu *{
+	border:solid 1px;
+	height:100px;
+}
