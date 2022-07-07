@@ -1,4 +1,6 @@
-
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="header-title" class="title">
@@ -7,7 +9,10 @@
 			<div class="title-top-left">
 				<img src="/img/logo.png" width="150px">
 			</div>
-			<div class="title-top-right">Logout</div>
+			<div  th:if="${principal==null}" class="title-top-right">
+				<a href="/auth/loginForm">Sign in</a>
+				<a href="/auth/joinForm">Sign up</a>
+			</div>
 		</div>
 		<div class="title-center">
 			<span style="font-size: 12px;

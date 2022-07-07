@@ -21,8 +21,8 @@ public class MemberApiController {
 		System.out.println("save함수 호출");
 		
 		MemberVO member2 = new MemberVO();
-		member2.setMid(member.getMid());
-		member2.setPwd(member.getPwd());
+		member2.setUsername(member.getUsername());
+		member2.setPassword(member.getPassword());
 		member2.setName(member.getName());
 		member2.setPhone(member.getPhone());
 		member2.setEmail(member.getEmail());
@@ -32,5 +32,7 @@ public class MemberApiController {
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 	}
+	
+	
 	
 }

@@ -3,12 +3,13 @@ let index = {
 		$("#btn-save").on("click", ()=>{ // 람다식 쓰는 이유 : this 바인딩
 			this.save(); // save 함수 호출
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
+		
 	},
 	
 	save: function(){
 		let data = {
-			mid: $("#mid").val(),
-			pwd: $("#pwd").val(),
+			mid: $("#username").val(),
+			pwd: $("#password").val(),
 			name: $("#name").val(),
 			phone: $("#phone").val(),
 			email: $("#email").val()

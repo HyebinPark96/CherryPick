@@ -1,19 +1,21 @@
 package com.pj.cherrypick.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data 
+@Builder
 public class MemberVO {
 
-	private String mid;
-	private String pwd;
+	private String username;
+	private String password;
 	private String name;
 	private String phone;
 	private String email;
-	private int role; // USER, ADMIN 둘 중 하나만 사용 가능
+	private int role;
 	
 }
