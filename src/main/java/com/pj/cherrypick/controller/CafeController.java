@@ -23,10 +23,12 @@ public class CafeController {
 	private CafeService cafeService;
 	
 	// 카페목록
-	@GetMapping
+	@GetMapping("/list")
 	public List<CafeVO> getCafeList() {
 		return cafeService.getCafeList();
-	}
+		}
+
+	
 	
 	// 카페상세정보
 	@GetMapping("/{cno}")

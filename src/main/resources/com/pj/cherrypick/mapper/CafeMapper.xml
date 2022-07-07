@@ -4,7 +4,7 @@
 <mapper namespace="com.pj.cherrypick.mapper.CafeMapper" >
 
 	<!-- 전체 카페리스트업 쿼리-->
- 	<select id="getCafeList" resultType="CafeVO">
+ 	<select id="getCafeList" resultType="com.pj.cherrypick.domain.CafeVO">
         select * from cafe
     </select> 
     
