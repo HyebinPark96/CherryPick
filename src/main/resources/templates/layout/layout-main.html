@@ -14,7 +14,7 @@
  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body> 
-	<div th:replace="${#httpServletRequest.requestURI}=='/demomain' ? ~{fragments/header:: header-title} : _"></div>
+	<div th:replace="${#httpServletRequest.requestURI}=='/' ? ~{fragments/header:: header-title} : _"></div>
 	<div th:replace="fragments/header:: header-navbar"></div>
 	<div th:replace="${#httpServletRequest.requestURI}!='/demomain' ? ~{fragments/header:: header-sub} : _"></div>
 
