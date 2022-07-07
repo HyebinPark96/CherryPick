@@ -8,8 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SampleController {
 
 
+	@GetMapping({"","/"})
+	public String demomain(Model model) {
+		model.addAttribute("isMainPage", true);
+		System.out.println("demomain 호출");
+		return "demomain";
+	}
+	
 	@GetMapping(value = "/demo1")
-	public void demo1() {
+	public void demo1(Model model) {
+		model.addAttribute("isMainPage", false);
 		System.out.println("demo1 호출");
 	}
 	
