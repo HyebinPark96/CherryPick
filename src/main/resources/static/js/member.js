@@ -8,8 +8,8 @@ let index = {
 	
 	save: function(){
 		let data = {
-			mid: $("#username").val(),
-			pwd: $("#password").val(),
+			username: $("#username").val(),
+			password: $("#password").val(),
 			name: $("#name").val(),
 			phone: $("#phone").val(),
 			email: $("#email").val()
