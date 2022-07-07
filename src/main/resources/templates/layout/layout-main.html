@@ -16,7 +16,7 @@
 <body> 
 	<div th:replace="${#httpServletRequest.requestURI}=='/' ? ~{fragments/header:: header-title} : _"></div>
 	<div th:replace="fragments/header:: header-navbar"></div>
-	<div th:replace="${#httpServletRequest.requestURI}!='/demomain' ? ~{fragments/header:: header-sub} : _"></div>
+	<div th:replace="${#httpServletRequest.requestURI}!='/' ? ~{fragments/header:: header-sub} : _"></div>
 
 	<div layout:fragment="content"></div>
 
