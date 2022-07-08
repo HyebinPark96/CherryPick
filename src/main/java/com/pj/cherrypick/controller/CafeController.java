@@ -25,14 +25,15 @@ public class CafeController {
 	// 카페목록
 	@GetMapping("/list")
 	public List<CafeVO> getCafeList() {
+		System.out.println("카페리스트 실행");
 		return cafeService.getCafeList();
 		}
 
 	
-	
 	// 카페상세정보
 	@GetMapping("/{cno}")
 	public CafeVO getCafe(@PathVariable int cno) {
+		System.out.println("카페정보 실행");
 		return cafeService.getCafe(cno);
 	}
 	

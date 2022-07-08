@@ -4,9 +4,14 @@
 <mapper namespace="com.pj.cherrypick.mapper.CafeMapper" >
 
 	<!-- 전체 카페리스트업 쿼리-->
- 	<select id="getCafeList" resultType="com.pj.cherrypick.domain.CafeVO">
-        select * from cafe
+ 	<select id="getCafeList" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+        SELECT * FROM cafe
     </select> 
+    <!-- cno로 카페정보 호출-->
+ 	<select id="getCafe" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">
+        SELECT * FROM cafe WHERE cno = #{cno}
+    </select> 
+    
     
    
     
