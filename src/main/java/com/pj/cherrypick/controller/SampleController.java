@@ -60,7 +60,7 @@ public class SampleController {
 	@GetMapping(value = "/test")
 	public String test(Model model) {
 		
-		return "";
+		return "test";
 	}
 	
 } 

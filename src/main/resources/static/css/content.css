@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	min-height: 200px;
+	min-height: 400px;
 }
 
 /*메인 페이지*/
@@ -223,12 +223,21 @@
 .join-option .opt {
 	display: flex;
 	align-items: center;
-	width: 360px;
+	width: 320px;
 	height: 50px;
-	background-color: #a6434b;
-	color: white;
+	background-color: white;
+	color:  #a6434b;
 	font-size: 18px;
+	font-weight: bold;
+	border-radius: 10px;
+	border: 5px solid  #a6434b;
+
 }
+
+.opt :hover{
+	cursor : pointer
+}
+
 
 /*북마크 화면*/
 .bmk-tab {
@@ -245,3 +254,4 @@
 	border: solid 1px;
 	height: 100px;
 }
+
