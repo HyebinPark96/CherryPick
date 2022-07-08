@@ -54,6 +54,38 @@
 				</div>
 				<hr>
 			</th:block>
+			
+			<button type="button" class="btn btn-outline-secondary col-md-12">더보기</button>
+			
+			<div class="nextBlock">
+				<th:block th:each="num : ${#numbers.sequence(1,3)}">
+				<div class="myreview-item">
+
+					<div class="">
+						<div>
+							<span style="font-size: 25px; font-weight: bold;">카페 이름</span>
+							<span class="">별점 : 0.0</span><br>
+							<span style="color:gray;">서울특별시 강남구 봉은사로</span> 
+						</div>
+						<br>
+						<div>
+							<div style="color:gray;">5일 전</div>
+							<div><b>나의 별점 : 0.0</b></div>
+							<div>리뷰 영역을 나타내는 더미 데이터입니다. 걷다가 보면 항상 이렇게 너를 바라만 보던 너를
+								생각한다고 말할까 지금 집앞에 기다리고 때론 지나치고 다시 기다리는 꽃이 피는 거리에 보고파라 이밤에 걷다가 보면
+								항상 이렇게 너를 아쉬워 하다 너를 기다린다고 말할까 지금 집앞에 계속 이렇게 너를 아쉬워 하다 너를 연락했다 할까
+							</div>
+							<div><b>(heart) : 0</b></div>
+						</div>
+					</div>
+					<div
+						style="width: 300px; background-image: url('https://images.pexels.com/photos/7541176/pexels-photo-7541176.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load');">
+					</div>
+					
+				</div>
+				<hr>
+			</th:block>
+			</div>
 
 			
 		</div>
