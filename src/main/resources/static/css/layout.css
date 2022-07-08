@@ -1,3 +1,17 @@
+a{
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: underline;	
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+
+
 button {
 	background-color: transparent;
 	border: none;
