@@ -238,6 +238,10 @@
 	cursor : pointer
 }
 
+.alertId{
+	color: red;
+}
+
 
 /*북마크 화면*/
 .bmk-tab {
