@@ -1,10 +1,14 @@
 package com.pj.cherrypick.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor // 생성자 전부 만들어
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Data 
+@Builder
 public class CafeVO {
 
 	private int cno;

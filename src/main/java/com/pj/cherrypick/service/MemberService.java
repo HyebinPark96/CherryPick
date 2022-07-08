@@ -23,6 +23,10 @@ public class MemberService {
 		String encPassword = encoder.encode(rawPassword); // 해쉬
 		member.setPassword(encPassword); // 시큐리티 적용
 		memberMapper.signUp(member);
-		System.out.println("MemberService 실행됨");
+	}
+	
+	@Transactional
+	public String findUsername(String name, String email) throws Exception {
+		return memberMapper.findUsername(name, email); // 아이디 찾기
 	}
 }
