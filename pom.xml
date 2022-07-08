@@ -47,6 +47,12 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<!--spring-boot-starter-mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		
 		<!-- 마이바티스 시작 -->
 		<dependency>    
 			<groupId>org.mybatis.spring.boot</groupId>    
