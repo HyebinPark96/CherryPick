@@ -29,15 +29,17 @@ public class MemberApiRestController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 	}
 	
-	@PutMapping("/auth/sendEmailProc")
-	public ResponseDto<Integer> sendEmail(@RequestBody String username, @RequestBody String email) {
-		
+	@PostMapping("/auth/sendEmailProc")
+	public ResponseDto<Integer> sendEmailProc(@RequestParam String username, @RequestParam String email) {
 		String tmpPassword = memberService.getTmpPassword(); // 임시비번 생성
+		System.out.println("sendEmail Controller 실행1");
 		
 		memberService.updatePassword(tmpPassword, username, email); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
+		System.out.println("sendEmail Controller 실행2");
 		
-		mailService.sendMail(email, tmpPassword); // 이메일로 임시비번 전송
+		mailService.sendEmail(email, tmpPassword); // 이메일로 임시비번 전송
 		
+		System.out.println("sendEmail Controller 실행3");
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	

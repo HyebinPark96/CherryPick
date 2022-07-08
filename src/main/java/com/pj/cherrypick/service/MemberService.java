@@ -36,6 +36,7 @@ public class MemberService {
 	/* 임시비번으로 비번 재설정 후, 메일로 임시비번 전송하기 */
 	
 	// 임시비번 생성
+	@Transactional
     public String getTmpPassword() {
         char[] charSet = new char[]{ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
@@ -49,17 +50,20 @@ public class MemberService {
             idx = (int) (charSet.length * Math.random()); // 랜덤 정수
             tmpPassword += charSet[idx]; // 배열에서 고르기
         }
-
+        System.out.println("tmpPassword : " + tmpPassword);
         return tmpPassword; // 임시비번 리턴
     }
 
     // 임시비번으로 업데이트
+	@Transactional
     public void updatePassword(String tmpPassword, String username, String email) {
-
+		
         String password = encoder.encode(tmpPassword); // 임시비번 => 해쉬로 암호화
         
         try {
         	memberMapper.updatePassword(password, username, email); // 해쉬를 비번으로 업데이트
+        	System.out.println("password: " + password);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
