@@ -9,9 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import com.pj.cherrypick.domain.CafeVO;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 @Repository("com.pj.cherrypick.mapper.CafeMapper")
 @Mapper //class 말고 인터페이스 쓰기
 public interface CafeMapper {
+	
 	CafeVO getCafe(int cno);
 	
 	List<CafeVO> getCafeList();
