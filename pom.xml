@@ -16,24 +16,24 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+	
 	<dependencies>
+	
+		<!-- 타임리프 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-	
-	<!-- 추가 라이브러리 시작 -->
-		<!-- 시큐리티 태그 라이브러리 -->
-<!-- 		<dependency>
-		  <groupId>org.springframework.security</groupId>
-		  <artifactId>spring-secuSrity-taglibs</artifactId>
-		</dependency> -->
-	<!-- 추가 라이브러리 종료 -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
 		
-<!-- 		<dependency>
+		<!-- 스프링 시큐리티 라이브러리 -->
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency> -->
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

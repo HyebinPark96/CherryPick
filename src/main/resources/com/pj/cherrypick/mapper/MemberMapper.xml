@@ -9,8 +9,11 @@
     </select> 
     
     <insert id="signUp" parameterType="com.pj.cherrypick.domain.MemberVO">
-    	INSERT INTO member VALUES (#{mid}, #{pwd}, #{name}, #{phone}, #{email}, #{role})
+    	INSERT INTO member VALUES (#{username}, #{password}, #{name}, #{phone}, #{email}, #{role})
     </insert>
     
+    <select id="findByUsername" resultType="com.pj.cherrypick.domain.MemberVO">
+    	SELECT * FROM member WHERE username = #{username}
+    </select>
     
 </mapper>

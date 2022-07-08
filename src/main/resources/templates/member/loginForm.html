@@ -1,8 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{/layout/layout-main}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout-main}">
 
 
 <head>
@@ -16,40 +14,43 @@
 
 		<main class="form-signin w-100 m-auto">
 			<img src="/img/logo-pink.png" alt="" width="150">
-			<form>
+			<form action="/auth/loginProc" method="POST">
 
 				<div class="form-floating">
-					<input type="email" class="form-control"
-						placeholder="아이디를 입력해주세요."> <label for="floatingInput">아이디를 입력해주세요.</label>
+					<input type="text" class="form-control" placeholder="아이디를 입력해주세요." name="username"> 
+					<label for="floatingInput">아이디를 입력해주세요.</label>
 				</div>
 				<div class="form-floating">
-					<input type="password" class="form-control"
-						placeholder="비밀번호를 입력해주세요."> <label for="floatingPassword">비밀번호를 입력해주세요.</label>
+					<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요." name="password"> 
+					<label for="floatingPassword">비밀번호를 입력해주세요.</label>
 				</div>
-				
+
 				<div class="checkbox mb-3">
-					<label> <input type="checkbox" value="remember-me">
-						Remember me
+					<label> 
+						<input type="checkbox" value="remember-me"> Remember me
 					</label>
 				</div>
-				<div class="alert"> 로그인 실패시 알림 메시지 </div>
-				<button class="loginbtn w-100 btn btn-lg" type="submit">로그인</button>
-				
+				<div class="alert">로그인 실패시 알림 메시지</div>
+				<button class="loginbtn w-100 btn btn-lg" id="btn-login">로그인</button>
 			</form>
-			
+
+
 			<div class="loginpage-option">
-					<div>- 아이디/비밀번호 찾기</div>
-					<div>- CherryPick이 처음이신가요? [회원가입]</div>
-					<br>
+				<div>- 아이디/비밀번호 찾기</div>
+				<div>
+					<a href="/auth/joinForm">- CherryPick이 처음이신가요? [회원가입]</a>
 				</div>
-				<div>[SNS 로그인]</div>
-				<img src="https://t1.daumcdn.net/cfile/tistory/99580C465C3D7D130C" width="300px">
-				<p class="mt-5 mb-3 text-muted">&copy; Copyright 2022 CherryPick</p>
-			
-			
-			<p>*ID찾기, PWD찾기는 일단 로그인 화면과 같은 구조로 만들었습니다.<br>소스파일에서 주석처리를 해제하면 확인하실 수 있습니다.
+				<br>
+			</div>
+			<div>[SNS 로그인]</div>
+			<img src="https://t1.daumcdn.net/cfile/tistory/99580C465C3D7D130C" width="300px">
+			<p class="mt-5 mb-3 text-muted">&copy; Copyright 2022 CherryPick</p>
+
+
+			<p>
+				*ID찾기, PWD찾기는 일단 로그인 화면과 같은 구조로 만들었습니다.<br>소스파일에서 주석처리를 해제하면 확인하실 수 있습니다.
 			</p>
-			
+
 			<!-- 
 			<h3>ID찾기 영역</h3>	
 			<form>
@@ -82,10 +83,11 @@
 			</form>
 			
 			  -->
-			
+
 		</main>
 
 
 	</div>
+	<script src="/js/member.js" async></script>
 </body>
 </html>
