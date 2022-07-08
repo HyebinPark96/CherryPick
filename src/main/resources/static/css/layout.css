@@ -1,3 +1,9 @@
+
+.text-large{
+	 font-size: 25px;
+	 font-weight: bold;
+}
+
 a{
 	text-decoration: none;
 }
