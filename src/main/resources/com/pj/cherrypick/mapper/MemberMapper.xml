@@ -16,4 +16,8 @@
     	SELECT * FROM member WHERE username = #{username}
     </select>
     
+    <select id="findUsername" resultType="String">
+    	SELECT username FROM member WHERE name = #{name} AND email = #{email}
+    </select>
+    
 </mapper>

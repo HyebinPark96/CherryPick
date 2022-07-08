@@ -8,14 +8,24 @@ public class MemberController {
 	// http://localhost/auth/joinForm
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {
-		return "member/joinForm";
+		return "member/joinForm"; // // /WEB-INF/views/templates/member/joinForm
 	}
-	
 	
 	@GetMapping("/auth/loginForm")
 	// http://localhost/auth/loginForm
 	public String loginForm() {
-		System.out.println("loginForm() 호출");
-		return "member/loginForm"; // /WEB-INF/views/templates/loginForm
+		return "member/loginForm"; // /WEB-INF/views/templates/member/loginForm
+	}
+	
+	@GetMapping("/auth/findUsernameForm")
+	// http://localhost/auth/findIdForm
+	public String findUsernameForm() {
+		return "member/findUsernameForm"; // /WEB-INF/views/templates/member/findIdForm
+	}
+	
+	@GetMapping("/auth/findPasswordForm")
+	// http://localhost/auth/findPwdForm
+	public String findPasswordForm() {
+		return "member/findPasswordForm"; // /WEB-INF/views/templates/member/findPwdForm
 	}
 }
