@@ -13,6 +13,18 @@ spring:
     suffix: .html
     cache: false # thymeleaf 실행시 서버에 저장을 하지 않겠다. (코드 수정 후에 서버 재실행 막기 위함.)
   
+  mail :
+    host : smtp.gmail.com
+    port : 587
+    username : seoha.mailing@gmail.com
+    password : pwdformailing!!
+    properties :
+      mail :
+        smtp :
+          auth : true
+          starttls :
+            enable : true   
+  
   datasource: 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
