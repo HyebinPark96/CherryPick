@@ -7,16 +7,16 @@
 	min-height: 400px;
 }
 
-/*메인 페이지*/
+/*메인 페이지 demomain.html*/
 .main-banner-tab {
 	height: 300px;
-
 }
 
 .main-banner-tab img {
 	width: 100%;
 	filter: brightness(50%);
-	transform: translateX(-50%);
+	position: relative;
+	top: 50%;
 	transform: translateY(-50%);
 }
 
@@ -226,18 +226,20 @@
 	width: 320px;
 	height: 50px;
 	background-color: white;
-	color:  #a6434b;
+	color: #a6434b;
 	font-size: 18px;
 	font-weight: bold;
 	border-radius: 10px;
-	border: 5px solid  #a6434b;
-
+	border: 5px solid #a6434b;
 }
 
-.opt :hover{
-	cursor : pointer
+.opt :hover {
+	cursor: pointer
 }
 
+.alertId {
+	color: red;
+}
 
 /*북마크 화면*/
 .bmk-tab {
@@ -254,4 +256,3 @@
 	border: solid 1px;
 	height: 100px;
 }
-

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pj.cherrypick.service.MailService;
 import com.pj.cherrypick.service.MemberService;
 
 @Controller
@@ -13,6 +14,9 @@ public class MemberApiController {
 	
 	@Autowired
 	private MemberService memberService; // 스프링이 컴포넌트 스캔을 통해 MemberService.java의 @Service 어노테이션을 보면 Bean에 등록을 해 줌 (=IOC 해줌)
+	
+	@Autowired
+	private MailService mailService; 
 	
 	@PostMapping("/auth/findUsernameProc")
 	public String findUsername(@RequestParam("name") String name, @RequestParam("email") String email, Model model) throws Exception {
@@ -37,4 +41,6 @@ public class MemberApiController {
 		model.addAttribute("username", encUsername);
 		return "member/findUsernameResult";
 	}
+		
+	
 }

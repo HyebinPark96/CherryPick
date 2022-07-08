@@ -3,10 +3,16 @@ let index = {
 		$("#btn-save").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
 			this.save(); // save 함수 호출
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
+		
 	},
 
 
 	save: function() {
+		let username = $("#username").val();
+		if(username.length < 8 || username.length > 15){
+			alert("아이디는 8~15자를 입력해주세요.");
+			return false;
+		}
 		let data = {
 			username: $("#username").val(), // Form 의 input값 들고오기
 			password: $("#password").val(),
@@ -15,7 +21,7 @@ let index = {
 			email: $("#email").val()
 		};
 
-		console.log(data);
+		// console.log(data);
 		
 		// ajax는 디폴트가 비동기 호출
 		// ajax 통신 성공 => 서버가 json 리턴 => 자동으로 자바스크립트 오브젝트로 변환
@@ -34,6 +40,7 @@ let index = {
 			alert(JSON.stringify(error));
 		});
 	},
+
 
 }
 
