@@ -24,4 +24,10 @@ public interface MemberMapper {
 	
 	// SELECT 아이디 찾기시 입력한 이름과 이메일로 아이디 리턴
 	String findUsername(String name, String email);
+	
+	// 해당 아이디와 이메일 가진 사람이 있는지 체크 (0 리턴 : 없음, 1 리턴 : 존재)
+	int findPasswordCheck(String username, String email);
+	
+	// 회원정보 수정
+	void updatePassword(String password, String username, String email);
 }

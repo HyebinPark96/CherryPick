@@ -20,4 +20,12 @@
     	SELECT username FROM member WHERE name = #{name} AND email = #{email}
     </select>
     
+    <select id="findPasswordCheck" resultType="int">
+		SELECT count(*) FROM member WHERE username = #{username} AND email = #{email}
+	</select>
+    
+    <update id="updatePassword"  parameterType="com.pj.cherrypick.domain.MemberVO">
+		UPDATE member SET password = #{password} WHERE username = #{username} AND email = #{email}
+	</update>
+    
 </mapper>
