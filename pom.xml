@@ -19,9 +19,14 @@
 	
 	<dependencies>
 	
+		<!-- 타임리프 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
 		
 		<!-- 스프링 시큐리티 라이브러리 -->
