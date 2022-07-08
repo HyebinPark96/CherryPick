@@ -7,6 +7,11 @@ let index = {
 
 
 	save: function() {
+		let username = $("#username").val();
+		if(username.length < 8 || username.length > 15){
+			alert("아이디는 8~15자를 입력해주세요.");
+			return false;
+		}
 		let data = {
 			username: $("#username").val(), // Form 의 input값 들고오기
 			password: $("#password").val(),
