@@ -1,24 +1,111 @@
-<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout-main}">
-	
+
 <head>
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Cafe List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=690f1466b1db83245b4a29ca995ae063"></script>
 </head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 <body>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
+	<div class="content container" layout:fragment="content">
+
+		<div class="item">
+           <div id="map" class="img"></div>
+             
+
+		
+
+
+		<div class="cflist-label">
+			<span style="font-size: 12px; color: #bbb;"> 조회수 000,000회 |
+				등록일 0000-00-00 </span> <br> <span style="font-size: 20px;"> 카페
+				리스트의 이름 </span>
+		</div>
+		<hr>
+		<div class="cflist container">
+
+			<div class="cflist-item">
+				<div class="cflist-thumb"
+					style="background-image: url('https://images.pexels.com/photos/7362647/pexels-photo-7362647.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940');">
+				</div>
+
+				<div class="d-flex">
+					<div class="col p-4 d-flex flex-column position-static">
+						<strong class="d-inline-block mb-2 text-success">1. 카페 이름</strong>
+						<div class="mb-1 text-muted">부산광역시 경상남도 서울시</div>
+						<div class="cflist-review">
+							<div class="cflist-review-profile"></div>
+							<div>
+								<b>username</b>&nbsp; 카페 리뷰를 입력하는 란입니다. 아직 입력된 데이터가 존재하지 않습니다.
+							</div>
+
+						</div>
+						<a href="#">더보기</a>
+
+					</div>
+					<div>
+						<img src="/img/bmk-empty.png">
+					</div>
+
+				</div>
+
+			</div>
+
+
+			<div class="cflist-item">
+				<div class="cflist-thumb"
+					style="background-image: url('https://images.pexels.com/photos/7362647/pexels-photo-7362647.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940');">
+				</div>
+
+				<div class="d-flex">
+					<div class="col p-4 d-flex flex-column position-static">
+						<strong class="d-inline-block mb-2 text-success">1. 카페 이름</strong>
+						<div class="mb-1 text-muted">부산광역시 경상남도 서울시</div>
+						<div class="cflist-review">
+							<div class="cflist-review-profile"></div>
+							<div>
+								<b>username</b>&nbsp; 카페 리뷰를 입력하는 란입니다. 아직 입력된 데이터가 존재하지 않습니다.
+							</div>
+
+						</div>
+						<a href="#">더보기</a>
+
+					</div>
+					<div>
+						<img src="/img/bmk-empty.png">
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="sharebar input-group mb-3">
+				<input type="text" value="https://sampletext.com">
+				<button class="btn btn-outline-secondary" type="button"
+					id="button-addon2">공유하기</button>
+			</div>
+
+			<div class="map" style="background-color: #ddd; height: 300px;">
+				[지도 영역]</div>
+		</div>
+
+	</div>
+
+
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 

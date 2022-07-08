@@ -1,32 +1,26 @@
 package com.pj.cherrypick.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.pj.cherrypick.domain.CafeVO;
-import com.pj.cherrypick.mapper.CafeMapper;
 import com.pj.cherrypick.service.CafeService;
 
-@RestController
-@RequestMapping("/cafe")
+
+@Controller
 public class CafeController {
 	
 	@Autowired
 	private CafeService cafeService;
 	
 	// 카페목록
-	@GetMapping("/list")
-	public List<CafeVO> getCafeList() {
+	@GetMapping("cafe/list")
+	public String cafeList() {
 		System.out.println("카페리스트 실행");
-		return cafeService.getCafeList();
+		return "cafe/list";
 		}
 
 	
