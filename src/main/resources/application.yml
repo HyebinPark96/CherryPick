@@ -16,10 +16,11 @@ spring:
   datasource: 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+   # 공유디비
+    
     url: jdbc:mysql://34.64.87.234:3306/cherrypick?serverTimezone=Asia/Seoul
     username: cherrypick
     password: F}$IG2"s{{^^H+%}
-
 
   sql:
     init:
