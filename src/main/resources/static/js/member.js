@@ -28,7 +28,7 @@ let index = {
 		}).done(function(resp){
 			// 성공한 경우 호출
 			alert("회원가입이 완료되었습니다.");
-			location.href="/demo1";
+			location.href="/";
 		}).fail(function(error){
 			// 실패한 경우 호출
 			alert(JSON.stringify(error));
