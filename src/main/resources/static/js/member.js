@@ -15,6 +15,8 @@ let index = {
 			email: $("#email").val()
 		};
 
+		console.log(data);
+		
 		// ajax는 디폴트가 비동기 호출
 		// ajax 통신 성공 => 서버가 json 리턴 => 자동으로 자바스크립트 오브젝트로 변환
 		$.ajax({
