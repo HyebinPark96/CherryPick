@@ -18,11 +18,10 @@ public interface MemberMapper {
 	// INSERT 회원가입
 	void signUp(MemberVO member) throws Exception;
 	
-	
 	// Optional로 객체를 감싸서 사용하면 NPE를 유발할 수 있는 null을 직접 다루지 않아도 됨
-	// SELECT 회원 유무 체크
+	// SELECT 로그인시 입력한 ID로 회원 유무 체크
 	MemberVO findByUsername(String username);
 	
-	
-	
+	// SELECT 아이디 찾기시 입력한 이름과 이메일로 아이디 리턴
+	String findUsername(String name, String email);
 }
