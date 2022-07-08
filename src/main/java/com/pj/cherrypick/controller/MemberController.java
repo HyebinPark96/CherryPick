@@ -8,7 +8,7 @@ public class MemberController {
 	// http://localhost/auth/joinForm
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {
-		return "joinForm";
+		return "member/joinForm";
 	}
 	
 	
@@ -16,6 +16,6 @@ public class MemberController {
 	// http://localhost/auth/loginForm
 	public String loginForm() {
 		System.out.println("loginForm() 호출");
-		return "loginForm"; // /WEB-INF/views/templates/loginForm
+		return "member/loginForm"; // /WEB-INF/views/templates/loginForm
 	}
 }
