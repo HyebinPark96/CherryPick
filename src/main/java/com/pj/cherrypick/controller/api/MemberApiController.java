@@ -1,11 +1,13 @@
 package com.pj.cherrypick.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pj.cherrypick.response.ResponseDto;
 import com.pj.cherrypick.service.MailService;
 import com.pj.cherrypick.service.MemberService;
 
@@ -40,6 +42,17 @@ public class MemberApiController {
 		
 		model.addAttribute("username", encUsername);
 		return "member/findUsernameResult";
+	}
+	
+	@PostMapping("/auth/sendEmailProc")
+	public String sendEmailProc(@RequestParam String username, @RequestParam String email) {
+		String tmpPassword = memberService.getTmpPassword(); // 임시비번 생성
+		
+		memberService.updatePassword(tmpPassword, username, email); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
+		
+		mailService.sendEmail(email, tmpPassword); // 이메일로 임시비번 전송
+		
+		return "member/loginForm";
 	}
 		
 	
