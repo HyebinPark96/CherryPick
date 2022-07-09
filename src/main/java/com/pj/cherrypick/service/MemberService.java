@@ -17,6 +17,14 @@ public class MemberService {
 	@Autowired
 	private BCryptPasswordEncoder encoder; // 암호화 방식
 	
+	@Transactional
+	public int findMUsername(String username) throws Exception { 
+		if(memberMapper.findMUsername(username) == 1)
+			return 1; // 회원가입시 입력한 username으로 DB에 중복되는 username있는지 조회하여 있다면 1 리턴 = 중복Id
+		else 
+			return 0; 
+	}
+	
 	@Transactional // 서비스 단에서 트랜잭션 시작되고 종료됨
 	public void signUp(MemberVO member) throws Exception {
 		String rawPassword = member.getPassword(); // 원본 비번
