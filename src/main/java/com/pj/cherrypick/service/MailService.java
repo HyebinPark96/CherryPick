@@ -12,7 +12,7 @@ public class MailService {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	private static final String fromEmail = "park2865526@gmail.com";
+	private static final String fromEmail = "seoha.mailing@gmail.com";
 	
 	@Transactional
 	public void sendEmail(String email, String tmpPassword) {
