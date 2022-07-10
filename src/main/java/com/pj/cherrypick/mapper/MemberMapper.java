@@ -30,4 +30,6 @@ public interface MemberMapper {
 	
 	// 회원정보 수정
 	void updatePassword(String password, String username, String email);
+	
+	int findMUsername(String username);
 }

@@ -28,4 +28,6 @@ public class MemberController {
 	public String findPasswordForm() {
 		return "member/findPasswordForm"; // /WEB-INF/views/templates/member/findPwdForm
 	}
+
+
 }
