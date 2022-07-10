@@ -32,7 +32,11 @@ textarea:focus, input:focus {
 }
 
 .content-top {
-	text-align: center;
+	margin-top: 20px;
+}
+
+.content-top{
+	padding-left: 10px;
 }
 
 .content-top-tab {
