@@ -19,7 +19,7 @@
 		    
 		    <!-- 회원 -->
 		    <div sec:authorize-expr="isAuthenticated()" class="title-top-right">
-		        <a href="/member/myPage">My Page | </a>
+		        <a href="/member/myPage">My Page |</a>
 		        <a href="#" th:href="@{/logout}">Sign out</a>
 		    </div>
 		    
@@ -33,7 +33,7 @@
 		    
 		    <!-- 비회원 -->
 		    <div sec:authorize-expr="!isAuthenticated()" class="title-top-right">
-		        <a href="/auth/loginForm">Sign in</a>
+		        <a href="/auth/loginForm">Sign in | </a>
 				<a href="/auth/joinForm">Sign up</a>
 		    </div>
 		    
