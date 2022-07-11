@@ -28,6 +28,13 @@ public class MemberController {
 	public String findPasswordForm() {
 		return "member/findPasswordForm"; // /WEB-INF/views/templates/member/findPwdForm
 	}
+	
+	@GetMapping("/auth/myPage")
+	// http://localhost/auth/findPwdForm
+	public String myPage() {
+		return "member/myPage";
+	}
+	
 
 
 }

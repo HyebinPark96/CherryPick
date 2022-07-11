@@ -9,7 +9,7 @@
 			
 			<div sec:authorize-expr="isAuthenticated()" class="title-top-right">
 		        <!-- <h2 sec:authentication="username">Name</h2> -->
-		        <a href="#">My Page</a>  
+		        <a href="/auth/myPage">My Page</a>  
 		        <a href="#" th:href="@{/logout}">Sign out</a>
 		    </div>
 		    

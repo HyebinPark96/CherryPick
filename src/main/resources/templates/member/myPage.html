@@ -23,7 +23,7 @@
 			<hr> -->
 			<div class="d-flex align-items-center row">
 				<div class="col-md-1">
-					<img class="back-icon" src="img/back.png">
+					<img class="back-icon" src="../img/back.png">
 				</div>
 				<div class="col-md-10" style="text-align: right">
 					<p><b>username님</b></p>
@@ -31,7 +31,7 @@
 				</div>
 
 				<div class="col-md-1">
-					<img class="edit-icon" src="img/edit.png">
+					<img class="edit-icon" src="../img/edit.png">
 				</div>
 			</div>
 			<hr>
@@ -51,7 +51,8 @@
 		<div class="content container">
 
 			<div id="cfBmk" class="cflist container">
-
+				
+				<th:block th:each="num : ${#numbers.sequence(1,3)}">
 				<div class="cflist-item">
 					<div class="cflist-thumb"
 						style="background-image: url('https://images.pexels.com/photos/7362647/pexels-photo-7362647.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940');">
@@ -73,43 +74,21 @@
 
 						</div>
 						<div>
-							<img src="/img/bmk-empty.png">
+							<img src="../img/bmk-empty.png">
 						</div>
 
 					</div>
 
 				</div>
+</th:block>
 
-
-				<div class="cflist-item">
-					<div class="cflist-thumb"
-						style="background-image: url('https://images.pexels.com/photos/7362647/pexels-photo-7362647.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940');">
-					</div>
-
-					<div class="d-flex">
-						<div class="col p-4 d-flex flex-column position-static">
-							<strong class="d-inline-block mb-2 text-success">1. 카페
-								이름</strong>
-							<div class="mb-1 text-muted">부산광역시 경상남도 서울시</div>
-							<div class="cflist-review">
-								<div class="cflist-review-profile"></div>
-								<div>
-									<b>username</b>&nbsp; 카페 리뷰를 입력하는 란입니다. 아직 입력된 데이터가 존재하지 않습니다.
-								</div>
-
-							</div>
-							<a href="#">더보기</a>
-
-						</div>
-						<div>
-							<img src="/img/bmk-empty.png">
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			<div></div>
-
+	
 			<div id="cfLiBmk" class="cflist container">
+			
+				<th:block th:each="num : ${#numbers.sequence(1,3)}">
 				<div class="cflist-item">
 					<div class="cflist-thumb"
 						style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
@@ -123,51 +102,15 @@
 							<div class="cflist-review"></div>
 						</div>
 						<div>
-							<img src="/img/bmk-empty.png">
+							<img src="../img/bmk-empty.png">
 						</div>
 					</div>
 
 				</div>
-				<div class="cflist-item">
-					<div class="cflist-thumb"
-						style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
-					</div>
-
-					<div class="d-flex">
-						<div class="col p-4 d-flex flex-column position-static">
-							<strong class="d-inline-block mb-2 text-success">2. 카페
-								리스트 이름</strong>
-							<div class="mb-1 text-muted">카페1, 카페2, 카페3, 카페4, 카페5</div>
-							<div class="cflist-review"></div>
-						</div>
-						<div>
-							<img src="/img/bmk-empty.png">
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="cflist-item">
-					<div class="cflist-thumb"
-						style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
-					</div>
-
-					<div class="d-flex">
-						<div class="col p-4 d-flex flex-column position-static">
-							<strong class="d-inline-block mb-2 text-success">3. 카페
-								리스트 이름</strong>
-							<div class="mb-1 text-muted">카페1, 카페2, 카페3, 카페4, 카페5</div>
-							<div class="cflist-review"></div>
-						</div>
-						<div>
-							<img src="/img/bmk-empty.png">
-						</div>
-					</div>
-
-				</div>
-
+				</th:block>
 			
 			</div>
+			
 		</div>
 
 
