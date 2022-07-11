@@ -2,7 +2,12 @@ package com.pj.cherrypick.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +25,9 @@ public class MemberApiRestController {
 	@Autowired
 	private MailService mailService; 
 	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody MemberVO member) throws Exception {
 		memberService.signUp(member);
@@ -28,12 +36,21 @@ public class MemberApiRestController {
 	
 	@PostMapping("/auth/mUsernameCheck")
 	public ResponseDto<Integer> mUsernameCheck(@RequestBody MemberVO member) throws Exception {
-		System.out.println("서비스 실행");
-		int mUsernameCheck = memberService.findMUsername(member.getUsername());
-		System.out.println(member.getUsername());
+		int mUsernameCheck = memberService.findDupUsername(member.getUsername());
+		
 		if(mUsernameCheck == 0)
 			return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 		return null;
 	}
 	
+	@PutMapping("/member/updateMemberProc")
+	public ResponseDto<Integer> updateMember(@RequestBody MemberVO member) throws Exception {
+		memberService.updateMember(member); // JSON으로 입력받은 수정 정보를 파라미터로 전달
+		
+        /* 변경된 세션 등록 */ 
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(member.getUsername(), member.getPassword())); 
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
+	}
 }

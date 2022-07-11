@@ -27,13 +27,13 @@
 			<div class="input-form-backgroud row">
 				<div class="input-form col-md-12 mx-auto">
 
-					<form class="validation-form" novalidate>
+					<form class="validation-form" novalidate action="/auth/regCafeProc" method="post">
 						<h3>방문정보</h3>
 						<hr>
 						<div class="row">
 							<div class="col-md-6 mb-3">
 								<label for="cname">업체명(카페 이름)</label> <input type="text"
-									class="form-control" id="name" placeholder="" value="" required>
+									class="form-control" id="cname" placeholder="" value="" required>
 								<div class="invalid-feedback">아이디를 입력해주세요.</div>
 							</div>
 
@@ -41,7 +41,7 @@
 							<div class="col-md-6 mb-3">
 								<div style="width: '300px'; height: '300px'">
 									<label for="cimage" class="form-label">대표 이미지를 등록해 주세요.</label>
-									<input class="form-control" type="file" id="formFile">
+									<input class="form-control" type="file" id="cimage">
 								</div>
 							</div>
 						</div>
@@ -50,50 +50,67 @@
 
 						<div class="mb-3">
 							<label for="caddress">주소</label> <input type="text"
-								class="form-control" id="name" placeholder="" value="" required>
+								class="form-control" id="caddress" placeholder="" value="" required>
 							<div class="invalid-feedback">주소를 입력해주세요.</div>
 							<b>[지도에서 위치 찾기]</b>
 						</div>
 
 						<div class="mb-3">
-							<label for="email">전화번호</label> <input type="text"
-								class="form-control" id="phone" placeholder="010-000-0000"
+							<label for="cphone">전화번호</label> <input type="text"
+								class="form-control" id="cphone" placeholder="010-000-0000"
 								required>
 							<div class="invalid-feedback">전화번호를 입력해 주세요.</div>
 						</div>
 						<br>
-						
+
 						<h3>메뉴</h3>
 						<hr>
-						
+
 						<div class="col-md-6 mb-3">
 							<div style="width: '300px'; height: '300px'">
 								<label for="cmenu_img" class="form-label">메뉴판 이미지를 등록해
-									주세요.</label> <input class="form-control" type="file" id="formFile">
+									주세요.</label> <input class="form-control" type="file" id="m_img">
 							</div>
 						</div>
-						<br><br>
+						<br>
+						<br>
 						<h4>메뉴</h4>
-						<div class="newmenu row">
-							<div class="col-md-3 mb-3">메뉴사진</div>
-							<div class="col-md-3 mb-3">메뉴이름</div>
-							<div class="col-md-3 mb-3">메뉴사이즈</div>
-							<div class="col-md-3 mb-3">메뉴가격</div>
+						<div class="container">
+							<div class="newmenu row">
+								<div class="col-md-3 mb-3">메뉴사진</div>
+							</div>
+
+							<div class="mb-3">
+								<label for="email">메뉴명</label> <input type="text"
+									class="form-control" id="m_name" placeholder="메뉴 이름을 적어주세요.">
+							</div>
+							
+							<div class="mb-3">
+								<label for="email">사이즈</label> <input type="text"
+									class="form-control" id="m_name" placeholder="메뉴 사이즈를 적습니다. ex) 톨, 벤티, ...">
+							</div>
+							
+							<div class="mb-3">
+								<label for="email">설명</label> <input type="text"
+									class="form-control" id="m_detail" placeholder="메뉴 설명을 적어주세요.">
+							</div>
+							
+							<div class="mb-3">
+								<label for="email">가격</label> <input type="text"
+									class="form-control" id="m_price" placeholder="메뉴 가격을 적어주세요.">
+							</div>
+
+
+							<div class="mb-3">
+								<label for="email">#해시태그</label> <input type="text"
+									class="form-control" id="m_tag"
+									placeholder="메뉴 해시태그(최대 5개까지 작성 가능합니다.)">
+							</div>
 						</div>
-						
-						<div class="mb-3">
-							<label for="email">메뉴설명</label> <input type="text"
-								class="form-control" id="m_detail" placeholder="메뉴 설명을 적어주세요.">
-						</div>
-						
-						<div class="mb-3">
-							<label for="email">#해시태그</label> <input type="text"
-								class="form-control" id="m_tag" placeholder="*최대 5개까지 입력 가능합니다.">
-						</div>
-						
-						<button type="button" class="col-md-12 btn btn-outline-secondary">+</button>
-						
-						<div style="margin-top:50px;"></div>
+
+						<button type="button" class="col-md-12 btn btn-outline-secondary">+ 새 메뉴 추가하기</button>
+
+						<div style="margin-top: 50px;"></div>
 						<h3>이용정보</h3>
 						<hr>
 
@@ -134,9 +151,9 @@
 						</th:block>
 
 						<div class="col-md-6 mb-3">
-							<label for="cname">#해시태그(최대 5개까지 작성 가능합니다.)</label> <input type="text"
-								class="form-control" id="name" placeholder="" value="" required>
-							<div class="invalid-feedback">해시태그를 입력해주세요.</div>
+							<label for="cname">#해시태그</label> <input
+								type="text" class="form-control" id="name" placeholder="카페 해시태그(최대 5개까지 작성 가능합니다.)"
+								value="" required>
 						</div>
 
 
@@ -148,7 +165,7 @@
 								동의합니다.</label>
 						</div>
 						<div class="mb-4"></div>
-						<button class="btn btn-primary btn-lg btn-block" type="submit">등록
+						<button id="btn-register" class="btn btn-primary btn-lg btn-block" type="submit">등록
 							완료</button>
 					</form>
 				</div>

@@ -4,9 +4,9 @@
 <mapper namespace="com.pj.cherrypick.mapper.MemberMapper" >
 
 	<!-- Mapper 인터페이스의 메소드명과 XML의 id가 같아야 함 -->
- 	<select id="listmap" resultType="com.pj.cherrypick.domain.MemberVO">
+ 	<select id="getMList" resultType="com.pj.cherrypick.domain.MemberVO">
         SELECT * FROM member
-    </select> 
+    </select>
     
     <insert id="signUp" parameterType="com.pj.cherrypick.domain.MemberVO">
     	INSERT INTO member VALUES (#{username}, #{password}, #{name}, #{phone}, #{email}, #{role})
@@ -28,8 +28,17 @@
 		UPDATE member SET password = #{password} WHERE username = #{username} AND email = #{email}
 	</update>
 	
-	<select id="findMUsername" resultType="int">
+	<select id="findDupUsername" resultType="int">
 		SELECT COUNT(*) FROM member WHERE username = #{username}
 	</select>
+	
+	<select id="checkMemberOrAdmin" resultType="int">
+		SELECT role FROM member WHERE username = #{username}
+	</select>
+	
+	<update id="updateMember"  parameterType="com.pj.cherrypick.domain.MemberVO">
+		UPDATE member SET password = #{password}, name = #{name}, phone = #{phone}, email = #{email} 
+		WHERE username = #{username}
+	</update>
     
 </mapper>

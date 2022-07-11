@@ -1,10 +1,16 @@
 package com.pj.cherrypick.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.mapper.MemberMapper;
 
@@ -18,8 +24,8 @@ public class MemberService {
 	private BCryptPasswordEncoder encoder; // 암호화 방식
 	
 	@Transactional
-	public int findMUsername(String username) throws Exception { 
-		if(memberMapper.findMUsername(username) == 1)
+	public int findDupUsername(String username) throws Exception { 
+		if(memberMapper.findDupUsername(username) == 1)
 			return 1; // 회원가입시 입력한 username으로 DB에 중복되는 username있는지 조회하여 있다면 1 리턴 = 중복Id
 		else 
 			return 0; 
@@ -74,6 +80,41 @@ public class MemberService {
 		}
         
     }
+	
+	@Transactional
+	public int checkMemberOrAdmin(String username) {
+		return memberMapper.checkMemberOrAdmin(username); // 0 or 1 반환
+	}
 
+	@Transactional
+	public List<MemberVO> getMList() {
+		List<MemberVO> mList = new ArrayList<MemberVO>();
+		mList =  memberMapper.getMList();
+		return mList;
+	}
+	
+	@Transactional
+	public void updateMember(MemberVO member) {
+		MemberVO orgMember = memberMapper.findByUsername(member.getUsername()); // 기존 회원정보 들고오기
+		
+		String rawPassword = member.getPassword(); // 회원정보 수정폼에서 입력한 패스워드 가져오기
+		String encPassword = encoder.encode(rawPassword); // 암호화
+		
+		orgMember.setPassword(encPassword); // 암호화된 비번 DB에 저장
+		
+		orgMember.setName(member.getName());
+		orgMember.setPhone(member.getPhone());
+		orgMember.setEmail(member.getEmail());
+		
+		memberMapper.updateMember(orgMember); // 수정 SQL문 
+		
+	}
+	
+	// 아이디로 회원 객체 들고오기
+	@Transactional
+	public MemberVO findByUsername(String username) {
+		return memberMapper.findByUsername(username);
+	}
+	
 	
 }

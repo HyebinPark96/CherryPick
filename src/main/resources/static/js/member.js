@@ -4,18 +4,24 @@ let index = {
 			this.save(); // save 함수 호출
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 		
-		$("#mUsernameCheckBtn").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			this.mUsernameCheck(); // save 함수 호출
-		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
+		$("#mUsernameCheckBtn").on("click", () => { 
+			this.mUsernameCheck();
+		});
+		
+		$("#btn-updateMember").on("click", () => {
+			this.updateMember();
+		});
 	},
 
 
 	save: function() {
-		let username = $("#username").val();
-		if(username.length < 8 || username.length > 15){
-			alert("아이디는 8~15자를 입력해주세요.");
+		let agreement = $("#agreement");
+
+		if(!agreement.is(":checked")){
+			alert("하단 체크박스에 동의해주세요.");
 			return false;
 		}
+		
 		let data = {
 			username: $("#username").val(), // Form 의 input값 들고오기
 			password: $("#password").val(),
@@ -23,8 +29,17 @@ let index = {
 			phone: $("#phone").val(),
 			email: $("#email").val()
 		};
+		
+		if(data.username.length < 8 || data.username.length > 15){
+			alert("아이디는 8~15자를 입력해주세요.");
+			return false;
+		}
 
-		// console.log(data);
+		if(data.password.trim().length==0 || data.name.trim().length==0 || 
+			data.phone.trim().length==0 || data.email.trim().length==0){
+			alert("항목을 제대로 기입하였는지 확인해주세요.");
+			return false;
+		}
 		
 		// ajax는 디폴트가 비동기 호출
 		// ajax 통신 성공 => 서버가 json 리턴 => 자동으로 자바스크립트 오브젝트로 변환
@@ -44,12 +59,11 @@ let index = {
 		});
 	},
 	
+	
+	
+	
+	
 		mUsernameCheck: function() {
-		let username = $("#username").val();
-		if(username.length < 8 || username.length > 15){
-			alert("아이디는 8~15자를 입력해주세요.");
-			return false;
-		}
 		let data = {
 			username: $("#username").val()
 		};
@@ -69,6 +83,36 @@ let index = {
 			// alert(JSON.stringify(error));
 		});
 	},
+	
+	
+	
+	
+		updateMember: function() {
+		let data = {
+			username: $("#username").val(),
+			password: $("#password").val(),
+			name: $("#name").val(),
+			phone: $("#phone").val(),
+			email: $("#email").val()
+		};
+
+		$.ajax({
+			type: "PUT",
+			url: "/member/updateMemberProc",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			alert("수정 되었습니다.");
+			location.href="/";
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			alert("수정에 실패하였습니다.");
+		});
+	},
+	
+	
 
 }
 
