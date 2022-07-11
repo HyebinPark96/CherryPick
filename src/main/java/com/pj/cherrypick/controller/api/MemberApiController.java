@@ -53,12 +53,6 @@ public class MemberApiController {
 		
 		return "member/loginForm";
 	}
-	
-	@GetMapping("/member/memberEditForm")
-	// http://localhost/auth/findPwdForm
-	public String memberEditForm() {
-		return "member/memberEditForm";
-	}
 		
 	
 }
