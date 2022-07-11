@@ -48,13 +48,6 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	@GetMapping("/auth/adminMain")
-	public String adminMain() {
-		// 관리자가 로그인하면 헤더에 있는 adminMain 카테고리로 접근 가능하지만,
-		// 회원이 url로 접근할 수 있으므로, 이를 방지하기 위해 멤버인지 관리자인지 체크하는 서비스 필요
-		return "admin/adminMain"; // /WEB-INF/views/templates/member/adminMain
-	}
-	
 	@GetMapping("/auth/memberEditForm")
 	// http://localhost/auth/findPwdForm
 	public String memberEditForm() {
