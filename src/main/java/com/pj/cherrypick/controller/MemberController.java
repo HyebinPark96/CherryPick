@@ -42,19 +42,13 @@ public class MemberController {
 		return "member/findPasswordForm"; // /WEB-INF/views/templates/member/findPwdForm
 	}
 	
-	@GetMapping("/auth/myPage")
+	@GetMapping("/member/myPage")
 	// http://localhost/auth/findPwdForm
 	public String myPage() {
 		return "member/myPage";
 	}
 	
-	@GetMapping("/auth/memberEditForm")
-	// http://localhost/auth/findPwdForm
-	public String memberEditForm() {
-		return "member/memberEditForm";
-	}
-	
-	@GetMapping("/auth/adminMain")
+	@GetMapping("/admin/adminMain")
 	public String adminMain(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/, Model model) {
 		try {
 			// 관리자가 로그인하면 헤더에 있는 adminMain 카테고리로 접근 가능하지만,
