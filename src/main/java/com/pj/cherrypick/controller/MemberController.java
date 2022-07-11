@@ -37,18 +37,19 @@ public class MemberController {
 	}
 	
 	@GetMapping("/auth/findPasswordForm")
-	// http://localhost/auth/findPwdForm
+	// http://localhost/auth/findPasswordForm
 	public String findPasswordForm() {
 		return "member/findPasswordForm"; // /WEB-INF/views/templates/member/findPwdForm
 	}
 	
 	@GetMapping("/member/myPage")
-	// http://localhost/auth/findPwdForm
+	// http://localhost/member/myPage
 	public String myPage() {
 		return "member/myPage";
 	}
 	
 	@GetMapping("/admin/adminMain")
+	//  http://localhost/admin/adminMain
 	public String adminMain(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/, Model model) {
 		try {
 			// 관리자가 로그인하면 헤더에 있는 adminMain 카테고리로 접근 가능하지만,
@@ -66,6 +67,12 @@ public class MemberController {
 			}
 		}
 		return "admin/adminMain";
+	}
+	
+	@GetMapping("/member/memberEditForm")
+	// http://localhost/member/memberEditForm
+	public String memberEditForm() {
+		return "member/memberEditForm";
 	}
 
 }
