@@ -9,7 +9,10 @@
 			
 			<div sec:authorize-expr="isAuthenticated()" class="title-top-right">
 		        <!-- <h2 sec:authentication="username">Name</h2> -->
-		        <a href="/auth/myPage">My Page</a>  
+		        <!-- <span th:if="${#authentication.role}==1">관리자입니다.</span> -->
+		        <!--ROLE_USER 권한을 갖는다면 이 글이 보임-->
+       			<a sec:authorize="hasRole('0')" href="/auth/adminMain">Admin</a> |
+		        <a href="/auth/myPage">My Page</a> |
 		        <a href="#" th:href="@{/logout}">Sign out</a>
 		    </div>
 		    
