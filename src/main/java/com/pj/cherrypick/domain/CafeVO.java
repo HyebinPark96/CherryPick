@@ -14,8 +14,8 @@ public class CafeVO {
 	private int cno;
 	private String bid;
 	private String cname;
-	private String c_lap;
-	private String c_long;
+	private float c_lat;
+	private float c_long;
 	private String cimage;
 	private String caddress;
 	private String cphone;
@@ -29,6 +29,10 @@ public class CafeVO {
 	private int group;
 	private String ctag;
 	private String cmenu_img;
+	
+	//리뷰용
+	private String mid;
+	private String title;
 	
 	
 	

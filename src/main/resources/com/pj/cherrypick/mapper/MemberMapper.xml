@@ -28,12 +28,17 @@
 		UPDATE member SET password = #{password} WHERE username = #{username} AND email = #{email}
 	</update>
 	
-	<select id="findMUsername" resultType="int">
+	<select id="findDupUsername" resultType="int">
 		SELECT COUNT(*) FROM member WHERE username = #{username}
 	</select>
 	
 	<select id="checkMemberOrAdmin" resultType="int">
 		SELECT role FROM member WHERE username = #{username}
 	</select>
+	
+	<update id="updateMember"  parameterType="com.pj.cherrypick.domain.MemberVO">
+		UPDATE member SET password = #{password}, name = #{name}, phone = #{phone}, email = #{email} 
+		WHERE username = #{username}
+	</update>
     
 </mapper>

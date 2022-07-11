@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.CafeService;
 
 
@@ -22,7 +23,7 @@ public class CafeController {
 	@GetMapping("cafe/list")
 	public String cafeList(Model model) {
 		System.out.println("카페리스트 실행");
-		List<CafeVO> cafes = cafeService.getCafeList();
+		List<CafeVO> cafes = cafeService.getCafePreviewList();
 		model.addAttribute("cafes", cafes);
 		return "cafe/list";
 		}
