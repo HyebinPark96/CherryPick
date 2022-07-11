@@ -12,7 +12,7 @@
 
 	<div layout:fragment="content">
 		<div class="content-top">
-			<div class="d-flex">
+			<!-- <div class="d-flex">
 				<div>
 					<img class="back-icon" src="img/back.png">
 				</div>
@@ -20,20 +20,34 @@
 					<b>username님의 Pick</b>
 				</div>
 			</div>
+			<hr> -->
+			<div class="d-flex align-items-center row">
+				<div class="col-md-1">
+					<img class="back-icon" src="img/back.png">
+				</div>
+				<div class="col-md-10" style="text-align: right">
+					<p><b>username님</b></p>
+					<p>email@naver.com</p>
+				</div>
+
+				<div class="col-md-1">
+					<img class="edit-icon" src="img/edit.png">
+				</div>
+			</div>
 			<hr>
 			<div class="content-top-tab">
 
-				<div onclick="showCafeBmk()">카페</div>
+				<div class="opt" onclick="showCafeBmk()">카페</div>
 				<div>|</div>
-				<div onclick="showCafeListBmk()">리스트</div>
+				<div class="opt" onclick="showCafeListBmk()">리스트</div>
 			</div>
 		</div>
 		<hr>
-		
+
 		<div style="color: gray">
-				<b>'카페'글자와 '리스트'글자를 눌러 탭을 전환합니다.</b>
-			</div>
-		
+			<b>'카페'글자와 '리스트'글자를 눌러 탭을 전환합니다.</b>
+		</div>
+
 		<div class="content container">
 
 			<div id="cfBmk" class="cflist container">
@@ -94,7 +108,7 @@
 				</div>
 			</div>
 			<div></div>
-			
+
 			<div id="cfLiBmk" class="cflist container">
 				<div class="cflist-item">
 					<div class="cflist-thumb"
@@ -107,135 +121,120 @@
 								리스트 이름</strong>
 							<div class="mb-1 text-muted">카페1, 카페2, 카페3, 카페4, 카페5</div>
 							<div class="cflist-review"></div>
-							<a href="#">리스트 펼치기</a>
-
 						</div>
 						<div>
 							<img src="/img/bmk-empty.png">
 						</div>
-
 					</div>
 
 				</div>
-
-				<div class="d-flex">
-					<div>
-						<div class="cflist-thumb"
-							style="min-width: 100px; min-height: 100px; background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;amp;cs=tinysrgb&amp;amp;w=300');">
-						</div>
-						<div>카페1</div>
-					</div>
-					
-					<div>
-						<div class="cflist-thumb"
-							style="min-width: 100px; min-height: 100px; background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;amp;cs=tinysrgb&amp;amp;w=300');">
-						</div>
-						<div>카페2</div>
-					</div>
-					
-					<div>
-						<div class="cflist-thumb"
-							style="min-width: 100px; min-height: 100px; background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;amp;cs=tinysrgb&amp;amp;w=300');">
-						</div>
-						<div>카페3</div>
-					</div>
-					
-					<div>
-						<div class="cflist-thumb"
-							style="min-width: 100px; min-height: 100px; background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;amp;cs=tinysrgb&amp;amp;w=300');">
-						</div>
-						<div>카페4</div>
-					</div>
-					
-					<div>
-						<div class="cflist-thumb"
-							style="min-width: 100px; min-height: 100px; background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;amp;cs=tinysrgb&amp;amp;w=300');">
-						</div>
-						<div>카페5</div>
-					</div>
-					
-				</div>
-
-
 				<div class="cflist-item">
 					<div class="cflist-thumb"
-						style="background-image: url('https://images.pexels.com/photos/7541175/pexels-photo-7541175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+						style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
 					</div>
 
-				
+					<div class="d-flex">
+						<div class="col p-4 d-flex flex-column position-static">
+							<strong class="d-inline-block mb-2 text-success">2. 카페
+								리스트 이름</strong>
+							<div class="mb-1 text-muted">카페1, 카페2, 카페3, 카페4, 카페5</div>
+							<div class="cflist-review"></div>
+						</div>
+						<div>
+							<img src="/img/bmk-empty.png">
+						</div>
+					</div>
+
 				</div>
+				
+				<div class="cflist-item">
+					<div class="cflist-thumb"
+						style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
+					</div>
+
+					<div class="d-flex">
+						<div class="col p-4 d-flex flex-column position-static">
+							<strong class="d-inline-block mb-2 text-success">3. 카페
+								리스트 이름</strong>
+							<div class="mb-1 text-muted">카페1, 카페2, 카페3, 카페4, 카페5</div>
+							<div class="cflist-review"></div>
+						</div>
+						<div>
+							<img src="/img/bmk-empty.png">
+						</div>
+					</div>
+
+				</div>
+
+			
 			</div>
 		</div>
-		
-		
-	<!-- ==============화면 표시 스크립트============ -->
-	
-	
-	<script type="text/javascript">
-		 	var cfBmk = document.getElementById("cfBmk");
-		 	var cfLiBmk = document.getElementById("cfLiBmk");
-		 	
-		 	
+
+
+		<!-- ==============화면 표시 스크립트============ -->
+
+
+		<script type="text/javascript">
+			var cfBmk = document.getElementById("cfBmk");
+			var cfLiBmk = document.getElementById("cfLiBmk");
+
 			cfLiBmk.style.display = 'none';
-		 	
-		 	function showCafeBmk() {
+
+			function showCafeBmk() {
 				cfBmk.style.display = 'flex';
 				cfLiBmk.style.display = 'none';
 			}
-			
-		 	function showCafeListBmk() {
+
+			function showCafeListBmk() {
 				cfBmk.style.display = 'none';
 				cfLiBmk.style.display = 'flex';
 			}
+
+			function seeCafeListItem() {
+				alert(event.target);
+				var parent = event.target.parentNode;
+				parent.style.display = 'none';
+
+			}
+
+			function hideCafeListItem() {
+
+			}
+
+			/* 
+			 var biz = document.getElementById("bizMemberJoin");
 			
-		 	
-		 	function seeCafeListItem(){
-		 		alert('송대관');
-		 		let dv = event.currentTarget;
-		 		
-		 	}
-		 	
-		 	function hideCafeListItem(){
-		 		
-		 	}
-		 	
+			 mem.style.display = 'none';
+			 biz.style.display = 'none';
 			
-		 	
-/* 
-			var biz = document.getElementById("bizMemberJoin");
+			 function alertIdLength(alert, input){
+			 var alert = document.getElementById(alert);
+			 var input = document.getElementById(input);
 			
-			mem.style.display = 'none';
-			biz.style.display = 'none';
-			
-			function alertIdLength(alert, input){
-				var alert = document.getElementById(alert);
-				var input = document.getElementById(input);
-				
-				var len = $(input).val().length;
-				if(len<8 || len>15)
-					alert.style.display = 'block';
-				else
-					alert.style.display = 'none';
-		    }
+			 var len = $(input).val().length;
+			 if(len<8 || len>15)
+			 alert.style.display = 'block';
+			 else
+			 alert.style.display = 'none';
+			 }
 			
 			
-			var bDisplay = true;
-						
+			 var bDisplay = true;
 			
-			function displayBizFrm() {
-				if (biz.style.display == 'none') {
-					biz.style.display = 'block';
-				} else {
-					biz.style.display = 'none';
-				}
-				mem.style.display = 'none';
-			}  */
 			
+			 function displayBizFrm() {
+			 if (biz.style.display == 'none') {
+			 biz.style.display = 'block';
+			 } else {
+			 biz.style.display = 'none';
+			 }
+			 mem.style.display = 'none';
+			 }  */
 		</script>
-	
+
 	</div>
-	
-	
+
+
 </body>
 </html>
 
