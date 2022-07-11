@@ -42,6 +42,12 @@ public class MemberController {
 		return "admin/adminMain"; // /WEB-INF/views/templates/member/adminMain
 	}
 	
+	@GetMapping("/auth/memberEditForm")
+	// http://localhost/auth/findPwdForm
+	public String memberEditForm() {
+		return "member/memberEditForm";
+	}
+	
 
 
 }
