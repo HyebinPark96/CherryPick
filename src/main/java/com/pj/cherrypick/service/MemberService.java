@@ -1,5 +1,8 @@
 package com.pj.cherrypick.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -74,6 +77,17 @@ public class MemberService {
 		}
         
     }
+	
+	@Transactional
+	public int checkMemberOrAdmin(String username) {
+		return memberMapper.checkMemberOrAdmin(username); // 0 or 1 반환
+	}
 
+	@Transactional
+	public List<MemberVO> getMList() {
+		List<MemberVO> mList = new ArrayList<MemberVO>();
+		mList =  memberMapper.getMList();
+		return mList;
+	}
 	
 }

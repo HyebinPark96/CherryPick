@@ -13,7 +13,7 @@ import com.pj.cherrypick.domain.MemberVO;
 public interface MemberMapper {
 	
 	// (테스트용) SELECT 전체 회원 목록 출력
-	List<MemberVO> listmap();
+	List<MemberVO> getMList();
 	
 	// INSERT 회원가입
 	void signUp(MemberVO member) throws Exception;
@@ -31,5 +31,9 @@ public interface MemberMapper {
 	// 회원정보 수정
 	void updatePassword(String password, String username, String email);
 	
+	// 아이디 찾기
 	int findMUsername(String username);
+	
+	// 회원인지 관리자인지 구분 : 관리자 이외 사람이 url로 관리자 페이지 접근하는 것 방지하기 위해 
+	int checkMemberOrAdmin(String username);
 }

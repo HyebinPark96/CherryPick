@@ -46,6 +46,7 @@
 						<tr>
 							<th scope="col">[ ]</th>
 							<th scope="col">순번</th>
+							<th scope="col">아이디</th>
 							<th scope="col">성명</th>
 							<th scope="col">전화번호</th>
 							<th scope="col">이메일</th>
@@ -53,25 +54,27 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+					
+						<tr th:each="mList, index : ${mList}">
 							<td>[ ]</td>
-							<td>1,001</td>
-							<td>random</td>
-							<td>data</td>
-							<td>placeholder</td>
-							<td>사업자</td>
-							<td>X</td>
+							<td th:text="${index.index + 1}"></td>
+							<td th:text="${mList.username}"></td>
+							<td th:text="${mList.name}">random</td>
+							<td th:text="${mList.phone}">data</td>
+							<td th:text="${mList.email}">placeholder</td>
+							
+							<td th:if="${mList.role}!=0 and ${mList.role}!=1">
+								사업자
+							</td>
+							<td th:if="${mList.role}==0">
+								회원
+							</td>
+							<td th:if="${mList.role}==1">
+								관리자
+							</td>
+						
 						</tr>
-						<tr>
-							<td>[ ]</td>
-							<td>1,001</td>
-							<td>random</td>
-							<td>data</td>
-							<td>placeholder</td>
-							<td>placeholder</td>
-							<td>X</td>
-						</tr>
-
+						
 					</tbody>
 				</table>
 			</div>
