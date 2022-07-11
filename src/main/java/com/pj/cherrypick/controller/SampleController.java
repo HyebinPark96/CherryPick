@@ -9,15 +9,13 @@ public class SampleController {
 
 
 	@GetMapping({"","/"})
-	public String demomain(Model model) {
-		model.addAttribute("isMainPage", true);
+	public String demomain() {
 		System.out.println("demomain 호출");
 		return "demomain";
 	}
 	
 	@GetMapping(value = "/demo1")
-	public void demo1(Model model) {
-		model.addAttribute("isMainPage", false);
+	public void demo1() {
 		System.out.println("demo1 호출");
 	}
 	
@@ -29,15 +27,6 @@ public class SampleController {
 	@GetMapping(value = "/demo3")
 	public void demo3() {
 		System.out.println("demo3 호출");
-	}
-	
-	@GetMapping(value = "/demologin")
-	public void demologin() {
-	}
-	
-	@GetMapping(value = "/demojoin")
-	public void demojoin() {
-		System.out.println("demojoin 호출");
 	}
 	
 	
