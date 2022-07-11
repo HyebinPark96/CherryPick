@@ -17,14 +17,17 @@ public interface CafeMapper {
 	
 	CafeVO getCafe(int cno);
 	
-	List<CafeVO> getCafeList();
-	
 	int createCafe(CafeVO cafe);
 	
 	int updateCafe(CafeVO cafe);
 	
 	int deleteCafe(int cno);
 	
-
+	// 특정카페(cno) 상세정보 불러오기
+	CafeVO getCafeDetail(int cno);
+	
+	// 카페 리스트업 
+	List<CafeVO> getCafeList();
+	
 	
 }

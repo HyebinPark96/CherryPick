@@ -1,10 +1,12 @@
 package com.pj.cherrypick.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.service.CafeService;
@@ -18,8 +20,10 @@ public class CafeController {
 	
 	// 카페목록
 	@GetMapping("cafe/list")
-	public String cafeList() {
+	public String cafeList(Model model) {
 		System.out.println("카페리스트 실행");
+		List<CafeVO> cafes = cafeService.getCafeList();
+		model.addAttribute("cafes", cafes);
 		return "cafe/list";
 		}
 

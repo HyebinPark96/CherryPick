@@ -40,9 +40,6 @@ public class SampleController {
 		System.out.println("demojoin 호출");
 	}
 	
-	@GetMapping(value = "/demobmk")
-	public void demobmk() {
-	}
 	
 	@GetMapping(value = "/demoreview")
 	public void demoreview() {

@@ -32,7 +32,11 @@ textarea:focus, input:focus {
 }
 
 .content-top {
-	text-align: center;
+	margin-top: 20px;
+}
+
+.content-top{
+	padding-left: 10px;
 }
 
 .content-top-tab {
@@ -40,7 +44,13 @@ textarea:focus, input:focus {
 	justify-content: space-evenly;
 }
 
+/*========아이콘========*/
+
 .back-icon {
+	width: 20px;
+}
+
+.edit-icon {
 	width: 20px;
 }
 
