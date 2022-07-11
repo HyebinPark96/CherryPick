@@ -11,11 +11,13 @@ let index = {
 
 
 	save: function() {
-		let username = $("#username").val();
-		if(username.length < 8 || username.length > 15){
-			alert("아이디는 8~15자를 입력해주세요.");
+		let agreement = $("#agreement");
+
+		if(!agreement.is(":checked")){
+			alert("하단 체크박스에 동의해주세요.");
 			return false;
 		}
+		
 		let data = {
 			username: $("#username").val(), // Form 의 input값 들고오기
 			password: $("#password").val(),
@@ -23,8 +25,17 @@ let index = {
 			phone: $("#phone").val(),
 			email: $("#email").val()
 		};
+		
+		if(data.username.length < 8 || data.username.length > 15){
+			alert("아이디는 8~15자를 입력해주세요.");
+			return false;
+		}
 
-		// console.log(data);
+		if(data.password.trim().length==0 || data.name.trim().length==0 || 
+			data.phone.trim().length==0 || data.email.trim().length==0){
+			alert("항목을 제대로 기입하였는지 확인해주세요.");
+			return false;
+		}
 		
 		// ajax는 디폴트가 비동기 호출
 		// ajax 통신 성공 => 서버가 json 리턴 => 자동으로 자바스크립트 오브젝트로 변환
