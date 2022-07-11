@@ -7,9 +7,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.MemberVO;
+import com.pj.cherrypick.mapper.MemberMapper;
 import com.pj.cherrypick.service.MemberService;
 
 @Controller
@@ -17,6 +19,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService; // 스프링이 컴포넌트 스캔을 통해 MemberService.java의 @Service 어노테이션을 보면 Bean에 등록을 해 줌 (=IOC 해줌)
+	
 	
 	// http://localhost/auth/joinForm
 	@GetMapping("/auth/joinForm")
@@ -71,7 +74,9 @@ public class MemberController {
 	
 	@GetMapping("/member/memberEditForm")
 	// http://localhost/member/memberEditForm
-	public String memberEditForm() {
+	public String memberEditForm(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+		MemberVO member = memberService.findByUsername(principalDetail.getUsername());
+		model.addAttribute("member", member);
 		return "member/memberEditForm";
 	}
 

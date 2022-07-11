@@ -7,28 +7,23 @@
 				<img src="/img/logo.png" width="150px">
 			</div>
 			
-			<!-- 관리자 -->
-			<div sec:authorize-expr="isAuthenticated()" class="title-top-right">
-		        <!-- <h2 sec:authentication="username">Name</h2> -->
-		        <!-- <span th:if="${#authentication.role}==1">관리자입니다.</span> -->
-		        <!--ROLE_USER 권한을 갖는다면 이 글이 보임-->
-       			<a sec:authorize="hasRole('1')" href="/admin/adminMain">Admin |</a>
-		        <a href="/member/myPage">My Page | </a>
-		        <a href="#" th:href="@{/logout}">Sign out</a>
-		    </div>
-		    
-		    <!-- 회원 -->
-		    <div sec:authorize-expr="isAuthenticated()" class="title-top-right">
-		        <a href="/member/myPage">My Page | </a>
-		        <a href="#" th:href="@{/logout}">Sign out</a>
+			<div sec:authorize="isAuthenticated()" class="title-top-right">
+				<!-- 관리자 -->
+       			<a href="/admin/adminMain" sec:authorize="hasRole('ROLE_1')">Admin |</a>
+		        <a href="/member/myPage" sec:authorize="hasRole('ROLE_1')">My Page | </a>
+		        <a href="#" th:href="@{/logout}" sec:authorize="hasRole('ROLE_1')" >Sign out</a>
+		        
+		        <!-- 회원 -->
+				<a href="/member/myPage" sec:authorize="!hasRole('ROLE_1')">My Page | </a>
+		        <a href="#" th:href="@{/logout}" sec:authorize="!hasRole('ROLE_1')">Sign out</a>
 		    </div>
 		    
 		    <!-- 사업자 -->
-		    <div sec:authorize-expr="isAuthenticated()" class="title-top-right">
-		        <a href="#">Store Management | </a>
+		    <div sec:authorize-expr="isAuthenticated()" sec:authorize="!hasAnyRole('ROLE_0','ROLE_1')" class="title-top-right">
+		        <a href="#" sec:authorize="!hasAnyRole('ROLE_0','ROLE_1')">Store Management | </a>
 		        <!-- <a href="/bMember/myPage">My Page | </a> -->
-		        <a href="#">My Page | </a> <!-- 사업자용 정보수정페이지는 회원용 수정페이지 뷰로 같이쓰되 url 매핑 따로 구현할 예정 -->
-		        <a href="#" th:href="@{/logout}">Sign out</a>
+		        <a href="#" sec:authorize="!hasAnyRole('ROLE_0','ROLE_1')">My Page | </a> <!-- 사업자용 정보수정페이지는 회원용 수정페이지 뷰로 같이쓰되 url 매핑 따로 구현할 예정 -->
+		        <a href="#" th:href="@{/logout}" sec:authorize="!hasAnyRole('ROLE_0','ROLE_1')">Sign out</a>
 		    </div>
 		    
 		    <!-- 비회원 -->

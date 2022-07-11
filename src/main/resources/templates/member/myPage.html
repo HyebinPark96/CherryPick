@@ -1,6 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{/layout/layout-main}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout-main}">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -22,17 +20,19 @@
 			</div>
 			<hr> -->
 			<div class="d-flex align-items-center row">
-				<div class="col-md-1">
-					<img class="back-icon" src="../img/back.png">
-				</div>
-				<div class="col-md-10" style="text-align: right">
-					<p><b>username님</b></p>
-					<p>email@naver.com</p>
-				</div>
+					<div class="col-md-1">
+						<img class="back-icon" src="../img/back.png">
+					</div>
+					<div class="col-md-10" style="text-align: right">
+						<p>
+							<b>username님</b>
+						</p>
+						<p>email@naver.com</p>
+					</div>
 
-				<div class="col-md-1">
-					<a id="mEdit" href="/member/memberEditForm"><img class="edit-icon" src="../img/edit.png"></a>
-				</div>
+					<div class="col-md-1">
+						<a id="mEdit" href="/member/memberEditForm"><img class="edit-icon" src="../img/edit.png"></a>
+					</div>
 			</div>
 			<hr>
 			<div class="content-top-tab">
@@ -51,66 +51,60 @@
 		<div class="content container">
 
 			<div id="cfBmk" class="cflist container">
-				
-				<th:block th:each="num : ${#numbers.sequence(1,3)}">
-				<div class="cflist-item">
-					<div class="cflist-thumb"
-						style="background-image: url('https://images.pexels.com/photos/7362647/pexels-photo-7362647.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940');">
-					</div>
 
-					<div class="d-flex">
-						<div class="col p-4 d-flex flex-column position-static">
-							<strong class="d-inline-block mb-2 text-success">1. 카페
-								이름</strong>
-							<div class="mb-1 text-muted">부산광역시 경상남도 서울시</div>
-							<div class="cflist-review">
-								<div class="cflist-review-profile"></div>
-								<div>
-									<b>username</b>&nbsp; 카페 리뷰를 입력하는 란입니다. 아직 입력된 데이터가 존재하지 않습니다.
+				<th:block th:each="num : ${#numbers.sequence(1,3)}">
+					<div class="cflist-item">
+						<div class="cflist-thumb" style="background-image: url('https://images.pexels.com/photos/7362647/pexels-photo-7362647.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940');"></div>
+
+						<div class="d-flex">
+							<div class="col p-4 d-flex flex-column position-static">
+								<strong class="d-inline-block mb-2 text-success">1. 카페 이름</strong>
+								<div class="mb-1 text-muted">부산광역시 경상남도 서울시</div>
+								<div class="cflist-review">
+									<div class="cflist-review-profile"></div>
+									<div>
+										<input type="hidden" id="username" th:value="${#authentication.principal.username}">
+										<b>username</b>&nbsp; 카페 리뷰를 입력하는 란입니다. 아직 입력된 데이터가 존재하지 않습니다.
+									</div>
+
 								</div>
+								<a href="seeCafeListItem()">더보기</a>
 
 							</div>
-							<a href="seeCafeListItem()">더보기</a>
+							<div>
+								<img src="../img/bmk-empty.png">
+							</div>
 
-						</div>
-						<div>
-							<img src="../img/bmk-empty.png">
 						</div>
 
 					</div>
+				</th:block>
 
-				</div>
-</th:block>
 
-				
 			</div>
 			<div></div>
-	
+
 			<div id="cfLiBmk" class="cflist container">
-			
+
 				<th:block th:each="num : ${#numbers.sequence(1,3)}">
-				<div class="cflist-item">
-					<div class="cflist-thumb"
-						style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
-					</div>
+					<div class="cflist-item">
+						<div class="cflist-thumb" style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');"></div>
 
-					<div class="d-flex">
-						<div class="col p-4 d-flex flex-column position-static">
-							<strong class="d-inline-block mb-2 text-success">1. 카페
-								리스트 이름</strong>
-							<div class="mb-1 text-muted">카페1, 카페2, 카페3, 카페4, 카페5</div>
-							<div class="cflist-review"></div>
+						<div class="d-flex">
+							<div class="col p-4 d-flex flex-column position-static">
+								<strong class="d-inline-block mb-2 text-success">1. 카페 리스트 이름</strong>
+								<div class="mb-1 text-muted">카페1, 카페2, 카페3, 카페4, 카페5</div>
+								<div class="cflist-review"></div>
+							</div>
+							<div>
+								<img src="../img/bmk-empty.png">
+							</div>
 						</div>
-						<div>
-							<img src="../img/bmk-empty.png">
-						</div>
-					</div>
 
-				</div>
+					</div>
 				</th:block>
-			
 			</div>
-			
+
 		</div>
 
 
@@ -174,7 +168,6 @@
 			 mem.style.display = 'none';
 			 }  */
 		</script>
-
 	</div>
 
 

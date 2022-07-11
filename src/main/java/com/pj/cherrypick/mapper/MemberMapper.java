@@ -32,8 +32,11 @@ public interface MemberMapper {
 	void updatePassword(String password, String username, String email);
 	
 	// 아이디 찾기
-	int findMUsername(String username);
+	int findDupUsername(String username);
 	
 	// 회원인지 관리자인지 구분 : 관리자 이외 사람이 url로 관리자 페이지 접근하는 것 방지하기 위해 
 	int checkMemberOrAdmin(String username);
+	
+	void updateMember(MemberVO member);
+	
 }
