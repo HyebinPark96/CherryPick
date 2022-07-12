@@ -45,12 +45,23 @@ public class MemberApiRestController {
 	
 	@PutMapping("/member/updateMemberProc")
 	public ResponseDto<Integer> updateMember(@RequestBody MemberVO member) throws Exception {
-		memberService.updateMember(member); // JSON으로 입력받은 수정 정보를 파라미터로 전달
+		System.out.println("member.getPassword() : " + member.getPassword());
+		System.out.println("member.getPassword().length : " + member.getPassword().length());
+
+		if(member.getPassword().length()==0) {
+			System.out.println(1);
+			memberService.updateMemberWithoutPwd(member); // 비번빼고 수정한 경우
+			System.out.println(2);
+		} else {
+			System.out.println(3);
+			memberService.updateMember(member); // 비번도 수정한 경우
+	        /* 변경된 세션 등록 */ 
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(member.getUsername(), member.getPassword())); 
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			System.out.println(4);
+		}
 		
-        /* 변경된 세션 등록 */ 
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(member.getUsername(), member.getPassword())); 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
+		System.out.println(5);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 	}
 }

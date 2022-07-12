@@ -31,6 +31,9 @@ public interface MemberMapper {
 	// 회원정보 수정
 	void updatePassword(String password, String username, String email);
 	
+	// 회원정보 수정
+	void updatePassword(String password);
+	
 	// 아이디 찾기
 	int findDupUsername(String username);
 	
@@ -38,5 +41,7 @@ public interface MemberMapper {
 	int checkMemberOrAdmin(String username);
 	
 	void updateMember(MemberVO member);
+	
+	void updateMemberWithoutPwd(MemberVO member);
 	
 }

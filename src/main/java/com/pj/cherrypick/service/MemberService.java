@@ -81,6 +81,16 @@ public class MemberService {
         
     }
 	
+	// DB저장된 비번과 회원수정 위해 입력한 비번 비교하기 위해 후자를 같은 방식으로 암호화 하여 비교
+	@Transactional
+    public boolean getEncPassword(String inputPassword, String dbPassword) {
+		if(encoder.matches(inputPassword, dbPassword)) { // 입력받은 비번, 암호화된 비번
+			return true;
+		}
+		return false;
+    }
+	
+	
 	@Transactional
 	public int checkMemberOrAdmin(String username) {
 		return memberMapper.checkMemberOrAdmin(username); // 0 or 1 반환
@@ -107,6 +117,23 @@ public class MemberService {
 		orgMember.setEmail(member.getEmail());
 		
 		memberMapper.updateMember(orgMember); // 수정 SQL문 
+		
+	}
+	
+	@Transactional
+	public void updateMemberWithoutPwd(MemberVO member) {
+		MemberVO orgMember = memberMapper.findByUsername(member.getUsername()); // 기존 회원정보 들고오기
+		
+//		String rawPassword = member.getPassword(); // 회원정보 수정폼에서 입력한 패스워드 가져오기
+//		String encPassword = encoder.encode(rawPassword); // 암호화
+//		
+//		orgMember.setPassword(encPassword); // 암호화된 비번 DB에 저장
+		
+		orgMember.setName(member.getName());
+		orgMember.setPhone(member.getPhone());
+		orgMember.setEmail(member.getEmail());
+		
+		memberMapper.updateMemberWithoutPwd(orgMember); // 수정 SQL문 
 		
 	}
 	

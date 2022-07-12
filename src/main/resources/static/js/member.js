@@ -91,10 +91,18 @@ let index = {
 		let data = {
 			username: $("#username").val(),
 			password: $("#password").val(),
+			pwdChk: $("#pwdChk").val(),
 			name: $("#name").val(),
 			phone: $("#phone").val(),
-			email: $("#email").val()
+			email: $("#email").val(),
+			dbPassword: $("#dbPassword").val()
 		};
+		
+		if(data.password != data.pwdChk){
+			alert("비밀번호가 동일하지 않습니다.");
+			return false;
+		}
+		
 
 		$.ajax({
 			type: "PUT",
