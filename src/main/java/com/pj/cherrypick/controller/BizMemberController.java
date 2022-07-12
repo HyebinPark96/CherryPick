@@ -9,9 +9,5 @@ import com.pj.cherrypick.domain.BizMemberVO;
 
 @Controller
 public class BizMemberController {
-	@GetMapping("/bizMember/myPage")
-	public String myPage(@SessionAttribute(name = "bizMember", required = false)BizMemberVO bizMember, Model model) {
-		model.addAttribute("bizMember", bizMember);
-		return "bizMember/myPage"; // model 들고 뷰로 이동
-	}
+
 }
