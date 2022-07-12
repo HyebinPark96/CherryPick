@@ -37,8 +37,12 @@ public class BizMemberService {
 	}
 	
 	@Transactional
-	public String findUsername(String name, String email) throws Exception {
-		return bizMemberMapper.findUsername(name, email); // 아이디 찾기
+	public String findUsername(String bname, String bemail) throws Exception { // 아이디 찾기
+		if(bizMemberMapper.findUsername(bname, bemail).equals(null)) {
+			return "";
+		} else {
+			return bizMemberMapper.findUsername(bname, bemail);
+		} 
 	}
 	
 	/* 임시비번으로 비번 재설정 후, 메일로 임시비번 전송하기 */
@@ -65,13 +69,9 @@ public class BizMemberService {
     // 임시비번으로 업데이트
 	@Transactional
     public void updatePassword(String tmpPassword, String username, String email) {
-		
-        String password = encoder.encode(tmpPassword); // 임시비번 => 해쉬로 암호화
         
         try {
-        	bizMemberMapper.updatePassword(password, username, email); // 해쉬를 비번으로 업데이트
-        	System.out.println("password: " + password);
-
+        	bizMemberMapper.updatePassword(tmpPassword, username, email); // 해쉬를 비번으로 업데이트
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

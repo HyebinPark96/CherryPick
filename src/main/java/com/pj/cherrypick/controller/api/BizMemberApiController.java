@@ -28,11 +28,14 @@ public class BizMemberApiController {
 	@PostMapping("/auth/bizFindUsernameProc")
 	public String findUsername(@RequestParam("bname") String bname, @RequestParam("bemail") String bemail, Model model)
 			throws Exception {
-//		System.out.println("name : " + name);
-//		System.out.println("email : " + email);
 
 		/* 아이디 3자리 이후부터 잘라 *로 처리하기 */
+		
+		if(bizMemberService.findUsername(bname, bemail).trim().equals("")) {
+			return "/"; // alert 하는 페이지로 이동하도록 수정하기!!!!
+		}
 		String rawUsername = bizMemberService.findUsername(bname, bemail);
+		
 		int rawUsernameLen = rawUsername.length(); // 아이디 글자수
 		String rawUsernameStart = rawUsername.substring(0, 3); // 시작위치, 종료위치 // 그대로 나타낼 부분
 		String rawUsernameEnd = rawUsername.substring(3, rawUsernameLen); // * 표시할 부분
@@ -44,19 +47,17 @@ public class BizMemberApiController {
 
 		String encUsername = rawUsernameStart + encUsernameEnd; // 일부 *로 변환된 아이디
 
-//		System.out.println("encUsername : " + encUsername);
-
 		model.addAttribute("username", encUsername);
 		return "bizMember/findUsernameResult";
 	}
 
-	@PostMapping("/auth/bizSendEmailProc")
+	@PostMapping("/auth/sendBemailProc")
 	public String sendEmailProc(@RequestParam("username") String username, @RequestParam("bemail") String bemail,
 			Model model) {
-		BizMemberVO bizmember = bizMemberService.findByUsername(username);
+		BizMemberVO bizMember = bizMemberService.findByUsername(username);
 
-		if (!bemail.equals(bizmember.getBemail())) {
-			return "member/findPasswordResult";
+		if (!bemail.equals(bizMember.getBemail())) {
+			return "bizMember/findPasswordResult";
 		} else {
 			String tmpPassword = bizMemberService.getTmpPassword(); // 임시비번 생성
 
