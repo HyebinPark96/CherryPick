@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.csrf().disable() // csrf : 정상적인 사용자가 의도치 않은 위조요청을 보내는 것을 방지하기 위한 토큰 생성을 비활성화 (테스트시 걸어두는 게 좋음)
 			.authorizeRequests()
-				.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/img/**", "/dummy/**", "/cafe/**")
+				.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/img/**", "/dummy/**", "/cafe/**", "/bizMember/signOut")
 				.permitAll() // 위 경로는 모든 사용자 접근 허용
 				.anyRequest() // 이외의 요청들은
 				.authenticated() // 인증되어야 함
