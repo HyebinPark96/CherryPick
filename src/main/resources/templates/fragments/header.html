@@ -6,49 +6,61 @@
 			<div class="title-top-left">
 				<img src="/img/logo.png" width="150px">
 			</div>
-			
+
 			<div sec:authorize="isAuthenticated()" class="title-top-right">
 				<!-- 관리자 -->
 				<div>
-       			<a href="/admin/adminMain" sec:authorize="hasRole('ROLE_1')">Admin</a>
-       			</div>
-       			<div>&nbsp;|&nbsp;</div>
-       			<div><a href="/member/myPage" sec:authorize="hasRole('ROLE_1')">My Page</a></div>
-		        <div>&nbsp;|&nbsp;</div>
-		        <div><a href="#" th:href="@{/logout}" sec:authorize="hasRole('ROLE_1')" >Sign out</a></div>
-		        
-		        
-		        <!-- 회원 -->
-		        
-				<div><a href="/member/myPage" sec:authorize="!hasRole('ROLE_1')">My Page</a></div>
+					<a href="/admin/adminMain" sec:authorize="hasRole('ROLE_1')">Admin</a>
+				</div>
+				<div sec:authorize="hasRole('ROLE_1')">&nbsp;|&nbsp;</div>
+				<div>
+					<a href="/member/myPage" sec:authorize="hasRole('ROLE_1')">My Page</a>
+				</div>
+				<div sec:authorize="hasRole('ROLE_1')">&nbsp;|&nbsp;</div>
+				<div>
+					<a href="#" th:href="@{/logout}" sec:authorize="hasRole('ROLE_1')">Sign out</a>
+				</div>
+
+
+				<!-- 회원 -->
+				<div>
+					<a href="/member/myPage" sec:authorize="!hasRole('ROLE_1')">My Page</a>
+				</div>
+				<div sec:authorize="!hasRole('ROLE_1')">&nbsp;|&nbsp;</div>
+				<div>
+					<a href="#" th:href="@{/logout}" sec:authorize="!hasRole('ROLE_1')">Sign out</a>
+				</div>
+			</div>
+
+			<!-- 비회원 -->
+			<div sec:authorize-expr="!isAuthenticated()" th:if="${bizMember == null}" class="title-top-right">
+				<div>
+					<a href="/auth/loginForm">Sign in</a>
+				</div>
 				<div>&nbsp;|&nbsp;</div>
-		        <div><a href="#" th:href="@{/logout}" sec:authorize="!hasRole('ROLE_1')">Sign out</a></div>
-		        
-		    </div>
-		    
-		   	<!-- 비회원 -->
-		    <div sec:authorize-expr="!isAuthenticated()" th:if="${bizMember == null}" class="title-top-right">
-		        <div><a href="/auth/loginForm">Sign in</a></div>
-		        <div>&nbsp;|&nbsp;</div>
-				<div><a href="/auth/joinForm">Sign up</a></div>
-		    </div>
-		    
-		    <!-- 사업자 -->
-		    <div sec:authorize-expr="!isAuthenticated()" th:if="${bizMember != null}" class="title-top-right">
-		        <div><a href="#" >Store Management</a></div>
-		        <!-- <a href="/bMember/myPage">My Page | </a> -->
-		        <div>&nbsp;|&nbsp;</div>
-		        <a href="#" >My Page</a> <!-- 사업자용 정보수정페이지는 회원용 수정페이지 뷰로 같이쓰되 url 매핑 따로 구현할 예정 -->
-		        <div>&nbsp;|&nbsp;</div>
-		        <form th:action="@{bizMember/signOut}" method="post">
-		        	<button type="submit">Sign out</button>
-		        </form>
-		    </div>
-		    
+				<div>
+					<a href="/auth/joinForm">Sign up</a>
+				</div>
+			</div>
+
+			<!-- 사업자 -->
+			<div sec:authorize-expr="!isAuthenticated()" th:if="${bizMember != null}" class="title-top-right">
+				<div>
+					<a href="#">Store Management</a>
+				</div>
+				<!-- <a href="/bMember/myPage">My Page | </a> -->
+				<div>&nbsp;|&nbsp;</div>
+				<a href="#">My Page</a>
+				<!-- 사업자용 정보수정페이지는 회원용 수정페이지 뷰로 같이쓰되 url 매핑 따로 구현할 예정 -->
+				<div>&nbsp;|&nbsp;</div>
+				<form th:action="@{bizMember/signOut}" method="post">
+					<button type="submit">Sign out</button>
+				</form>
+			</div>
+
 		</div>
 		<div class="title-center">
-			<span style="font-size: 12px;
-	color: #ddd;">주목할 만한, 글귀 한 구절!</span>
+			<span style="font-size: 12px; color: #ddd;">주목할 만한, 글귀 한 구절!</span>
 			<h3>망고플레이트</h3>
 
 			<div class="title-searchbar">
@@ -81,11 +93,11 @@
 		</div>
 		<div class="sub-searchbar">
 			<div>
-					&nbsp;&nbsp;<img src="/img/search-b.png" style="height: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;
-				</div>
-				<input id="mainsearch" placeholder="#인스타 #핫플 #스터디"></input>
+				&nbsp;&nbsp;<img src="/img/search-b.png" style="height: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;
+			</div>
+			<input id="mainsearch" placeholder="#인스타 #핫플 #스터디"></input>
 		</div>
 	</div>
-	
+
 </div>
 </html>
