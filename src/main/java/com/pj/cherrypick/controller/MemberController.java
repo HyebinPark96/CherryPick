@@ -24,13 +24,13 @@ public class MemberController {
 	// http://localhost/auth/joinForm
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {
-		return "member/joinForm"; // // /WEB-INF/views/templates/member/joinForm
+		return "joinForm"; // // /WEB-INF/views/templates/joinForm
 	}
 	
 	@GetMapping("/auth/loginForm")
 	// http://localhost/auth/loginForm
 	public String loginForm() {
-		return "member/loginForm"; // /WEB-INF/views/templates/member/loginForm
+		return "loginForm"; // /WEB-INF/views/templates/loginForm
 	}
 	
 	@GetMapping("/auth/findUsernameForm")

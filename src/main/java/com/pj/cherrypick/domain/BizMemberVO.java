@@ -14,6 +14,6 @@ public class BizMemberVO {
 	private String password;
 	private String bname;
 	private int bstat;
-	private String bPhone;
-	private String bEmail;
+	private String bphone;
+	private String bemail;
 }
