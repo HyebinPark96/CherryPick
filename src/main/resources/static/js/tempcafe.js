@@ -26,7 +26,7 @@ let index = {
 		$.ajax({
 			type: "POST",
 			url: "/auth/regCafeProc",
-			data: JSON.stringify(data), // 자바스크립트의 data 객체를 Java가 알아듣도록 변경
+			data: JSON.stringify(data), // 자바스크립트의 data 객체를 Java가 알아듣도록 변경			
 			contentType: "application/json; charset=utf-8",
 			dataType: "json" // json이라면 => javascript 오브젝트로 변경하여 아래 함수의 파라미터로 전달
 		}).done(function(resp) {
