@@ -24,17 +24,16 @@
 				<div class="cflist-item" th:each="cafe : ${cafes}"> 
 					<div class="cflist-thumb">
 					<!-- style="background-image: url('https://images.pexels.com/photos/7362647/pexels-photo-7362647.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940');"-->
-					<img src="/img/${cafe.cimage}" alt="카페썸네일">
+					<img th:src="@{${'/img/' + cafe.cimage}}" alt = "카페썸네일" width="200"/>
 					</div>
 
 					<div class="d-flex">
 						<div class="col p-4 d-flex flex-column position-static">
 							<strong class="d-inline-block mb-2 text-success" th:text="${cafe.cname}">1. 카페
 								이름</strong>
+							<div th:text="${cafe.ctag}">카페 해시태그</div>	
 							<div class="mb-1 text-muted" th:text="${cafe.caddress}">부산광역시 경상남도 서울시</div>
-							<div th:text="${cafe.c_lat}">경도</div>
-							<div th:text="${cafe.c_long}">위도</div>
-							<div th:text="${cafe.cno}">카페번호</div>
+
 							
 							<div class="cflist-review">
 								<div class="cflist-review-profile"></div>
@@ -59,8 +58,6 @@
 				</div>
 
 
-			
-
 				<div class="sharebar input-group mb-3">
 					<input type="text" value="https://sampletext.com">
 					<button class="btn btn-outline-secondary" type="button"
@@ -71,53 +68,53 @@
 			<!-- 지도 출력 스크립트 -->
 			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=690f1466b1db83245b4a29ca995ae063&libraries=services"></script>
 <script th:inline="javascript">
-       
- /*<![CDATA[*/
 
-	 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+	/*<![CDATA[*/
+
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {
 			center: new kakao.maps.LatLng(35.15306, 129.06623), // 지도의 중심좌표 (전포역)
 			level: 3 // 지도의 확대 레벨
 		};
 
 	// 지도생성
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 
 	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-	
-/*	var positions = [
-		{
-			content: '<div>카카오</div>',
-			latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-		},
-		{
-			content: '<div>생태연못</div>',
-			latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-		},
-		{
-			content: '<div>텃밭</div>',
-			latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-		},
-		{
-			content: '<div>근린공원</div>',
-			latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-		}
-	]; */
-	
-		var positions = [];
-		
-    	/*[# th:each="cafe : ${cafes}"]*/
-    	var data = {};
-    	data.content = /*[[${cafe.cname}]]*/
-    	data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/);
-		positions.push(data);
-   		var cno = /*[[${cafe.cno}]]*/;
-		console.log("cno", cno);
-		console.log("data:", data);
-		console.log("positions:", positions);
-		var cimage = /*[[${cafe.cimage}]]*/;
-		console.log(cimage);
-        /*[/]*/
+
+	/*	var positions = [
+			{
+				content: '<div>카카오</div>',
+				latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+			},
+			{
+				content: '<div>생태연못</div>',
+				latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+			},
+			{
+				content: '<div>텃밭</div>',
+				latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+			},
+			{
+				content: '<div>근린공원</div>',
+				latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+			}
+		]; */
+
+	var positions = [];
+
+	/*[# th:each="cafe : ${cafes}"]*/
+	var data = {};
+	data.content = /*[[${cafe.cname}]]*/
+		data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/);
+	positions.push(data);
+	var cno = /*[[${cafe.cno}]]*/;
+	console.log("cno", cno);
+	console.log("data:", data);
+	console.log("positions:", positions);
+	var cimage = /*[[${cafe.cimage}]]*/;
+	console.log(cimage);
+	/*[/]*/
 
 
 
@@ -152,21 +149,11 @@
 		return function () {
 			infowindow.close();
 		};
-	} 
-	
-	
+	}
 
-	
-	
-	
-/*]]>*/
+	/*]]>*/
 </script>
 
-
-
-				
-				
-				
 			</div>
 
 		</div>

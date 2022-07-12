@@ -22,7 +22,7 @@ public class CafeController {
 	// 카페목록
 	@GetMapping("cafe/list")
 	public String cafeList(Model model) {
-		System.out.println("카페리스트 실행");
+		System.out.println("[CafeController] cafe/list");
 		List<CafeVO> cafes = cafeService.getCafePreviewList();
 		model.addAttribute("cafes", cafes);
 		return "cafe/list";
