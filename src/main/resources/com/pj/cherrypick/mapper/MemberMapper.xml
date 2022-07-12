@@ -40,5 +40,10 @@
 		UPDATE member SET password = #{password}, name = #{name}, phone = #{phone}, email = #{email} 
 		WHERE username = #{username}
 	</update>
+	
+	<update id="updateMemberWithoutPwd"  parameterType="com.pj.cherrypick.domain.MemberVO">
+		UPDATE member SET name = #{name}, phone = #{phone}, email = #{email} 
+		WHERE username = #{username}
+	</update>
     
 </mapper>

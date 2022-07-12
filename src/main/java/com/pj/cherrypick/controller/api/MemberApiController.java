@@ -1,12 +1,14 @@
 package com.pj.cherrypick.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pj.cherrypick.config.auth.PrincipalDetail;
+import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.service.MailService;
 import com.pj.cherrypick.service.MemberService;
 
@@ -44,15 +46,36 @@ public class MemberApiController {
 	}
 	
 	@PostMapping("/auth/sendEmailProc")
-	public String sendEmailProc(@RequestParam String username, @RequestParam String email) {
-		String tmpPassword = memberService.getTmpPassword(); // 임시비번 생성
+	public String sendEmailProc(@RequestParam("username") String username, @RequestParam("email") String email, Model model) {
+		MemberVO member = memberService.findByUsername(username);
 		
-		memberService.updatePassword(tmpPassword, username, email); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
-		
-		mailService.sendEmail(email, tmpPassword); // 이메일로 임시비번 전송
-		
-		return "member/loginForm";
+		if(!email.equals(member.getEmail())) {
+			return "member/findPasswordResult";
+		} else {
+			String tmpPassword = memberService.getTmpPassword(); // 임시비번 생성
+			
+			memberService.updatePassword(tmpPassword, username, email); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
+			
+			mailService.sendEmail(email, tmpPassword); // 이메일로 임시비번 전송
+			
+			return "member/loginForm";
+		}
 	}
 		
+		@PostMapping("/member/checkPwdForEditResult")
+		public String checkPwdForEditResult(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/,@RequestParam(required = false, value = "password") String password, Model model) {
+			System.out.println("password"+password);
+			MemberVO member = memberService.findByUsername(principalDetail.getUsername()); // DB 저장된 회원정보 가져오기
+			boolean checkPassword = memberService.getEncPassword(password, member.getPassword());
+			
+			if(!checkPassword) {
+				System.out.println("false");
+				return "member/checkPwdForEditResult";
+			} else {
+				System.out.println("true");
+				model.addAttribute("member", member); // member 객체들고 뷰로 이동
+				return "member/memberEditForm";
+			}
+		}
 	
 }

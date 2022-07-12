@@ -6,22 +6,6 @@
 
 <body>
 	<div class="content container" layout:fragment="content">
-		<div class="text-large">회원정보 수정</div>
-
-		<div class="edit-pwdchk d-flex flex-column align-item-center">
-			<img src="/img/logo-pink.png" alt="" width="150">
-			<div>비밀번호를 입력해 주세요.</div>
-		</div>
-
-		<div class="col-md-6 mb-3">
-			<input type="password" class="form-control" id="pwdInput" oninput="displayEditFrm()" placeholder="1234를 입력하면 수정 폼이 열립니다." value="" required>
-			<div class="invalid-feedback">비밀번호 확인</div>
-			<img id="pwdChkIcon" class="check-icon" src="../img/check.png">
-		</div>
-
-
-
-		<!-- ===========회원수정 폼=========== -->
 
 		<div id="memberEditFrm" class="input-form-backgroud row">
 			<hr>
@@ -37,11 +21,13 @@
 					</div>
 
 					<div class="col-md-6 mb-3">
-						<label for="password">신규 비밀번호</label> <input type="password" class="form-control" id="password" placeholder="" value="" required>
+						<label for="password">신규 비밀번호</label> 
+						<input type="password" class="form-control" id="password" placeholder="" value="" required>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
 					<div class="col-md-6 mb-3">
-						<label for="password">신규 비밀번호 확인</label> <input type="password" class="form-control" id="pwdchk" placeholder="" value="" required>
+						<label for="password">신규 비밀번호 확인</label> 
+						<input type="password" class="form-control" id="pwdChk" placeholder="" value="" required>
 						<div class="invalid-feedback">비밀번호 확인</div>
 					</div>
 
@@ -65,44 +51,12 @@
 					<hr class="mb-4">
 					<div class="mb-4"></div>
 					<input type="hidden" id="username" th:value="${#authentication.principal.username}" />
+					<input type="hidden" id="dbPassword" th:value="${#authentication.principal.password}" />
 				</form>
 
 				<button class="btn btn-primary btn-lg btn-block" id="btn-updateMember">수정 완료</button>
 			</div>
 		</div>
-
-
-
-		<!-- ===========입력폼 화면 표시 스크립트=========== -->
-
-
-		<script type="text/javascript">
-			var memberEditFrm = document.getElementById("memberEditFrm");
-			var pwdChkIcon = document.getElementById("pwdChkIcon");
-
-			var pwdInput = document.getElementById('pwdInput');
-			
-			/* let passwordTest = document.getElementById('passwordTest').value; */
-			
-			memberEditFrm.style.display = 'none';
-			pwdChkIcon.style.display = 'none';
-
-			/*비밀번호 일치시 수정 폼 표시*/
-			var bDisplay = true;
-
-			function displayEditFrm() {
-				if (pwdInput.value == '1234') {
-					memberEditFrm.style.display = 'block';
-					pwdChkIcon.style.display = 'block';
-					pwdInput.readOnly = true;
-				} else {
-					memberEditFrm.style.display = 'none';
-					pwdChkIcon.style.display = 'none';
-				}
-
-			}
-		</script>
-
 	</div>
 
 </body>

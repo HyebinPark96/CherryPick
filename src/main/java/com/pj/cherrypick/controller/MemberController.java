@@ -79,5 +79,11 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "member/memberEditForm";
 	}
+	
+	@GetMapping("/member/checkPwdForEdit")
+	// http://localhost/member/checkPwdForEdit
+	public String checkPwdForEdit() {
+		return "member/checkPwdForEdit";
+	}
 
 }
