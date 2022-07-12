@@ -23,6 +23,10 @@ let index = {
 			this.bUsernameCheck();
 		});
 		
+		$("#updateBMemberBtn").on("click", () => {
+			this.updateBMember();
+		});
+		
 	},
 
 	/* 회원 */
@@ -107,8 +111,8 @@ let index = {
 	
 	updateMember: function() {
 		let data = {
-			usernme: $("#username").val(),
-			passwoard: $("#password").val(),
+			username: $("#username").val(),
+			password: $("#password").val(),
 			pwdChk: $("#pwdChk").val(),
 			name: $("#name").val(),
 			phone: $("#phone").val(),
@@ -215,6 +219,42 @@ let index = {
 		});
 	},
 
+
+
+
+
+	updateBMember: function() {
+		let data = {
+			username: $("#username").val(),
+			password: $("#password").val(),
+			pwdChk: $("#pwdChk").val(),
+			bname: $("#bname").val(),
+			bphone: $("#bphone").val(),
+			bemail: $("#bemail").val(),
+			dbPassword: $("#dbPassword").val()
+		};
+		
+		if(data.password != data.pwdChk){
+			alert("비밀번호가 동일하지 않습니다.");
+			return false;
+		}
+		
+
+		$.ajax({
+			type: "PUT",
+			url: "/bizMember/updateBMemberProc",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			alert("수정 되었습니다.");
+			location.href="/";
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			alert("수정에 실패하였습니다.");
+		});
+	},
 
 
 }

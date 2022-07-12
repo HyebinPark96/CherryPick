@@ -4,6 +4,11 @@
 <body>
 	<div class="content container" layout:fragment="content">
 		<form method="post" th:action="@{/bizMember/checkPwdForEditResult}">
+		
+			<!-- 세션에 저장된 username 을 submit() 하면 컨트롤러에서 받아서
+			 서비스단을 통해 해당 회원정보를 담고있는 BizMember 객체를 생성한다. -->
+			<input type="hidden" th:value="${bizMember.username}" name="username">
+		
 			<div class="text-large">회원정보 수정</div>
 
 			<div class="edit-pwdchk d-flex flex-column align-item-center">

@@ -7,7 +7,7 @@
 <body>
 	<div class="content container" layout:fragment="content">
 
-		<div id="memberEditFrm" class="input-form-backgroud row">
+		<div id="bizMemberEditFrm" class="input-form-backgroud row">
 			<hr>
 
 			<div class="input-form col-md-12 mx-auto">
@@ -16,7 +16,7 @@
 				<!-- <input type="hidden" th:value="${#authentication.principal.password}" id="passwordTest"> -->
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<b th:text="${#authentication.principal.username}">username</b>님의 회원정보 변경
+							<b th:text="${bizMember.username}">username</b>님의 회원정보 변경
 						</div>
 					</div>
 
@@ -34,27 +34,30 @@
 
 					<div class="col-md-6 mb-3">
 					<!-- th:value="${#authentication.principal.name}"  -->
-						<label for="name">이름</label> <input type="text" class="form-control" id="name" placeholder="" th:value="${member.name}" required>
+						<label for="name">이름</label> 
+						<input type="text" class="form-control" id="bname" placeholder="" th:value="${bizMember.bname}" required>
 						<div class="invalid-feedback">이름을 입력해주세요.</div>
 					</div>
 
 					<div class="mb-3">
-						<label for="email">전화번호</label> <input type="text" class="form-control" id="phone" placeholder="010-000-0000" th:value="${member.phone}" required>
+						<label for="email">전화번호</label> 
+						<input type="text" class="form-control" id="bphone" placeholder="010-000-0000" th:value="${bizMember.bphone}" required>
 						<div class="invalid-feedback">전화번호를 입력해 주세요.</div>
 					</div>
 
 					<div class="mb-3">
-						<label for="email">이메일</label> <input type="email" class="form-control" id="email" placeholder="cherrypick@example.com" th:value="${member.email}" required>
+						<label for="email">이메일</label> 
+						<input type="email" class="form-control" id="bemail" placeholder="cherrypick@example.com" th:value="${bizMember.bemail}" required>
 						<div class="invalid-feedback">이메일을 입력해주세요.</div>
 					</div>
 
 					<hr class="mb-4">
 					<div class="mb-4"></div>
-					<input type="hidden" id="username" th:value="${#authentication.principal.username}" />
-					<input type="hidden" id="dbPassword" th:value="${#authentication.principal.password}" />
+					<input type="hidden" id="username" th:value="${bizMember.username}" />
+					<input type="hidden" id="dbPassword" th:value="${bizMember.password}" />
 				</form>
 
-				<button class="btn btn-primary btn-lg btn-block" id="updateMemberBtn">수정 완료</button>
+				<button class="btn btn-primary btn-lg btn-block" id="updateBMemberBtn">수정 완료</button>
 			</div>
 		</div>
 	</div>

@@ -43,18 +43,13 @@ public class BizMemberApiRestController {
 		return null;
 	}
 	
-	@PutMapping("/member/updateBMemberProc")
-	public ResponseDto<Integer> updateBizMember(@RequestBody BizMemberVO bizMember) throws Exception {
-		System.out.println("bMember.getPassword() : " + bizMember.getPassword());
-		System.out.println("bMember.getPassword().length : " + bizMember.getPassword().length());
+	@PutMapping("/bizMember/updateBMemberProc")
+	public ResponseDto<Integer> updateBizMember(@RequestBody BizMemberVO bizMember/*입력받은 수정 데이터*/) throws Exception {
 
 		if(bizMember.getPassword().length()==0) {
-			bizMemberService.updateMemberWithoutPwd(bizMember); // 비번빼고 수정한 경우
+			bizMemberService.updateMemberWithoutPwd(bizMember); // 비번빼고 수정한 경우고, 수정데이터를 파라미터로 전달
 		} else {
 			bizMemberService.updateMember(bizMember); // 비번도 수정한 경우
-	        /* 변경된 세션 등록 */ 
-			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(bizMember.getUsername(), bizMember.getPassword())); 
-			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 	}

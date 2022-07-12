@@ -85,5 +85,11 @@ public class MemberController {
 	public String checkPwdForEdit() {
 		return "member/checkPwdForEdit";
 	}
+	
+	@GetMapping("/error/403")
+	// http://localhost/error/403
+	public String ForbiddenErrorPage() {
+		return "error/403";
+	}
 
 }

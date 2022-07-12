@@ -31,7 +31,11 @@
 					</div>
 
 					<div class="col-md-1">
-						<a id="mEdit" href="/member/checkPwdForEdit"><img class="edit-icon" src="../img/edit.png"></a>
+						<form id="moveUpdateFrm" action="/bizMember/checkPwdForEdit" method="post">
+							<input type="hidden" th:value="${bizMember.username}">
+							<input type="hidden" th:value="${bizMember.password}">
+							<img id="submitImg" onclick="submit()" class="edit-icon" src="../img/edit.png">
+						</form>
 					</div>
 			</div>
 			<hr>
@@ -137,7 +141,12 @@
 			function hideCafeListItem() {
 
 			}
-
+			
+			function submit() {
+				let moveUpdateFrm = document.getElementById("moveUpdateFrm");
+				alert(moveUpdateFrm);
+				moveUpdateFrm.submit();
+			}
 			/* 
 			 var biz = document.getElementById("bizMemberJoin");
 			
