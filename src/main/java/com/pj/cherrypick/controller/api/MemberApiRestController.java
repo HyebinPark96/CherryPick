@@ -28,7 +28,7 @@ public class MemberApiRestController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	@PostMapping("/auth/joinProc")
+	@PostMapping("/auth/mJoinProc")
 	public ResponseDto<Integer> save(@RequestBody MemberVO member) throws Exception {
 		memberService.signUp(member);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
