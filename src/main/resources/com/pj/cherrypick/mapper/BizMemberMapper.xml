@@ -9,7 +9,7 @@
     </select>
     
     <insert id="signUp" parameterType="com.pj.cherrypick.domain.BizMemberVO">
-    	INSERT INTO bizMember VALUES (#{username}, #{password}, #{bname}, #{bphone}, #{bemail})
+    	INSERT INTO bizMember VALUES (#{username}, #{password}, #{bname}, #{bstat}, #{bphone}, #{bemail})
     </insert>
     
     <select id="findByUsername" resultType="com.pj.cherrypick.domain.BizMemberVO">
@@ -45,5 +45,9 @@
 		UPDATE bizMember SET bname = #{bname}, bphone = #{bphone}, bemail = #{bemail} 
 		WHERE username = #{username}
 	</update>
+	
+	<select id="signIn" resultType="com.pj.cherrypick.domain.BizMemberVO">
+    	SELECT * FROM bizMember WHERE username = #{username} AND password = #{password}
+    </select>
     
 </mapper>

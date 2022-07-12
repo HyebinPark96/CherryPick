@@ -1,14 +1,21 @@
 package com.pj.cherrypick.controller.api;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.BizMemberVO;
+import com.pj.cherrypick.response.ResponseDto;
 import com.pj.cherrypick.service.BizMemberService;
 import com.pj.cherrypick.service.MailService;
 
@@ -74,6 +81,22 @@ public class BizMemberApiController {
 				System.out.println("true");
 				model.addAttribute("bizMember", bizMember); // member 객체들고 뷰로 이동
 				return "bizMember/memberEditForm";
+			}
+		}
+		
+		@PostMapping("/auth/bSignInProc")
+		public String signIn(@RequestParam String username, @RequestParam String password, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+			HttpSession session = request.getSession();
+			BizMemberVO bizMember = bizMemberService.signIn(username, password);
+			System.out.println(bizMember.getUsername());
+			System.out.println(bizMember.getPassword());
+			String failMessage = "아이디 혹은 비밀번호가 잘못 되었습니다."; // 로그인 실패 알림 문구
+			if(bizMember.equals(null) || bizMember == null) { // 회원정보 없음 => 로그인 실패
+		        rttr.addFlashAttribute("loginFail", failMessage);
+		        return "redirect:/loginForm";
+			} else {
+			    session.setAttribute("signInBizMember", bizMember);
+			    return "redirect:/";
 			}
 		}
 	

@@ -30,9 +30,9 @@ public class BizMemberService {
 	
 	@Transactional // 서비스 단에서 트랜잭션 시작되고 종료됨
 	public void signUp(BizMemberVO bizMember) throws Exception {
-		String rawPassword = bizMember.getPassword(); // 원본 비번
-		String encPassword = encoder.encode(rawPassword); // 해쉬
-		bizMember.setPassword(encPassword); // 시큐리티 적용
+//		String rawPassword = bizMember.getPassword(); // 원본 비번
+//		String encPassword = encoder.encode(rawPassword); // 해쉬
+//		bizMember.setPassword(encPassword); // 시큐리티 적용
 		bizMemberMapper.signUp(bizMember);
 	}
 	
@@ -138,6 +138,12 @@ public class BizMemberService {
 	@Transactional
 	public BizMemberVO findByUsername(String username) {
 		return bizMemberMapper.findByUsername(username);
+	}
+	
+	//  로그인
+	@Transactional
+	public BizMemberVO signIn (String username, String password) {
+		return bizMemberMapper.signIn(username, password);
 	}
 	
 }

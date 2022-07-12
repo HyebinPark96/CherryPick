@@ -36,16 +36,15 @@ public class BizMemberApiRestController {
 	}
 	
 	@PostMapping("/auth/bUsernameCheck")
-	public ResponseDto<Integer> mUsernameCheck(@RequestBody BizMemberVO bizMember) throws Exception {
-		int mUsernameCheck = bizMemberService.findDupUsername(bizMember.getUsername());
-		
-		if(mUsernameCheck == 0)
+	public ResponseDto<Integer> bUsernameCheck(@RequestBody BizMemberVO bizMember) throws Exception {
+		int bUsernameCheck = bizMemberService.findDupUsername(bizMember.getUsername());
+		if(bUsernameCheck == 0)
 			return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 		return null;
 	}
 	
 	@PutMapping("/member/updateBMemberProc")
-	public ResponseDto<Integer> updateMember(@RequestBody BizMemberVO bizMember) throws Exception {
+	public ResponseDto<Integer> updateBizMember(@RequestBody BizMemberVO bizMember) throws Exception {
 		System.out.println("bMember.getPassword() : " + bizMember.getPassword());
 		System.out.println("bMember.getPassword().length : " + bizMember.getPassword().length());
 
