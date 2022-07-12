@@ -4,13 +4,11 @@
 <mapper namespace="com.pj.cherrypick.mapper.CafeMapper" >
 
 	<!-- 전체 카페리스트업 쿼리-->
- 	<select id="getCafePreviewList" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
- 		SELECT
- 			*
- 		FROM
- 			cafe c
- 		LEFT JOIN
- 			review r ON c.cno = r.cno
+ 	<select id="getCafeAll" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+ 		SELECT *
+ 		FROM cafe c
+ 		LEFT JOIN review r 
+ 		ON c.cno = r.cno
     </select> 
     <!-- cno로 카페정보 호출-->
  	<select id="getCafe" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">
@@ -27,6 +25,26 @@
 		LIMIT
 			1    		
     </select>
-   
-    
+   <!-- lino로 list 출력 -->
+   <select id="getEachList" parameterType="int" resultType="com.pj.cherrypick.domain.ListVO">
+   		SELECT	 *
+		FROM list l
+		WHERE lino = #{lino}
+   </select>
+   <!-- lino로 찾은 list에 포함된 cafe 정보 출력 -->
+   <select id="getCafeList" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *
+		FROM cafe c
+		LEFT JOIN review r
+		ON c.cno = r.cno
+		LEFT JOIN list l
+		ON c.cno = li_cafe1 
+		OR c.cno = li_cafe2 
+		OR c.cno = li_cafe3 
+		OR c.cno = li_cafe4 
+		OR c.cno = li_cafe5
+		WHERE lino = #{lino}
+		GROUP BY c.cno
+   </select>
+
 </mapper>

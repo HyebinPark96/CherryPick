@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.CafeMapper;
 
@@ -20,14 +20,21 @@ public class CafeService {
 		return cafeMapper.getCafe(cno);
 	}
 	
-	public List<CafeVO> getCafePreviewList() {
-		return cafeMapper.getCafePreviewList();
+	public List<CafeVO> getCafeALL() {
+		return cafeMapper.getCafeAll();
 	}
 	
 	public ReviewVO getFirstReview(int cno) {
 		return cafeMapper.getFirstReview(cno);
 	}
 	
+	public ListVO getEachList(int lino) {
+		return cafeMapper.getEachList(lino);
+	}
+	
+	public List<CafeVO> getCafeList(int cno) {
+		return cafeMapper.getCafeList(cno);
+	}	
 	
 	public int createCafe(CafeVO cafe) {
 		return cafeMapper.createCafe(cafe);

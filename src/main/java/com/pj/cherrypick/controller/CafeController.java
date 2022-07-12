@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.pj.cherrypick.domain.CafeVO;
-import com.pj.cherrypick.domain.ReviewVO;
+import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.service.CafeService;
 
 
@@ -19,15 +19,27 @@ public class CafeController {
 	@Autowired
 	private CafeService cafeService;
 	
-	// 카페목록
-	@GetMapping("cafe/list")
-	public String cafeList(Model model) {
-		System.out.println("[CafeController] cafe/list");
-		List<CafeVO> cafes = cafeService.getCafePreviewList();
+	// 전체 카페목록
+	@GetMapping("cafe/all")
+	public String getCafeAll(Model model) {
+		System.out.println("[CafeController] cafe/all");
+		List<CafeVO> cafes = cafeService.getCafeALL();
+		model.addAttribute("cafes", cafes);
+		return "cafe/all";
+		}
+	
+	// 카페리스트 (전체카페X list table)
+	@GetMapping("cafe/list/{lino}")
+	public String getEachList (@PathVariable int lino, Model model) {
+		System.out.println("[CafeController] cafe/list/{lino}");
+		ListVO list = cafeService.getEachList(lino);
+		List<CafeVO> cafes = cafeService.getCafeList(lino);
+		model.addAttribute("list", list);
 		model.addAttribute("cafes", cafes);
 		return "cafe/list";
-		}
-
+	}
+	
+	
 	
 	// 카페상세정보
 	@GetMapping("/{cno}")
