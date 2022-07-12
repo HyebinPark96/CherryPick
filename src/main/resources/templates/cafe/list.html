@@ -24,7 +24,7 @@
 				<div class="cflist-item" th:each="cafe : ${cafes}"> 
 					<div class="cflist-thumb">
 					<!-- style="background-image: url('https://images.pexels.com/photos/7362647/pexels-photo-7362647.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940');"-->
-					<img src="/src/main/resources/static/img/${cafe.cimage}" alt="카페썸네일">
+					<img src="/img/${cafe.cimage}" alt="카페썸네일">
 					</div>
 
 					<div class="d-flex">
@@ -105,17 +105,21 @@
 	]; */
 	
 		var positions = [];
-		var data = {};
+		
     	/*[# th:each="cafe : ${cafes}"]*/
+    	var data = {};
     	data.content = /*[[${cafe.cname}]]*/
     	data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/);
-		console.log("data:", data);
 		positions.push(data);
    		var cno = /*[[${cafe.cno}]]*/;
-
+		console.log("cno", cno);
+		console.log("data:", data);
+		console.log("positions:", positions);
+		var cimage = /*[[${cafe.cimage}]]*/;
+		console.log(cimage);
         /*[/]*/
 
-	console.log("positions[]:", positions);
+
 
 	for (var i = 0; i < positions.length; i++) {
 		// 마커를 생성합니다
