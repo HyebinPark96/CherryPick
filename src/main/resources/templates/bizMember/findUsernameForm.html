@@ -9,22 +9,22 @@
 		<main class="form-signin w-100 m-auto">
 			<img src="/img/logo-pink.png" alt="" width="150">
 			
-			<h3>ID찾기</h3>
+			<h3>사업자 ID찾기</h3>
 			
 			<div>
 				이름과 이메일을 입력해 주세요.<br />
 			</div>
 			<br />
 			
-			<form action="/auth/findUsernameProc" method="POST">
+			<form action="/auth/bizFindUsernameProc" method="POST">
 			
 				<div class="form-floating">
-					<input type="text" class="form-control" placeholder="이름을 입력해주세요." name="name"> 
+					<input type="text" class="form-control" placeholder="이름을 입력해주세요." name="bname"> 
 					<label for="floatingInput">이름을 입력해주세요.</label>
 				</div>
 				
 				<div class="form-floating">
-					<input type="email" class="form-control" placeholder="이메일을 입력해주세요." name="email"> 
+					<input type="email" class="form-control" placeholder="이메일을 입력해주세요." name="bemail"> 
 					<label for="floatingInput">이메일을 입력해주세요.</label>
 				</div>
 			

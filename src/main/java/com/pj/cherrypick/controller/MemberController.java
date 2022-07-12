@@ -20,11 +20,22 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService; // 스프링이 컴포넌트 스캔을 통해 MemberService.java의 @Service 어노테이션을 보면 Bean에 등록을 해 줌 (=IOC 해줌)
 	
+	// http://localhost/auth/selectTypeForFindId
+	@GetMapping("/auth/selectTypeForFindId")
+	public String selectTypeForFindId() {
+		return "selectTypeForFindId"; // /WEB-INF/views/templates/selectTypeForFindId
+	}
+	
+	// http://localhost/auth/selectTypeForFindPwd
+	@GetMapping("/auth/selectTypeForFindPwd")
+	public String selectTypeForFindPwd() {
+		return "selectTypeForFindPwd"; // /WEB-INF/views/templates/selectTypeForFindPwd
+	}
 	
 	// http://localhost/auth/joinForm
 	@GetMapping("/auth/joinForm")
 	public String joinForm() {
-		return "joinForm"; // // /WEB-INF/views/templates/joinForm
+		return "joinForm"; // /WEB-INF/views/templates/joinForm
 	}
 	
 	@GetMapping("/auth/loginForm")
@@ -84,6 +95,12 @@ public class MemberController {
 	// http://localhost/member/checkPwdForEdit
 	public String checkPwdForEdit() {
 		return "member/checkPwdForEdit";
+	}
+	
+	@GetMapping("/error/403")
+	// http://localhost/error/403
+	public String ForbiddenErrorPage() {
+		return "error/403";
 	}
 
 }

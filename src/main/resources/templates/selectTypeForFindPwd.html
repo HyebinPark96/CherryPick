@@ -1,0 +1,21 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout-main}">
+<head>
+<meta charset="UTF-8">
+<title>CherryPick</title>
+</head>
+<body>
+	<div class="content loginpage text-center container" layout:fragment="content">
+		<main class="form-signin w-100 m-auto">
+			<img src="/img/logo-pink.png" alt="" width="150"><br>
+			
+			<div class="btn-group login-opt-group" role="group" aria-label="Basic example">
+				<a href="/auth/findPasswordForm"><button type="button" class="btn login-opt-btn" id="memberBtn">회원</button></a>
+				<a href="/auth/findBPasswordForm"><button type="button" class="btn login-opt-btn" id="bMemberBtn">사업자</button></a>
+			</div>
+			
+		</main>
+	</div>
+
+</body>
+</html>
