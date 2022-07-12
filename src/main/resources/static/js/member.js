@@ -1,5 +1,6 @@
 let index = {
 	init: function() {
+		/* 회원 */
 		$("#saveBtn").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
 			this.save(); // save 함수 호출
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
@@ -12,10 +13,14 @@ let index = {
 			this.updateMember();
 		});
 		
+		/* 사업자 */
+		$("#bSaveBtn").on("click", () => {
+			this.bSave();
+		});
 		
 	},
 
-
+	/* 회원 */
 	save: function() {
 		let agreement = $("#agreement");
 
@@ -27,6 +32,7 @@ let index = {
 		let data = {
 			username: $("#username").val(), // Form 의 input값 들고오기
 			password: $("#password").val(),
+			pwdChk: $("#pwdChk").val(),
 			name: $("#name").val(),
 			phone: $("#phone").val(),
 			email: $("#email").val()
@@ -34,6 +40,11 @@ let index = {
 		
 		if(data.username.length < 8 || data.username.length > 15){
 			alert("아이디는 8~15자를 입력해주세요.");
+			return false;
+		}
+		
+		if(data.password != data.pwdChk){
+			alert("비밀번호가 일치하지 않습니다.");
 			return false;
 		}
 
@@ -47,7 +58,7 @@ let index = {
 		// ajax 통신 성공 => 서버가 json 리턴 => 자동으로 자바스크립트 오브젝트로 변환
 		$.ajax({
 			type: "POST",
-			url: "/auth/joinProc",
+			url: "/auth/mJoinProc",
 			data: JSON.stringify(data), // 자바스크립트의 data 객체를 Java가 알아듣도록 변경
 			contentType: "application/json; charset=utf-8",
 			dataType: "json" // json이라면 => javascript 오브젝트로 변경하여 아래 함수의 파라미터로 전달
@@ -65,7 +76,7 @@ let index = {
 	
 	
 	
-		mUsernameCheck: function() {
+	mUsernameCheck: function() {
 		let data = {
 			username: $("#username").val()
 		};
@@ -89,10 +100,10 @@ let index = {
 	
 	
 	
-		updateMember: function() {
+	updateMember: function() {
 		let data = {
-			username: $("#username").val(),
-			password: $("#password").val(),
+			usernme: $("#username").val(),
+			passwoard: $("#password").val(),
 			pwdChk: $("#pwdChk").val(),
 			name: $("#name").val(),
 			phone: $("#phone").val(),
@@ -123,6 +134,57 @@ let index = {
 	},
 	
 	
+	
+	
+	/* 사업자 */
+	bSave: function() {
+		let agreement = $("#agreement");
+
+		if(!agreement.is(":checked")){
+			alert("하단 체크박스에 동의해주세요.");
+			return false;
+		}
+		
+		let data = {
+			username: $("#bUsername").val(),
+			password: $("#bPassword").val(),
+			pwdChk: $("#bPwdChk").val(),
+			name: $("#name").val(),
+			phone: $("#phone").val(),
+			email: $("#email").val()
+		};
+		
+		if(data.username.length < 8 || data.username.length > 15){
+			alert("아이디는 8~15자를 입력해주세요.");
+			return false;
+		}
+
+		if(data.password != data.pwdChk){
+			alert("비밀번호가 일치하지 않습니다.");
+			return false;
+		}
+				
+		if(data.password.trim().length==0 || data.name.trim().length==0 || 
+			data.phone.trim().length==0 || data.email.trim().length==0){
+			alert("항목을 제대로 기입하였는지 확인해주세요.");
+			return false;
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "/auth/bJoinProc",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json" 
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			alert("회원가입이 완료되었습니다.");
+			location.href = "/";
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			alert(JSON.stringify(error));
+		});
+	},
 
 }
 

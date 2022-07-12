@@ -1,0 +1,19 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout-main}">
+<head>
+<meta charset="UTF-8">
+<title>CherryPick</title>
+</head>
+<body>
+	<div class="content loginpage text-center container" layout:fragment="content">
+		<main class="form-signin w-100 m-auto">
+			<img src="/img/logo-pink.png" alt="" width="150">
+			
+			<h3>ID찾기</h3>
+			id : <span th:text="${username}"></span>
+			
+		</main>
+	</div>
+	
+</body>
+</html>

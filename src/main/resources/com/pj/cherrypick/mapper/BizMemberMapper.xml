@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace의 값은, MemberMapper.xml의 쿼리를 호출할 Mapper Class의 경로와 클래스명으로 하도록 해야한다. -->
+<mapper namespace="com.pj.cherrypick.mapper.BizMemberMapper" >
+    
+	<!-- Mapper 인터페이스의 메소드명과 XML의 id가 같아야 함 -->
+ 	<select id="getBMList" resultType="com.pj.cherrypick.domain.BizMemberVO">
+        SELECT * FROM bizMember
+    </select>
+    
+    <insert id="signUp" parameterType="com.pj.cherrypick.domain.BizMemberVO">
+    	INSERT INTO bizMember VALUES (#{username}, #{password}, #{bname}, #{bphone}, #{bemail})
+    </insert>
+    
+    <select id="findByUsername" resultType="com.pj.cherrypick.domain.BizMemberVO">
+    	SELECT * FROM bizMember WHERE username = #{username}
+    </select>
+    
+    <select id="findUsername" resultType="String">
+    	SELECT username FROM bizMember WHERE bname = #{bname} AND bemail = #{bemail}
+    </select>
+    
+    <select id="findPasswordCheck" resultType="int">
+		SELECT COUNT(*) FROM bizMember WHERE username = #{username} AND bemail = #{bemail}
+	</select>
+    
+    <update id="updatePassword"  parameterType="com.pj.cherrypick.domain.BizMemberVO">
+		UPDATE bizMember SET password = #{password} WHERE username = #{username} AND bemail = #{bemail}
+	</update>
+	
+	<select id="findDupUsername" resultType="int">
+		SELECT COUNT(*) FROM bizMember WHERE username = #{username}
+	</select>
+	
+<!-- 	<select id="checkMemberOrAdmin" resultType="int">
+		SELECT role FROM bizMember WHERE username = #{username}
+	</select> -->
+	
+	<update id="updateMember"  parameterType="com.pj.cherrypick.domain.BizMemberVO">
+		UPDATE bizMember SET password = #{password}, bname = #{bname}, bphone = #{bphone}, bemail = #{bemail} 
+		WHERE username = #{username}
+	</update>
+	
+	<update id="updateMemberWithoutPwd"  parameterType="com.pj.cherrypick.domain.BizMemberVO">
+		UPDATE bizMember SET bname = #{bname}, bphone = #{bphone}, bemail = #{bemail} 
+		WHERE username = #{username}
+	</update>
+    
+</mapper>

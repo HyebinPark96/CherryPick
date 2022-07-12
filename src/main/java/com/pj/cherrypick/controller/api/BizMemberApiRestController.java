@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.response.ResponseDto;
+import com.pj.cherrypick.service.BizMemberService;
 import com.pj.cherrypick.service.MailService;
-import com.pj.cherrypick.service.MemberService;
 
-@RestController // 뷰가 아닌 데이터만 주고받는 컨트롤러
-public class MemberApiRestController {
+@RestController
+public class BizMemberApiRestController {
 	
 	@Autowired
-	private MemberService memberService; // 스프링이 컴포넌트 스캔을 통해 MemberService.java의 @Service 어노테이션을 보면 Bean에 등록을 해 줌 (=IOC 해줌)
+	private BizMemberService bizMemberService; // 스프링이 컴포넌트 스캔을 통해 MemberService.java의 @Service 어노테이션을 보면 Bean에 등록을 해 줌 (=IOC 해줌)
 	
 	@Autowired
 	private MailService mailService; 
@@ -28,32 +29,32 @@ public class MemberApiRestController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	@PostMapping("/auth/mJoinProc")
-	public ResponseDto<Integer> save(@RequestBody MemberVO member) throws Exception {
-		memberService.signUp(member);
+	@PostMapping("/auth/bJoinProc")
+	public ResponseDto<Integer> save(@RequestBody BizMemberVO bizMember) throws Exception {
+		bizMemberService.signUp(bizMember);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 	}
 	
-	@PostMapping("/auth/mUsernameCheck")
-	public ResponseDto<Integer> mUsernameCheck(@RequestBody MemberVO member) throws Exception {
-		int mUsernameCheck = memberService.findDupUsername(member.getUsername());
+	@PostMapping("/auth/bUsernameCheck")
+	public ResponseDto<Integer> mUsernameCheck(@RequestBody BizMemberVO bizMember) throws Exception {
+		int mUsernameCheck = bizMemberService.findDupUsername(bizMember.getUsername());
 		
 		if(mUsernameCheck == 0)
 			return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 		return null;
 	}
 	
-	@PutMapping("/member/updateMemberProc")
-	public ResponseDto<Integer> updateMember(@RequestBody MemberVO member) throws Exception {
-		System.out.println("member.getPassword() : " + member.getPassword());
-		System.out.println("member.getPassword().length : " + member.getPassword().length());
+	@PutMapping("/member/updateBMemberProc")
+	public ResponseDto<Integer> updateMember(@RequestBody BizMemberVO bizMember) throws Exception {
+		System.out.println("bMember.getPassword() : " + bizMember.getPassword());
+		System.out.println("bMember.getPassword().length : " + bizMember.getPassword().length());
 
-		if(member.getPassword().length()==0) {
-			memberService.updateMemberWithoutPwd(member); // 비번빼고 수정한 경우
+		if(bizMember.getPassword().length()==0) {
+			bizMemberService.updateMemberWithoutPwd(bizMember); // 비번빼고 수정한 경우
 		} else {
-			memberService.updateMember(member); // 비번도 수정한 경우
+			bizMemberService.updateMember(bizMember); // 비번도 수정한 경우
 	        /* 변경된 세션 등록 */ 
-			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(member.getUsername(), member.getPassword())); 
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(bizMember.getUsername(), bizMember.getPassword())); 
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
