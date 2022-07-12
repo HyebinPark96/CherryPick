@@ -139,6 +139,10 @@
 }
 
 /*카페 상세 페이지*/
+.cf-label{
+	padding-top: 100px;
+}
+
 .cf-img {
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -150,7 +154,22 @@
 	margin-right: 30px;
 }
 
-.cf-review {
+.cf-menu-detail{
+	color: gray;
+}
+
+.cf-detail table td{
+	color: gray;
+}
+
+.cf-review>div:nth-child(2n-1) {
+	background-color: #FFF0F1;
+}
+
+.cf-review-item {
+	padding-left: 30px;
+	padding-right: 30px;
+	
 	padding-top: 20px;
 	padding-bottom: 20px;
 	display: flex;
@@ -170,6 +189,16 @@
 	height: 50px;
 	border-radius: 50%;
 	background-color: black;
+}
+
+.cf-review-detail{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.cf-waiting{
+	color: #a6434b;
 }
 
 /*로그인 화면*/
