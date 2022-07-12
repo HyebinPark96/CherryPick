@@ -88,16 +88,23 @@ public class BizMemberApiController {
 		public String signIn(@RequestParam String username, @RequestParam String password, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
 			HttpSession session = request.getSession();
 			BizMemberVO bizMember = bizMemberService.signIn(username, password);
-			System.out.println(bizMember.getUsername());
-			System.out.println(bizMember.getPassword());
+
 			String failMessage = "아이디 혹은 비밀번호가 잘못 되었습니다."; // 로그인 실패 알림 문구
 			if(bizMember.equals(null) || bizMember == null) { // 회원정보 없음 => 로그인 실패
 		        rttr.addFlashAttribute("loginFail", failMessage);
 		        return "redirect:/loginForm";
 			} else {
-			    session.setAttribute("signInBizMember", bizMember);
+			    session.setAttribute("bizMember", bizMember);
 			    return "redirect:/";
 			}
+		}
+		
+		@PostMapping(value = "/bizMember/signOut")
+		public String signOut(HttpServletRequest request) {
+		    HttpSession session = request.getSession();
+		    session.invalidate();
+
+		    return "redirect:/";
 		}
 	
 }
