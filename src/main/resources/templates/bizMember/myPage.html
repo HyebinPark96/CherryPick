@@ -25,9 +25,9 @@
 					</div>
 					<div class="col-md-10" style="text-align: right">
 						<p>
-							<b>username님</b>
+							<b th:text="${bizMember.username+'님'}"></b>
 						</p>
-						<p>email@naver.com</p>
+						<p th:text="${bizMember.bemail}"></p>
 					</div>
 
 					<div class="col-md-1">
@@ -63,7 +63,7 @@
 								<div class="cflist-review">
 									<div class="cflist-review-profile"></div>
 									<div>
-										<input type="hidden" id="username" th:value="${#authentication.principal.username}">
+										<input type="hidden" id="username" th:value="${bizMember.username}">
 										<b>username</b>&nbsp; 카페 리뷰를 입력하는 란입니다. 아직 입력된 데이터가 존재하지 않습니다.
 									</div>
 
