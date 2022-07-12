@@ -30,7 +30,7 @@ public class CafeVO {
 	private String ctag;
 	private String cmenu_img;
 	
-	//리뷰용
+	//리뷰미리보기용 (1개만)
 	private String mid;
 	private String title;
 	
