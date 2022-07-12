@@ -50,8 +50,9 @@
 				</div>
 				<!-- <a href="/bMember/myPage">My Page | </a> -->
 				<div>&nbsp;|&nbsp;</div>
-				<a href="#">My Page</a>
-				<!-- 사업자용 정보수정페이지는 회원용 수정페이지 뷰로 같이쓰되 url 매핑 따로 구현할 예정 -->
+				<form th:action="@{bizMember/myPage}" method="post">
+					<button type="submit">My Page</button>
+				</form>
 				<div>&nbsp;|&nbsp;</div>
 				<form th:action="@{bizMember/signOut}" method="post">
 					<button type="submit">Sign out</button>
