@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.CafeMapper;
 
 @Service
@@ -19,9 +20,14 @@ public class CafeService {
 		return cafeMapper.getCafe(cno);
 	}
 	
-	public List<CafeVO> getCafeList() {
-		return cafeMapper.getCafeList();
+	public List<CafeVO> getCafePreviewList() {
+		return cafeMapper.getCafePreviewList();
 	}
+	
+	public ReviewVO getFirstReview(int cno) {
+		return cafeMapper.getFirstReview(cno);
+	}
+	
 	
 	public int createCafe(CafeVO cafe) {
 		return cafeMapper.createCafe(cafe);

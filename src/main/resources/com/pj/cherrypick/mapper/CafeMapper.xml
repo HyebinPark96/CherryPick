@@ -4,15 +4,29 @@
 <mapper namespace="com.pj.cherrypick.mapper.CafeMapper" >
 
 	<!-- 전체 카페리스트업 쿼리-->
- 	<select id="getCafeList" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
-        SELECT * FROM cafe
+ 	<select id="getCafePreviewList" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+ 		SELECT
+ 			*
+ 		FROM
+ 			cafe c
+ 		LEFT JOIN
+ 			review r ON c.cno = r.cno
     </select> 
     <!-- cno로 카페정보 호출-->
  	<select id="getCafe" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">
         SELECT * FROM cafe WHERE cno = #{cno}
     </select> 
-    
-    
+    <!-- cno로 리뷰첫번째 호출 -->
+    <select id="getFirstReview" parameterType="com.pj.cherrypick.domain.ReviewVO" resultType="com.pj.cherrypick.domain.ReviewVO">
+    	SELECT 
+    		*
+    	FROM
+    		review
+    	WHERE
+    		cno = #{cno}
+		LIMIT
+			1    		
+    </select>
    
     
 </mapper>

@@ -1,0 +1,7 @@
+<script th:inline="javascript">
+    /*[# th:each="cafe: ${cafes}"]*/
+        
+        var l = new google.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/);
+        console.log(l);
+    /*[/]*/
+</script>
