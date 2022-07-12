@@ -16,9 +16,16 @@ public class tempCafeApiRestController {
 	@Autowired
 	private CafeService cafeService;
 	
+//	@PostMapping("/auth/regCafeProc")
+//	public ResponseDto<Integer> save(@RequestBody CafeVO cafe) throws Exception{
+//		System.out.println(cafe.getCname());
+//		cafeService.createCafe(cafe);
+//		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+//	}
+	
 	@PostMapping("/auth/regCafeProc")
-	public ResponseDto<Integer> save(@RequestBody CafeVO cafe) throws Exception{
-		cafeService.createCafe(cafe);
-		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	public String test(@RequestBody CafeVO cafe) throws Exception{
+		System.out.println(cafe.getCname());
+		return cafe.getCname();
 	}
 }

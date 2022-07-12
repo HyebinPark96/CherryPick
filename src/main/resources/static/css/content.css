@@ -233,6 +233,13 @@
 	border: 5px solid #a6434b;
 }
 
+.cherrybtn{
+	padding: 5px;
+	background-color: #a6434b;
+	border-radius: 10px;
+	color: white;
+}
+
 .opt :hover {
 	cursor: pointer
 }
