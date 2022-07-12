@@ -1,13 +1,17 @@
 package com.pj.cherrypick.controller.api;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.service.BizMemberService;
 import com.pj.cherrypick.service.MailService;
@@ -61,20 +65,48 @@ public class BizMemberApiController {
 		}
 	}
 		
-		@PostMapping("/bizMember/checkPwdForEditResult")
-		public String checkPwdForEditResult(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/,@RequestParam(required = false, value = "password") String password, Model model) {
-			System.out.println("password"+password);
-			BizMemberVO bizMember = bizMemberService.findByUsername(principalDetail.getUsername()); // DB 저장된 회원정보 가져오기
-			boolean checkPassword = bizMemberService.getEncPassword(password, bizMember.getPassword());
-			
-			if(!checkPassword) {
-				System.out.println("false");
-				return "bizMember/checkPwdForEditResult";
+//		@PostMapping("/bizMember/checkPwdForEditResult")
+//		public String checkPwdForEditResult(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/,@RequestParam(required = false, value = "password") String password, Model model) {
+//			BizMemberVO bizMember = bizMemberService.findByUsername(principalDetail.getUsername()); // DB 저장된 회원정보 가져오기
+//			boolean checkPassword = bizMemberService.getEncPassword(password, bizMember.getPassword());
+//			
+//			if(!checkPassword) {
+//				System.out.println("false");
+//				return "bizMember/checkPwdForEditResult";
+//			} else {
+//				System.out.println("true");
+//				model.addAttribute("bizMember", bizMember); // member 객체들고 뷰로 이동
+//				return "bizMember/memberEditForm";
+//			}
+//		}
+		
+		@PostMapping("/auth/bSignInProc")
+		public String signIn(@RequestParam String username, @RequestParam String password, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+			HttpSession session = request.getSession();
+			BizMemberVO bizMember = bizMemberService.signIn(username, password);
+
+			String failMessage = "아이디 혹은 비밀번호가 잘못 되었습니다."; // 로그인 실패 알림 문구
+			if(bizMember.equals(null) || bizMember == null) { // 회원정보 없음 => 로그인 실패
+		        rttr.addFlashAttribute("loginFail", failMessage);
+		        return "redirect:/loginForm";
 			} else {
-				System.out.println("true");
-				model.addAttribute("bizMember", bizMember); // member 객체들고 뷰로 이동
-				return "bizMember/memberEditForm";
+			    session.setAttribute("bizMember", bizMember);
+			    return "redirect:/";
 			}
+		}
+		
+		@PostMapping(value = "/bizMember/signOut")
+		public String signOut(HttpServletRequest request) {
+		    HttpSession session = request.getSession();
+		    session.invalidate();
+
+		    return "redirect:/";
+		}
+		
+		@PostMapping(value = "/bizMember/myPage")
+		public String myPage(@SessionAttribute(name = "bizMember", required = false)BizMemberVO bizMember, Model model) {
+				model.addAttribute("bizMember", bizMember);
+				return "bizMember/myPage"; // model 들고 뷰로 이동
 		}
 	
 }

@@ -212,6 +212,17 @@
 	background-color: pink;
 }
 
+.login-opt-group{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.login-opt-btn{
+	border-radius: 15px;
+	border: solid pink 1px;
+	width: 75px;
+}
+
 /*회원가입 화면*/
 .join-option {
 	display: flex;

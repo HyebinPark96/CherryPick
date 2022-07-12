@@ -43,4 +43,6 @@ public interface BizMemberMapper {
 	void updateMember(BizMemberVO bizMember);
 	
 	void updateMemberWithoutPwd(BizMemberVO bizMember);
+	
+	BizMemberVO signIn(String username, String password);
 }

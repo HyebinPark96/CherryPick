@@ -157,6 +157,18 @@ textarea:focus, input:focus {
 	padding: 20px;
 }
 
+.title-top-right{
+	display: flex;
+}
+
+.title-top-right *{
+	color: white;
+}
+
+.title-top-right * :hover{
+	text-decoration: underline;
+}
+
 /*========header-sub 요소========*/
 .sub {
 	display: flex;

@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.MemberVO;
 
 import lombok.Getter;

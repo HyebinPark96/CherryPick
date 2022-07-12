@@ -13,9 +13,14 @@ let index = {
 			this.updateMember();
 		});
 		
+		
 		/* 사업자 */
 		$("#bSaveBtn").on("click", () => {
 			this.bSave();
+		});
+		
+		$("#bUsernameCheckBtn").on("click", () => { 
+			this.bUsernameCheck();
 		});
 		
 	},
@@ -138,9 +143,9 @@ let index = {
 	
 	/* 사업자 */
 	bSave: function() {
-		let agreement = $("#agreement");
+		let bAgreement = $("#bAgreement");
 
-		if(!agreement.is(":checked")){
+		if(!bAgreement.is(":checked")){
 			alert("하단 체크박스에 동의해주세요.");
 			return false;
 		}
@@ -148,10 +153,10 @@ let index = {
 		let data = {
 			username: $("#bUsername").val(),
 			password: $("#bPassword").val(),
-			pwdChk: $("#bPwdChk").val(),
-			name: $("#name").val(),
-			phone: $("#phone").val(),
-			email: $("#email").val()
+			bPwdChk: $("#bPwdChk").val(),
+			bname: $("#bname").val(),
+			bphone: $("#bphone").val(),
+			bemail: $("#bemail").val()
 		};
 		
 		if(data.username.length < 8 || data.username.length > 15){
@@ -159,13 +164,13 @@ let index = {
 			return false;
 		}
 
-		if(data.password != data.pwdChk){
+		if(data.password != data.bPwdChk){
 			alert("비밀번호가 일치하지 않습니다.");
 			return false;
 		}
 				
-		if(data.password.trim().length==0 || data.name.trim().length==0 || 
-			data.phone.trim().length==0 || data.email.trim().length==0){
+		if(data.password.trim().length==0 || data.bname.trim().length==0 || 
+			data.bphone.trim().length==0 || data.bemail.trim().length==0){
 			alert("항목을 제대로 기입하였는지 확인해주세요.");
 			return false;
 		}
@@ -185,6 +190,32 @@ let index = {
 			alert(JSON.stringify(error));
 		});
 	},
+	
+	
+	
+	
+	bUsernameCheck: function() {
+		let data = {
+			username: $("#bUsername").val()
+		};
+
+		$.ajax({
+			type: "POST",
+			url: "/auth/bUsernameCheck",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			alert(data.username + ": 사용 가능한 아이디입니다.");
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			alert(data.username + ": 이미 사용중이거나 탈퇴한 아이디입니다.");
+			// alert(JSON.stringify(error));
+		});
+	},
+
+
 
 }
 
