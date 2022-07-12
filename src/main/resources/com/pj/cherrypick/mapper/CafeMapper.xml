@@ -11,10 +11,10 @@
  		ON c.cno = r.cno
     </select> 
     <!-- cno로 카페정보 호출-->
- 	<select id="getCafe" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">
+ 	<select id="getCafeInfo" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">
         SELECT * FROM cafe WHERE cno = #{cno}
     </select> 
-    <!-- cno로 리뷰첫번째 호출 -->
+    <!-- cno로 리뷰첫번째 호출 (안씀)-->
     <select id="getFirstReview" parameterType="com.pj.cherrypick.domain.ReviewVO" resultType="com.pj.cherrypick.domain.ReviewVO">
     	SELECT 
     		*
@@ -46,5 +46,12 @@
 		WHERE lino = #{lino}
 		GROUP BY c.cno
    </select>
-
+	<!--  cno로 메뉴리스트 불러오기 -->
+	<select id="getCafeMenu" parameterType="int" resultType="com.pj.cherrypick.domain.CafeMenuVO">
+		SELECT * FROM cafeMenu WHERE cno = #{cno}
+	</select>
+	<!--  cno로 리뷰리스트 불러오기 -->
+	<select id="getReview" parameterType="int" resultType="com.pj.cherrypick.domain.ReviewVO">
+		SELECT * FROM review WHERE cno = #{cno}
+	</select>
 </mapper>
