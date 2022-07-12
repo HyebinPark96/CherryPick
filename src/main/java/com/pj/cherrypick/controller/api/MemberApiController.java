@@ -58,7 +58,7 @@ public class MemberApiController {
 			
 			mailService.sendEmail(email, tmpPassword); // 이메일로 임시비번 전송
 			
-			return "member/loginForm";
+			return "loginForm";
 		}
 	}
 		
