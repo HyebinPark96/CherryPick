@@ -34,6 +34,14 @@
 						<a id="mEdit" href="/member/checkPwdForEdit"><img class="edit-icon" src="../img/edit.png"></a>
 					</div>
 			</div>
+			
+			<div>
+				<form th:action="@{myReview}" method="POST">
+					<input type="hidden" th:value="${#authentication.principal.username}">
+					<button type="submit">내가 작성한 리뷰 보러가기</button>
+				</form>
+			</div>
+			
 			<hr>
 			<div class="content-top-tab">
 

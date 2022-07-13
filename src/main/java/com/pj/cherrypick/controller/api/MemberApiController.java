@@ -1,5 +1,7 @@
 package com.pj.cherrypick.controller.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.MemberVO;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.MailService;
 import com.pj.cherrypick.service.MemberService;
 
@@ -84,20 +87,28 @@ public class MemberApiController {
 		}
 	}
 		
-		@PostMapping("/member/checkPwdForEditResult")
-		public String checkPwdForEditResult(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/,@RequestParam(required = false, value = "password") String password, Model model) {
-			System.out.println("password"+password);
-			MemberVO member = memberService.findByUsername(principalDetail.getUsername()); // DB 저장된 회원정보 가져오기
-			boolean checkPassword = memberService.getEncPassword(password, member.getPassword());
+	@PostMapping("/member/checkPwdForEditResult")
+	public String checkPwdForEditResult(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/,@RequestParam(required = false, value = "password") String password, Model model) {
+		System.out.println("password"+password);
+		MemberVO member = memberService.findByUsername(principalDetail.getUsername()); // DB 저장된 회원정보 가져오기
+		boolean checkPassword = memberService.getEncPassword(password, member.getPassword());
 			
-			if(!checkPassword) {
-				System.out.println("false");
-				return "member/checkPwdForEditResult";
-			} else {
-				System.out.println("true");
-				model.addAttribute("member", member); // member 객체들고 뷰로 이동
-				return "member/memberEditForm";
-			}
+		if(!checkPassword) {
+			System.out.println("false");
+			return "member/checkPwdForEditResult";
+		} else {
+			System.out.println("true");
+			model.addAttribute("member", member); // member 객체들고 뷰로 이동
+			return "member/memberEditForm";
 		}
+	}
+		
+	@PostMapping("/member/myReview")
+	// http://localhost/member/myReview
+	public String myReview(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+		List<ReviewVO> myReviewList = memberService.getMyReviewList(principalDetail.getUsername()); // 작성자 id로  리뷰 찾기
+		model.addAttribute("myReviewList", myReviewList);
+		return "member/myReview"; // /WEB-INF/views/templates/member/myReview
+	}
 	
 }

@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.MemberVO;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.MemberMapper;
+import com.pj.cherrypick.mapper.ReviewMapper;
 
 @Service
 public class MemberService {
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private ReviewMapper reviewMapper;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder; // 암호화 방식
@@ -145,6 +150,12 @@ public class MemberService {
 	@Transactional
 	public MemberVO findByUsername(String username) {
 		return memberMapper.findByUsername(username);
+	}
+	
+	// 아이디로 나의 리뷰 가져오기
+	@Transactional
+	public List<ReviewVO> getMyReviewList(String username) {
+		return reviewMapper.getMyReviewList(username);
 	}
 	
 	

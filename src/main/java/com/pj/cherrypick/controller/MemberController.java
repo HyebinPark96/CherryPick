@@ -114,11 +114,5 @@ public class MemberController {
 	public String internalServerErrorPage() {
 		return "error/500"; // /WEB-INF/views/templates/error/500
 	}
-	
-	@GetMapping("/member/myReview")
-	// http://localhost/member/myReview
-	public String myReview() {
-		return "member/myReview"; // /WEB-INF/views/templates/member/myReview
-	}
 
 }

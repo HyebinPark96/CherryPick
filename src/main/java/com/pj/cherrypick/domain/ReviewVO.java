@@ -17,6 +17,6 @@ public class ReviewVO {
 	private String date;
 	private String title;
 	private String content;
-	private int score;
+	private double score;
 	private int waiting;
 }
