@@ -38,7 +38,7 @@ public class BizMemberService {
 	
 	@Transactional
 	public String findUsername(String bname, String bemail) throws Exception { // 아이디 찾기
-		if(bizMemberMapper.findUsername(bname, bemail).equals(null)) {
+		if(bizMemberMapper.findUsername(bname, bemail)==null) {
 			return "";
 		} else {
 			return bizMemberMapper.findUsername(bname, bemail);

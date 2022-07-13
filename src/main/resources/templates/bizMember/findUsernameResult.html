@@ -3,14 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>CherryPick</title>
+
+	<script>
+		function back() {
+			history.back();
+		}
+	</script>
+	
 </head>
 <body>
 	<div class="content loginpage text-center container" layout:fragment="content">
 		<main class="form-signin w-100 m-auto">
 			<img src="/img/logo-pink.png" alt="" width="150">
 			
-			<h3>사업자 ID찾기</h3>
-			id : <span th:text="${username}"></span>
+			<input type="hidden" th:value="${username}" id="username">
+			
+			<div id="findUsernameResult">
+				<h3>사업자 ID찾기</h3>
+				
+				<div id="existId" th:if="${username!=''}">
+					<label>회원님의 아이디 조회 결과는 다음과 같습니다.</label><br>
+					<label>id : </label>
+					<span th:text="${username}"></span>
+				</div>
+				
+				<div id="notFoundId" th:unless="${username!=''}">
+					<label>해당 아이디와 이메일로 등록된 회원정보가 없습니다.</label>
+				</div>
+			</div>
+			
+			<br><button onclick="back()" id="backBtn">뒤로가기</button>
 			
 		</main>
 	</div>

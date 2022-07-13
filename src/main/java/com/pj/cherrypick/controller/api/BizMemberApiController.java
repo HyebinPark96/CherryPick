@@ -29,11 +29,13 @@ public class BizMemberApiController {
 	public String findUsername(@RequestParam("bname") String bname, @RequestParam("bemail") String bemail, Model model)
 			throws Exception {
 
-		/* 아이디 3자리 이후부터 잘라 *로 처리하기 */
-		
+		/*null 방지*/
 		if(bizMemberService.findUsername(bname, bemail).trim().equals("")) {
-			return "/"; // alert 하는 페이지로 이동하도록 수정하기!!!!
+			model.addAttribute("username","");
+			return "bizMember/findUsernameResult";
 		}
+		
+		/* 아이디 3자리 이후부터 잘라 *로 처리하기 */
 		String rawUsername = bizMemberService.findUsername(bname, bemail);
 		
 		int rawUsernameLen = rawUsername.length(); // 아이디 글자수

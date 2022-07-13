@@ -23,11 +23,17 @@ public class MemberApiController {
 	
 	@PostMapping("/auth/findUsernameProc")
 	public String findUsername(@RequestParam("name") String name, @RequestParam("email") String email, Model model) throws Exception {
-//		System.out.println("name : " + name);
-//		System.out.println("email : " + email);
+		
+		/*null 방지*/
+		if(memberService.findUsername(name, email).trim().equals("")) {
+			model.addAttribute("username","");
+			return "member/findUsernameResult";
+		}
+
 		
 		/*아이디 3자리 이후부터 잘라 *로 처리하기*/
 		String rawUsername = memberService.findUsername(name, email);
+		
 		int rawUsernameLen = rawUsername.length(); // 아이디 글자수
 		String rawUsernameStart = rawUsername.substring(0, 3); // 시작위치, 종료위치 // 그대로 나타낼 부분
 		String rawUsernameEnd = rawUsername.substring(3, rawUsernameLen); // * 표시할 부분
@@ -38,8 +44,6 @@ public class MemberApiController {
 		}
 
 		String encUsername = rawUsernameStart + encUsernameEnd; // 일부 *로 변환된 아이디
-		
-//		System.out.println("encUsername : " + encUsername);
 		
 		model.addAttribute("username", encUsername);
 		return "member/findUsernameResult";
