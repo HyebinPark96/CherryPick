@@ -22,15 +22,15 @@ public class MemberApiController {
 	private MailService mailService; 
 	
 	@PostMapping("/auth/findUsernameProc")
-	public String findUsername(@RequestParam("name") String name, @RequestParam("email") String email, Model model) throws Exception {
-		
+	public String findUsername(@RequestParam("name") String name, @RequestParam("email") String email, Model model) 
+			throws Exception {
+
 		/*null 방지*/
 		if(memberService.findUsername(name, email).trim().equals("")) {
 			model.addAttribute("username","");
 			return "member/findUsernameResult";
 		}
 
-		
 		/*아이디 3자리 이후부터 잘라 *로 처리하기*/
 		String rawUsername = memberService.findUsername(name, email);
 		

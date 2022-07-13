@@ -56,18 +56,33 @@ public class BizMemberApiController {
 	@PostMapping("/auth/sendBemailProc")
 	public String sendEmailProc(@RequestParam("username") String username, @RequestParam("bemail") String bemail,
 			Model model) {
-		BizMemberVO bizMember = bizMemberService.findByUsername(username);
-
-		if (!bemail.equals(bizMember.getBemail())) {
-			return "bizMember/findPasswordResult";
-		} else {
-			String tmpPassword = bizMemberService.getTmpPassword(); // 임시비번 생성
-
-			bizMemberService.updatePassword(tmpPassword, username, bemail); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
-
-			mailService.sendEmail(bemail, tmpPassword); // 이메일로 임시비번 전송
-
-			return "loginForm";
+		
+		try {
+			if(username.trim().equals("") || bemail.trim().equals("")) {
+				model.addAttribute("result","");
+				return "bizMember/findPasswordResult";
+			}
+			
+			if(bizMemberService.findByUsername(username)==null) {
+				model.addAttribute("result", "null");
+				return "bizMember/findPasswordResult";
+			}else {
+				BizMemberVO bizMember = bizMemberService.findByUsername(username);
+		
+				if (!bemail.equals(bizMember.getBemail())) {
+					return "bizMember/findPasswordResult";
+				} else {
+					String tmpPassword = bizMemberService.getTmpPassword(); // 임시비번 생성
+		
+					bizMemberService.updatePassword(tmpPassword, username, bemail); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
+		
+					mailService.sendEmail(bemail, tmpPassword); // 이메일로 임시비번 전송
+					
+					return "loginForm";
+				}
+			}
+		} catch (Exception e) {
+			return "/error/500";
 		}
 	}
 

@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <title>CherryPick</title>
 
-	<script>
+	<script type="text/javascript">
 		function back() {
 			history.back();
 		}
 	</script>
-	
+
 </head>
 <body>
 	<div class="content loginpage text-center container" layout:fragment="content">
@@ -21,7 +21,7 @@
 			<div id="findUsernameResult">
 				<h3>ID찾기</h3>
 				
-				<div id="existId" th:if="${username!=''}">
+				<div id="existId" th:if="${username}!=''">
 					<label>회원님의 아이디 조회 결과는 다음과 같습니다.</label><br>
 					<label>id : </label>
 					<span th:text="${username}"></span>

@@ -102,5 +102,16 @@ public class MemberController {
 	public String ForbiddenErrorPage() {
 		return "error/403";
 	}
+	
+	@GetMapping("/error/404")
+	// http://localhost/error/403
+	public String notFoundErrorPage() {
+		return "error/404";
+	}
+	
+	@GetMapping("/error/500")
+	public String internalServerErrorPage() {
+		return "error/500";
+	}
 
 }
