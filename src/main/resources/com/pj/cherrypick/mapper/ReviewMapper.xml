@@ -35,20 +35,7 @@
 		FROM person p	  JOIN car c	    ON p.id = c.owner_id	 
 		WHERE p.id = #{id}
 	</select> -->
-
 	
-	<resultMap type="com.pj.cherrypick.domain.ReviewVO" id="ReviewVO">
-		<result column="rno" property="rno" />
-		<result column="username" property="username" />
-		<result column="cno" property="cno" />
-		<result column="date" property="date" />
-		<result column="title" property="title" />
-		<result column="content" property="content" />
-		<result column="score" property="score" />
-		<result column="waiting" property="waiting" />	
-		<collection property="CafeVO" resultMap="CafeVO" />
-		<collection property="MemberVO" resultMap="MemberVO" />
-	</resultMap>
 	
 	<resultMap type="com.pj.cherrypick.domain.CafeVO" id="CafeVO">
 		<result column="cno" property="cno" />
@@ -77,12 +64,27 @@
 		<result column="role" property="role" />
 	</resultMap>
 	
+	<resultMap type="com.pj.cherrypick.domain.ReviewVO" id="ReviewVO">
+		<result column="rno" property="rno" />
+		<result column="username" property="username" />
+		<result column="cno" property="cno" />
+		<result column="date" property="date" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="score" property="score" />
+		<result column="waiting" property="waiting" />	
+		<collection property="CafeVO" resultMap="CafeVO" />
+		<collection property="MemberVO" resultMap="MemberVO" />
+	</resultMap>
+	
+
+	
 	<select id="getMyReviewList" resultMap="ReviewVO">
-		SELECT r.cno     
-		FROM review r 
-		LEFT JOIN cafe c 
+		SELECT c.caddress
+		FROM review r
+		LEFT JOIN cafe c
 		ON r.cno = c.cno
-		LEFT JOIN member m 
+		LEFT JOIN member m
 		ON r.username = m.username
 		WHERE m.username = #{username}
 	</select>

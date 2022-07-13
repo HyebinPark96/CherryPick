@@ -34,7 +34,9 @@
 						<div>
 							<span style="font-size: 25px; font-weight: bold;"><label>카페 이름</label></span> 
 							<span class=""><label th:text="${myReviewList.score}"></label></span><br> 
-							<span style="color: gray;"><label th:text="${myReviewList.caddress}">카페 주소</label></span>
+							<span style="color: gray;" th:each="CafeVO, iter:${myReviewList.CafeVO}">
+								<label th:text="${CafeVO.caddress}">카페 주소</label>
+							</span>
 						</div>
 						<br>
 						<div>
