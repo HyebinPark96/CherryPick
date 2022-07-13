@@ -24,7 +24,6 @@ public class CafeController {
 	// 전체 카페목록
 	@GetMapping("cafe/all")
 	public String getCafeAll(Model model) {
-		System.out.println("[CafeController] cafe/all");
 		List<CafeVO> cafes = cafeService.getCafeALL();
 		model.addAttribute("cafes", cafes);
 		return "cafe/all";

@@ -131,8 +131,8 @@
 	/*<![CDATA[*/
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {
-			center: new kakao.maps.LatLng(35.15306, 129.06623), // 지도의 중심좌표 (전포역)
-			level: 3 // 지도의 확대 레벨
+			center: new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/), // 지도의 중심좌표 (카페위치)
+			level: 2 // 지도의 확대 레벨
 		};
 
 	// 지도생성
