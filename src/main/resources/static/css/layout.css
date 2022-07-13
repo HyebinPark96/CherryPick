@@ -4,6 +4,11 @@
 	 font-weight: bold;
 }
 
+.text-20{
+	 font-size: 20px;
+	 font-weight: bold;
+}
+
 a{
 	text-decoration: none;
 }
@@ -56,6 +61,21 @@ textarea:focus, input:focus {
 
 .check-icon{
 	width: 20px;
+}
+
+.heart-icon{
+	width: 20px;
+}
+
+.clock-icon{
+	width: 30px;
+}
+
+/*구분선*/
+ .hr-dotted {
+  border:none;
+  border-top:2px dotted #ddd; 
+  height:1px;
 }
 
 
