@@ -1,27 +1,29 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout-main}">
 
-<head>
+<!-- <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<script th:inline="javascript">
-	//cno 넘겨서 개별info로 보내기
-		function findId(variable) {
-			location.href = `/cafe/${variable}`;
-		}
-	</script>
-	<!--<script src="../js/cafe.js" async></script>-->
+
+	
+	<script src="../js/cafe.js" async></script>
+
 	<title>CherryPick</title>
 </head>
 
-<body>
+<body> -->
 	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
 	<div class="content container" layout:fragment="content">
-
 		<div class="item">
 			<div class="cflist-label">
-				<span style="font-size: 12px; color: #bbb;"> 조회수 000,000회 |
-					등록일 0000-00-00 </span><br>
-				등록된 카페 수: <span th:text="${#lists.size(cafes)}">카페 수</span>개
+			
+				<div>등록된 카페 수: <span th:text="${#lists.size(cafes)}">카페 수</span>개</div>
+				
+				<div class="cflist-sort">
+				<a>최신순</a>
+				<a>별점 높은 순</a>
+				<a>리뷰 많은 순</a>
+				<a>즐겨찾기 순</a>
+				</div>
 			</div>
 			<hr>
 			<!--구분선-->
@@ -164,7 +166,16 @@
 			</div>
 
 		</div>
-</body>
+		
+		
+		<script th:inline="javascript">
+	//cno 넘겨서 개별info로 보내기
+		function findId(variable) {
+			location.href = `/cafe/${variable}`;
+		}
+	</script>
+	</div>
+<!-- </body> -->
 </html>
 
 

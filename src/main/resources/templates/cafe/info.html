@@ -2,12 +2,18 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout-main}">
 
-<head>
+<!-- <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>CherryPick</title>
 
-<!-- 타임리프로 최상단 배경 이미지 적용  -->
-<style th:inline="text">
+
+</head>
+
+<body> -->
+
+	<!-- 타임리프로 최상단 배경 이미지 적용  -->
+<head>
+ <style th:inline="text">
 .cf-label-bg {
 	background:
 		url([[@{https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300}]])
@@ -16,10 +22,9 @@
 	min-height: 200px;
 }
 </style>
-
 </head>
 
-<body>
+
 	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
 	<div layout:fragment="content">
 		<div class="cf-label-bg">
@@ -131,8 +136,8 @@
 	/*<![CDATA[*/
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {
-			center: new kakao.maps.LatLng(35.15306, 129.06623), // 지도의 중심좌표 (전포역)
-			level: 3 // 지도의 확대 레벨
+			center: new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/), // 지도의 중심좌표 (카페위치)
+			level: 2 // 지도의 확대 레벨
 		};
 
 	// 지도생성
@@ -219,9 +224,11 @@
 			<hr>
 
 		</div>
+		
+	
 	</div>
 
-</body>
+<!-- </body> -->
 </html>
 
 
