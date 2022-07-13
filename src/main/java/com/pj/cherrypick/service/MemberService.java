@@ -40,8 +40,12 @@ public class MemberService {
 	}
 	
 	@Transactional
-	public String findUsername(String name, String email) throws Exception {
-		return memberMapper.findUsername(name, email); // 아이디 찾기
+	public String findUsername(String name, String email) throws Exception { // 아이디 찾기
+		if(memberMapper.findUsername(name, email)==null) {
+			return "";
+		} else {
+			return memberMapper.findUsername(name, email);
+		} 
 	}
 	
 	/* 임시비번으로 비번 재설정 후, 메일로 임시비번 전송하기 */
