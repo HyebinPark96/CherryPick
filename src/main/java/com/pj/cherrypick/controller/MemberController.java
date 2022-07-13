@@ -59,7 +59,7 @@ public class MemberController {
 	@GetMapping("/member/myPage")
 	// http://localhost/member/myPage
 	public String myPage() {
-		return "member/myPage";
+		return "member/myPage"; // /WEB-INF/views/templates/member/myPage
 	}
 	
 	@GetMapping("/admin/adminMain")
@@ -77,7 +77,7 @@ public class MemberController {
 		} catch (Exception e) {
 			if(principalDetail==null) {
 				// 비회원일 경우
-				return "redirect:/auth/loginForm"; 
+				return "redirect:/loginForm"; // /WEB-INF/views/templates/loginForm
 			}
 		}
 		return "admin/adminMain";
@@ -88,30 +88,37 @@ public class MemberController {
 	public String memberEditForm(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
 		MemberVO member = memberService.findByUsername(principalDetail.getUsername());
 		model.addAttribute("member", member);
-		return "member/memberEditForm";
+		return "member/memberEditForm"; // /WEB-INF/views/templates/member/memberEditForm
 	}
 	
 	@GetMapping("/member/checkPwdForEdit")
 	// http://localhost/member/checkPwdForEdit
 	public String checkPwdForEdit() {
-		return "member/checkPwdForEdit";
+		return "member/checkPwdForEdit"; // /WEB-INF/views/templates/member/checkPwdForEdit
 	}
 	
 	@GetMapping("/error/403")
 	// http://localhost/error/403
 	public String ForbiddenErrorPage() {
-		return "error/403";
+		return "error/403"; // /WEB-INF/views/templates/error/403
 	}
 	
 	@GetMapping("/error/404")
 	// http://localhost/error/403
 	public String notFoundErrorPage() {
-		return "error/404";
+		return "error/404"; // /WEB-INF/views/templates/error/404
 	}
 	
 	@GetMapping("/error/500")
+	// http://localhost/error/500
 	public String internalServerErrorPage() {
-		return "error/500";
+		return "error/500"; // /WEB-INF/views/templates/error/500
+	}
+	
+	@GetMapping("/member/myReview")
+	// http://localhost/member/myReview
+	public String myReview() {
+		return "member/myReview"; // /WEB-INF/views/templates/member/myReview
 	}
 
 }

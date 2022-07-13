@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Data 
 @Builder
 public class BizMemberVO {
-	private String username;
-	private String password;
+	private String bid;
+	private String bpwd;
 	private String bname;
 	private int bstat;
 	private String bphone;

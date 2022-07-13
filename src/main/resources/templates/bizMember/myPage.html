@@ -25,15 +25,15 @@
 					</div>
 					<div class="col-md-10" style="text-align: right">
 						<p>
-							<b th:text="${bizMember.username+'님'}"></b>
+							<b th:text="${bizMember.bid+'님'}"></b>
 						</p>
 						<p th:text="${bizMember.bemail}"></p>
 					</div>
 
 					<div class="col-md-1">
 						<form id="moveUpdateFrm" action="/bizMember/checkPwdForEdit" method="post">
-							<input type="hidden" th:value="${bizMember.username}">
-							<input type="hidden" th:value="${bizMember.password}">
+							<input type="hidden" th:value="${bizMember.bid}">
+							<input type="hidden" th:value="${bizMember.bpwd}">
 							<img id="submitImg" onclick="submit()" class="edit-icon" src="../img/edit.png">
 						</form>
 					</div>
@@ -68,7 +68,7 @@
 									<div class="cflist-review-profile"></div>
 									<div>
 										<input type="hidden" id="username" th:value="${bizMember.username}">
-										<b th:text="${bizMember.username+'님'}">username</b>&nbsp; 카페 리뷰를 입력하는 란입니다. 아직 입력된 데이터가 존재하지 않습니다.
+										<b th:text="${bizMember.bid+'님'}">username</b>&nbsp; 카페 리뷰를 입력하는 란입니다. 아직 입력된 데이터가 존재하지 않습니다.
 									</div>
 
 								</div>

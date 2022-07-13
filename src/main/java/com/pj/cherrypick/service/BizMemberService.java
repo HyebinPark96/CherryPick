@@ -17,12 +17,10 @@ public class BizMemberService {
 	@Autowired
 	private BizMemberMapper bizMemberMapper;
 	
-	@Autowired
-	private BCryptPasswordEncoder encoder; // 암호화 방식
 	
 	@Transactional
-	public int findDupUsername(String username) throws Exception { 
-		if(bizMemberMapper.findDupUsername(username) == 1)
+	public int findDupUsername(String bid) throws Exception { 
+		if(bizMemberMapper.findDupBid(bid) == 1)
 			return 1; // 회원가입시 입력한 username으로 DB에 중복되는 username있는지 조회하여 있다면 1 리턴 = 중복Id
 		else 
 			return 0; 
@@ -30,18 +28,15 @@ public class BizMemberService {
 	
 	@Transactional // 서비스 단에서 트랜잭션 시작되고 종료됨
 	public void signUp(BizMemberVO bizMember) throws Exception {
-//		String rawPassword = bizMember.getPassword(); // 원본 비번
-//		String encPassword = encoder.encode(rawPassword); // 해쉬
-//		bizMember.setPassword(encPassword); // 시큐리티 적용
 		bizMemberMapper.signUp(bizMember);
 	}
 	
 	@Transactional
-	public String findUsername(String bname, String bemail) throws Exception { // 아이디 찾기
-		if(bizMemberMapper.findUsername(bname, bemail)==null) {
+	public String findBid(String bname, String bemail) throws Exception { // 아이디 찾기
+		if(bizMemberMapper.findBid(bname, bemail)==null) {
 			return "";
 		} else {
-			return bizMemberMapper.findUsername(bname, bemail);
+			return bizMemberMapper.findBid(bname, bemail);
 		} 
 	}
 	
@@ -68,10 +63,10 @@ public class BizMemberService {
 
     // 임시비번으로 업데이트
 	@Transactional
-    public void updatePassword(String tmpPassword, String username, String email) {
+    public void updatePassword(String tmpPassword, String bid, String bemail) {
         
         try {
-        	bizMemberMapper.updatePassword(tmpPassword, username, email); // 해쉬를 비번으로 업데이트
+        	bizMemberMapper.updateBpwd(tmpPassword, bid, bemail); // 해쉬를 비번으로 업데이트
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,12 +81,6 @@ public class BizMemberService {
 		}
 		return false;
     }
-	
-	
-//	@Transactional
-//	public int checkMemberOrAdmin(String username) {
-//		return bizMemberMapper.checkMemberOrAdmin(username); // 0 or 1 반환
-//	}
 
 	@Transactional
 	public List<BizMemberVO> getMList() {
@@ -102,41 +91,41 @@ public class BizMemberService {
 	
 	@Transactional
 	public void updateMember(BizMemberVO bizMember) {
-		BizMemberVO orgMember = bizMemberMapper.findByUsername(bizMember.getUsername()); // 기존 회원정보 들고오기
+		BizMemberVO orgMember = bizMemberMapper.findByBid(bizMember.getBid()); // 기존 회원정보 들고오기
 		
 		/*기존회원정보에 입력받은 수정 데이터 업데이트(따로 변경안하면 기존 회원정보로 셋팅 되도록 설계)*/
-		orgMember.setPassword(bizMember.getPassword());
+		orgMember.setBpwd(bizMember.getBpwd());
 		orgMember.setBname(bizMember.getBname());
 		orgMember.setBphone(bizMember.getBphone());
 		orgMember.setBemail(bizMember.getBemail());
 		
-		bizMemberMapper.updateMember(orgMember); // 수정 SQL문 
+		bizMemberMapper.updateBMember(orgMember); // 수정 SQL문 
 		
 	}
 	
 	@Transactional
 	public void updateMemberWithoutPwd(BizMemberVO bizMember/*입력받은 수정 데이터*/) {
-		BizMemberVO orgMember = bizMemberMapper.findByUsername(bizMember.getUsername()); // username은 불변이므로 기존 회원정보 들고오기
+		BizMemberVO orgMember = bizMemberMapper.findByBid(bizMember.getBid()); // username은 불변이므로 기존 회원정보 들고오기
 		
 		/*기존회원정보에 입력받은 수정 데이터 업데이트(따로 변경안하면 기존 회원정보로 셋팅 되도록 설계)*/
 		orgMember.setBname(bizMember.getBname());
 		orgMember.setBphone(bizMember.getBphone());
 		orgMember.setBemail(bizMember.getBemail());
 		
-		bizMemberMapper.updateMemberWithoutPwd(orgMember); // 변경된 회원 객체로 UPDATE SQL문 
+		bizMemberMapper.updateBMemberWithoutPwd(orgMember); // 변경된 회원 객체로 UPDATE SQL문 
 		
 	}
 	
 	// 아이디로 회원 객체 들고오기
 	@Transactional
-	public BizMemberVO findByUsername(String username) {
-		return bizMemberMapper.findByUsername(username);
+	public BizMemberVO findByUsername(String bid) {
+		return bizMemberMapper.findByBid(bid);
 	}
 	
 	//  로그인
 	@Transactional
-	public BizMemberVO signIn (String username, String password) {
-		return bizMemberMapper.signIn(username, password);
+	public BizMemberVO signIn (String bid, String bpwd) {
+		return bizMemberMapper.signIn(bid, bpwd);
 	}
 	
 }

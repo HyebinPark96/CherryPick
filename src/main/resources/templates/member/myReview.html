@@ -16,10 +16,10 @@
 		<div class="content-top">
 			<div class="row">
 				<div class="col-md-1">
-					<img class="back-icon" src="img/back.png">
+					<img class="back-icon" src="../img/back.png">
 				</div>
 				<div class="col-md-11">
-					<b>username님의 Review</b>
+					<b th:text="${#authentication.principal.username}+'님의 Review'"></b>
 				</div>
 			</div>
 			<hr>

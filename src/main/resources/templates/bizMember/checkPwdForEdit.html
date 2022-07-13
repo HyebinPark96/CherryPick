@@ -7,7 +7,7 @@
 		
 			<!-- 세션에 저장된 username 을 submit() 하면 컨트롤러에서 받아서
 			 서비스단을 통해 해당 회원정보를 담고있는 BizMember 객체를 생성한다. -->
-			<input type="hidden" th:value="${bizMember.username}" name="username">
+			<input type="hidden" th:value="${bizMember.bid}" name="bid">
 		
 			<div class="text-large">회원정보 수정</div>
 
@@ -17,7 +17,7 @@
 			</div>
 
 			<div class="col-md-6 mb-3">
-				<input type="password" class="form-control" id="password" placeholder="회원수정을 위해 비밀번호를 입력해주세요." value="" name="password" required>
+				<input type="password" class="form-control" id="bpwd" placeholder="회원수정을 위해 비밀번호를 입력해주세요." value="" name="bpwd" required>
 				<div class="invalid-feedback">비밀번호 확인</div>
 			</div>
 

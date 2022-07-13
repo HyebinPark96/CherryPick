@@ -35,10 +35,10 @@ public class BizMemberApiRestController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 	}
 	
-	@PostMapping("/auth/bUsernameCheck")
+	@PostMapping("/auth/bidCheck")
 	public ResponseDto<Integer> bUsernameCheck(@RequestBody BizMemberVO bizMember) throws Exception {
-		int bUsernameCheck = bizMemberService.findDupUsername(bizMember.getUsername());
-		if(bUsernameCheck == 0)
+		int bidCheck = bizMemberService.findDupUsername(bizMember.getBid());
+		if(bidCheck == 0)
 			return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 		return null;
 	}
@@ -46,7 +46,7 @@ public class BizMemberApiRestController {
 	@PutMapping("/bizMember/updateBMemberProc")
 	public ResponseDto<Integer> updateBizMember(@RequestBody BizMemberVO bizMember/*입력받은 수정 데이터*/) throws Exception {
 
-		if(bizMember.getPassword().length()==0) {
+		if(bizMember.getBpwd().length()==0) {
 			bizMemberService.updateMemberWithoutPwd(bizMember); // 비번빼고 수정한 경우고, 수정데이터를 파라미터로 전달
 		} else {
 			bizMemberService.updateMember(bizMember); // 비번도 수정한 경우
