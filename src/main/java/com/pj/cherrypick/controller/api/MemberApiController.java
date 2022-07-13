@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
+import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.service.MailService;
 import com.pj.cherrypick.service.MemberService;
@@ -50,19 +51,36 @@ public class MemberApiController {
 	}
 	
 	@PostMapping("/auth/sendEmailProc")
-	public String sendEmailProc(@RequestParam("username") String username, @RequestParam("email") String email, Model model) {
-		MemberVO member = memberService.findByUsername(username);
+	public String sendEmailProc(@RequestParam("username") String username, @RequestParam("email") String email, 
+			Model model) {
 		
-		if(!email.equals(member.getEmail())) {
-			return "member/findPasswordResult";
-		} else {
-			String tmpPassword = memberService.getTmpPassword(); // 임시비번 생성
+		try {
+			if(username.trim().equals("") || email.trim().equals("")) {
+				model.addAttribute("result",""); // 공백 입력한 경우
+				return "member/findPasswordResult";
+			}
 			
-			memberService.updatePassword(tmpPassword, username, email); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
-			
-			mailService.sendEmail(email, tmpPassword); // 이메일로 임시비번 전송
-			
-			return "loginForm";
+			if(memberService.findByUsername(username)==null) {
+				model.addAttribute("result", "null"); // 아이디 없는 경우
+				return "member/findPasswordResult";
+			} else {
+				MemberVO member = memberService.findByUsername(username);
+		
+				if (!email.equals(member.getEmail())) {
+					model.addAttribute("result", "null"); // 아이디는 있는데, 이메일 주소 다른 경우
+					return "member/findPasswordResult";
+				} else {
+					String tmpPassword = memberService.getTmpPassword(); // 임시비번 생성
+		
+					memberService.updatePassword(tmpPassword, username, email); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
+		
+					mailService.sendEmail(email, tmpPassword); // 이메일로 임시비번 전송
+					
+					return "loginForm";
+				}
+			}
+		} catch (Exception e) {
+			return "/error/500";
 		}
 	}
 		

@@ -59,17 +59,18 @@ public class BizMemberApiController {
 		
 		try {
 			if(username.trim().equals("") || bemail.trim().equals("")) {
-				model.addAttribute("result","");
+				model.addAttribute("result",""); // 공백 입력한 경우
 				return "bizMember/findPasswordResult";
 			}
 			
 			if(bizMemberService.findByUsername(username)==null) {
-				model.addAttribute("result", "null");
+				model.addAttribute("result", "null"); // 아이디 없는 경우
 				return "bizMember/findPasswordResult";
 			}else {
 				BizMemberVO bizMember = bizMemberService.findByUsername(username);
 		
 				if (!bemail.equals(bizMember.getBemail())) {
+					model.addAttribute("result", "null"); // 아이디는 있는데, 이메일 주소 다른 경우
 					return "bizMember/findPasswordResult";
 				} else {
 					String tmpPassword = bizMemberService.getTmpPassword(); // 임시비번 생성
