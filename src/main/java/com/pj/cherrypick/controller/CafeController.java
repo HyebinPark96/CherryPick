@@ -51,7 +51,6 @@ public class CafeController {
 		model.addAttribute("cafe", cafe);
 		model.addAttribute("menu", menu);
 		model.addAttribute("review", review);
-		System.out.println("model:"+model);
 		return "cafe/info";
 	}
 	
