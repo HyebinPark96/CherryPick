@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ListVO {
 	
 	private int lino;
-	private String mid;
+	private String username;
 	private String liname;
 	private int li_cafe1;
 	private int li_cafe2;

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class CafeVO {
 
 	private int cno;
-	private String bid;
+	private String username;
 	private String cname;
 	private float c_lat;
 	private float c_long;

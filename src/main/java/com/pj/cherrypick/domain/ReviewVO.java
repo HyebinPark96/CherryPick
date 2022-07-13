@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ReviewVO {
 
 	private int rno;
-	private String mid;
+	private String username;
 	private int cno;
 	private String date;
 	private String title;

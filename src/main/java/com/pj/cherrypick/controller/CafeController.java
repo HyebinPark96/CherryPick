@@ -33,7 +33,6 @@ public class CafeController {
 	// 카페리스트 (전체카페X lino로 리스트 불러오기)
 	@GetMapping("cafe/list/{lino}")
 	public String getEachList (@PathVariable int lino, Model model) {
-		System.out.println("[CafeController] cafe/list/{lino}");
 		ListVO list = cafeService.getEachList(lino);
 		List<CafeVO> cafes = cafeService.getCafeList(lino);
 		model.addAttribute("list", list);
