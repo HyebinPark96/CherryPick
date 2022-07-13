@@ -25,18 +25,18 @@ public class BizMemberApiController {
 	@Autowired
 	private MailService mailService;
 
-	@PostMapping("/auth/bizFindUsernameProc")
-	public String findUsername(@RequestParam("bname") String bname, @RequestParam("bemail") String bemail, Model model)
+	@PostMapping("/auth/findBidProc")
+	public String findUsername(@RequestParam String bname, @RequestParam String bemail, Model model)
 			throws Exception {
 
 		/*null 방지*/
-		if(bizMemberService.findUsername(bname, bemail).trim().equals("")) {
-			model.addAttribute("username","");
+		if(bizMemberService.findBid(bname, bemail).trim().equals("")) {
+			model.addAttribute("bid","");
 			return "bizMember/findUsernameResult";
 		}
 		
 		/* 아이디 3자리 이후부터 잘라 *로 처리하기 */
-		String rawUsername = bizMemberService.findUsername(bname, bemail);
+		String rawUsername = bizMemberService.findBid(bname, bemail);
 		
 		int rawUsernameLen = rawUsername.length(); // 아이디 글자수
 		String rawUsernameStart = rawUsername.substring(0, 3); // 시작위치, 종료위치 // 그대로 나타낼 부분
@@ -49,25 +49,25 @@ public class BizMemberApiController {
 
 		String encUsername = rawUsernameStart + encUsernameEnd; // 일부 *로 변환된 아이디
 
-		model.addAttribute("username", encUsername);
+		model.addAttribute("bid", encUsername);
 		return "bizMember/findUsernameResult";
 	}
 
 	@PostMapping("/auth/sendBemailProc")
-	public String sendEmailProc(@RequestParam("username") String username, @RequestParam("bemail") String bemail,
+	public String sendEmailProc(@RequestParam String bid, @RequestParam String bemail,
 			Model model) {
 		
 		try {
-			if(username.trim().equals("") || bemail.trim().equals("")) {
+			if(bid.trim().equals("") || bemail.trim().equals("")) {
 				model.addAttribute("result",""); // 공백 입력한 경우
 				return "bizMember/findPasswordResult";
 			}
 			
-			if(bizMemberService.findByUsername(username)==null) {
+			if(bizMemberService.findByUsername(bid)==null) {
 				model.addAttribute("result", "null"); // 아이디 없는 경우
 				return "bizMember/findPasswordResult";
 			}else {
-				BizMemberVO bizMember = bizMemberService.findByUsername(username);
+				BizMemberVO bizMember = bizMemberService.findByUsername(bid);
 		
 				if (!bemail.equals(bizMember.getBemail())) {
 					model.addAttribute("result", "null"); // 아이디는 있는데, 이메일 주소 다른 경우
@@ -75,7 +75,7 @@ public class BizMemberApiController {
 				} else {
 					String tmpPassword = bizMemberService.getTmpPassword(); // 임시비번 생성
 		
-					bizMemberService.updatePassword(tmpPassword, username, bemail); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
+					bizMemberService.updatePassword(tmpPassword, bid, bemail); // Service단에 임시비번 전달하면 해쉬로 암호화 거쳐서 업데이트해줌
 		
 					mailService.sendEmail(bemail, tmpPassword); // 이메일로 임시비번 전송
 					
@@ -94,10 +94,10 @@ public class BizMemberApiController {
 	}
 
 	@PostMapping("/bizMember/checkPwdForEditResult")
-	public String checkPwdForEditResult(@RequestParam(required = false, value = "username") String username,
-			@RequestParam(required = false, value = "password") String password, Model model) {
-		BizMemberVO bizMember = bizMemberService.findByUsername(username); // DB 저장된 회원정보 가져오기
-		boolean checkEqualsPassword = bizMemberService.checkEqualsPassword(password, bizMember.getPassword()); // DB비번 입력비번 일치여부
+	public String checkPwdForEditResult(@RequestParam(required = false, value = "bid") String bid,
+			@RequestParam(required = false, value = "bpwd") String bpwd, Model model) {
+		BizMemberVO bizMember = bizMemberService.findByUsername(bid); // DB 저장된 회원정보 가져오기
+		boolean checkEqualsPassword = bizMemberService.checkEqualsPassword(bpwd, bizMember.getBpwd()); // DB비번 입력비번 일치여부
 
 		if (!checkEqualsPassword) { // 일치하지 않는다면 
 			return "bizMember/checkPwdForEditResult";
@@ -108,10 +108,10 @@ public class BizMemberApiController {
 	}
 
 	@PostMapping("/auth/bSignInProc")
-	public String signIn(@RequestParam String username, @RequestParam String password, HttpServletRequest request,
+	public String signIn(@RequestParam String bid, @RequestParam String bpwd, HttpServletRequest request,
 			RedirectAttributes rttr) throws Exception {
 		HttpSession session = request.getSession();
-		BizMemberVO bizMember = bizMemberService.signIn(username, password);
+		BizMemberVO bizMember = bizMemberService.signIn(bid, bpwd);
 
 		String failMessage = "아이디 혹은 비밀번호가 잘못 되었습니다."; // 로그인 실패 알림 문구
 		if (bizMember.equals(null) || bizMember == null) { // 회원정보 없음 => 로그인 실패

@@ -16,18 +16,18 @@
 				<!-- <input type="hidden" th:value="${#authentication.principal.password}" id="passwordTest"> -->
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<b th:text="${bizMember.username}">username</b>님의 회원정보 변경
+							<b th:text="${bizMember.bid}"></b>님의 회원정보 변경
 						</div>
 					</div>
 
 					<div class="col-md-6 mb-3">
 						<label for="password">신규 비밀번호</label> 
-						<input type="password" class="form-control" id="password" placeholder="" value="" required>
+						<input type="password" class="form-control" id="bpwd" placeholder="" value="" required>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
 					<div class="col-md-6 mb-3">
 						<label for="password">신규 비밀번호 확인</label> 
-						<input type="password" class="form-control" id="pwdChk" placeholder="" value="" required>
+						<input type="password" class="form-control" id="bPwdChk" placeholder="" value="" required>
 						<div class="invalid-feedback">비밀번호 확인</div>
 					</div>
 
@@ -53,8 +53,8 @@
 
 					<hr class="mb-4">
 					<div class="mb-4"></div>
-					<input type="hidden" id="username" th:value="${bizMember.username}" />
-					<input type="hidden" id="dbPassword" th:value="${bizMember.password}" />
+					<input type="hidden" id="username" th:value="${bizMember.bid}" />
+					<input type="hidden" id="dbPassword" th:value="${bizMember.bpwd}" />
 				</form>
 
 				<button class="btn btn-primary btn-lg btn-block" id="updateBMemberBtn">수정 완료</button>

@@ -16,18 +16,18 @@
 		<main class="form-signin w-100 m-auto">
 			<img src="/img/logo-pink.png" alt="" width="150">
 			
-			<input type="hidden" th:value="${username}" id="username">
+			<input type="hidden" th:value="${bid}" id="bid">
 			
-			<div id="findUsernameResult">
+			<div id="findBidResult">
 				<h3>사업자 ID찾기</h3>
 				
-				<div id="existId" th:if="${username!=''}">
+				<div id="existId" th:if="${bid!=''}">
 					<label>회원님의 아이디 조회 결과는 다음과 같습니다.</label><br>
 					<label>id : </label>
-					<span th:text="${username}"></span>
+					<span th:text="${bid}"></span>
 				</div>
 				
-				<div id="notFoundId" th:unless="${username!=''}">
+				<div id="notFoundId" th:unless="${bid!=''}">
 					<label>해당 아이디와 이메일로 등록된 회원정보가 없습니다.</label>
 				</div>
 			</div>

@@ -20,29 +20,27 @@ public interface BizMemberMapper {
 	
 	// Optional로 객체를 감싸서 사용하면 NPE를 유발할 수 있는 null을 직접 다루지 않아도 됨
 	// SELECT 로그인시 입력한 ID로 회원 유무 체크
-	BizMemberVO findByUsername(String username);
+	BizMemberVO findByBid(String bid);
 	
 	// SELECT 아이디 찾기시 입력한 이름과 이메일로 아이디 리턴
-	String findUsername(String bname, String bemail);
+	String findBid(String bname, String bemail);
 	
 	// 해당 아이디와 이메일 가진 사람이 있는지 체크 (0 리턴 : 없음, 1 리턴 : 존재)
-	int findPasswordCheck(String username, String bemail);
+	int findBpwdCheck(String bid, String bemail);
 	
-	// 회원정보 수정
-	void updatePassword(String password, String username, String bemail);
-	
-	// 회원정보 수정
-	void updatePassword(String password);
+	// 비밀번호만 수정
+	void updateBpwd(String bpwd, String bid, String bemail);
 	
 	// 아이디 찾기
-	int findDupUsername(String username);
+	int findDupBid(String bid);
 	
 //	// 회원인지 관리자인지 구분 : 관리자 이외 사람이 url로 관리자 페이지 접근하는 것 방지하기 위해 
 //	int checkMemberOrAdmin(String username);
 	
-	void updateMember(BizMemberVO bizMember);
+	void updateBMember(BizMemberVO bizMember);
 	
-	void updateMemberWithoutPwd(BizMemberVO bizMember);
+	// 비밀번호 빼고 수정
+	void updateBMemberWithoutPwd(BizMemberVO bizMember);
 	
-	BizMemberVO signIn(String username, String password);
+	BizMemberVO signIn(String bid, String bpwd);
 }
