@@ -9,6 +9,7 @@
  		FROM cafe c
  		LEFT JOIN review r 
  		ON c.cno = r.cno
+ 		GROUP BY c.cno
     </select> 
     <!-- cno로 카페정보 호출-->
  	<select id="getCafeInfo" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">

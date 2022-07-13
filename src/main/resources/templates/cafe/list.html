@@ -4,6 +4,12 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script th:inline="javascript"> 
+	//cno 넘겨서 보내기 
+		function findId(variable) {
+			location.href = `/cafe/${variable}`;
+		}
+	</script>
 	<!--<script src="../js/cafe.js" async></script>-->
 	<title>CherryPick</title>
 </head>
@@ -17,7 +23,7 @@
 				<span style="font-size: 12px; color: #bbb;"> 조회수 000,000회 |
 					등록일 0000-00-00 </span><br>
 				리스트 이름: <span th:text="${list.liname}">liname</span><br>
-				<span th:text="${list.mid}">mid</span>님이 만든
+				<span th:text="${list.username}">username</span>님이 만든
 				이 리스트를 <span>n</span>명이 담았습니다.
 			</div>
 			<hr>
@@ -39,7 +45,7 @@
 							<div class="cflist-review">
 								<div class="cflist-review-profile"></div>
 								<div>
-									<b th:text="${cafe.mid}">username</b>&nbsp;
+									<b th:text="${cafe.username}">username</b>&nbsp;
 									<div>
 										<span th:if="${cafe.title != null}" th:text="${cafe.title}"></span>
 										<span th:if="${cafe.title == null}">등록된 리뷰가 없습니다.</span>
@@ -47,7 +53,7 @@
 								</div>
 
 							</div>
-							<a href="#">더보기</a>
+							<a th:id="${cafe.cno}" th:onclick="findId(this.getAttribute('id'))">더보기</a>
 
 						</div>
 						<div>
