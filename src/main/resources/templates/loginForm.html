@@ -7,7 +7,6 @@
 <meta charset="utf-8">
 
 <title>CherryPick-Login</title>
-
 </head>
 <body>
 	<div class="content loginpage text-center container" layout:fragment="content">
@@ -39,7 +38,7 @@
 					<label> <input type="checkbox" value="remember-me"> Remember me
 					</label>
 				</div>
-				<div class="alert" style="display: none">로그인 실패시 알림 메시지</div>
+				<label style="color:red" th:text="${alertFailMsg}"></label>
 				<button class="loginbtn w-100 btn btn-lg" id="signInBtn">로그인</button>
 			</form>
 
@@ -49,17 +48,16 @@
 			<form action="/auth/bSignInProc" method="POST" id="bMemberLoginFrm">
 				<h3>사업자 로그인</h3>
 				<div class="form-floating">
-					<input type="text" class="form-control" placeholder="아이디를 입력해주세요." name="username"> <label for="floatingInput">아이디를 입력해주세요.</label>
+					<input type="text" class="form-control" placeholder="아이디를 입력해주세요." name="bid"> <label for="floatingInput">아이디를 입력해주세요.</label>
 				</div>
 				<div class="form-floating">
-					<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요." name="password"> <label for="floatingPassword">비밀번호를 입력해주세요.</label>
+					<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요." name="bpwd"> <label for="floatingPassword">비밀번호를 입력해주세요.</label>
 				</div>
 
 				<div class="checkbox mb-3">
 					<label> <input type="checkbox" value="remember-me"> Remember me
 					</label>
 				</div>
-				<div class="alert" style="display: none">로그인 실패시 알림 메시지</div>
 				<button class="loginbtn w-100 btn btn-lg" id="bSignInBtn">로그인</button>
 			</form>
 

@@ -96,23 +96,23 @@
 			<div class="text-large">회원가입 - 사업자회원</div>
 			<div class="input-form col-md-12 mx-auto">
 
-				<form class="validation-form" id="bizFrm" novalidate action="/auth/joinProc" method="post">
+				<form class="validation-form" id="bizFrm" novalidate action="/auth/bJoinProc" method="post">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="name">아이디</label> 
-							<input type="text" oninput="alertIdLength('bAlertId', 'bUsername')" class="form-control" id="bUsername" placeholder="" value="" required>
+							<input type="text" oninput="alertIdLength('bAlertId', 'bid')" class="form-control" id="bid" placeholder="" value="" required>
 							<!-- 8~15자 조건 벗어나면 빨간색으로, 조건 충족하면 display='none'-->
 							<label id="bAlertId" class="alertId" for="name">8~15자를 입력해주세요.</label>
 							<div class="invalid-feedback">아이디를 입력해주세요.</div>
 						</div>
 						<div class="col-md-6 mb-3">
-							<button type="button" class="btn btn-primary" id="bUsernameCheckBtn">중복확인</button>
+							<button type="button" class="btn btn-primary" id="bidCheckBtn">중복확인</button>
 						</div>
 					</div>
 
 					<div class="col-md-6 mb-3">
 						<label for="password">비밀번호</label> 
-						<input type="password" class="form-control" id="bPassword" placeholder="" value="" required>
+						<input type="password" class="form-control" id="bpwd" placeholder="" value="" required>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
 					<div class="col-md-6 mb-3">

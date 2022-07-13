@@ -19,8 +19,8 @@ let index = {
 			this.bSave();
 		});
 		
-		$("#bUsernameCheckBtn").on("click", () => { 
-			this.bUsernameCheck();
+		$("#bidCheckBtn").on("click", () => { 
+			this.bidCheck();
 		});
 		
 		$("#updateBMemberBtn").on("click", () => {
@@ -155,25 +155,25 @@ let index = {
 		}
 		
 		let data = {
-			username: $("#bUsername").val(),
-			password: $("#bPassword").val(),
+			bid: $("#bid").val(),
+			bpwd: $("#bpwd").val(),
 			bPwdChk: $("#bPwdChk").val(),
 			bname: $("#bname").val(),
 			bphone: $("#bphone").val(),
 			bemail: $("#bemail").val()
 		};
 		
-		if(data.username.length < 8 || data.username.length > 15){
+		if(data.bid.length < 8 || data.bid.length > 15){
 			alert("아이디는 8~15자를 입력해주세요.");
 			return false;
 		}
 
-		if(data.password != data.bPwdChk){
+		if(data.bpwd != data.bpwd){
 			alert("비밀번호가 일치하지 않습니다.");
 			return false;
 		}
 				
-		if(data.password.trim().length==0 || data.bname.trim().length==0 || 
+		if(data.bpwd.trim().length==0 || data.bname.trim().length==0 || 
 			data.bphone.trim().length==0 || data.bemail.trim().length==0){
 			alert("항목을 제대로 기입하였는지 확인해주세요.");
 			return false;
@@ -198,23 +198,23 @@ let index = {
 	
 	
 	
-	bUsernameCheck: function() {
+	bIdCheck: function() {
 		let data = {
-			username: $("#bUsername").val()
+			bid: $("#bid").val()
 		};
 
 		$.ajax({
 			type: "POST",
-			url: "/auth/bUsernameCheck",
+			url: "/auth/bIdCheck",
 			data: JSON.stringify(data), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			alert(data.username + ": 사용 가능한 아이디입니다.");
+			alert(data.bid + ": 사용 가능한 아이디입니다.");
 		}).fail(function(error) {
 			// 실패한 경우 호출
-			alert(data.username + ": 이미 사용중이거나 탈퇴한 아이디입니다.");
+			alert(data.bid + ": 이미 사용중이거나 탈퇴한 아이디입니다.");
 			// alert(JSON.stringify(error));
 		});
 	},
@@ -225,16 +225,16 @@ let index = {
 
 	updateBMember: function() {
 		let data = {
-			username: $("#username").val(),
-			password: $("#password").val(),
-			pwdChk: $("#pwdChk").val(),
+			bid: $("#bid").val(),
+			bpwd: $("#bpwd").val(),
+			bPwdChk: $("#bPwdChk").val(),
 			bname: $("#bname").val(),
 			bphone: $("#bphone").val(),
 			bemail: $("#bemail").val(),
 			dbPassword: $("#dbPassword").val()
 		};
 		
-		if(data.password != data.pwdChk){
+		if(data.bpwd != data.bPwdChk){
 			alert("비밀번호가 동일하지 않습니다.");
 			return false;
 		}

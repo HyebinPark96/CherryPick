@@ -109,18 +109,24 @@ public class BizMemberApiController {
 
 	@PostMapping("/auth/bSignInProc")
 	public String signIn(@RequestParam String bid, @RequestParam String bpwd, HttpServletRequest request,
-			RedirectAttributes rttr) throws Exception {
+			RedirectAttributes rttr, Model model) throws Exception {
+		
 		HttpSession session = request.getSession();
-		BizMemberVO bizMember = bizMemberService.signIn(bid, bpwd);
-
-		String failMessage = "아이디 혹은 비밀번호가 잘못 되었습니다."; // 로그인 실패 알림 문구
-		if (bizMember.equals(null) || bizMember == null) { // 회원정보 없음 => 로그인 실패
-			rttr.addFlashAttribute("loginFail", failMessage);
-			return "redirect:/loginForm";
-		} else {
-			session.setAttribute("bizMember", bizMember);
-			return "redirect:/";
+		
+		try {
+			if(bizMemberService.signIn(bid, bpwd)!=null) { // 로그인 성공
+				BizMemberVO bizMember = bizMemberService.signIn(bid, bpwd); // 로그인 성공
+				session.setAttribute("bizMember", bizMember);
+				return "/";
+			} else { // 로그인 실패
+				model.addAttribute("alertFailMsg", "해당 회원정보가 없습니다.");
+				return "loginForm";
+			}
+		} catch (Exception e) {
+			return "error/500";
 		}
+		
+
 	}
 
 	@PostMapping(value = "/bizMember/signOut")
