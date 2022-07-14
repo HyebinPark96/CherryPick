@@ -24,3 +24,8 @@ function sort() {
 function sendToInfo(variable) {
 	location.href = `/cafe/${variable}`;
 }
+
+// lino -> cafe/list/{lino} (리스트 개별페이지) 보내기
+function sendToListInfo(variable) {
+	location.href = `/cafe/list/${variable}`;
+}
