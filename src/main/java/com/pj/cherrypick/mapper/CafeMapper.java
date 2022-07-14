@@ -28,6 +28,9 @@ public interface CafeMapper {
 	// 전체 카페 보기
 	List<CafeVO> getCafeAll();
 	
+	// 전체 카페 보기 (평점높은순) 
+	List<CafeVO> getCafeAllByScore();
+	
 	// 특정카페(cno) 리뷰 1개씩만 리스트로 불러오기 (미리보기)
 	ReviewVO getFirstReview(int cno);
 	
