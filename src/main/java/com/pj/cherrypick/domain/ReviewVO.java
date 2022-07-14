@@ -22,6 +22,7 @@ public class ReviewVO {
 	private String content;
 	private double score;
 	private int waiting;
+	private List<Map<String, String>> HeartVO;
 	private List<Map<String, String>> CafeVO;
 	private List<Map<String, String>> MemberVO;
 }

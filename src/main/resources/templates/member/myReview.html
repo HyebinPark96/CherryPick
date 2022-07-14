@@ -27,36 +27,44 @@
 
 		<div class="container">
 
-			<th:block> <!-- th:each="myReviewList : ${myReviewList}" -->
-			<h3></h3> <!-- th:text="${myReviewList}" -->
+			<th:block th:each="myReviewList : ${myReviewList}"> <!--  -->
 				<div class="myreview-item">
 
 					<div class="">
-						<div> <!-- th:each="CafeVO, iter:${myReviewList.CafeVO}" -->
+						<div th:each="CafeVO, iter:${myReviewList.CafeVO}"> <!-- -->
 							<span style="font-size: 25px; font-weight: bold;">
-								<label>카페 이름</label> <!-- th:text="${CafeVO.cname}" -->
+								<label th:text="${CafeVO.cname}">카페 이름</label> <!-- -->
 							</span> 
 							<span class="">
-								<label>리뷰 점수</label> <!-- th:text="${myReviewList.score}" -->
+								<label th:text="${myReviewList.score}">리뷰 점수</label> <!-- -->
 							</span><br> 
-							<span style="color: gray;"> <!-- th:each="CafeVO, iter:${myReviewList.CafeVO}" -->
-								<label>카페 주소</label> <!-- th:text="${CafeVO.caddress}" -->
+							<span style="color: gray;" th:each="CafeVO, iter:${myReviewList.CafeVO}"> <!-- -->
+								<label th:text="${CafeVO.caddress}">카페 주소</label> <!-- -->
 							</span>
 						</div>
 						<br>
 						<div>
-							<div style="color: gray;">작성 날짜</div><!--  th:text="${myReviewList.date}" -->
+							<div style="color: gray;" th:text="${myReviewList.date}">작성 날짜</div><!-- -->
 							<div>
 								<b>
-									나의 별점 : <label></label> <!-- th:text="${myReviewList.score}" -->
+									나의 별점 : <label th:text="${myReviewList.score}"></label> <!-- -->
 								</b>
 							</div>
 							<div>
-								<label></label> <!-- th:text="${myReviewList.content}" -->
+								<label th:text="${myReviewList.content}"></label> <!---->
 							</div>
-							<div>
-								<b>(heart) : 0</b>
+							
+							(heart) : 
+							<div th:each="HeartVO, iter:${myReviewList.HeartVO}">
+								<span th:if="${iter.size}!=1">
+									<b th:if="${iter.index}==0" th:text="${iter.size}">2</b>
+								</span>
+								<span th:unless="${iter.size}!=1">
+									<b th:if="${iter.index}==0">0</b>
+								</span>
 							</div>
+							
+							
 						</div>
 					</div>
 					<div
