@@ -108,25 +108,18 @@ public class BizMemberApiController {
 	}
 
 	@PostMapping("/auth/bSignInProc")
-	public String signIn(@RequestParam String bid, @RequestParam String bpwd, HttpServletRequest request,
-			RedirectAttributes rttr, Model model) throws Exception {
+	public String signIn(@RequestParam String bid, @RequestParam String bpwd, HttpServletRequest request, Model model) throws Exception {
 		
 		HttpSession session = request.getSession();
 		
-		try {
-			if(bizMemberService.signIn(bid, bpwd)!=null) { // 로그인 성공
-				BizMemberVO bizMember = bizMemberService.signIn(bid, bpwd); // 로그인 성공
-				session.setAttribute("bizMember", bizMember);
-				return "/";
-			} else { // 로그인 실패
-				model.addAttribute("alertFailMsg", "해당 회원정보가 없습니다.");
-				return "loginForm";
-			}
-		} catch (Exception e) {
-			return "error/500";
+		if(bizMemberService.signIn(bid, bpwd)!=null) { // 로그인 성공
+			BizMemberVO bizMember = bizMemberService.signIn(bid, bpwd); // 로그인 성공
+			session.setAttribute("bizMember", bizMember);
+			return "redirect:/";
+		} else { // 로그인 실패
+			model.addAttribute("alertFailMsg", "해당 회원정보가 없습니다.");
+			return "loginForm";
 		}
-		
-
 	}
 
 	@PostMapping(value = "/bizMember/signOut")
@@ -141,6 +134,12 @@ public class BizMemberApiController {
 	public String myPage(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, Model model) {
 		model.addAttribute("bizMember", bizMember);
 		return "bizMember/myPage"; // model 들고 뷰로 이동
+	}
+	
+	@PostMapping("/bizMember/storeManagement")
+	public String storeManagement(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, Model model) {
+		model.addAttribute("bizMember", bizMember);
+		return "bizMember/storeManagement"; // model 들고 뷰로 이동
 	}
 
 }
