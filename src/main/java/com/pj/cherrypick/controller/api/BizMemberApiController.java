@@ -127,7 +127,7 @@ public class BizMemberApiController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 
-		return "redirect:/";
+		return "/";
 	}
 
 	@PostMapping(value = "/bizMember/myPage")
@@ -140,6 +140,12 @@ public class BizMemberApiController {
 	public String storeManagement(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, Model model) {
 		model.addAttribute("bizMember", bizMember);
 		return "bizMember/storeManagement"; // model 들고 뷰로 이동
+	}
+	
+	@PostMapping("/bizMember/regCafe")
+	public String regCafe(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, Model model) {
+		model.addAttribute("bizMember", bizMember);
+		return "bizMember/regCafe"; // model 들고 뷰로 이동
 	}
 
 }
