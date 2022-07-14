@@ -20,19 +20,19 @@
 
 				<!-- 회원관리 - 라디오 버튼 -->
 				<div class="d-flex">
-					<div class="form-check">
+<!-- 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="memberRadio"
-							id="all"> <label class="form-check-label"
+							id="all" value="all"> <label class="form-check-label"
 							for="flexRadioDefault0"> 전체 </label>
-					</div>
+					</div> -->
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="memberRadio"
-							id="normal"> <label class="form-check-label"
+							id="member" value="member" checked="checked"> <label class="form-check-label"
 							for="flexRadioDefault1"> 일반회원 </label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="memberRadio"
-							id="biz" checked> <label class="form-check-label"
+							id="biz" value="biz"> <label class="form-check-label"
 							for="flexRadioDefault2"> 사업자회원 </label>
 					</div>
 				</div>
@@ -48,9 +48,7 @@
 				<table class="table table-striped table-sm">
 					<thead>
 						<tr>
-							<th scope="col"><input class="form-check-input mt-0"
-								name="memChkAll" type="checkbox" value="">
-								</th>
+							<th scope="col"><input class="form-check-input mt-0" name="memChkAll" type="checkbox" value=""></th>
 							<th scope="col">순번</th>
 							<th scope="col">아이디</th>
 							<th scope="col">성명</th>
@@ -59,9 +57,9 @@
 							<th scope="col">회원분류</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="htmls">
 
-						<tr th:each="mList, index : ${mList}">
+<!-- 						<tr th:each="mList, index : ${mList}">
 							<td><input class="form-check-input mt-0" name="memChk"
 								type="checkbox" value=""></td>
 							<td th:text="${index.index + 1}"></td>
@@ -74,12 +72,12 @@
 							<td th:if="${mList.role}==0">회원</td>
 							<td th:if="${mList.role}==1">관리자</td>
 
-						</tr>
+						</tr> -->
 
 					</tbody>
 				</table>
 			</div>
-			<Button class="btn btn-danger">선택 탈퇴</Button>
+			<Button class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button>
 		</div>
 
 
