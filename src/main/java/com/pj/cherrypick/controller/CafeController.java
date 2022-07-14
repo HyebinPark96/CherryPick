@@ -1,5 +1,7 @@
 package com.pj.cherrypick.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
@@ -22,12 +25,24 @@ public class CafeController {
 	private CafeService cafeService;
 	
 	// 전체 카페목록
+
 	@GetMapping("cafe/all")
-	public String getCafeAll(Model model) {
-		List<CafeVO> cafes = cafeService.getCafeALL();
-		model.addAttribute("cafes", cafes);
-		return "cafe/all";
+	public String getCafeAll(@PathVariable(required=false) String sort, Model model)  {
+
+		if (sort=="0" || sort==null || sort.equals(null)) {
+			sort="0";
+			List<CafeVO> cafes = cafeService.getCafeAll();
+			model.addAttribute("cafes", cafes);
+		}else {
+			List<CafeVO> cafes = cafeService.getCafeAllByScore();
+			model.addAttribute("cafes", cafes);
 		}
+		System.out.println(sort);
+		return "cafe/all";
+	}
+	
+
+	
 	
 	// 카페리스트 (전체카페X lino로 리스트 불러오기)
 	@GetMapping("cafe/list/{lino}")
@@ -51,6 +66,16 @@ public class CafeController {
 		model.addAttribute("review", review);
 		return "cafe/info";
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 카페 등록
 	@GetMapping("/create")

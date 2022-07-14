@@ -54,5 +54,14 @@
 	<!--  cno로 리뷰리스트 불러오기 -->
 	<select id="getReview" parameterType="int" resultType="com.pj.cherrypick.domain.ReviewVO">
 		SELECT * FROM review WHERE cno = #{cno}
+	</select>	
+	<!-- 전체카페 평점높은순으로 -->
+	<select id="getCafeAllByScore" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *, AVG(r.score) AS avg 
+		FROM cafe c
+		LEFT JOIN review r
+		ON c.cno = r.cno
+		GROUP BY c.cno
+		ORDER BY avg DESC
 	</select>
 </mapper>

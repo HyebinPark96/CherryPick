@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class CafeVO {
 
 	private int cno;
-	private String username;
+	private String bid;
 	private String cname;
 	private float c_lat;
 	private float c_long;
@@ -31,7 +31,7 @@ public class CafeVO {
 	private String cmenu_img;
 	
 	//리뷰미리보기용 (1개만)
-	private String mid;
+	private String username;
 	private String title;
 	
 	

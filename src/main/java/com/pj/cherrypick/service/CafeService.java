@@ -17,8 +17,12 @@ public class CafeService {
 	@Autowired
 	private CafeMapper cafeMapper;
 	
+	public List<CafeVO> getCafeAllByScore() {
+		return cafeMapper.getCafeAllByScore();
+		
+	}
 
-	public List<CafeVO> getCafeALL() {
+	public List<CafeVO> getCafeAll() {
 		return cafeMapper.getCafeAll();
 	}
 	
