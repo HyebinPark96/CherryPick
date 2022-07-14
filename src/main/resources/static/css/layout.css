@@ -1,12 +1,11 @@
 
-.ffffaaa{
-	display: flex;
-	justify-content: center;
-}
-
-
 .text-large{
 	 font-size: 25px;
+	 font-weight: bold;
+}
+
+.text-23{
+	 font-size: 23px;
 	 font-weight: bold;
 }
 
@@ -57,6 +56,14 @@ textarea:focus, input:focus {
 
 /*========아이콘========*/
 
+.icon-20{
+	width: 20px;
+}
+
+.icon-30{
+	width: 30px;
+}
+
 .back-icon {
 	width: 20px;
 }
@@ -82,6 +89,80 @@ textarea:focus, input:focus {
   border:none;
   border-top:2px dotted #ddd; 
   height:1px;
+}
+
+
+
+/*========박스========*/
+.divBtn {
+	cursor: pointer;
+}
+
+.hoverbox {
+	width: 100%;
+	border: 5px dotted gray;
+	box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.1);
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	position: relative;
+	background-position: center;
+}
+
+.hoverbox-img-caption {
+	font-weight: 300;
+	font-size: 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.hoverbox-img-caption, .hoverbox-img-icon {
+	margin: 0;
+}
+
+#overlay5 {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: rgba(0, 0, 0, 0.85);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: auto;
+	bottom: 0;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+#overlay8 {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: rgba(0, 0, 0, 0.85);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: auto;
+	bottom: 0;
+	opacity: 0;
+	transform: scale(0);
+	transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.hoverbox:hover #overlay5 {
+	opacity: 1;
+}
+
+.hoverbox:hover #overlay8 {
+	opacity: 1;
+	transform: scale(1);
 }
 
 
@@ -222,6 +303,89 @@ textarea:focus, input:focus {
 	border-radius: 50px;
 	width: 50%;
 }
+
+/* 사이드바 관련 요소 */
+@media ( min-width : 0px) {
+	#page-wrapper {
+		flex-direction: column;
+		min-height: 500px;
+	}
+	
+	#sidebar-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		width: 100%;
+		height: 100%;
+		padding-top: 30px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		background-color: gray;
+	}
+	
+	.sidebar-nav {
+		position: relative;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+}
+
+@media ( min-width : 768px) {
+	#page-wrapper {
+		flex-direction: row;
+		padding-left: 200px;
+		min-height: 500px;
+	}
+	
+	#sidebar-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		width: 200px;
+		height: 100%;
+		margin-left: -200px;
+		padding-top: 30px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		background-color: gray;
+	}
+	.sidebar-nav {
+		position: fixed;
+		width: 250px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+}
+
+#page-content-wrapper {
+	width: 100%;
+	padding: 20px;
+}
+
+
+.sidebar-nav li {
+	text-indent: 1.5em;
+	line-height: 2.8em;
+}
+
+.sidebar-nav li a {
+	display: block;
+	text-decoration: none;
+	color: #fff;
+}
+
+.sidebar-nav li a:hover {
+	color: black;
+}
+
+.sidebar-nav>.sidebar-brand {
+	font-size: 1.3em;
+	line-height: 3em;
+}
+
 
 /*========footer 요소========*/
 .footer-logo {

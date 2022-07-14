@@ -3,6 +3,18 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout-main}">
 
+<!-- <head>
+	<script>
+		function toggleEdit(frm){
+		var frm = document.getElementById(frm);
+		alert('activated')
+			const inputs = frm.querySelectorAll(':scope > input');
+			for (var i = 0; i < inputs.length; i++) {
+				alert('i');
+			}
+		}
+	</script>
+</head> -->
 
 <!-- <body> -->
 <div layout:fragment="content">
@@ -17,59 +29,86 @@
 		<!-- 본문 -->
 		<div class="content" id="page-content-wrapper">
 			<div class="container-fluid">
-				<div class="text-large">사업장 관리 </div>
+				<div class="text-large">사업장 관리</div>
 				<hr>
-				<div class="text-20" th:text="카페1">카페</div>
+				<div class="text-23" th:text="카페1" style="text-decoration: underline;">카페 이름</div>
 				<br>
 				<!-- 등록 정보 영역 -->
 				<div class="text-20">
-					<b>등록 정보</b> <img class="edit-icon" src="/img/edit.png">
+					<b>등록 정보</b>
+					<button onclick="toggleEdit('cfFrm')">
+						<img class="edit-icon" src="/img/edit.png">
+					</button>
 				</div>
-				<form>
-					<table style="width: 30%">
+				<form id="cfFrm" action="" method="POST">
+					<table>
 						<tr>
 							<th>업체명</th>
-							<td th:text="|카페1|">카페</td>
+							<td><input id="cname" value="카페이름" type="text"
+								class="form-control" placeholder=""></td>
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td th:text="|서울특별시 강남구 봉은사로|">주소</td>
+							<td><input id="caddress" value="서울시 강남구" type="text"
+								class="form-control" placeholder=""></td>
 						</tr>
 						<tr>
 							<th>전화번호</th>
-							<td th:text="010-0000-0000">555 77 854</td>
+							<td><input id="cphone" value="010-0000-0000" type="text"
+								class="form-control" placeholder=""></td>
 						</tr>
-						<tr>
-							<th>가격대</th>
-							<td>만원대 미만</td>
-						</tr>
+
 						<tr>
 							<th>영업시간</th>
-							<td th:text="'14:00' + '~' + '21:00'">14:00 - 21:00</td>
+							<td>오픈 <input id="copen" value="" type="time"
+								class="form-control" placeholder=""> 마감 <input
+								id="copen" value="" type="time" class="form-control"
+								placeholder=""></td>
 						</tr>
 						<tr>
 							<th>주차 여부</th>
-							<td th:if="true" th:text="가능"></td>
-							<td th:if="false" th:text="불가"></td>
+							<td><input id="parkingY" class="form-check-input"
+								type="radio" name="parking"> <label
+								class="form-check-label" for="flexRadioDefault1"> 예 </label> <input
+								id="parkingN" class="form-check-input" type="radio"
+								name="parking"> <label class="form-check-label"
+								for="flexRadioDefault2"> 아니오 </label></td>
 						</tr>
 						<tr>
 							<th>애견 동반</th>
-							<td th:if="true" th:text="가능"></td>
-							<td th:if="false" th:text="불가"></td>
+							<td><input id="petY" class="form-check-input" type="radio"
+								name="pet"> <label class="form-check-label"
+								for="flexRadioDefault1"> 예 </label> <input id="petN"
+								class="form-check-input" type="radio" name="pet"> <label
+								class="form-check-label" for="flexRadioDefault2"> 아니오 </label></td>
 						</tr>
 						<tr>
 							<th>유아 동반</th>
-							<td th:if="true" th:text="가능"></td>
-							<td th:if="false" th:text="불가"></td>
+							<td><input id="kidY" class="form-check-input" type="radio"
+								name="kid"> <label class="form-check-label"
+								for="flexRadioDefault1"> 예 </label> <input id="kidN"
+								class="form-check-input" type="radio" name="kid"> <label
+								class="form-check-label" for="flexRadioDefault2"> 아니오 </label></td>
 						</tr>
+
+
 						<tr>
 							<th>총 좌석 수</th>
-							<td th:text="|좌석 수|">좌석 수</td>
+							<td><input id="number" value="00" type="text"
+								class="form-control" placeholder=""></td>
 						</tr>
 						<tr>
-							<th>5인이상 단체석</th>
-							<td th:if="true" th:text="있음"></td>
-							<td th:if="false" th:text="없음"></td>
+							<th>단체석(5인 이상)</th>
+							<td><input id="groupY" class="form-check-input" type="radio"
+								name="group"> <label class="form-check-label"
+								for="flexRadioDefault1"> 있음 </label> <input id="groupN"
+								class="form-check-input" type="radio" name="group"> <label
+								class="form-check-label" for="flexRadioDefault2"> 없음 </label></td>
+						</tr>
+						<tr>
+							<th>해시태그(최대 5개까지)</th>
+							<td><input id="ctag" value="#해시#태그" type="text"
+								class="form-control" placeholder=""></td>
 						</tr>
 					</table>
 				</form>
@@ -79,52 +118,90 @@
 				<div class="text-20">등록 이미지</div>
 				<div class="row">
 					<div class="col-md-3">
-						<div class="cf-img thumbnail" OnClick="location.href ='#'"
+						<div class="divBtn cf-img thumbnail" OnClick="location.href ='#'"
 							style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
 						</div>
 					</div>
 
 					<div class="col-md-3">
-						<div class="cf-img thumbnail" OnClick="location.href ='#'"
+						<div class="divBtn cf-img thumbnail" OnClick="location.href ='#'"
 							style="background-image: url('https://images.pexels.com/photos/7541175/pexels-photo-7541175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
 						</div>
 					</div>
+
 					<div class="col-md-3">
-						<div class="cf-img thumbnail" OnClick="location.href ='#'"
-							style="background-image: url('https://images.pexels.com/photos/7541176/pexels-photo-7541176.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load');">
+						<div class="divBtn cf-img hoverbox thumbnail"
+							OnClick="location.href ='#'"
+							style="background-image: url('/img/add-image.png');">
+							<div id="overlay5">
+								<div class="hoverbox-img-caption">새 이미지 추가</div>
+								<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
+							</div>
 						</div>
 					</div>
 				</div>
+
 				<hr>
-				
+
 				<!-- 등록 메뉴 영역 -->
 				<div class="d-flex flex-column" style="gap: 10px;">
-					<div class="text-20">등록 메뉴 <img class="edit-icon" src="/img/edit.png"></div> 
+					<div class="text-20">
+						등록 메뉴 <img class="edit-icon" src="/img/edit.png">
+					</div>
 					<div>
 						<b>전체 메뉴판</b>
 					</div>
-					<img src="/img/samplemenu.jpg" width="250"/>
+					<img onclick="location.href='#'" class="divBtn" src="/img/samplemenu.jpg" width="250" />
 
-					<form>
-						<div class="menulist-item">
-							<div class="d-flex" style="gap: 10px;">
-								<div>
-									<img src="/img/sample.jpg" alt="메뉴썸네일" width="150" />
-								</div>
-								<div>
+					<div>
+						<b>대표메뉴</b>
+					</div>
+
+					<th:block th:each="num : ${#numbers.sequence(1,3)}">
+
+						<form>
+							<div class="menulist-item">
+								<div class="d-flex" style="gap: 10px;">
 									<div>
-										메뉴명: <span th:text="|메뉴이름1|">메뉴이름</span>
+										<img onclick="location.href='#'" class="divBtn" src="/img/sample.jpg" alt="메뉴썸네일" width="150" />
 									</div>
-									<div>
-										메뉴가격: <span th:text="|메뉴가격|">메뉴가격</span>
-									</div>
-									<div>
-										메뉴설명: <span th:text="|메뉴설명을 작성하는 란입니다.|">메뉴설명</span>
-									</div>
+									<table>
+										<tr>
+											<th>메뉴명</th>
+											<td><input id="m_name" value="메뉴이름1" type="text"
+												class="form-control" placeholder=""></td>
+
+										</tr>
+
+										<tr>
+											<th>메뉴가격</th>
+											<td><input id="m_price" value="카페이름" type="number"
+												class="form-control" placeholder=""></td>
+										</tr>
+										<tr>
+											<th>메뉴설명</th>
+											<td><input id="m_detail" value="메뉴설명을 기입하는 란입니다."
+												type="text" class="form-control" placeholder=""></td>
+										</tr>
+									</table>
+									<button>
+										<img class="icon-20" src="/img/edit.png">
+									</button>
+									<button>
+										<img class="icon-20" src="/img/x.png">
+									</button>
+
+
+
+
 								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+
+					</th:block>
+					<div onclick="location.href='#'" class="divBtn hoverbox" style="width:150px; height: 100px;">
+						<img class="icon-30" src="/img/circle-plus.png">
+					</div>
 				</div>
 				<hr>
 
@@ -144,6 +221,8 @@
 
 		</div>
 	</div>
+
+
 
 </div>
 
