@@ -13,12 +13,14 @@
 <link rel="stylesheet" th:href="@{/css/layout.css}">
 <link rel="stylesheet" th:href="@{/css/cafe.css}">
 <link rel="stylesheet" th:href="@{/css/content.css}">
+<link rel="stylesheet" th:href="@{/css/biz.css}">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!--kakaomap api javascript-->
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=690f1466b1db83245b4a29ca995ae063&libraries=services"></script>
 </head>
-<body> 
-	<div th:replace="${#httpServletRequest.requestURI}=='/' ? ~{fragments/header:: header-title} : _"></div>
+<body>
+	<div
+		th:replace="${#httpServletRequest.requestURI}=='/' ? ~{fragments/header:: header-title} : _"></div>
 	<div th:replace="fragments/header:: header-navbar"></div>
 	<div th:replace="${#httpServletRequest.requestURI}!='/' ? ~{fragments/header:: header-sub} : _"></div>
 
@@ -27,9 +29,9 @@
 
 	<!-- 비동기처리 -->
 	<script src="/js/member.js" async></script>
-	
+
 	<!--cafe/*xml-->
 	<script th:src="@{/js/cafe.js}"></script>
-	
+
 </body>
 </html>

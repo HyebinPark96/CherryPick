@@ -1,4 +1,10 @@
 
+.ffffaaa{
+	display: flex;
+	justify-content: center;
+}
+
+
 .text-large{
 	 font-size: 25px;
 	 font-weight: bold;
