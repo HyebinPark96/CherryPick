@@ -127,7 +127,7 @@ public class BizMemberApiController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 
-		return "/";
+		return "redirect:/";
 	}
 
 	@PostMapping(value = "/bizMember/myPage")
