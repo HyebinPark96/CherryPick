@@ -3,12 +3,17 @@
 	layout:decorate="~{/layout/layout-main}">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>CherryPick</title>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
+<script th:inline="javascript">
+function findId(variable) {
+        location.href = `/cafe/list/${variable}`;
+    }
+</script>
+<!-- <title>CherryPick</title> -->
 </head>
 
 
-<body>
+<!-- <body> -->
 	<div layout:fragment="content">
 		<header>
 			<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -130,7 +135,7 @@
 			</div>
 		</main>
 	</div>
-</body>
+<!-- </body> -->
 </html>
 
 

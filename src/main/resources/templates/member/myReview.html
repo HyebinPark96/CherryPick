@@ -27,23 +27,32 @@
 
 		<div class="container">
 
-			<th:block th:each="myReviewList : ${myReviewList}">
+			<th:block> <!-- th:each="myReviewList : ${myReviewList}" -->
+			<h3></h3> <!-- th:text="${myReviewList}" -->
 				<div class="myreview-item">
 
 					<div class="">
-						<div>
-							<span style="font-size: 25px; font-weight: bold;"><label>카페 이름</label></span> 
-							<span class=""><label th:text="${myReviewList.score}"></label></span><br> 
-							<span style="color: gray;"><label th:text="${myReviewList.caddress}">카페 주소</label></span>
+						<div> <!-- th:each="CafeVO, iter:${myReviewList.CafeVO}" -->
+							<span style="font-size: 25px; font-weight: bold;">
+								<label>카페 이름</label> <!-- th:text="${CafeVO.cname}" -->
+							</span> 
+							<span class="">
+								<label>리뷰 점수</label> <!-- th:text="${myReviewList.score}" -->
+							</span><br> 
+							<span style="color: gray;"> <!-- th:each="CafeVO, iter:${myReviewList.CafeVO}" -->
+								<label>카페 주소</label> <!-- th:text="${CafeVO.caddress}" -->
+							</span>
 						</div>
 						<br>
 						<div>
-							<div style="color: gray;" th:text="${myReviewList.date}">작성 날짜</div>
+							<div style="color: gray;">작성 날짜</div><!--  th:text="${myReviewList.date}" -->
 							<div>
-								<b>나의 별점 : <label th:text="${myReviewList.score}"></label></b>
+								<b>
+									나의 별점 : <label></label> <!-- th:text="${myReviewList.score}" -->
+								</b>
 							</div>
 							<div>
-								<label th:text="${myReviewList.content}"></label>
+								<label></label> <!-- th:text="${myReviewList.content}" -->
 							</div>
 							<div>
 								<b>(heart) : 0</b>

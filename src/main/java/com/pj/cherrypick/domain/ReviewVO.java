@@ -1,5 +1,8 @@
 package com.pj.cherrypick.domain;
 
+import java.util.List;
+import java.util.Map;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +22,6 @@ public class ReviewVO {
 	private String content;
 	private double score;
 	private int waiting;
+	private List<Map<String, String>> CafeVO;
+	private List<Map<String, String>> MemberVO;
 }

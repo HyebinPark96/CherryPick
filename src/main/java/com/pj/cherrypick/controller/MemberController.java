@@ -97,22 +97,22 @@ public class MemberController {
 		return "member/checkPwdForEdit"; // /WEB-INF/views/templates/member/checkPwdForEdit
 	}
 	
-	@GetMapping("/error/403")
-	// http://localhost/error/403
-	public String ForbiddenErrorPage() {
-		return "error/403"; // /WEB-INF/views/templates/error/403
-	}
-	
-	@GetMapping("/error/404")
-	// http://localhost/error/403
-	public String notFoundErrorPage() {
-		return "error/404"; // /WEB-INF/views/templates/error/404
-	}
-	
-	@GetMapping("/error/500")
-	// http://localhost/error/500
-	public String internalServerErrorPage() {
-		return "error/500"; // /WEB-INF/views/templates/error/500
-	}
+//	@GetMapping("/error/403")
+//	// http://localhost/error/403
+//	public String ForbiddenErrorPage() {
+//		return "error/403"; // /WEB-INF/views/templates/error/403
+//	}
+//	
+//	@GetMapping("/error/404")
+//	// http://localhost/error/403
+//	public String notFoundErrorPage() {
+//		return "error/404"; // /WEB-INF/views/templates/error/404
+//	}
+//	
+//	@GetMapping("/error/500")
+//	// http://localhost/error/500
+//	public String internalServerErrorPage() {
+//		return "error/500"; // /WEB-INF/views/templates/error/500
+//	}
 
 }

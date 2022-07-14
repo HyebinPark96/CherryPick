@@ -1,6 +1,7 @@
 package com.pj.cherrypick.controller.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -106,8 +107,7 @@ public class MemberApiController {
 	@PostMapping("/member/myReview")
 	// http://localhost/member/myReview
 	public String myReview(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
-		List<ReviewVO> myReviewList = memberService.getMyReviewList(principalDetail.getUsername()); // 작성자 id로  리뷰 찾기
-		model.addAttribute("myReviewList", myReviewList);
+		model.addAttribute("myReviewList", memberService.getMyReviewList(principalDetail.getUsername()));
 		return "member/myReview"; // /WEB-INF/views/templates/member/myReview
 	}
 	
