@@ -1,6 +1,5 @@
 <!-- REST API 관점에서 바라보는 HTTP 상태 코드 -->
-<!-- 해당 페이지는 403 Forbidden 상태 : 클라이언트가 권한이 없기 때문에 작업을 진행할 수 없는 경우 
-출처: https://sanghaklee.tistory.com/61 [이상학의 개발블로그:티스토리] -->
+<!-- 해당 페이지는 404 Not Found 상태 : 클라이언트가 서버와 통신할 수는 있지만 서버가 요청한 바를 찾을 수 없다는 것을 가리키는 HTTP 표준 응답 코드-->
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout-main}">
@@ -15,7 +14,7 @@
 		<div style="text-align: center;">
 			<img src="/img/404.png">
 			<div>
-				<b>접근 권한이 없습니다.</b>
+				<b>요청한 페이지를 찾을 수 없습니다.</b>
 			</div>
 			<button class="cherrybtn" type="button" onclick="location.href = '/'">홈으로 돌아가기</button>
 		</div>

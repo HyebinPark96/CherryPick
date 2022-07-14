@@ -80,7 +80,7 @@
 
 	
 	<select id="getMyReviewList" resultMap="ReviewVO">
-		SELECT c.caddress
+		SELECT r.*, c.*, m.*
 		FROM review r
 		LEFT JOIN cafe c
 		ON r.cno = c.cno

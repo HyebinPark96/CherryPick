@@ -6,7 +6,11 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-  
+  error:
+    path: /error
+    whitelabel:
+      enabled: false
+          
 spring: 
   thymeleaf:
     prefix: classpath:/templates/
