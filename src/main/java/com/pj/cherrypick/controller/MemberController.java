@@ -62,26 +62,26 @@ public class MemberController {
 //		return "member/myPage"; // /WEB-INF/views/templates/member/myPage
 //	}
 	
-	@GetMapping("/admin/adminMain")
-	//  http://localhost/admin/adminMain
-	public String adminMain(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/, Model model) {
-		try {
-			// 관리자가 로그인하면 헤더에 있는 adminMain 카테고리로 접근 가능하지만,
-			// 회원이 url로 접근할 수 있으므로, 이를 방지하기 위해 멤버인지 관리자인지 체크하는 서비스 필요
-			if(memberService.checkMemberOrAdmin(principalDetail.getUsername())==0) { // role=0 : 관리자
-				// 회원이라 접근권한 없을 경우
-				return "error/403"; // /WEB-INF/views/templates/error/403
-			};
-			List<MemberVO> mList = memberService.getMList();
-			model.addAttribute("mList", mList); // model 을 들고 view 까지 이동
-		} catch (Exception e) {
-			if(principalDetail==null) {
-				// 비회원일 경우
-				return "redirect:/loginForm"; // /WEB-INF/views/templates/loginForm
-			}
-		}
-		return "admin/adminMain";
-	}
+//	@GetMapping("/admin/adminMain")
+//	//  http://localhost/admin/adminMain
+//	public String adminMain(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/, Model model) {
+//		try {
+//			// 관리자가 로그인하면 헤더에 있는 adminMain 카테고리로 접근 가능하지만,
+//			// 회원이 url로 접근할 수 있으므로, 이를 방지하기 위해 멤버인지 관리자인지 체크하는 서비스 필요
+//			if(memberService.checkMemberOrAdmin(principalDetail.getUsername())==0) { // role=0 : 관리자
+//				// 회원이라 접근권한 없을 경우
+//				return "error/403"; // /WEB-INF/views/templates/error/403
+//			};
+//			List<MemberVO> mList = memberService.getMList();
+//			model.addAttribute("mList", mList); // model 을 들고 view 까지 이동
+//		} catch (Exception e) {
+//			if(principalDetail==null) {
+//				// 비회원일 경우
+//				return "redirect:/loginForm"; // /WEB-INF/views/templates/loginForm
+//			}
+//		}
+//		return "admin/adminMain";
+//	}
 	
 	@GetMapping("/member/memberEditForm")
 	// http://localhost/member/memberEditForm

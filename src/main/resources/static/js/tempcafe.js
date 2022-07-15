@@ -9,7 +9,7 @@ let cindex = {
 
 	register: function() {
 		
-		alert('2kooong2');
+		alert('카페 등록을 실행합니다.');
 
 		/*
 		let cname = $("#cname").val();

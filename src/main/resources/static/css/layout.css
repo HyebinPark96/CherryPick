@@ -1,32 +1,29 @@
-
-.text-large{
-	 font-size: 25px;
-	 font-weight: bold;
+.text-large {
+	font-size: 25px;
+	font-weight: bold;
 }
 
-.text-23{
-	 font-size: 23px;
-	 font-weight: bold;
+.text-23 {
+	font-size: 23px;
+	font-weight: bold;
 }
 
-.text-20{
-	 font-size: 20px;
-	 font-weight: bold;
+.text-20 {
+	font-size: 20px;
+	font-weight: bold;
 }
 
-a{
+a {
 	text-decoration: none;
 }
 
-a:hover{
-	text-decoration: underline;	
+a:hover {
+	text-decoration: underline;
 }
 
 a, a:visited, a:hover, a:active {
-  color: inherit;
+	color: inherit;
 }
-
-
 
 button {
 	background-color: transparent;
@@ -45,7 +42,7 @@ textarea:focus, input:focus {
 	margin-top: 20px;
 }
 
-.content-top{
+.content-top {
 	padding-left: 10px;
 }
 
@@ -55,12 +52,11 @@ textarea:focus, input:focus {
 }
 
 /*========아이콘========*/
-
-.icon-20{
+.icon-20 {
 	width: 20px;
 }
 
-.icon-30{
+.icon-30 {
 	width: 30px;
 }
 
@@ -72,26 +68,24 @@ textarea:focus, input:focus {
 	width: 20px;
 }
 
-.check-icon{
+.check-icon {
 	width: 20px;
 }
 
-.heart-icon{
+.heart-icon {
 	width: 20px;
 }
 
-.clock-icon{
+.clock-icon {
 	width: 30px;
 }
 
 /*구분선*/
- .hr-dotted {
-  border:none;
-  border-top:2px dotted #ddd; 
-  height:1px;
+.hr-dotted {
+	border: none;
+	border-top: 2px dotted #ddd;
+	height: 1px;
 }
-
-
 
 /*========박스========*/
 .divBtn {
@@ -155,7 +149,6 @@ textarea:focus, input:focus {
 	transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-
 .hoverbox:hover #overlay5 {
 	opacity: 1;
 }
@@ -164,7 +157,6 @@ textarea:focus, input:focus {
 	opacity: 1;
 	transform: scale(1);
 }
-
 
 /*========header-title 요소========*/
 .title {
@@ -264,15 +256,15 @@ textarea:focus, input:focus {
 	padding: 20px;
 }
 
-.title-top-right{
+.title-top-right {
 	display: flex;
 }
 
-.title-top-right *{
+.title-top-right * {
 	color: white;
 }
 
-.title-top-right * :hover{
+.title-top-right * :hover {
 	text-decoration: underline;
 }
 
@@ -305,40 +297,41 @@ textarea:focus, input:focus {
 }
 
 /* 사이드바 관련 요소 */
+#sidebar-wrapper * {
+	color: white;
+	}
+
 @media ( min-width : 0px) {
+	/*=====모바일 뷰포트====*/
 	#page-wrapper {
 		flex-direction: column;
 		min-height: 500px;
 	}
 	
-	#sidebar-wrapper {
+	#sidebar-contents {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		gap: 30px;
+
+	}
+	
+	#sidebar-wrapper {
 		width: 100%;
 		height: 100%;
 		padding-top: 30px;
-		overflow-x: hidden;
-		overflow-y: auto;
+		padding-left: 10px;
+		padding-right: 10px;
 		background-color: gray;
-	}
-	
-	.sidebar-nav {
-		position: relative;
-		width: 100%;
-		margin: 0;
-		padding: 0;
-		list-style: none;
 	}
 }
 
 @media ( min-width : 768px) {
+	/*=====데스크톱 뷰포트====*/
 	#page-wrapper {
 		flex-direction: row;
 		padding-left: 200px;
 		min-height: 500px;
 	}
-	
 	#sidebar-wrapper {
 		display: flex;
 		flex-direction: column;
@@ -346,17 +339,14 @@ textarea:focus, input:focus {
 		width: 200px;
 		height: 100%;
 		margin-left: -200px;
-		padding-top: 30px;
-		overflow-x: hidden;
-		overflow-y: auto;
-		background-color: gray;
 	}
-	.sidebar-nav {
+	
+	
+	#sidebar-contents {
 		position: fixed;
-		width: 250px;
-		margin: 0;
-		padding: 0;
-		list-style: none;
+		top: 30;
+		flex-direction: column;
+		gap: 30px;
 	}
 }
 
@@ -364,8 +354,7 @@ textarea:focus, input:focus {
 	width: 100%;
 	padding: 20px;
 }
-
-
+/* 
 .sidebar-nav li {
 	text-indent: 1.5em;
 	line-height: 2.8em;
@@ -385,8 +374,7 @@ textarea:focus, input:focus {
 	font-size: 1.3em;
 	line-height: 3em;
 }
-
-
+ */
 /*========footer 요소========*/
 .footer-logo {
 	width: 150px;

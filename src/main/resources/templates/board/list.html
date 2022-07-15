@@ -3,23 +3,33 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시물 목록</title>
 </head>
 <body>
 
+	<header th:replace="fragments/nav :: navFragment"></header>
+
 	<table>
 		<thead>
-			<tr th:each="list : ${list}">
-				<th th:text="${list.bno}">번호</th>
-				<th th:text="${list.title}">제목</th>
-				<th th:text="${list.regDate}">작성일</th>
-				<th th:text="${list.writer}">작성자<th>
-				<th th:text="${list.viewCnt}">조회수</th>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성일</th>
+				<th>작성자<th>
+				<th>조회수</th>
 			</tr>
 		</thead>
 		
 		<tbody>
-		
+			<tr th:each="list : ${list}">
+				<td th:text="${list.bno}"></td>
+				<td>
+					<a th:href="@{view(bno=${list.bno})}" th:text="${list.title}"></a>
+				</td>
+				<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd')}"></td>
+				<td th:text="${list.writer}"><td>
+				<td th:text="${list.viewCnt}"></td>
+			</tr>
 		</tbody>
 		
 	</table>

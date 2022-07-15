@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>게시물 조회</title>
+</head>
+<body>
+
+	<header th:replace="fragments/nav :: navFragment"></header>
+	
+		<form method="POST">
+	
+			<label>제목</label>
+			<label th:text="${view.title}"></label><br />
+			
+			<label>작성자</label>
+			<label th:text="${view.writer}"></label><br />
+			
+			<label>내용</label>
+			<label th:text="${view.content}"></label><br />
+			
+			<div>
+				<a th:href="@{modify(bno=${view.bno})}">게시물 수정</a>
+				<a th:href="@{delete(bno=${view.bno})}">게시물 삭제</a>
+			</div>
+		
+			<!-- <button type="submit">작성</button> -->
+		
+	</form>
+
+</body>
+</html>

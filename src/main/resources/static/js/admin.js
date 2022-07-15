@@ -1,7 +1,7 @@
 let index = {
 	init: function() {
 	
-		/* 관리자 */
+		/* 관리자 
 		
 		$('#member').attr("checked", () => {
 			this.member();
@@ -14,6 +14,7 @@ let index = {
 		$('#biz').on("click", () => {
 			this.biz();
 		});
+		*/
 	
 	},
 
