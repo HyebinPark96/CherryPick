@@ -159,5 +159,11 @@ public class MemberService {
 		return reviewMapper.getMyReviewList(username);
 	}
 	
+	@Transactional
+	// 관리자의 회원관리 기능 중 회원목록 페이징처리
+	public List<MemberVO> getMListForPaging(int start, int end) {
+		return memberMapper.getMListForPaging(start, end);
+	}
+	
 	
 }
