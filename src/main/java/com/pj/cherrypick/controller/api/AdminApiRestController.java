@@ -26,7 +26,7 @@ public class AdminApiRestController {
 	public List<MemberVO> memberManagement(@RequestBody HashMap<String, String> sort) { // JSON 데이터 받으므로 @RequestBody 사용
 		if(sort.get("sort").equals("member")) {
 			if(memberService.getMList() != null || memberService.getMList().size() > 0) {
-				List<MemberVO> memberList = memberService.getMList();
+				List<MemberVO> memberList = memberService.getMListForPaging(0,5);
 				return memberList;
 			}
 		}
