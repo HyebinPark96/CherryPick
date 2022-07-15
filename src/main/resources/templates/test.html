@@ -4,6 +4,83 @@
 <head>
 <title></title>
 <meta http-equiv="Content-Type"  content="text/html; charset=UTF-8"  />
+
+<style>
+
+
+.hoverbox {
+	border: 5px dotted gray;
+	box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.1);
+	color: white;
+	display: inline-block;
+	text-align:center;
+	height: 250px;
+	margin: 4em;
+	overflow: hidden;
+	position: relative;
+	width: 400px;
+}
+
+.hoverbox-img {
+	width: auto;
+	height: 100%;
+}
+
+.hoverbox-img-caption {
+	font-weight: 300;
+	font-size: 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.hoverbox-img-caption, .hoverbox-img-icon {
+	margin: 0;
+}
+
+#overlay5 {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: rgba(0, 0, 0, 0.85);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: auto;
+	bottom: 0;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+#overlay8 {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: rgba(0, 0, 0, 0.85);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: auto;
+	bottom: 0;
+	opacity: 0;
+	transform: scale(0);
+	transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.hoverbox:hover #overlay5 {
+	opacity: 1;
+}
+
+.hoverbox:hover #overlay8 {
+	opacity: 1;
+	transform: scale(1);
+}
+</style>
+
 <script type="text/javascript">
 	var bDisplay = true;
 	function doDisplay() {
@@ -36,6 +113,25 @@
 	<div>시도 목록</div>
 	<a
 		href="https://www.phpkida.com/css-star-rating-example-free-download/">[1]</a>
+
+
+	<div class="hoverbox">
+		<img class="hoverbox-img"
+			src="https://static1.squarespace.com/static/55ac6d80e4b0a964784b2f80/t/5703eb2e746fb98cc2510ebd/1459874606989/PsZyN43.png" />
+		<div id="overlay5">
+			<div class="hoverbox-img-caption"><img src="/img/circle-plus.png" width="50px"></div>
+			<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
+		</div>
+	</div>
+	
+	<div class="hoverbox">
+		<img class="hoverbox-img"
+			src="/img/add-image.png" />
+		<div id="overlay5">
+			<div class="hoverbox-img-caption">새 이미지 추가</div>
+			<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
+		</div>
+	</div>
 
 </body>
 
