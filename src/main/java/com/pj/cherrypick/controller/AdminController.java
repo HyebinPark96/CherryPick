@@ -22,10 +22,11 @@ public class AdminController {
 	/*1. 일반회원*/
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/admin/adminMain", method = RequestMethod.GET)
-	public void getListPage(Model model, @RequestParam(value = "num", required = false) int num) throws Exception{ // num : 페이지 번호
+	public void getListPage(Model model, @RequestParam("num") int num) throws Exception{ // num : 페이지 번호
 		Page page = new Page();
 		
 		page.setNum(num);
+		System.out.println(num);
 		page.setCount(adminService.count());  
 
 		List<MemberVO> list = null; 

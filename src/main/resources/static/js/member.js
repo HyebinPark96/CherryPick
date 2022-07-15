@@ -1,7 +1,6 @@
 let index = {
 	init: function() {
-		/*
-		회원
+		/*회원*/
 		$("#saveBtn").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
 			this.save(); // save 함수 호출
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
@@ -15,7 +14,7 @@ let index = {
 		});
 		
 		
-		사업자
+		/*사업자*/
 		$("#bSaveBtn").on("click", () => {
 			this.bSave();
 		});
@@ -27,7 +26,7 @@ let index = {
 		$("#updateBMemberBtn").on("click", () => {
 			this.updateBMember();
 		});
-		*/
+		
 	},
 
 	/* 회원 */
