@@ -30,6 +30,13 @@ public class SampleController {
 		return "test";
 	}
 	
+	
+	@GetMapping(value = "/test2")
+	public String test2(Model model) {
+		
+		return "test2";
+	}
+	
 } 
 
 

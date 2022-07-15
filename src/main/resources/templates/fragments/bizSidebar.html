@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<head>
+<script>
+	stickybits('#sidebar-contents');
+</script>
+</head>
+
 <div th:fragment="sidebar">
 	<!-- 사이드바 -->
 	<div id="sidebar-wrapper">
-		<div>bizname님</div>
-		<hr>
-
-		<form th:action="@{/bizMember/storeManagement}" method="post">
-			<button type="submit">사업장 관리</button>
-		</form>
-		<form th:action="@{/bizMember/storeRegister}" method="post">
-			<button type="submit">신규 사업장 등록</button>
-		</form>
+		<div id="sidebar-contents">
+			<div>
+				<b>bizname님</b>
+				<hr>
+			</div>
+			<form th:action="@{/bizMember/storeManagement}" method="post">
+				<button type="submit">사업장 관리</button>
+			</form>
+			<form th:action="@{/bizMember/storeRegister}" method="post">
+				<button type="submit">신규 사업장 등록</button>
+			</form>
+		</div>
 	</div>
 	<!-- /사이드바 -->
+
+
 
 </div>
 </html>
