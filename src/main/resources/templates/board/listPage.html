@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>게시물 목록</title>
+</head>
+<body>
+
+	<header th:replace="fragments/nav :: navFragment"></header>
+
+	<table>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성일</th>
+				<th>작성자<th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="list : ${list}">
+				<td th:text="${list.bno}"></td>
+				<td>
+					<a th:href="@{view(bno=${list.bno})}" th:text="${list.title}"></a>
+				</td>
+				<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd')}"></td>
+				<td th:text="${list.writer}"><td>
+				<td th:text="${list.viewCnt}"></td>
+			</tr>
+		</tbody>
+		
+	</table>
+	
+	<div>
+	<!-- 10개씩 페이징이 아닌 전체 페이징되어 나오는 코드 -->
+<!-- 		<th:block th:each="num : ${#numbers.sequence(1, pageNum)}"> ${pageNum}이 아닌 pageNum으로 사용해야 에러 안남
+			<span>
+				<a th:href="@{listPage(num=${num})}" th:text="${num}"></a>
+			</span>
+		</th:block> -->
+		
+		<th:block th:if="${page.prev}">
+			<span>[ <a th:href="@{listPage(num=${page.startPageNum - 1})}">이전</a> ]</span>
+		</th:block>
+		
+		<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
+			<span th:if="${select!=num}">
+				<a th:href="@{listPage(num=${num})}" th:text="${num}"></a>
+			</span>
+			<span th:unless="${select!=num}">
+				<b th:text="${num}"></b>
+			</span>
+		</th:block>
+		
+		<th:block th:if="${page.next}">
+			<span>[ <a th:href="@{listPage(num=${page.endPageNum + 1})}">다음</a> ]</span>
+		</th:block>
+		
+		
+		
+	</div>
+	
+</body>
+</html>

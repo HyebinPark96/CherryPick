@@ -8,4 +8,47 @@
 		SELECT bno, title, content, writer, regDate, viewCnt
 		FROM cherrypick.tbl_board
 	</select>
+	
+	<!-- 게시물 작성 -->
+	<insert id="write" parameterType="com.pj.cherrypick.domain.BoardVO">
+		INSERT INTO tbl_board(title, content, writer)
+		VALUES(#{title}, #{content}, #{writer})
+	</insert>
+	
+	<!-- 게시물 조회 -->
+	<select id="view" parameterType="int" resultType="com.pj.cherrypick.domain.BoardVO">
+		SELECT bno, title, content, writer, regDate, viewCnt
+		FROM cherrypick.tbl_board
+		WHERE bno = #{bno}
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="modify" parameterType="com.pj.cherrypick.domain.BoardVO">
+		UPDATE tbl_board
+		SET title = #{title},
+				content = #{content},
+				writer = #{writer}
+		WHERE bno = #{bno}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM tbl_board
+		WHERE bno = #{bno}
+	</delete>
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="count" resultType="int">
+		SELECT COUNT(bno)
+		FROM tbl_board
+	</select>
+	
+	<!-- 게시물 목록 + 페이징 : 게시물을 10개씩 출력-->
+	<select id="listPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BoardVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT bno, title, content, writer, regDate, viewCnt
+		FROM tbl_board
+		ORDER BY bno DESC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
 </mapper>
