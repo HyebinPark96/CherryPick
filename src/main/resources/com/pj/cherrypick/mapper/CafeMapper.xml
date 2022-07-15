@@ -64,4 +64,34 @@
 		GROUP BY c.cno
 		ORDER BY avg DESC
 	</select>
+	<!-- 내가 북마크한 카페 리스트 (myPage) -->
+ 	<select id="getMyCafeBmk" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+ 		SELECT *
+ 		FROM cafe c
+ 		LEFT JOIN review r 
+ 		ON c.cno = r.cno
+ 		LEFT JOIN bmk_cafe b
+ 		ON c.cno = b.cno
+ 		LEFT JOIN member m
+ 		ON m.username = b.username
+ 		WHERE m.username = #{username}
+ 		GROUP BY c.cno
+    </select> 	
+    <!-- 내가 북마크한 리스트 (myPage) -->
+ 	<select id="getMyListBmk" parameterType="com.pj.cherrypick.domain.ListVO" resultType="com.pj.cherrypick.domain.ListVO">
+		SELECT *
+		FROM bmk_list b
+		LEFT JOIN member m
+		ON b.username = m.username
+		LEFT JOIN list l
+		ON l.lino = b.lino
+		LEFT JOIN cafe c
+		ON c.cno = l.li_cafe1
+		OR cno = li_cafe2 
+		OR cno = li_cafe3 
+		OR cno = li_cafe4 
+		OR cno = li_cafe5
+		WHERE b.username = #{username}
+		GROUP BY l.liname
+    </select> 
 </mapper>

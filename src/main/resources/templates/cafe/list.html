@@ -15,10 +15,11 @@
 	<div class="content container" layout:fragment="content">
 
 		<div class="item">
-			<div class="cflist-label">
+			<div class="cflist-label2">
+				<div>
 				<span style="font-size: 12px; color: #bbb;"> 조회수 000,000회 |
-					등록일 0000-00-00 </span><br>
-				리스트 이름: <span th:text="${list.liname}">liname</span><br>
+					등록일 0000-00-00 </span></div>  
+				리스트 이름: <b th:text="${list.liname}">liname</b><br>
 				<span th:text="${list.username}">username</span>님이 만든
 				이 리스트를 <span>n</span>명이 담았습니다.
 			</div>

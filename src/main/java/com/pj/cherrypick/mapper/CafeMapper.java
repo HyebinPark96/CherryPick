@@ -46,4 +46,10 @@ public interface CafeMapper {
 	// 특정카페(cno) 리뷰 전체리스트로 불러오기
 	List<ReviewVO> getReview(int cno);
 	
+	// 내(username)가 북마크한 카페 리스트 불러오기
+	List<CafeVO> getMyCafeBmk(String username);
+	
+	// 내(username)가 북마크한 리스트 불러오기
+	List<ListVO> getMyListBmk(String username);
+	
 }

@@ -1,10 +1,12 @@
 
 // 정렬값 보내기
-function sort() {
+/* function sort() {
 	
 	// selected sort 값 가져오기
 	var sort = $("#sort").val();
-	alert(sort);
+	
+	
+	}
 	
 	$.ajax( {
 		url: "all",
@@ -16,8 +18,8 @@ function sort() {
 		error : function() {
 			alert("에러")
 		}
-	})
-}
+	}) */
+
 
 
 // cno -> cafe/cno (카페개별페이지) 보내기
