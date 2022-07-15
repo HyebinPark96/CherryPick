@@ -63,7 +63,7 @@
 								<td>
 									<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
 								</td>
-								<td th:text="${listStat.count}"></td>
+								<td th:text="${listStat.count + (page.num*10) - 10}"></td>
 								<td th:text="${list.username}"></td>
 								<td th:text="${list.name}">random</td>
 								<td th:text="${list.phone}">data</td>
