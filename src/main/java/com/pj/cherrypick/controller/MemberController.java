@@ -56,11 +56,11 @@ public class MemberController {
 		return "member/findPasswordForm"; // /WEB-INF/views/templates/member/findPwdForm
 	}
 	
-	@GetMapping("/member/myPage")
+//	@GetMapping("/member/myPage")
 	// http://localhost/member/myPage
-	public String myPage() {
-		return "member/myPage"; // /WEB-INF/views/templates/member/myPage
-	}
+//	public String myPage() {
+//		return "member/myPage"; // /WEB-INF/views/templates/member/myPage
+//	}
 	
 	@GetMapping("/admin/adminMain")
 	//  http://localhost/admin/adminMain

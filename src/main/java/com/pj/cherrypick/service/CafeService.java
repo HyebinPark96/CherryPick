@@ -19,7 +19,6 @@ public class CafeService {
 	
 	public List<CafeVO> getCafeAllByScore() {
 		return cafeMapper.getCafeAllByScore();
-		
 	}
 
 	public List<CafeVO> getCafeAll() {
@@ -50,18 +49,13 @@ public class CafeService {
 		return cafeMapper.getReview(cno);
 	}
 	
-	public int createCafe(CafeVO cafe) {
-		return cafeMapper.createCafe(cafe);
+	public List<CafeVO> getMyCafeBmk(String username) {
+		return cafeMapper.getMyCafeBmk(username);
 	}
 	
-	public int updateCafe(CafeVO cafe) {
-		return cafeMapper.updateCafe(cafe);
+	public List<ListVO> getMyListBmk(String username) {
+		return cafeMapper.getMyListBmk(username);
 	}
-	
-	public int deleteCafe(int cno) {
-		return cafeMapper.deleteCafe(cno);
-	}
-	
 	
 
 	

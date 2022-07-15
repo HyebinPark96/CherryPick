@@ -9,9 +9,6 @@ import com.pj.cherrypick.domain.CafeVO;
 @Mapper //class 말고 인터페이스 쓰기
 public interface TempCafeMapper {
 	
-
-	
-	void createCafe(CafeVO cafe);
-	
+	int createCafe(CafeVO cafe);
 	
 }
