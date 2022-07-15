@@ -1,6 +1,8 @@
 package com.pj.cherrypick.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,6 +16,7 @@ import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.domain.ReviewVO;
+import com.pj.cherrypick.service.BookmarkService;
 import com.pj.cherrypick.service.CafeService;
 
 @Controller
@@ -21,23 +24,29 @@ public class CafeController {
 
 	@Autowired
 	private CafeService cafeService;
+	@Autowired
+	private BookmarkService bookmarkService;
 
 	// 전체 카페목록
 
 
-	@GetMapping("cafe/all")
-	public String getCafeAll(@PathVariable(required = false) String sort, Model model) {
+	@GetMapping("/cafe/all")
+	public String getCafeAll(Model model) {
+	
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", "aaa"); //값 추가
+		map.put("cno", 2);
+	//	String username = "aaa";
+	//	int cno = 3;
+		List<CafeVO> cafes = cafeService.getCafeAll();
+		Boolean bmkc = bookmarkService.checkBmkc(map);
+		model.addAttribute("cafes", cafes);
+		model.addAttribute("bmkc", bmkc);
+		System.out.println("map:"+map);
+		System.out.println("bmkc:"+ bookmarkService.checkBmkc(map));
+		System.out.println("model:"+model);
 
-		if (sort == "0" || sort == null || sort.equals(null)) {
-			sort = "0";
-			List<CafeVO> cafes = cafeService.getCafeAll();
-			model.addAttribute("cafes", cafes);
-		} else {
-			List<CafeVO> cafes = cafeService.getCafeAllByScore();
-			model.addAttribute("cafes", cafes);
-		}
-		System.out.println(sort);
-		return "cafe/all";
+		return "/cafe/all";
 	}
 
 	// 카페리스트 (전체카페X lino로 리스트 불러오기)

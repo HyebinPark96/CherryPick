@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.pj.cherrypick.mapper.BookmarkMapper" >
+
+	<!-- username으로 카페 북마크 여부 확인-->
+ 	<select id="checkBmkc" parameterType="hashmap" resultType="boolean">
+		SELECT *
+		FROM bmk_cafe b
+		LEFT JOIN member m
+		ON b.username = m.username
+		LEFT JOIN cafe c
+		ON b.cno = c.cno
+		WHERE b.username= #{username} AND b.cno = #{cno}
+    </select> 
+	<!-- username으로 리스트 북마크 여부 확인-->
+ 	<select id="checkBmkli" parameterType="hashmap" resultType="boolean">
+		SELECT IF(COUNT(*) = 1, true, false)
+		FROM bmk_list b
+		LEFT JOIN member m
+		ON b.username = m.username
+		LEFT JOIN cafe c
+		ON b.cno = c.cno
+		WHERE b.username= #{username} AND b.cno=#{cno} 
+    </select> 
+
+
+</mapper>

@@ -13,15 +13,7 @@ import com.pj.cherrypick.domain.ReviewVO;
 @Repository("com.pj.cherrypick.mapper.CafeMapper")
 @Mapper //class 말고 인터페이스 쓰기
 public interface CafeMapper {
-	
-
-	
-	int createCafe(CafeVO cafe);
-	
-	int updateCafe(CafeVO cafe);
-	
-	int deleteCafe(int cno);
-	
+			
 	// 특정카페(cno) 상세정보 불러오기
 	CafeVO getCafeInfo(int cno);
 	
