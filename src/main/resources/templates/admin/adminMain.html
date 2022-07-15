@@ -59,27 +59,30 @@
 					</thead>
 					<tbody id="htmls">
 
-<!-- 						<tr th:each="mList, index : ${mList}">
-							<td><input class="form-check-input mt-0" name="memChk"
-								type="checkbox" value=""></td>
-							<td th:text="${index.index + 1}"></td>
-							<td th:text="${mList.username}"></td>
-							<td th:text="${mList.name}">random</td>
-							<td th:text="${mList.phone}">data</td>
-							<td th:text="${mList.email}">placeholder</td>
+						<tr th:each="list, index : ${list}">
+								<td>
+									<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+								</td>
+								<td th:text="${index.index + 1}"></td>
+								<td th:text="${list.username}"></td>
+								<td th:text="${list.name}">random</td>
+								<td th:text="${list.phone}">data</td>
+								<td th:text="${list.email}">placeholder</td>
+	
+								<td th:if="${list.role}!=0 and ${list.role}!=1">사업자</td>
+								<td th:if="${list.role}==0">회원</td>
+								<td th:if="${list.role}==1">관리자</td>
+	
+							</tr>
 
-							<td th:if="${mList.role}!=0 and ${mList.role}!=1">사업자</td>
-							<td th:if="${mList.role}==0">회원</td>
-							<td th:if="${mList.role}==1">관리자</td>
-
-						</tr> -->
-
-					</tbody>
-				</table>
-			</div>
-			<Button class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button><br><br>
+						</tbody>
+					</table>
+				</div>
+				<Button class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button><br><br>
 			
-			<div>
+<!-- 	
+		페이징 부트스트랩 코드		
+		<div>
 				<ul class="pagination">
 				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 				  <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -88,10 +91,26 @@
 				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
 				</ul>
 			</div>
-		</div>
-		
-		<a th:href="@{testForPaging}"><label>페이징테스트로 이동하기</label></a>
+		</div> 
+-->
 
+		<th:block th:if="${page.prev}">
+			<span>[ <a th:href="@{listPage(num=${page.startPageNum - 1})}">이전</a> ]</span>
+		</th:block>
+		
+		<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
+			<span th:if="${select!=num}">
+				<a th:href="@{listPage(num=${num})}" th:text="${num}"></a>
+			</span>
+			<span th:unless="${select!=num}">
+				<b th:text="${num}"></b>
+			</span>
+		</th:block>
+		
+		<th:block th:if="${page.next}">
+			<span>[ <a th:href="@{listPage(num=${page.endPageNum + 1})}">다음</a> ]</span>
+		</th:block>
+		
 		<!-- 사업장(카페)관리 테이블 -->
 		<div id="cafeManage" class="container">
 			<h3>사업장관리</h3>
