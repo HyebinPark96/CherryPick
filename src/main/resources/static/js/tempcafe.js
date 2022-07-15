@@ -8,6 +8,8 @@ let cindex = {
 
 
 	register: function() {
+		
+		alert('2kooong2');
 
 		/*
 		let cname = $("#cname").val();
@@ -17,24 +19,25 @@ let cindex = {
 		}
 		*/
 		let data = {
-			username: "dummy", // Form 의 input값 들고오기
+			bid: "bizTemp", 
 			cname: $("#cname").val(),
 			c_lat: 0,
 			c_long: 0,
-			cimage: "",
+			cimage: "ready.png",
 			caddress: $("#caddress").val(),
 			cphone: $("#cphone").val(),
-			copen: null,
-			cclose: null,
+			copen: '00:00:00',
+			cclose: '00:00:00',
 			parking: 0,
 			pet: 0,
 			kids: 0,
 			seats: 0,
 			smoke: 0,
 			group: 0,
-			ctag: 0,
+			ctag: "",
 			cmenu_img: ""
 		};
+		
 		
 		console.log(data);
 		console.log(JSON.stringify(data));
