@@ -14,7 +14,7 @@
 
 		<!-- ==========회원관리=========== -->
 		<div class="container" id="memberManage">
-
+			<h1 style="color:red">페이징처리 테스트용 페이지!!! </h1>
 			<h3>회원관리</h3>
 			<div class="d-flex justify-content-between">
 
@@ -59,7 +59,7 @@
 					</thead>
 					<tbody id="htmls">
 
-<!-- 						<tr th:each="mList, index : ${mList}">
+ 						<tr th:each="mList, index : ${mList}">
 							<td><input class="form-check-input mt-0" name="memChk"
 								type="checkbox" value=""></td>
 							<td th:text="${index.index + 1}"></td>
@@ -72,7 +72,7 @@
 							<td th:if="${mList.role}==0">회원</td>
 							<td th:if="${mList.role}==1">관리자</td>
 
-						</tr> -->
+						</tr>
 
 					</tbody>
 				</table>
@@ -89,8 +89,7 @@
 				</ul>
 			</div>
 		</div>
-		
-		<a th:href="@{testForPaging}"><label>페이징테스트로 이동하기</label></a>
+
 
 		<!-- 사업장(카페)관리 테이블 -->
 		<div id="cafeManage" class="container">

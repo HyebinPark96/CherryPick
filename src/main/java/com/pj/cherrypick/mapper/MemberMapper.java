@@ -43,4 +43,7 @@ public interface MemberMapper {
 	
 	void updateMemberWithoutPwd(MemberVO member);
 	
+	// 5개씩 들고오기
+	List<MemberVO> getMListForPaging(int start, int end);
+	
 }

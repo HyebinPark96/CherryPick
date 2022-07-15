@@ -36,8 +36,9 @@ public class SampleController {
 	public void demoreview() {
 	}
 	
-	@GetMapping(value = "/demoregcafe")
-	public void demoregcafe() {
+	@GetMapping(value = "/regcafe")
+	public String demoregcafe() {
+		return "/bizmember/regcafe";
 	}
 	
 	

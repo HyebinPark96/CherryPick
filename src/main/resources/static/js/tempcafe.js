@@ -1,4 +1,4 @@
-let index = {
+let cindex = {
 	init: function() {
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
 			this.register(); // save 함수 호출
@@ -8,41 +8,65 @@ let index = {
 
 
 	register: function() {
+		
+		alert('2kooong2');
+
+		/*
 		let cname = $("#cname").val();
-		if(cname.length == 0){
+		if (cname.length == 0) {
 			alert("카페 이름을 입력해주세요.");
 			return false;
 		}
+		*/
 		let data = {
-			username: $("#cname").val(), // Form 의 input값 들고오기
-			phone: $("#caddress").val(),
-			email: $("#cphone").val()
+			bid: "bizTemp", 
+			cname: $("#cname").val(),
+			c_lat: 0,
+			c_long: 0,
+			cimage: "ready.png",
+			caddress: $("#caddress").val(),
+			cphone: $("#cphone").val(),
+			copen: '00:00:00',
+			cclose: '00:00:00',
+			parking: 0,
+			pet: 0,
+			kids: 0,
+			seats: 0,
+			smoke: 0,
+			group: 0,
+			ctag: "",
+			cmenu_img: ""
 		};
-
-		// console.log(data);
+		
+		
+		console.log(data);
+		console.log(JSON.stringify(data));
 		
 		// ajax는 디폴트가 비동기 호출
 		// ajax 통신 성공 => 서버가 json 리턴 => 자동으로 자바스크립트 오브젝트로 변환
+		
 		$.ajax({
 			type: "POST",
-			url: "/auth/regCafeProc",
+			url: "/cafe/regCafeProc",
 			data: JSON.stringify(data), // 자바스크립트의 data 객체를 Java가 알아듣도록 변경			
 			contentType: "application/json; charset=utf-8",
 			dataType: "json" // json이라면 => javascript 오브젝트로 변경하여 아래 함수의 파라미터로 전달
 		}).done(function(resp) {
 			// 성공한 경우 호출
+			alert(resp);
 			alert("등록되었습니다.");
 			location.href = "/";
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			alert(JSON.stringify(error));
 		});
+		
 	},
-	
+
 
 }
 
-index.init();
+cindex.init();
 
 
 
