@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	
+	<header th:fragment="navFragment">
+		<ul>
+		
+			<li>
+				<a th:href="@{listPage(num=1)}">글 목록(페이징)</a>
+			</li>
+			
+			<li>
+				<a th:href="@{list}">글 목록</a>
+			</li>
+			
+			<li>
+				<a th:href="@{write}">글 작성</a>
+			</li>
+			
+		</ul>
+		
+	</header>
+

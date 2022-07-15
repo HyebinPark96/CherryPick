@@ -5,6 +5,7 @@
 
 package com.pj.cherrypick.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,46 @@ public class BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 	
+	// 게시물 목록
 	public List<BoardVO> list() throws Exception{
 		return boardMapper.list();
 	}
+	
+	// 게시물 작성
+	public void write(BoardVO boardVO) throws Exception{
+		boardMapper.write(boardVO);
+	}
+	
+	// 게시물 조회
+	public BoardVO view(int bno) throws Exception{
+		return boardMapper.view(bno);
+	}
+	
+	// 게시물 수정
+	public void modify(BoardVO boardVO) throws Exception{
+		boardMapper.modify(boardVO);
+	}
+	
+	// 게시물 삭제	
+	public void delete(int bno) throws Exception{
+		boardMapper.delete(bno);
+	}
+	
+	// 게시물 총 갯수
+	public int count() throws Exception{
+		return boardMapper.count();
+	}
+	
+	// 게시물 목록  + 페이징
+	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception{
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		
+		data.put("displayPost", displayPost); // <S,I>
+		data.put("postNum", postNum); // <S,I>
+		
+		return boardMapper.listPage(data.get("displayPost"), data.get("postNum")); // = listPage(int displayPost, int postNum)
+	}
+	
+	
 	
 }

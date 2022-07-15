@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>게시물 작성</title>
+</head>
+<body>
+
+	<header th:replace="fragments/nav :: navFragment"></header>
+
+	<!-- 주의 : form 안의 input 태그의 name속성의 값은 BoardVO 와 동일해야 한다. (전송할 순 있지만, 별도 작업 필요하므로 VO 만든 이유 없음)-->
+	<form method="POST">
+	
+		<label>제목</label>
+		<input type="text" name="title" /><br />
+		
+		<label>작성자</label>
+		<input type="text" name="writer" /><br />
+		
+		<label>내용</label>
+		<textarea cols="50" rows="5" name="content"></textarea><br />
+		
+		<button type="submit">작성</button>
+		
+	</form>
+
+</body>
+</html>
