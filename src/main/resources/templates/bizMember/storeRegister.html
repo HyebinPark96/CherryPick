@@ -185,15 +185,13 @@
 
 										<tr>
 											<th>메뉴가격</th>
-											<td><input id="m_price" value="" type="text"
-												class="input-number form-control" placeholder=""></td>
-
-
-											<div class="ctag-item">
-												<span class="ctag-item-prefix">#</span> <input
-													class="ctag-item-value" name="ctag" type="text"
-													placeholder="" />
-											</div>
+											<td>
+											<div class="">
+											<span class="ctag-item-prefix">#</span>
+											<input id="m_price" value="" type="text"
+												class="input-number form-control" placeholder="">
+												</div>
+												</td>
 										</tr>
 										<tr>
 											<th>메뉴설명</th>
@@ -234,6 +232,8 @@
 
 	<script>
 	//숫자 입력란(.input-number)에 ,로 숫자 구분
+		var mask="KF94";
+	
 		function updateTextView(_obj) {
 			var num = getNumber(_obj.val());
 			if (num == 0) {
@@ -288,15 +288,20 @@
 		
 		//안한거 : +버튼, x버튼이 눌렸을 때 +버튼의 display를 토글하라.
 		
-		function test(){
+		
+		//해쉬태그 생성 관련
+		var ctagStr = "";
+		
+		function makeHashtag(){
 			var ctagArr = document.getElementsByClassName('ctag-item-value');
-			var ctagStr = "";
-			alert('2kooong2');
-			var abcElements = document.querySelectorAll('input');
+			ctagStr = "";
 			
-			for (var i = 0; i < abcElements.length; i++){
-			    $(abcElements[i]).attr('name', 'exampleName' + i);
-			}
+			for (var i = 1; i < ctagArr.length; i++){
+				var currCtag = ctagArr[i].value.replace(/(\s*)/g,""); //공백 제거
+				if(currCtag.length>0){
+					ctagStr = ctagStr += '#' + currCtag;
+				} 
+			} 
 		}
 		
 		

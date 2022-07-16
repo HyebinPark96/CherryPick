@@ -1,16 +1,19 @@
+
+
 let cindex = {
 	init: function() {
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			this.register(); // save 함수 호출
+			this.register(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 
 	},
 
-
 	register: function() {
 		
 		alert('카페 등록을 실행합니다.');
-
+		
+		makeHashtag(); //storeRegister.html의 hashtag 함수
+		
 		/*
 		let cname = $("#cname").val();
 		if (cname.length == 0) {
@@ -18,6 +21,7 @@ let cindex = {
 			return false;
 		}
 		*/
+		
 		let data = {
 			bid: "bizTemp", 
 			cname: $("#cname").val(),
@@ -32,9 +36,8 @@ let cindex = {
 			pet: $("input[name=pet]").filter(":checked").val(),
 			kids: $("input[name=kids]").filter(":checked").val(),
 			seats: $("#seats").val(),
-			smoke: 0,
 			group: $("input[name=group]").filter(":checked").val(),
-			ctag: "",
+			ctag: ctagStr,
 			cmenu_img: ""
 		};
 		
