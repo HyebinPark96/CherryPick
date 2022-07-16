@@ -28,19 +28,15 @@ let cindex = {
 			cphone: $("#cphone").val(),
 			copen: '00:00:00',
 			cclose: '00:00:00',
-			parking: 0,
-			pet: 0,
-			kids: 0,
-			seats: 0,
+			parking: $("input[name=parking]").filter(":checked").val(),
+			pet: $("input[name=pet]").filter(":checked").val(),
+			kids: $("input[name=kids]").filter(":checked").val(),
+			seats: $("#seats").val(),
 			smoke: 0,
-			group: 0,
+			group: $("input[name=group]").filter(":checked").val(),
 			ctag: "",
 			cmenu_img: ""
 		};
-		
-		
-		console.log(data);
-		console.log(JSON.stringify(data));
 		
 		// ajax는 디폴트가 비동기 호출
 		// ajax 통신 성공 => 서버가 json 리턴 => 자동으로 자바스크립트 오브젝트로 변환
@@ -53,9 +49,11 @@ let cindex = {
 			dataType: "json" // json이라면 => javascript 오브젝트로 변경하여 아래 함수의 파라미터로 전달
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			alert(resp);
-			alert("등록되었습니다.");
+//			alert(resp);
+			alert("등록되었습니다. \n등록하신 정보는 [사업장 관리]페이지에서 수정하실 수 있습니다.");
 			location.href = "/";
+//			"/bizMember/storeManagement";
+
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			alert(JSON.stringify(error));

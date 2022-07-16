@@ -20,7 +20,7 @@ public class tempCafeApiController {
 	public ResponseDto<Integer> save(@RequestBody CafeVO cafe) {
 		System.out.println("tempCaf On");
 		int result = cafeService.createCafe(cafe);
-		return new ResponseDto<Integer>(HttpStatus.OK, result); 
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
 		//자바 오브젝트를 Json으로 변환해서 리턴(Jackson)
 	}
 }
