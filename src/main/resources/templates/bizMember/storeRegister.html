@@ -24,7 +24,8 @@
 
 		<div id="sidebar-wrapper" class="col-md-1"
 			th:replace="fragments/bizSidebar:: sidebar"></div>
-
+		
+		
 
 		<!-- 본문 -->
 		<div class="content" id="page-content-wrapper">
@@ -34,9 +35,9 @@
 				<div class="text-23" th:text="카페1"
 					style="text-decoration: underline;">카페 이름</div>
 				<br>
-				<!-- 등록 정보 영역 -->
+				<!-- 기본 정보 영역 -->
 				<div class="text-20">
-					<b>등록 정보</b>
+					<b>기본 정보</b>
 				</div>
 				<!-- action="/cafe/regCafeProc" -->
 				<form id="cfFrm" action="/cafe/regCafeProc" method="post">
@@ -116,16 +117,20 @@
 						</div>
 
 					<div id="ctag-block">
+						<!-- <div class="ctag-item">
+							<input type="text" class="ctag form-control" placeholder="" data-prefix="#">
+						</div> -->
 						<div class="ctag-item">
-							#<input value="해시" type="text" class="ctag form-control" placeholder="">
+							<span class="ctag-item-prefix">#</span> 
+							<input class="ctag-item-value" type="text" placeholder="" />
 						</div>
 					</div>
 
 					<img class="divBtn icon-30" onclick="addItem('ctag-block', 'ctag-item', 5)" src="/img/circle-plus-pink.png">
 					<hr>
 
-					<!-- 등록 이미지 -->
-					<div class="text-20">등록 이미지</div>
+					<!-- 이미지 등록 -->
+					<div class="text-20">이미지 등록</div>
 					<div class="row">
 						<div class="col-md-3">
 							<div class="divBtn cf-img thumbnail" OnClick="location.href ='#'"
@@ -153,9 +158,9 @@
 
 					<hr>
 
-					<!-- 등록 메뉴 영역 -->
+					<!-- 메뉴 등록 영역 -->
 					<div class="d-flex flex-column" style="gap: 10px;">
-						<div class="text-20">등록 메뉴</div>
+						<div class="text-20">메뉴 등록</div>
 						<div>
 							<b>전체 메뉴판</b>
 						</div>
@@ -209,6 +214,9 @@
 				</form>
 				<button id="btn-register" class="btn btn-primary btn-lg btn-block">등록
 					완료</button>
+					
+					<br>
+				<div class="divBtn btn btn-primary btn-lg" onclick="test()">테스트</div>
 
 
 			</div>
@@ -216,6 +224,8 @@
 		</div>
 
 	</div>
+	
+	<!-- DB 연결 스크립트 -->
 	<script src="/js/tempcafe.js"></script>
 
 	<script>
@@ -257,18 +267,7 @@
 		
 		initItem('ctag-block', 'ctag-item');
 		initItem('menulist-block', 'menulist-item');
-		/* 
-		var cBlock = document.getElementById("ctag-block");
-		var cItem = document.getElementsByClassName("ctag-item");
-		cBlock.appendChild(cItem[0].cloneNode(true));	
-		cItem[0].style.display = 'none';
-		
-	
-		var mBlock = document.getElementById("menulist-block");
-		var mItem = document.getElementsByClassName("menulist-item");
-		mBlock.appendChild(mItem[0].cloneNode(true));	
-		mItem[0].style.display = 'none';
-	 */	
+
 		//숨겨져 있는 원본을 복사하고, 화면에 표시한다(display = 'block')
 		function addItem(blk, itm, max){
 			var blk = document.getElementById(blk);
@@ -284,6 +283,16 @@
 		
 		//안한거 : +버튼, x버튼이 눌렸을 때 +버튼의 display를 토글하라.
 		
+		function test(){
+			var ctagArr = document.getElementsByClassName('ctag-item-value');
+			var ctagStr = "";
+			alert('2kooong2');
+			var abcElements = document.querySelectorAll('input');
+			// Set their ids
+			for (var i = 0; i < abcElements.length; i++){
+			    $('input[i]').attr('name', 'exampleName' + i);
+			}
+		}
 		
 	//메뉴 입력란 제어
 	</script>
