@@ -24,7 +24,8 @@
 
 		<div id="sidebar-wrapper" class="col-md-1"
 			th:replace="fragments/bizSidebar:: sidebar"></div>
-
+		
+		
 
 		<!-- 본문 -->
 		<div class="content" id="page-content-wrapper">
@@ -34,9 +35,9 @@
 				<div class="text-23" th:text="카페1"
 					style="text-decoration: underline;">카페 이름</div>
 				<br>
-				<!-- 등록 정보 영역 -->
+				<!-- 기본 정보 영역 -->
 				<div class="text-20">
-					<b>등록 정보</b>
+					<b>기본 정보</b>
 				</div>
 				<!-- action="/cafe/regCafeProc" -->
 				<form id="cfFrm" action="/cafe/regCafeProc" method="post">
@@ -116,32 +117,33 @@
 						</div>
 
 					<div id="ctag-block">
+						<!-- <div class="ctag-item">
+							<input type="text" class="ctag form-control" placeholder="" data-prefix="#">
+						</div> -->
 						<div class="ctag-item">
-							#<input value="해시" type="text" class="ctag form-control" placeholder="">
+							<span class="ctag-item-prefix">#</span> 
+							<input class="ctag-item-value" name="ctag" type="text" placeholder="" />
 						</div>
 					</div>
 
 					<img class="divBtn icon-30" onclick="addItem('ctag-block', 'ctag-item', 5)" src="/img/circle-plus-pink.png">
 					<hr>
 
-					<!-- 등록 이미지 -->
-					<div class="text-20">등록 이미지</div>
+					<!-- 이미지 등록 -->
+					<div class="text-20">이미지 등록</div>
 					<div class="row">
-						<div class="col-md-3">
-							<div class="divBtn cf-img thumbnail" OnClick="location.href ='#'"
-								style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="divBtn cf-img thumbnail" OnClick="location.href ='#'"
-								style="background-image: url('https://images.pexels.com/photos/7541175/pexels-photo-7541175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+						<div id="cimage-block" class="row">
+							<div class="cimage-item col-md-3">
+								<div class="divBtn cf-img thumbnail"
+									OnClick="location.href ='#'"
+									style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
+								</div>
 							</div>
 						</div>
 
 						<div class="col-md-3">
 							<div class="divBtn cf-img hoverbox thumbnail"
-								OnClick="location.href ='#'"
+								OnClick="addItem('cimage-block', 'cimage-item', 3)"
 								style="background-image: url('/img/add-image.png');">
 								<div id="overlay5">
 									<div class="hoverbox-img-caption">새 이미지 추가</div>
@@ -153,9 +155,9 @@
 
 					<hr>
 
-					<!-- 등록 메뉴 영역 -->
+					<!-- 메뉴 등록 영역 -->
 					<div class="d-flex flex-column" style="gap: 10px;">
-						<div class="text-20">등록 메뉴</div>
+						<div class="text-20">메뉴 등록</div>
 						<div>
 							<b>전체 메뉴판</b>
 						</div>
@@ -183,8 +185,13 @@
 
 										<tr>
 											<th>메뉴가격</th>
-											<td><input id="m_price" value="" type="text"
-												class="input-number form-control" placeholder="0,000"></td>
+											<td>
+											<div class="">
+											<span class="ctag-item-prefix">#</span>
+											<input id="m_price" value="" type="text"
+												class="input-number form-control" placeholder="">
+												</div>
+												</td>
 										</tr>
 										<tr>
 											<th>메뉴설명</th>
@@ -209,6 +216,9 @@
 				</form>
 				<button id="btn-register" class="btn btn-primary btn-lg btn-block">등록
 					완료</button>
+					
+					<br>
+				<div class="divBtn btn btn-primary btn-lg" onclick="test()">테스트</div>
 
 
 			</div>
@@ -216,10 +226,14 @@
 		</div>
 
 	</div>
+	
+	<!-- DB 연결 스크립트 -->
 	<script src="/js/tempcafe.js"></script>
 
 	<script>
 	//숫자 입력란(.input-number)에 ,로 숫자 구분
+		var mask="KF94";
+	
 		function updateTextView(_obj) {
 			var num = getNumber(_obj.val());
 			if (num == 0) {
@@ -257,18 +271,8 @@
 		
 		initItem('ctag-block', 'ctag-item');
 		initItem('menulist-block', 'menulist-item');
-		/* 
-		var cBlock = document.getElementById("ctag-block");
-		var cItem = document.getElementsByClassName("ctag-item");
-		cBlock.appendChild(cItem[0].cloneNode(true));	
-		cItem[0].style.display = 'none';
-		
-	
-		var mBlock = document.getElementById("menulist-block");
-		var mItem = document.getElementsByClassName("menulist-item");
-		mBlock.appendChild(mItem[0].cloneNode(true));	
-		mItem[0].style.display = 'none';
-	 */	
+		initItem('cimage-block', 'cimage-item');
+
 		//숨겨져 있는 원본을 복사하고, 화면에 표시한다(display = 'block')
 		function addItem(blk, itm, max){
 			var blk = document.getElementById(blk);
@@ -285,7 +289,22 @@
 		//안한거 : +버튼, x버튼이 눌렸을 때 +버튼의 display를 토글하라.
 		
 		
-	//메뉴 입력란 제어
+		//해쉬태그 생성 관련
+		var ctagStr = "";
+		
+		function makeHashtag(){
+			var ctagArr = document.getElementsByClassName('ctag-item-value');
+			ctagStr = "";
+			
+			for (var i = 1; i < ctagArr.length; i++){
+				var currCtag = ctagArr[i].value.replace(/(\s*)/g,""); //공백 제거
+				if(currCtag.length>0){
+					ctagStr = ctagStr += '#' + currCtag;
+				} 
+			} 
+		}
+		
+		
 	</script>
 
 
