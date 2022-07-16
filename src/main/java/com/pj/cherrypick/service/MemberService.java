@@ -134,11 +134,6 @@ public class MemberService {
 	public void updateMemberWithoutPwd(MemberVO member) {
 		MemberVO orgMember = memberMapper.findByUsername(member.getUsername()); // 기존 회원정보 들고오기
 		
-//		String rawPassword = member.getPassword(); // 회원정보 수정폼에서 입력한 패스워드 가져오기
-//		String encPassword = encoder.encode(rawPassword); // 암호화
-//		
-//		orgMember.setPassword(encPassword); // 암호화된 비번 DB에 저장
-		
 		orgMember.setName(member.getName());
 		orgMember.setPhone(member.getPhone());
 		orgMember.setEmail(member.getEmail());
@@ -153,17 +148,12 @@ public class MemberService {
 		return memberMapper.findByUsername(username);
 	}
 	
-	// 아이디로 나의 리뷰 가져오기
+	// 내가 작성한 리뷰 리스트 가져오기
 	@Transactional
-	public List<ReviewVO> getMyReviewList(String username) {
-		return reviewMapper.getMyReviewList(username);
+	public List<ReviewVO> getMyReviewList(String username, int displayPost, int postNum) {
+		return reviewMapper.getMyReviewList(username, displayPost, postNum);
 	}
 	
-	@Transactional
-	// 관리자의 회원관리 기능 중 회원목록 페이징처리
-	public List<MemberVO> getMListForPaging(int start, int end) {
-		return memberMapper.getMListForPaging(start, end);
-	}
 	
 	
 }

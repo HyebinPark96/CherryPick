@@ -99,11 +99,12 @@ public class MemberApiController {
 		}
 	}
 		
-	@PostMapping("/member/myReview")
-	// http://localhost/member/myReview
-	public String myReview(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
-		model.addAttribute("myReviewList", memberService.getMyReviewList(principalDetail.getUsername()));
-		return "member/myReview"; // /WEB-INF/views/templates/member/myReview
-	}
+	/*페이징처리 위해 Get방식으로 변경*/
+//	@PostMapping("/member/myReview")
+//	// http://localhost/member/myReview
+//	public String myReview(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+//		model.addAttribute("myReviewList", memberService.getMyReviewList(principalDetail.getUsername()));
+//		return "member/myReview"; // /WEB-INF/views/templates/member/myReview
+//	}
 	
 }

@@ -28,35 +28,35 @@
 
 		<div class="container">
 
-			<th:block th:each="myReviewList : ${myReviewList}"> <!--  -->
+			<th:block th:each="list : ${list}"> <!--  -->
 				<div class="myreview-item">
 
 					<div class="">
-						<div th:each="CafeVO, iter:${myReviewList.CafeVO}"> <!-- -->
+						<div th:each="CafeVO, iter:${list.CafeVO}"> <!-- -->
 							<span style="font-size: 25px; font-weight: bold;">
 								<label th:text="${CafeVO.cname}">카페 이름</label> <!-- -->
 							</span> 
 							<span class="">
-								<label th:text="${myReviewList.score}">리뷰 점수</label> <!-- -->
+								<label th:text="${list.score}">리뷰 점수</label> <!-- -->
 							</span><br> 
-							<span style="color: gray;" th:each="CafeVO, iter:${myReviewList.CafeVO}"> <!-- -->
+							<span style="color: gray;" th:each="CafeVO, iter:${list.CafeVO}"> <!-- -->
 								<label th:text="${CafeVO.caddress}">카페 주소</label> <!-- -->
 							</span>
 						</div>
 						<br>
 						<div>
-							<div style="color: gray;" th:text="${myReviewList.date}">작성 날짜</div><!-- -->
+							<div style="color: gray;" th:text="${list.date}">작성 날짜</div><!-- -->
 							<div>
 								<b>
-									나의 별점 : <label th:text="${myReviewList.score}"></label> <!-- -->
+									나의 별점 : <label th:text="${list.score}"></label> <!-- -->
 								</b>
 							</div>
 							<div>
-								<label th:text="${myReviewList.content}"></label> <!---->
+								<label th:text="${list.content}"></label> <!---->
 							</div>
 							
 							(heart) : 
-							<div th:each="HeartVO, iter:${myReviewList.HeartVO}">
+							<div th:each="HeartVO, iter:${list.HeartVO}">
 								<span th:if="${iter.size}!=1">
 									<b th:if="${iter.index}==0" th:text="${iter.size}">2</b>
 								</span>
@@ -75,6 +75,25 @@
 				</div>
 				<hr>
 			</th:block>
+			
+			<div class="pagination" th:if="${list.size}>=10">
+					<th:block th:if="${page.prev}">
+						<span class="page-item" >[ <a th:href="@{myReview(num=${page.startPageNum - 1})}" class="page-link">이전</a> ]</span>
+					</th:block>
+					
+					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
+						<span th:if="${select!=num}" class="page-item" >
+							<a th:href="@{myReview(num=${num})}" th:text="${num}" class="page-link" ></a>
+						</span>
+						<span th:unless="${select!=num}" class="page-item active">
+							<a th:href="@{myReview(num=${num})}" th:text="${num}" class="page-link"></a>
+						</span>
+					</th:block>
+					
+					<th:block th:if="${page.next}">
+						<span class="page-item">[ <a th:href="@{myReview(num=${page.endPageNum + 1})}" class="page-link">다음</a> ]</span>
+					</th:block>
+				</div>
 
 			<!-- === 숨어있는 영역 ====  -->
 <!-- 			

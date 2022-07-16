@@ -3,38 +3,14 @@
 <!-- namespace의 값은, MemberMapper.xml의 쿼리를 호출할 Mapper Class의 경로와 클래스명으로 하도록 
 	해야한다. -->
 <mapper namespace="com.pj.cherrypick.mapper.ReviewMapper">
+	
+	<!-- 내가 작성한 리뷰 총 갯수 -->
+	<select id="count" resultType="int" parameterType="String">
+		SELECT COUNT(rno)
+		FROM review
+		WHERE username = #{username}
+	</select>
 
-<!-- 	<select id="findReviewListByUsername"
-		resultMap="com.pj.cherrypick.domain.ReviewVO, com.pj.cherrypick.domain.CafeVO">
-		SELECT *
-		FROM review r, cafe c, member m
-		LEFT JOIN c
-		ON r.cno =
-		c.cno
-		LEFT JOIN m
-		ON r.username = m.username
-		WHERE m.username =
-		'abcd1234'
-	</select> -->
-	
-<!-- 	<resultMap type="Car" id="Car">	
-		<result column="owner_id" property="ownerId"/>	
-		<result column="model_no" property="modelNo"/>	
-		<result column="color" property="color"/>
-	</resultMap>
-	
-	<resultMap type="Person" id="Person">	
-		<result column="id" property="id"/>	
-		<result column="name" property="name"/>	
-		<result column="age" property="age"/>	
-		<collection property="car" resultMap="Car"/>
-	</resultMap>
-	
-	<select id="selectPersonById" parameterType="String" resultMap="Person">	
-		SELECT p.id, p.name, p.age		   c.owner_id, c.model_no, c.color      
-		FROM person p	  JOIN car c	    ON p.id = c.owner_id	 
-		WHERE p.id = #{id}
-	</select> -->
 	
 	<resultMap type="com.pj.cherrypick.domain.HeartVO" id="HeartVO">
 		<result column="hno" property="hno" />
@@ -86,7 +62,8 @@
 	
 
 	
-	<select id="getMyReviewList" resultMap="ReviewVO">
+	<!-- 내가 작성한 리뷰 목록 + 페이징 -->
+	<select id="getMyReviewList" resultMap="ReviewVO" parameterType="hashmap">  <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT r.*, c.*, m.*, h.*
 		FROM review r
 		LEFT JOIN cafe c
@@ -96,6 +73,8 @@
 		LEFT JOIN heart h
 		ON r.rno = h.rno
 		WHERE m.username = #{username}
+		ORDER BY r.date DESC
+		LIMIT #{displayPost}, #{postNum}
 	</select>
 
 

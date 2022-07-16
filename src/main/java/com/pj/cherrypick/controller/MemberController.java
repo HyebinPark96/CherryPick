@@ -1,20 +1,29 @@
 package com.pj.cherrypick.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.MemberVO;
+import com.pj.cherrypick.domain.Page;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.MemberService;
+import com.pj.cherrypick.service.ReviewService;
 
 @Controller
 public class MemberController {
 	
 	@Autowired
 	private MemberService memberService; // 스프링이 컴포넌트 스캔을 통해 MemberService.java의 @Service 어노테이션을 보면 Bean에 등록을 해 줌 (=IOC 해줌)
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 	// http://localhost/auth/selectTypeForFindId
 	@GetMapping("/auth/selectTypeForFindId")
@@ -52,33 +61,6 @@ public class MemberController {
 		return "member/findPasswordForm"; // /WEB-INF/views/templates/member/findPwdForm
 	}
 	
-//	@GetMapping("/member/myPage")
-	// http://localhost/member/myPage
-//	public String myPage() {
-//		return "member/myPage"; // /WEB-INF/views/templates/member/myPage
-//	}
-	
-//	@GetMapping("/admin/adminMain")
-//	//  http://localhost/admin/adminMain
-//	public String adminMain(@AuthenticationPrincipal PrincipalDetail principalDetail/*스프링 시큐리티 세션의 username을 들고온다.*/, Model model) {
-//		try {
-//			// 관리자가 로그인하면 헤더에 있는 adminMain 카테고리로 접근 가능하지만,
-//			// 회원이 url로 접근할 수 있으므로, 이를 방지하기 위해 멤버인지 관리자인지 체크하는 서비스 필요
-//			if(memberService.checkMemberOrAdmin(principalDetail.getUsername())==0) { // role=0 : 관리자
-//				// 회원이라 접근권한 없을 경우
-//				return "error/403"; // /WEB-INF/views/templates/error/403
-//			};
-//			List<MemberVO> mList = memberService.getMList();
-//			model.addAttribute("mList", mList); // model 을 들고 view 까지 이동
-//		} catch (Exception e) {
-//			if(principalDetail==null) {
-//				// 비회원일 경우
-//				return "redirect:/loginForm"; // /WEB-INF/views/templates/loginForm
-//			}
-//		}
-//		return "admin/adminMain";
-//	}
-	
 	@GetMapping("/member/memberEditForm")
 	// http://localhost/member/memberEditForm
 	public String memberEditForm(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
@@ -93,22 +75,21 @@ public class MemberController {
 		return "member/checkPwdForEdit"; // /WEB-INF/views/templates/member/checkPwdForEdit
 	}
 	
-//	@GetMapping("/error/403")
-//	// http://localhost/error/403
-//	public String ForbiddenErrorPage() {
-//		return "error/403"; // /WEB-INF/views/templates/error/403
-//	}
-//	
-//	@GetMapping("/error/404")
-//	// http://localhost/error/403
-//	public String notFoundErrorPage() {
-//		return "error/404"; // /WEB-INF/views/templates/error/404
-//	}
-//	
-//	@GetMapping("/error/500")
-//	// http://localhost/error/500
-//	public String internalServerErrorPage() {
-//		return "error/500"; // /WEB-INF/views/templates/error/500
-//	}
+	@GetMapping("/member/myReview")
+	// http://localhost/member/myReview
+	public void myReview(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model, 
+			@RequestParam("num") int num) {
+		Page page = new Page();
+		
+		page.setNum(num);
+		page.setCount(reviewService.count(principalDetail.getUsername().toString())); 
+		
+		List<ReviewVO> myReviewList = memberService.getMyReviewList(principalDetail.getUsername().toString(), page.getDisplayPost(), page.getPostNum());
+		
+		model.addAttribute("list", myReviewList);
+		model.addAttribute("page", page);
+		model.addAttribute("select", num); // 현재 페이지 (현재 페이지가 아닌 페이지와 구분하기 위해 값 전달)
+		
+	}
 
 }

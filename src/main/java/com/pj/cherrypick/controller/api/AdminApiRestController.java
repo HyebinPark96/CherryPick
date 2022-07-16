@@ -27,7 +27,7 @@ public class AdminApiRestController {
 		System.out.println("sort : " + sort.get("sort"));
 		if(sort.get("sort").equals("member")) {
 			if(memberService.getMList() != null || memberService.getMList().size() > 0) {
-				List<MemberVO> memberList = memberService.getMListForPaging(0,5);
+				List<MemberVO> memberList = memberService.getMList();
 				return memberList;
 			}
 		}
