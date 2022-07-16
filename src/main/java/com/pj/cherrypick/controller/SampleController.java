@@ -37,6 +37,12 @@ public class SampleController {
 		return "test2";
 	}
 	
+	@GetMapping(value = "/testModal")
+	public String testModal(Model model) {
+		
+		return "testModal";
+	}
+	
 } 
 
 

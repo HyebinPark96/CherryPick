@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.pj.cherrypick.mapper.TempCafeMapper" >
+
+    <insert id="createCafe" parameterType="com.pj.cherrypick.domain.CafeVO">
+    	INSERT INTO cafe VALUES (null, #{bid}, #{cname}, #{c_lat}, #{c_long}, #{cimage}, #{caddress}, #{cphone}, #{copen}, #{cclose}, #{parking}, #{pet}, #{kids}, #{seats}, #{group}, #{ctag}, #{cmenu_img})
+    </insert>
+</mapper>
+
+
+
