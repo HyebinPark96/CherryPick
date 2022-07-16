@@ -1,17 +1,13 @@
 package com.pj.cherrypick.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.MemberVO;
-import com.pj.cherrypick.mapper.MemberMapper;
 import com.pj.cherrypick.service.MemberService;
 
 @Controller
