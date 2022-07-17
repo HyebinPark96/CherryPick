@@ -46,11 +46,5 @@
 		WHERE username = #{username}
 	</update>
 	
-	<select id="getMListForPaging" resultType="com.pj.cherrypick.domain.MemberVO">
-		SELECT *
-		FROM member
-		ORDER BY username DESC
-		LIMIT #{start}, #{end}
-	</select>
     
 </mapper>

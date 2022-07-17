@@ -30,31 +30,31 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
-<!-- 	 2. 사업자 회원 
-	회원 목록 가져오기
+ 	 <!-- 2. 사업자 회원  -->
+	<!-- 회원 목록 가져오기 -->
 	<select id="bList" resultType="com.pj.cherrypick.domain.BizMemberVO">
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM cherrypick.bizMember
 	</select>
 	
-	게시물 삭제
+	<!-- 게시물 삭제 -->
 	<delete id="bDelete" parameterType="String">
 		DELETE FROM bizMember
 		WHERE bid = #{bid}
 	</delete>
 	
-	게시물 총 갯수
+	<!-- 게시물 총 갯수 -->
 	<select id="bCount" resultType="int">
 		SELECT COUNT(bid)
 		FROM bizMember
 	</select>
 	
-	게시물 목록 + 페이징 : 게시물을 10개씩 출력
-	<select id="bListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> 주의 : 파라메터타입은 hashmap
+	<!-- 게시물 목록 + 페이징 : 게시물을 10개씩 출력 -->
+	<select id="bListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM bizMember
 		ORDER BY bid ASC
 		limit #{displayPost}, #{postNum}
-	</select> -->
+	</select>
 	
 </mapper>

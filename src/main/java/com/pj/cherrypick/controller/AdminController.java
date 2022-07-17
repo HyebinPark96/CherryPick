@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.domain.Page;
 import com.pj.cherrypick.service.AdminService;
@@ -22,23 +23,37 @@ public class AdminController {
 	/*1. 일반회원*/
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/admin/adminMain", method = RequestMethod.GET)
-	public void getListPage(Model model, @RequestParam("num") int num) throws Exception{ // num : 페이지 번호
+	public void getListPage(Model model, @RequestParam("num") int num, @RequestParam("sort") String sort) throws Exception{ // num : 페이지 번호
 		Page page = new Page();
-		
 		page.setNum(num);
-		System.out.println(num);
-		page.setCount(adminService.count());  
+		
+		if(sort.equals("member")) {
+			
+			page.setCount(adminService.count());  
 
-		List<MemberVO> list = null; 
-		list = adminService.listPage(page.getDisplayPost(), page.getPostNum());
+			List<MemberVO> list = null; 
+			list = adminService.listPage(page.getDisplayPost(), page.getPostNum());
 
-		model.addAttribute("list", list); 
-		model.addAttribute("page", page);
-		model.addAttribute("select", num);
+			model.addAttribute("list", list); 
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("sort", sort); // member
+			
+		} else if(sort.equals("bizMember")) {
+			
+			page.setCount(adminService.bCount());
+
+			List<BizMemberVO> list = null; 
+			list = adminService.bListPage(page.getDisplayPost(), page.getPostNum());
+
+			model.addAttribute("list", list); 
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("sort", sort); // bizMember
+		}
+	
+
+		
 	}
-	
-	
-	
-	/*2. 사업자회원*/
 	
 }

@@ -10,7 +10,7 @@
 <!-- <body> -->
 
 	<div class="content" layout:fragment="content">
-
+	<input type="hidden" th:value="${num}" id="num">
 
 		<!-- ==========회원관리=========== -->
 		<div class="container" id="memberManage">
@@ -19,24 +19,40 @@
 			<div class="d-flex justify-content-between">
 
 				<!-- 회원관리 - 라디오 버튼 -->
-				<div class="d-flex">
+				
 <!-- 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="memberRadio"
 							id="all" value="all"> <label class="form-check-label"
 							for="flexRadioDefault0"> 전체 </label>
 					</div> -->
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="memberRadio"
-							id="member" value="member" checked="checked"> <label class="form-check-label"
-							for="flexRadioDefault1"> 일반회원 </label>
+					
+					<div class="d-flex" th:if="${sort}=='member'">
+						<span class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="member" value="member" checked> 
+								<label class="form-check-label" for="flexRadioDefault1"> 일반회원 </label>
+						</span>
+						<span style="margin-left:10px;" class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="bizMember" value="biz"> <label class="form-check-label"
+								for="flexRadioDefault2"> 사업자회원 </label>
+						</span>
 					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="memberRadio"
-							id="biz" value="biz"> <label class="form-check-label"
-							for="flexRadioDefault2"> 사업자회원 </label>
+					
+					<div class="d-flex" th:unless="${sort}=='member'">
+						<span class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="member" value="member"> 
+								<label class="form-check-label" for="flexRadioDefault1"> 일반회원 </label>
+						</span>
+						<span style="margin-left:10px;" class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="bizMember" value="biz" checked> <label class="form-check-label"
+								for="flexRadioDefault2"> 사업자회원 </label>
+						</span>
 					</div>
-				</div>
-
+					
+				
 				<!-- 회원관리 - 정렬 탭 -->
 				<div class="d-flex">
 					<div>번호순 | 이름순</div>
@@ -56,22 +72,51 @@
 							<th scope="col">회원분류</th>
 						</tr>
 					</thead>
-					<tbody id="htmls">
+					<tbody>
 						
-						<tr th:each="list : ${list}">
+						<!-- 일반회원 리스트 -->
+ 						<tr th:if="${sort}=='member'" th:each="list : ${list}">
 						
 								<td>
 									<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
 								</td>
 								<td th:text="${listStat.count + (page.num*10) - 10}"></td>
+								
 								<td th:text="${list.username}"></td>
+								
 								<td th:text="${list.name}">random</td>
+								
 								<td th:text="${list.phone}">data</td>
+								
 								<td th:text="${list.email}">placeholder</td>
+								
+								<td></td>
+								
+								<!-- <td th:if="${list.role}==0">회원</td>
+								<td th:if="${list.role}==1">관리자</td> -->
 	
-								<td th:if="${list.role}!=0 and ${list.role}!=1">사업자</td>
-								<td th:if="${list.role}==0">회원</td>
-								<td th:if="${list.role}==1">관리자</td>
+							</tr>
+							
+							<!-- 사업자 회원 리스트 -->
+							 <tr th:if="${sort}=='bizMember'" th:each="list : ${list}">
+						
+								<td>
+									<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+								</td>
+								<td th:text="${listStat.count + (page.num*10) - 10}"></td>
+								
+								<td th:text="${list.bid}"></td>
+								
+								<td th:text="${list.bname}">random</td>
+								
+								<td th:text="${list.bphone}">data</td>
+								
+								<td th:text="${list.bemail}">placeholder</td>
+								
+								<td></td>
+								
+								<!-- <td th:if="${list.role}==0">회원</td>
+								<td th:if="${list.role}==1">관리자</td> -->
 	
 							</tr>
 
@@ -82,20 +127,20 @@
 				
 				<div class="pagination">
 					<th:block th:if="${page.prev}">
-						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1})}" class="page-link">이전</a> ]</span>
+						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort})}" class="page-link">이전</a> ]</span>
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
 						<span th:if="${select!=num}" class="page-item" >
-							<a th:href="@{adminMain(num=${num})}" th:text="${num}" class="page-link" ></a>
+							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link" ></a>
 						</span>
 						<span th:unless="${select!=num}" class="page-item active">
-							<a th:href="@{adminMain(num=${num})}" th:text="${num}" class="page-link"></a>
+							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
 						</span>
 					</th:block>
 					
 					<th:block th:if="${page.next}">
-						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1})}" class="page-link">다음</a> ]</span>
+						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort})}" class="page-link">다음</a> ]</span>
 					</th:block>
 				</div>
 
@@ -140,7 +185,6 @@
 								<th scope="col">대표번호</th>
 								<th scope="col">이메일</th>
 								<th scope="col">[자세히]</th>
-								<th scope="col">[]</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -152,7 +196,6 @@
 								<td>data</td>
 								<td>placeholder</td>
 								<td></td>
-								<td>X</td>
 							</tr>
 						</tbody>
 					</table>
@@ -173,7 +216,6 @@
 								<th scope="col">대표번호</th>
 								<th scope="col">이메일</th>
 								<th scope="col">[자세히]</th>
-								<th scope="col">[]</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -185,7 +227,6 @@
 								<td>data</td>
 								<td>placeholder</td>
 								<td></td>
-								<td>V</td>
 							</tr>
 
 						</tbody>

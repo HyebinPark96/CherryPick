@@ -1,41 +1,114 @@
-<!DOCTYPE HTML>
-
+<!DOCTYPE html>
+<html>
 <head>
-<title>Sticky Element</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+
+	
+
+
+	<div class="container">
+		<div class="form-group.container">
+			<label for="file">Upload File</label> <input type="file"
+				id="file-input" required accept="image/*">
+			<!-- required accept: 파일 유형 제한 -->
+		</div>
+		<div class="box-2">
+			<div class="result"></div>
+		</div>
+
+		<div class="box-2 img-result hide">
+			<img src="" alt="" class="cropped">
+		</div>
+
+		<div class="box">
+			<div class="options hide">
+				<label for="width">width</label> <input type="number" class="img-w"
+					value="300" min="100" max="1200">
+			</div>
+			<button class="btn save hide">Save</button>
+
+			<a href="" class="btn download hide">Download</a>
+		</div>
+	</div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
+
 <style>
-#sticky-div {
-	position: sticky;
-	top: 0;
-	font-size: 30px;
-	color: white;
-	background-color: #3991bd;
-}
-
-p {
-	font-size: 20px;
-}
-
-#description {
-	background-color: #6ccde6;
-	width: 75%
+.hide {
+	display: none;
 }
 </style>
 
-</head>
 
+<script>
+	let result = document.querySelector(".result"), 
+	img_result = document.querySelector(".img-result"), 
+	img_w = document.querySelector(".img-w"), 
+	img_h = document.querySelector(".img-h"), 
+	options = document.querySelector(".options"), 
+	save = document.querySelector(".save"), 
+	cropped = document.querySelector(".cropped"), 
+	dwn = document.querySelector(".download"), 
+	upload = document.querySelector("#file-input"), 
+	cropper = "";
+	
+	upload.addEventListener('change',(e) =>{
+		console.log(e)
 
-<body style="background-color: #3991bd">
-	<h1 id="sticky-div">Introduction To Sticky Elements In CSS</h1>
-	<p id="description">
-		<br> <br> “Your Text” <br> <br>
-	</p>
-	<h1 id="sticky-div">What is Sticky position?</h1>
-	<br>
-	<br>
+		//이미지 자르기
+	 // start file reader
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target.result) {
+          // create new image
+          let img = document.createElement("img");
+          img.id = "image";
+          img.src = e.target.result;
+          // clean result before
+          result.innerHTML = "";
+          // append new image
+          result.appendChild(img);
+          // show save btn and options
+          save.classList.remove("hide");
+          options.classList.remove("hide");
+          // init cropper
+          cropper = new Cropper(img);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);	
+	})
+	
+	//save button to crop the image
+	save.addEventListener('click',(e)=>{
+		e.preventDefault()
+	
+	 // get result to data uri
+    let imgSrc = cropper
+      .getCroppedCanvas({
+        width: img_w.value, 
+        // input value
+      })
+      .toDataURL();
+		
+		console.log(imgSrc);
+		
+		 // remove hide class of img
+	    cropped.classList.remove("hide");
+	    img_result.classList.remove("hide");
+	    // show image cropped
 
-	<p id="description">“Your Text”</p>
-	<br>
-	<br>
-	<p id="description">“Your Text”</p>
-</body>
+	    cropped.src = imgSrc;
+	    dwn.classList.remove("hide");
+	    dwn.download = "imagename.png";
+	    dwn.setAttribute("href", imgSrc);
+	})
+</script>
 </html>

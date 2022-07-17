@@ -91,6 +91,16 @@
 			con.style.display = 'none';
 		}
 	}
+	
+	$("input").keydown(function(e) {
+		var oldvalue=$(this).val();
+		var field=this;
+		setTimeout(function () {
+		    if(field.value.indexOf('http://') !== 0) {
+		        $(field).val(oldvalue);
+		    } 
+		}, 1);
+		});
 </script>
 
 </head>
@@ -132,6 +142,8 @@
 			<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
 		</div>
 	</div>
+	
+	<input id="input">
 
 </body>
 

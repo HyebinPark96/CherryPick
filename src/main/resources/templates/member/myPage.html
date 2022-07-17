@@ -36,10 +36,9 @@
 			</div>
 			
 			<div>
-				<form th:action="@{myReview}" method="POST">
-					<input type="hidden" th:value="${#authentication.principal.username}">
+				<a th:href="@{myReview(num=1)}">
 					<button type="submit">내가 작성한 리뷰 보러가기</button>
-				</form>
+				</a>
 			</div>
 			
 			<hr>

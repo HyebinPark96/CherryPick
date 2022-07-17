@@ -24,9 +24,10 @@ public class AdminApiRestController {
 
 	@PostMapping("/admin/memberManagement")
 	public List<MemberVO> memberManagement(@RequestBody HashMap<String, String> sort) { // JSON 데이터 받으므로 @RequestBody 사용
+		System.out.println("sort : " + sort.get("sort"));
 		if(sort.get("sort").equals("member")) {
 			if(memberService.getMList() != null || memberService.getMList().size() > 0) {
-				List<MemberVO> memberList = memberService.getMListForPaging(0,5);
+				List<MemberVO> memberList = memberService.getMList();
 				return memberList;
 			}
 		}
@@ -35,6 +36,7 @@ public class AdminApiRestController {
 	
 	@PostMapping("/admin/bizMemberManagement")
 	public List<BizMemberVO> bizMemberManagement(@RequestBody HashMap<String, String> sort) { // JSON 데이터 받으므로 @RequestBody 사용
+		System.out.println("sort : " + sort.get("sort"));
 		if(sort.get("sort").equals("biz")) {
 			if(bizMemberService.getMList() != null || bizMemberService.getMList().size() > 0) {
 				List<BizMemberVO> bizMemberList = bizMemberService.getMList();

@@ -2,16 +2,13 @@ package com.pj.cherrypick.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import com.pj.cherrypick.config.auth.PrincipalDetail;
+import com.pj.cherrypick.domain.HeartVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.MemberMapper;
@@ -134,11 +131,6 @@ public class MemberService {
 	public void updateMemberWithoutPwd(MemberVO member) {
 		MemberVO orgMember = memberMapper.findByUsername(member.getUsername()); // 기존 회원정보 들고오기
 		
-//		String rawPassword = member.getPassword(); // 회원정보 수정폼에서 입력한 패스워드 가져오기
-//		String encPassword = encoder.encode(rawPassword); // 암호화
-//		
-//		orgMember.setPassword(encPassword); // 암호화된 비번 DB에 저장
-		
 		orgMember.setName(member.getName());
 		orgMember.setPhone(member.getPhone());
 		orgMember.setEmail(member.getEmail());
@@ -153,17 +145,18 @@ public class MemberService {
 		return memberMapper.findByUsername(username);
 	}
 	
-	// 아이디로 나의 리뷰 가져오기
+	// 내가 작성한 리뷰 리스트 가져오기
 	@Transactional
-	public List<ReviewVO> getMyReviewList(String username) {
-		return reviewMapper.getMyReviewList(username);
+	public List<ReviewVO> getMyReviewList(String username, int displayPost, int postNum) {
+		return reviewMapper.getMyReviewList(username, displayPost, postNum);
 	}
 	
+	// 내가 작성한 리뷰의 좋아요 갯수 가져오기
 	@Transactional
-	// 관리자의 회원관리 기능 중 회원목록 페이징처리
-	public List<MemberVO> getMListForPaging(int start, int end) {
-		return memberMapper.getMListForPaging(start, end);
+	public int getHeartCnt(int rno){
+		return reviewMapper.getHeartCnt(rno);
 	}
+	
 	
 	
 }
