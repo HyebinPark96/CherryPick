@@ -46,5 +46,6 @@ public interface MemberMapper {
 	
 	public void updateMemberWithoutPwd(MemberVO member);
 
-
+	// 회원탈퇴
+	public void withdrawalProc(String username);
 }

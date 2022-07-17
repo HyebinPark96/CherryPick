@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout-main}">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+	<!-- 문구는 임시로 적은거라 실제 회원탈퇴 페이지 참고해서 수정하셔도 됩니다~ -->
+		<h1>정말 회원탈퇴 하시겠습니까?</h1>
+		
+		<form>
+			<button type="button" class="btn btn-primary btn-lg btn-block" id="withdrawalProcBtn">회원탈퇴</button>
+			<input type="hidden" id="username" th:value="${#authentication.principal.username}">
+		</form>
+		
+		
+		<h3>더 나은 운영을 위해 회원탈퇴 이유를 선택하여 주십시오.</h3>
+		
+		<form>
+		
+			<div>
+				<input type="checkbox"> 
+				<label>도움이 되지 않아서</label>
+			</div>
+			
+			<div>
+			<input type="checkbox"> 
+			<label>개인정보 침해가 우려되어서</label>
+			</div>
+			
+			<div>
+			<input type="checkbox"> 
+			<label>...등의 이유로</label>
+			</div>
+			
+		</form>
+	
+	</div>
+
+
+</body>
+</html>

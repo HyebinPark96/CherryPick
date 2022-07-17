@@ -126,4 +126,9 @@ public class MemberController {
 //		return "/member/myPage";
 //	}
 
+	@GetMapping("/member/withdrawal")
+	public String withdrawal() {
+		return "member/withdrawal";
+	}
+	
 }

@@ -157,6 +157,10 @@ public class MemberService {
 		return reviewMapper.getHeartCnt(rno);
 	}
 	
-	
+	// 회원탈퇴
+	@Transactional
+	public void withdrawalProc(String username) {
+		memberMapper.withdrawalProc(username);
+	}
 	
 }
