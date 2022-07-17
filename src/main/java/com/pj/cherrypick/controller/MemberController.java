@@ -97,5 +97,12 @@ public class MemberController {
 	public String checkPwdForEditResult() {
 		return "member/checkPwdForEditResult";
 	}
+	
+	@GetMapping("/member/myPage")
+	public String myPage(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+		MemberVO member = memberService.findByUsername(principalDetail.getUsername()); // 회원 정보 가져오기
+		model.addAttribute("member", member); // 뷰에 보내기
+		return "member/myPage";
+	}
 
 }
