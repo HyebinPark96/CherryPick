@@ -37,11 +37,25 @@ public class SampleController {
 		return "test2";
 	}
 	
-	@GetMapping(value = "/testModal")
-	public String testModal(Model model) {
+	@GetMapping(value = "/test3")
+	public String test3(Model model) {
 		
-		return "testModal";
+		return "test3";
 	}
+	
+	@GetMapping(value = "/test4")
+	public String test4(Model model) {
+		
+		return "test4";
+	}
+	
+	@GetMapping(value = "/uploadForm")
+	public String uploadForm(Model model) {
+		
+		return "uploadForm";
+	}
+	
+	
 	
 } 
 

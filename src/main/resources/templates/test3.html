@@ -1,41 +1,130 @@
-<!DOCTYPE HTML>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/layout-main}">
+<div layout:fragment="content">
 
-<head>
-<title>Sticky Element</title>
-<style>
-#sticky-div {
-	position: sticky;
-	top: 0;
-	font-size: 30px;
-	color: white;
-	background-color: #3991bd;
-}
+	<div>
+		<div class="divBtn btn btn-primary btn-lg" onclick="test()">테스트</div>
+	</div>
 
-p {
-	font-size: 20px;
-}
+	<!-- 미리보기 box -->
+	<div class="box-2 img-result hide">
+		<img style="max-width: 100%;" src="" alt="" class="cropped">
+	</div>
 
-#description {
-	background-color: #6ccde6;
-	width: 75%
-}
-</style>
+	<!-- 모달 영역 -->
+	<div id="imgModal" class="modal fade">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">이미지 첨부</h5>
+					<button type="button" data-bs-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
 
-</head>
+					<!-- Cropper 영역 -->
+					<div>
+						<div class="form-group.container">
+							<label for="file">Upload File</label> <input type="file"
+								id="file-input" required accept="image/*">
+							<!-- required accept: 파일 유형 제한 -->
+						</div>
+						<div class="box-2">
+							<div class="result"></div>
+						</div>
+
+						<!-- <div class="box-2 img-result hide">
+									<img style="max-width:100%;" src="" alt="" class="cropped">
+								</div> -->
+
+						<div class="box">
+							<div class="options hide">
+								<label for="width">width</label> <input type="number"
+									class="img-w" value="300" min="100" max="1200">
+							</div>
+							<button class="btn save hide" data-bs-dismiss="modal">Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- cropper script -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
+	<script>
+	let result = document.querySelector(".result"), 
+	img_result = document.querySelector(".img-result"), 
+	img_w = document.querySelector(".img-w"), 
+	img_h = document.querySelector(".img-h"), 
+	options = document.querySelector(".options"), 
+	save = document.querySelector(".save"), 
+	cropped = document.querySelector(".cropped"), 
+	dwn = document.querySelector(".download"), 
+	upload = document.querySelector("#file-input"), 
+	cropper = "";
+	
+	upload.addEventListener('change',(e) =>{
+		console.log(e)
+
+		//이미지 자르기
+	 // start file reader
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target.result) {
+          // create new image
+          let img = document.createElement("img");
+          img.id = "image";
+          img.src = e.target.result;
+          // clean result before
+          result.innerHTML = "";
+          // append new image
+          result.appendChild(img);
+          // show save btn and options
+          save.classList.remove("hide");
+          options.classList.remove("hide");
+          // init cropper
+          cropper = new Cropper(img);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);	
+	})
+	
+	//save button to crop the image
+	save.addEventListener('click',(e)=>{
+		e.preventDefault()
+	
+	 // get result to data uri
+    let imgSrc = cropper
+      .getCroppedCanvas({
+        width: img_w.value, 
+        // input value
+      })
+      .toDataURL();
+		
+		console.log(imgSrc);
+		
+		 // remove hide class of img
+	    cropped.classList.remove("hide");
+	    img_result.classList.remove("hide");
+	    // show image cropped
+
+	    cropped.src = imgSrc;
+	    dwn.classList.remove("hide");
+	    dwn.download = "imagename.png";
+	    dwn.setAttribute("href", imgSrc);
+	})
+	
+	function test() {
+			$("#imgModal").modal('show');
+		}
+</script>
 
 
-<body style="background-color: #3991bd">
-	<h1 id="sticky-div">Introduction To Sticky Elements In CSS</h1>
-	<p id="description">
-		<br> <br> “Your Text” <br> <br>
-	</p>
-	<h1 id="sticky-div">What is Sticky position?</h1>
-	<br>
-	<br>
 
-	<p id="description">“Your Text”</p>
-	<br>
-	<br>
-	<p id="description">“Your Text”</p>
-</body>
+
+</div>
 </html>
+

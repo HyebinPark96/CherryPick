@@ -213,16 +213,18 @@
 			</div>
 
 
-
-
+			<!-- 미리보기 box -->
+			<div class="box-2 img-result hide">
+									<img style="max-width:100%;" src="" alt="" class="cropped">
+								</div>
 
 			<!-- 모달 영역 -->
-			<div id="myModal" class="modal fade">
+			<div id="imgModal" class="modal fade">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title">이미지 첨부</h5>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
 						</div>
 						<div class="modal-body">
 							
@@ -237,18 +239,16 @@
 									<div class="result"></div>
 								</div>
 
-								<div class="box-2 img-result hide">
+								<!-- <div class="box-2 img-result hide">
 									<img style="max-width:100%;" src="" alt="" class="cropped">
-								</div>
+								</div> -->
 
 								<div class="box">
 									<div class="options hide">
 										<label for="width">width</label> <input type="number"
 											class="img-w" value="300" min="100" max="1200">
 									</div>
-									<button class="btn save hide">Save</button>
-
-									<a href="" class="btn download hide">Download</a>
+									<button class="btn save hide" data-bs-dismiss="modal">Save</button>
 								</div>
 							</div>
 						</div>
@@ -401,15 +401,9 @@
 		}
 
 		function test() {
-			alert('no test available');
+			$("#imgModal").modal('show');
 		}
 	</script>
-	
-	<script>
-	$(document).ready(function(){
-		$("#myModal").modal('show');
-	});
-</script>
 
 </div>
 
