@@ -92,5 +92,10 @@ public class MemberController {
 		model.addAttribute("select", num); // 현재 페이지 (현재 페이지가 아닌 페이지와 구분하기 위해 값 전달)
 		
 	}
+	
+	@GetMapping("/auth/checkPwdForEditResult")
+	public String checkPwdForEditResult() {
+		return "member/checkPwdForEditResult";
+	}
 
 }
