@@ -62,8 +62,11 @@
 							<span th:each="HeartVO : ${list.HeartVO}">
 							
 								<span th:if="${HeartVO.hno}!=0">
-<!-- 									<b th:text="${HeartVOStat.index}">2</b>-->
 									<b th:if="${HeartVOStat.size}==1" th:text="${HeartVOStat.count}">2</b>
+								</span>
+								
+								<span th:unless="${HeartVO.hno}!=0">
+									<b th:text="${HeartVOStat.index}">2</b>
 								</span>
 <!-- 								<span th:unless="${iter.size}!=0">
 									<b th:if="${iter.index}==0" th:text="0">0</b>
