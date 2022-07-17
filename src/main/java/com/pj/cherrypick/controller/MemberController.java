@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
+import com.pj.cherrypick.domain.HeartVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.domain.Page;
 import com.pj.cherrypick.domain.ReviewVO;

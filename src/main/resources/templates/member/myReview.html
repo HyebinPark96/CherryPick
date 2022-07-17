@@ -56,14 +56,19 @@
 							</div>
 							
 							(heart) : 
-							<div th:each="HeartVO, iter:${list.HeartVO}">
-								<span th:if="${iter.size}!=1">
-									<b th:if="${iter.index}==0" th:text="${iter.size}">2</b>
+							<span>
+								<b th:if="${list.HeartVO.size}>1" th:text="${#lists.size(list.HeartVO)}"></b>
+							</span>
+							<span th:each="HeartVO : ${list.HeartVO}">
+							
+								<span th:if="${HeartVO.hno}!=0">
+<!-- 									<b th:text="${HeartVOStat.index}">2</b>-->
+									<b th:if="${HeartVOStat.size}==1" th:text="${HeartVOStat.count}">2</b>
 								</span>
-								<span th:unless="${iter.size}!=1">
-									<b th:if="${iter.index}==0">0</b>
-								</span>
-							</div>
+<!-- 								<span th:unless="${iter.size}!=0">
+									<b th:if="${iter.index}==0" th:text="0">0</b>
+								</span> -->
+							</span>
 							
 							
 						</div>
@@ -76,7 +81,7 @@
 				<hr>
 			</th:block>
 			
-			<div class="pagination" th:if="${list.size}>=10">
+			<div class="pagination">
 					<th:block th:if="${page.prev}">
 						<span class="page-item" >[ <a th:href="@{myReview(num=${page.startPageNum - 1})}" class="page-link">이전</a> ]</span>
 					</th:block>
@@ -133,16 +138,16 @@
 			</div>
 			</th:block> -->
 
-			<!-- === 더보기 버튼 ==== -->
+			<!-- === 더보기 버튼 ==== 
 
 			<button type="button" id="seeMoreBtn" onclick="seeMore()" class="btn btn-outline-secondary col-md-12">더보기</button>
 			<button type="button" id="hideBtn" onclick="hideAll()" class="btn btn-outline-secondary col-md-3">▲ 리뷰 접기</button>
-
+			-->
 
 
 		</div>
 
-		<!-- ======스크립트====== -->
+		<!-- ======스크립트====== 
 		<script type="text/javascript">
 			var seeMoreBtn = document.getElementById("seeMoreBtn");
 			var hideBtn = document.getElementById("hideBtn");
@@ -175,6 +180,7 @@
 				hideBtn.style.display = 'none';
 			}
 		</script>
+		-->
 	</div>
 </body>
 </html>

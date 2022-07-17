@@ -2,16 +2,13 @@ package com.pj.cherrypick.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import com.pj.cherrypick.config.auth.PrincipalDetail;
+import com.pj.cherrypick.domain.HeartVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.MemberMapper;
@@ -152,6 +149,12 @@ public class MemberService {
 	@Transactional
 	public List<ReviewVO> getMyReviewList(String username, int displayPost, int postNum) {
 		return reviewMapper.getMyReviewList(username, displayPost, postNum);
+	}
+	
+	// 내가 작성한 리뷰의 좋아요 갯수 가져오기
+	@Transactional
+	public int getHeartCnt(int rno){
+		return reviewMapper.getHeartCnt(rno);
 	}
 	
 	
