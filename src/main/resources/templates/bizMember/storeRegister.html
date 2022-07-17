@@ -2,7 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout-main}">
-
+<head>
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css" />
+</head>
 
 <div layout:fragment="content">
 
@@ -11,8 +14,8 @@
 
 		<div id="sidebar-wrapper" class="col-md-1"
 			th:replace="fragments/bizSidebar:: sidebar"></div>
-		
-		
+
+
 
 		<!-- 본문 -->
 		<div class="content" id="page-content-wrapper">
@@ -48,8 +51,7 @@
 						<tr>
 							<th>영업시간</th>
 							<td>오픈 <input id="copen" value="" type="time"
-								class="form-control" placeholder=""> 
-								마감 <input
+								class="form-control" placeholder=""> 마감 <input
 								id="cclose" value="" type="time" class="form-control"
 								placeholder=""></td>
 						</tr>
@@ -57,17 +59,16 @@
 							<th>주차공간</th>
 							<td><input id="parkingY" class="form-check-input"
 								type="radio" name="parking" value=1> <label
-								class="form-check-label" for="flexRadioDefault1"> 있음 </label> 
-								<input id="parkingN" class="form-check-input" type="radio"
-								name="parking" value=0 checked> <label class="form-check-label"
-								for="flexRadioDefault2"> 없음 </label></td>
+								class="form-check-label" for="flexRadioDefault1"> 있음 </label> <input
+								id="parkingN" class="form-check-input" type="radio"
+								name="parking" value=0 checked> <label
+								class="form-check-label" for="flexRadioDefault2"> 없음 </label></td>
 						</tr>
 						<tr>
 							<th>애견 동반</th>
 							<td><input id="petY" class="form-check-input" type="radio"
 								name="pet" value=1> <label class="form-check-label"
-								for="flexRadioDefault1"> 예 </label> 
-								<input id="petN"
+								for="flexRadioDefault1"> 예 </label> <input id="petN"
 								class="form-check-input" type="radio" name="pet" value=0 checked>
 								<label class="form-check-label" for="flexRadioDefault2">
 									아니오 </label></td>
@@ -75,12 +76,11 @@
 						<tr>
 							<th>유아 동반</th>
 							<td><input id="kidY" class="form-check-input" type="radio"
-								name="kids" value=1> 
-								<label class="form-check-label"
-								for="flexRadioDefault1"> 예 </label> 
-								<input id="kidN" class="form-check-input" type="radio" name="kids" value=0 checked> 
-								<label
-								class="form-check-label" for="flexRadioDefault2"> 아니오 </label></td>
+								name="kids" value=1> <label class="form-check-label"
+								for="flexRadioDefault1"> 예 </label> <input id="kidN"
+								class="form-check-input" type="radio" name="kids" value=0
+								checked> <label class="form-check-label"
+								for="flexRadioDefault2"> 아니오 </label></td>
 						</tr>
 
 
@@ -92,29 +92,31 @@
 						<tr>
 							<th>단체석(5인 이상)</th>
 							<td><input id="groupY" class="form-check-input" type="radio"
-								name="group" value=1> 
-								<label class="form-check-label"
+								name="group" value=1> <label class="form-check-label"
 								for="flexRadioDefault1"> 있음 </label> <input id="groupN"
-								class="form-check-input" type="radio" name="group" value=0 checked> <label
-								class="form-check-label" for="flexRadioDefault2"> 없음 </label></td>
+								class="form-check-input" type="radio" name="group" value=0
+								checked> <label class="form-check-label"
+								for="flexRadioDefault2"> 없음 </label></td>
 						</tr>
-						
+
 					</table>
-						<div>
-							<b>해시태그 /최대 5개까지 입력 가능합니다.</b>
-						</div>
+					<div>
+						<b>해시태그 /최대 5개까지 입력 가능합니다.</b>
+					</div>
 
 					<div id="ctag-block">
 						<!-- <div class="ctag-item">
 							<input type="text" class="ctag form-control" placeholder="" data-prefix="#">
 						</div> -->
 						<div class="ctag-item">
-							<span class="ctag-item-prefix">#</span> 
-							<input class="ctag-item-value" name="ctag" type="text" placeholder="" />
+							<span class="ctag-item-prefix">#</span> <input
+								class="ctag-item-value" name="ctag" type="text" placeholder="" />
 						</div>
 					</div>
 
-					<img class="divBtn icon-30" onclick="addItem('ctag-block', 'ctag-item', 5)" src="/img/circle-plus-pink.png">
+					<img class="divBtn icon-30"
+						onclick="addItem('ctag-block', 'ctag-item', 5)"
+						src="/img/circle-plus-pink.png">
 					<hr>
 
 					<!-- 이미지 등록 -->
@@ -174,17 +176,17 @@
 										<tr>
 											<th>메뉴가격</th>
 											<td>
-											<div class="">
-											<span class="ctag-item-prefix">#</span>
-											<input id="m_price" value="" type="text"
-												class="input-number form-control" placeholder="">
+												<div class="">
+													<span class="ctag-item-prefix">#</span> <input id="m_price"
+														value="" type="text" class="input-number form-control"
+														placeholder="">
 												</div>
-												</td>
+											</td>
 										</tr>
 										<tr>
 											<th>메뉴설명</th>
-											<td><input id="m_detail" value=""
-												type="text" class="form-control" placeholder="메뉴에 대해 설명해주세요."></td>
+											<td><input id="m_detail" value="" type="text"
+												class="form-control" placeholder="메뉴에 대해 설명해주세요."></td>
 										</tr>
 									</table>
 									<div class="divBtn">
@@ -193,8 +195,8 @@
 								</div>
 							</div>
 						</div>
-						<div onclick="addItem('menulist-block', 'menulist-item', 3)" class="divBtn hoverbox"
-							style="width: 150px; height: 100px;">
+						<div onclick="addItem('menulist-block', 'menulist-item', 3)"
+							class="divBtn hoverbox" style="width: 150px; height: 100px;">
 							<img class="icon-30" src="/img/circle-plus.png">
 						</div>
 					</div>
@@ -204,31 +206,50 @@
 				</form>
 				<button id="btn-register" class="btn btn-primary btn-lg btn-block">등록
 					완료</button>
-					
-					<br>
+
+				<br>
 				<div class="divBtn btn btn-primary btn-lg" onclick="test()">테스트</div>
 
 			</div>
 
+
+
+
+
+			<!-- 모달 영역 -->
 			<div id="myModal" class="modal fade">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">Subscribe our Newsletter</h5>
+							<h5 class="modal-title">이미지 첨부</h5>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 						<div class="modal-body">
-							<p>Subscribe to our mailing list to get the latest updates
-								straight in your inbox.</p>
+							
+							<!-- Cropper 영역 -->
 							<div>
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Name">
+								<div class="form-group.container">
+									<label for="file">Upload File</label> <input type="file"
+										id="file-input" required accept="image/*">
+									<!-- required accept: 파일 유형 제한 -->
 								</div>
-								<div class="form-group">
-									<input type="email" class="form-control"
-										placeholder="Email Address">
+								<div class="box-2">
+									<div class="result"></div>
 								</div>
-								<button type="submit" class="btn btn-primary">Subscribe</button>
+
+								<div class="box-2 img-result hide">
+									<img style="max-width:100%;" src="" alt="" class="cropped">
+								</div>
+
+								<div class="box">
+									<div class="options hide">
+										<label for="width">width</label> <input type="number"
+											class="img-w" value="300" min="100" max="1200">
+									</div>
+									<button class="btn save hide">Save</button>
+
+									<a href="" class="btn download hide">Download</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -238,7 +259,74 @@
 		</div>
 
 	</div>
+
+
+	<!-- cropper script -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
+	<script>
+	let result = document.querySelector(".result"), 
+	img_result = document.querySelector(".img-result"), 
+	img_w = document.querySelector(".img-w"), 
+	img_h = document.querySelector(".img-h"), 
+	options = document.querySelector(".options"), 
+	save = document.querySelector(".save"), 
+	cropped = document.querySelector(".cropped"), 
+	dwn = document.querySelector(".download"), 
+	upload = document.querySelector("#file-input"), 
+	cropper = "";
 	
+	upload.addEventListener('change',(e) =>{
+		console.log(e)
+
+		//이미지 자르기
+	 // start file reader
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target.result) {
+          // create new image
+          let img = document.createElement("img");
+          img.id = "image";
+          img.src = e.target.result;
+          // clean result before
+          result.innerHTML = "";
+          // append new image
+          result.appendChild(img);
+          // show save btn and options
+          save.classList.remove("hide");
+          options.classList.remove("hide");
+          // init cropper
+          cropper = new Cropper(img);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);	
+	})
+	
+	//save button to crop the image
+	save.addEventListener('click',(e)=>{
+		e.preventDefault()
+	
+	 // get result to data uri
+    let imgSrc = cropper
+      .getCroppedCanvas({
+        width: img_w.value, 
+        // input value
+      })
+      .toDataURL();
+		
+		console.log(imgSrc);
+		
+		 // remove hide class of img
+	    cropped.classList.remove("hide");
+	    img_result.classList.remove("hide");
+	    // show image cropped
+
+	    cropped.src = imgSrc;
+	    dwn.classList.remove("hide");
+	    dwn.download = "imagename.png";
+	    dwn.setAttribute("href", imgSrc);
+	})
+</script>
+
 	<!-- DB 연결 스크립트 -->
 	<script src="/js/tempcafe.js"></script>
 
