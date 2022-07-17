@@ -17,15 +17,11 @@ public interface ReviewMapper {
 	
 	List<ReviewVO> getMyReviewList(String username, int displayPost, int postNum);
 	
-	/*myReview 리뷰목록 페이징 처리*/
-	// 1. 나의 리뷰 총 갯수 : 나의 리뷰 갯수로 페이징 할거라서 매개변수로 나의 id 들어감
+	/*----myReview 리뷰목록 페이징 처리----*/
+	// 나의 리뷰 총 갯수 : 나의 리뷰 갯수로 페이징 할거라서 매개변수로 나의 id 들어감
 	public int count(String username);
 	
-	// 테이블 4개 조인해야 모든 정보 출력 가능하므로
-	// 2. 리뷰 관련 리스트 
-	public List<MemberVO> mList();
-	public List<CafeVO> cList();
-	public List<ReviewVO> vList();
-	public List<HeartVO> hList();
+	/*---------------------------------*/
 	
+	public int getHeartCnt(int rno);
 }

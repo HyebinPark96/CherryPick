@@ -90,8 +90,6 @@ public class Page {
 		// 마지막 번호 재계산
 		int endPageNum_tmp = (int) (Math.ceil((double) count / (double) pageNumCnt));
 		
-		System.out.println("endPageNum_tmp : " + endPageNum_tmp);
-		
 		if (endPageNum > endPageNum_tmp) {
 			endPageNum = endPageNum_tmp;
 		}
@@ -100,7 +98,6 @@ public class Page {
 		next = endPageNum * pageNumCnt >= count ? false : true;
 
 		displayPost = (num - 1) * postNum;
-		System.out.println("displayPost 변경 후 : " + displayPost);
 
 	}
 

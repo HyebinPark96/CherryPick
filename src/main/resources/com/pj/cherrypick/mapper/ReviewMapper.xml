@@ -78,5 +78,13 @@
 	</select>
 
 
+	<select id="getHeartCnt" resultType="int" parameterType="int">
+		SELECT COUNT(h.rno)
+		FROM heart h
+		WHERE h.rno = (SELECT r.rno 
+								FROM review r
+								WHERE r.rno = #{rno})
+	</select>
+
 
 </mapper>
