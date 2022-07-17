@@ -91,7 +91,7 @@ public class MemberApiController {
 		boolean checkPassword = memberService.getEncPassword(password, member.getPassword());
 			
 		if(!checkPassword) {
-			return "redirect:/member/checkPwdForEditResult";
+			return "redirect:/auth/checkPwdForEditResult";
 		} else {
 			model.addAttribute("member", member); // member 객체들고 뷰로 이동
 			return "member/memberEditForm";

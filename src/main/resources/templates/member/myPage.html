@@ -27,7 +27,7 @@
 						<p>
 							<b th:text="${#authentication.principal.username}">username님</b>
 						</p>
-						<p>email@naver.com</p>
+						<p th:text="${member.email}">email@naver.com</p>
 					</div>
 
 					<div class="col-md-1">
