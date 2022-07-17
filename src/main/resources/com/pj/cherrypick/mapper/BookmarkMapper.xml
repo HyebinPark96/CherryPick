@@ -4,14 +4,15 @@
 <mapper namespace="com.pj.cherrypick.mapper.BookmarkMapper" >
 
 	<!-- username으로 카페 북마크 여부 확인-->
- 	<select id="checkBmkc" parameterType="hashmap" resultType="boolean">
-		SELECT *
+ 	<select id="checkBmkc" resultType="com.pj.cherrypick.domain.BookmarkVO">
+		SELECT *, IF(COUNT(*) = 1, true, false) as chk
 		FROM bmk_cafe b
 		LEFT JOIN member m
 		ON b.username = m.username
 		LEFT JOIN cafe c
 		ON b.cno = c.cno
 		WHERE b.username= #{username} AND b.cno = #{cno}
+
     </select> 
 	<!-- username으로 리스트 북마크 여부 확인-->
  	<select id="checkBmkli" parameterType="hashmap" resultType="boolean">
@@ -23,6 +24,16 @@
 		ON b.cno = c.cno
 		WHERE b.username= #{username} AND b.cno=#{cno} 
     </select> 
-
+    
+	<!-- username으로 카페 북마크 여부 확인-->
+ 	<select id="checkCafeBmk" parameterType="com.pj.cherrypick.domain.BookmarkVO" resultType="com.pj.cherrypick.domain.BookmarkVO">
+		SELECT *, IF(COUNT(*) = 1, true, false) as chk
+		FROM bmk_cafe b
+		LEFT JOIN member m
+		ON b.username = m.username
+		LEFT JOIN cafe c
+		ON b.cno = c.cno
+		WHERE b.username = #{username} AND c.cno = #{cno}
+    </select> 
 
 </mapper>

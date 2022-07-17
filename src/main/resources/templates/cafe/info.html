@@ -32,11 +32,12 @@
 				<span style="font-size: 12px; color: #bbb;"> 조회수 000,000회 |
 					저장된 횟수 또는 즐겨찾기 수 </span> <br> <span style="font-size: 20px; color:#eee;"
 					th:text="${cafe.cname}"><b>카페 이름</b> </span>
+					<img th:if="${bmk.chk > 0 }" th:src="@{/img/bmk.png}" />
+					<img th:unless="${bmk.chk > 0 }" th:src="@{/img/bmk-empty.png}" />  
+					
 			</div>
 		</div>
 		<div class="content container">
-
-
 
 			<div>
 				<div class="row">
