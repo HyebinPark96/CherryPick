@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.pj.cherrypick.domain.BookmarkVO;
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.ListVO;
@@ -43,5 +44,6 @@ public interface CafeMapper {
 	
 	// 내(username)가 북마크한 리스트 불러오기
 	List<ListVO> getMyListBmk(String username);
+	
 	
 }

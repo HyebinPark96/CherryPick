@@ -59,10 +59,11 @@
 							<a th:id="${cafe.cno}" th:onclick="sendToInfo(this.getAttribute('id'))">더보기</a>
 
 						</div>
-						<div>
-					<!--	  <img th:if="${bmkc = true}" th:src="@{/img/bmk.png}" />
-						  <img th:if="${bmkc != true}" src="@{img/bmk-empty.png}" /> -->
-
+						<div class="bmk">						
+						<!--<b th:text="{$bmk}">cno?</b> -->
+	
+				<!--		  <img th:if="${bmk.cno == cafe.cno}" th:src="@{/img/bmk.png}" />
+						  <img th:if="${{bmk.cno != cafe.cno}" th:src="@{/img/bmk-empty.png}" /> -->				
 						</div>
 
 					</div>
