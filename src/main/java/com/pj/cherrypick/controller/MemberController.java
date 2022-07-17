@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
-import com.pj.cherrypick.domain.HeartVO;
+import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.domain.Page;
 import com.pj.cherrypick.domain.ReviewVO;
+import com.pj.cherrypick.service.CafeService;
 import com.pj.cherrypick.service.MemberService;
 import com.pj.cherrypick.service.ReviewService;
 
@@ -25,6 +27,9 @@ public class MemberController {
 	
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private CafeService cafeService;
 	
 	// http://localhost/auth/selectTypeForFindId
 	@GetMapping("/auth/selectTypeForFindId")
@@ -99,10 +104,26 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/myPage")
-	public String myPage(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+	public String getMyCafeBmk(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
 		MemberVO member = memberService.findByUsername(principalDetail.getUsername()); // 회원 정보 가져오기
+		String username = principalDetail.getUsername();
+		List<CafeVO> cafes = cafeService.getMyCafeBmk(username);
+		List<ListVO> list = cafeService.getMyListBmk(username);
+		model.addAttribute("cafes", cafes);
+		model.addAttribute("list", list);
 		model.addAttribute("member", member); // 뷰에 보내기
 		return "member/myPage";
 	}
+	
+	/*CafeController에서 MemberController 의 위 메소드로 이동*/
+//	@GetMapping("/member/myPage")
+//	public String getMyCafeBmk(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+//		String username = principalDetail.getUsername();
+//		List<CafeVO> cafes = cafeService.getMyCafeBmk(username);
+//		List<ListVO> list = cafeService.getMyListBmk(username);
+//		model.addAttribute("cafes", cafes);
+//		model.addAttribute("list", list);
+//		return "/member/myPage";
+//	}
 
 }

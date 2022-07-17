@@ -87,15 +87,7 @@ public class CafeController {
 
 	
 
-	@GetMapping("/member/myPage")
-	public String getMyCafeBmk(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
-		String username = principalDetail.getUsername();
-		List<CafeVO> cafes = cafeService.getMyCafeBmk(username);
-		List<ListVO> list = cafeService.getMyListBmk(username);
-		model.addAttribute("cafes", cafes);
-		model.addAttribute("list", list);
-		return "/member/myPage";
-	}
+
 	
 //	@GetMapping("/member/myPage")
 	// http://localhost/member/myPage
