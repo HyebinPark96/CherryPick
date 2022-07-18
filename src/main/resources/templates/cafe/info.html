@@ -35,11 +35,8 @@
 			<img id="bmkImg" src="">
 			<input type="hidden" id="bmk_check" th:if="${bmk.chk == 0}" th:value="0">
 			<input type="hidden" id="bmk_check" th:if="${bmk.chk != 0}" th:value="1"> 
-			
-			<!--reviewController에 cno 보내기 -->
-			<!-- <input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}"> -->
-			
-			
+
+		
 		</div>
 			
 
@@ -199,6 +196,13 @@
 			<b>리뷰(<span style="font-size: 16px;"
 				th:text="${#lists.size(review)}">000</span>)
 			</b>
+
+			<form>
+				<!--reviewController에 cno 보내기 -->
+				<input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
+				<a th:href="@{/review/writeReview/{cno}(cno=${cafe.cno})}"><button type="button">리뷰 작성하기</button></a>
+			</form>
+			
 			<div class="cf-review">
 				<div class="cf-review-item" th:each="review, j : ${review}">
 					<div class="cf-review-writer">
