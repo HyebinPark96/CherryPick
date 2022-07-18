@@ -26,16 +26,25 @@
 				<input type="hidden" id="cno" th:value="${cno}"> 
 				
 				<input type="text" id="title" class="form-control form-control" placeholder="제목을 작성해주세요."><br>
-		    	<div id="content"></div>
+		    	<div id="content"></div><br>
 		    	
-		    	<input type="range" class="form-control-range" id="score"  value="0" min="0" max="5">
+		    	<div style="width:200px;">
+		    		<h5>만족도</h5>
+			    	<input type="range" class="form-control-range" id="score"  value="0" min="0" max="5" step="0.5" oninput="document.getElementById('value1').innerHTML=this.value;">
+			    	<span id="value1">0</span>점<br><br>
+		    	</div>
 		    	
-		    	  <select class="selectpicker" id="waiting">
-				    <option>10</option> <!-- 10분 이하 -->
-				    <option>20</option><!-- 10~20분 이하 -->
-				    <option>30</option><!-- 20~30분 이하 -->
-				    <option>40</option><!-- 30분 초과 -->
-				  </select><br><br>
+		    	<div>
+		    		<h5>웨이팅(분)</h5><br>
+					<select class="selectpicker" id="waiting">
+					    <option>10</option> <!-- 10분 -->
+					    <option>20</option><!-- 10~20분 -->
+					    <option>30</option><!-- 20~30분 -->
+					    <option>40</option><!-- 30~40분 -->
+					   	<option>50</option><!-- 40~50분 -->
+					    <option>60</option><!-- 50~60분 -->
+				 	</select><br><br>
+				</div>
 				
 	    	</form>
 	    	

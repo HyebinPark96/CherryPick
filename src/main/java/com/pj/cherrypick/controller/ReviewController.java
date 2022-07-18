@@ -11,7 +11,6 @@ public class ReviewController {
 	
 	@GetMapping("/review/writeReview/{cno}")
 	public String writeReview(@PathVariable int cno, Model model) {
-		System.out.println("cno" + cno);
 		model.addAttribute("cno", cno);
 		
 		return "review/writeReview";
