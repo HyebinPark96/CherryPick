@@ -23,7 +23,6 @@ public class SampleController {
 		return "bizMember/storeRegister"; // model 들고 뷰로 이동
 	}
 	
-	
 	@GetMapping(value = "/demo2")
 	public String demo2(Model model) {
 		
@@ -55,11 +54,11 @@ public class SampleController {
 		return "test4";
 	}
 	
-	@GetMapping(value = "/uploadForm")
-	public String uploadForm(Model model) {
-		
-		return "uploadForm";
-	}
+	
+	  @GetMapping(value = "/uploadForm") public String uploadForm(Model model) {
+	  
+	  return "uploadForm"; }
+	 
 	
 	
 	

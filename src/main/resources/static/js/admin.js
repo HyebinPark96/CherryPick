@@ -17,6 +17,10 @@ let index = {
 			this.bizMember();
 		});
 		
+		$('#bizMemberSB').on("click", () => {
+			this.bizMemberSB();
+		});
+		
 	
 	},
 
@@ -98,6 +102,30 @@ let index = {
 			*/
 			$('#bizMember').prop("checked", true);
 			location.href = "/admin/adminMain?num=1&sort=bizMember";
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			alert(JSON.stringify(error));
+		});
+	},
+	
+	bizMemberSB: function() {
+				
+		let data = {
+			sort: $("#bizMemberSB").val(),
+			num: $("#num").val()
+		};
+		
+		$.ajax({
+			type: "POST",
+			url: "/admin/bizMemberManagement",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			
+			$('#bizMemberSB').prop("checked", true);
+			location.href = "/admin/adminMain?num=1&sort=bizMemberSB";
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			alert(JSON.stringify(error));
