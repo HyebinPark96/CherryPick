@@ -24,10 +24,16 @@ public class SampleController {
 	}
 	
 	
+	@GetMapping(value = "/demo2")
+	public String demo2(Model model) {
+		
+		return "demo2";
+	}
+	
 	@GetMapping(value = "/test")
 	public String test(Model model) {
 		
-		return "test";
+		return "withdrawalResult";
 	}
 	
 	
