@@ -13,6 +13,11 @@ let index = {
 			this.updateMember();
 		});
 		
+		// 일반 회원의 회원탈퇴
+		$("#withdrawalProcBtn").on("click", () => {
+			this.withdrawalProc();
+		});
+		
 		
 		/*사업자*/
 		$("#bSaveBtn").on("click", () => {
@@ -26,6 +31,9 @@ let index = {
 		$("#updateBMemberBtn").on("click", () => {
 			this.updateBMember();
 		});
+		
+		// 사업자 회원의 회원탈퇴 (구현예정)
+		
 		
 	},
 
@@ -74,7 +82,7 @@ let index = {
 		}).done(function(resp) {
 			// 성공한 경우 호출
 			alert("회원가입이 완료되었습니다.");
-			location.href = "/";
+			location.href = "/auth/loginForm";
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			alert(JSON.stringify(error));
@@ -145,6 +153,30 @@ let index = {
 	
 	
 	
+	
+	withdrawalProc: function() {
+		let data = {
+			username: $("#username").val()
+		};
+
+		$.ajax({
+			type: "DELETE",
+			url: "/member/withdrawalProc",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			alert("회원탈퇴가 완료되었습니다.");
+			location.href = "/";
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			alert(JSON.stringify(error));
+		});
+	},
+	
+	
+	
+	
 	/* 사업자 */
 	bSave: function() {
 		let bAgreement = $("#bAgreement");
@@ -188,7 +220,7 @@ let index = {
 		}).done(function(resp) {
 			// 성공한 경우 호출
 			alert("회원가입이 완료되었습니다.");
-			location.href = "/";
+			location.href = "/auth/loginForm";
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			alert(JSON.stringify(error));

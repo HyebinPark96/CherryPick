@@ -77,7 +77,7 @@
 		LIMIT #{displayPost}, #{postNum}
 	</select>
 
-
+	<!-- 내가 작성한 리뷰의 좋아요 총 갯수 가져오기 -->
 	<select id="getHeartCnt" resultType="int" parameterType="int">
 		SELECT COUNT(h.rno)
 		FROM heart h
@@ -85,6 +85,11 @@
 								FROM review r
 								WHERE r.rno = #{rno})
 	</select>
-
+	
+	<!-- 리뷰 작성 (date는 디폴트로 작성시간으로 입력됨) -->
+ 	<insert id="writeReviewProc" parameterType="com.pj.cherrypick.domain.ReviewVO">
+		INSERT INTO review (username, cno, title, content, score, waiting)
+		VALUES (#{username}, #{cno}, #{title}, #{content}, #{score}, #{waiting})
+	</insert>
 
 </mapper>

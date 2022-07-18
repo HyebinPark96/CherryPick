@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,8 +46,6 @@ public class MemberApiRestController {
 	
 	@PutMapping("/member/updateMemberProc")
 	public ResponseDto<Integer> updateMember(@RequestBody MemberVO member) throws Exception {
-		System.out.println("member.getPassword() : " + member.getPassword());
-		System.out.println("member.getPassword().length : " + member.getPassword().length());
 
 		if(member.getPassword().length()==0) {
 			memberService.updateMemberWithoutPwd(member); // 비번빼고 수정한 경우
@@ -56,6 +55,13 @@ public class MemberApiRestController {
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(member.getUsername(), member.getPassword())); 
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
+	}
+	
+	@DeleteMapping("/member/withdrawalProc")
+	public ResponseDto<Integer> withdrawalProc(@RequestBody MemberVO member) throws Exception {
+		memberService.withdrawalProc(member.getUsername());
+		SecurityContextHolder.clearContext(); // 세션도 삭제
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 1 리턴되면 성공한 것
 	}
 }

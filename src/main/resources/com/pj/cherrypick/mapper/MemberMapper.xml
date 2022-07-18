@@ -36,15 +36,20 @@
 		SELECT role FROM member WHERE username = #{username}
 	</select>
 	
-	<update id="updateMember"  parameterType="com.pj.cherrypick.domain.MemberVO">
+	<update id="updateMember" parameterType="com.pj.cherrypick.domain.MemberVO">
 		UPDATE member SET password = #{password}, name = #{name}, phone = #{phone}, email = #{email} 
 		WHERE username = #{username}
 	</update>
 	
-	<update id="updateMemberWithoutPwd"  parameterType="com.pj.cherrypick.domain.MemberVO">
+	<update id="updateMemberWithoutPwd" parameterType="com.pj.cherrypick.domain.MemberVO">
 		UPDATE member SET name = #{name}, phone = #{phone}, email = #{email} 
 		WHERE username = #{username}
 	</update>
+	
+	<delete id="withdrawalProc" parameterType="String">
+		DELETE FROM member
+		WHERE username = #{username}
+	</delete>
 	
     
 </mapper>
