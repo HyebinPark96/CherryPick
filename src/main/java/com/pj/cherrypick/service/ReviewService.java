@@ -12,7 +12,6 @@ public class ReviewService {
 	private ReviewMapper reviewMapper;
 	
 	// 내가 작성한 리뷰 총 갯수
-	@Transactional
 	public int count(String username) {
 		return reviewMapper.count(username);
 	}

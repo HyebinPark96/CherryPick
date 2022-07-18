@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.MemberVO;
@@ -20,6 +21,7 @@ public class AdminService {
 		return adminMapper.list();
 	};
 	
+	@Transactional(rollbackFor = Exception.class)
 	public void delete(String username) throws Exception{
 		adminMapper.delete(username);
 	};
@@ -41,6 +43,7 @@ public class AdminService {
 		return adminMapper.bList();
 	};
 	
+	@Transactional(rollbackFor = Exception.class)
 	public void bDelete(String bid) throws Exception{
 		adminMapper.bDelete(bid);
 	};
