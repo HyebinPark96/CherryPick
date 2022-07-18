@@ -16,16 +16,24 @@ public class BookmarkService {
 	@Autowired
 	private BookmarkMapper bookmarkMapper;
 	
-	public List<BookmarkVO> checkBmkc(String username, int cno) {
+	public List<BookmarkVO> checkBmkc(String username, int cno) throws Exception {
 		return bookmarkMapper.checkBmkc(username, cno);
 	}
 	
-	public Boolean checkBmkli(Map<String, Object> map) {
+	public Boolean checkBmkli(Map<String, Object> map) throws Exception {
 		return bookmarkMapper.checkBmkli(map);
 	}	
 	
-	public BookmarkVO checkCafeBmk(String username, int cno) {
+	public BookmarkVO checkCafeBmk(String username, int cno) throws Exception {
 		return bookmarkMapper.checkCafeBmk(username, cno);
 	}
-
+	
+	public void addBmkc(BookmarkVO bookmarkVO) throws Exception {
+		bookmarkMapper.addBmkc(bookmarkVO);
+	}
+	
+	public void delBmkc(String username, int cno) throws Exception {
+		bookmarkMapper.delBmkc(username, cno);
+	}	
+	
 }

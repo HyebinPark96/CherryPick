@@ -42,7 +42,7 @@ public class CafeController {
 	}
 
 	@GetMapping("/cafe/test")
-	public String gettest(Model model) {
+	public String gettest(Model model) throws Exception {
 		
 		String username = "aaa";
 		List<BookmarkVO> bmk = bookmarkService.checkBmkc(username, 1);
@@ -67,8 +67,7 @@ public class CafeController {
 
 	// 카페상세정보
 	@GetMapping("cafe/{cno}")
-	public String getCafe(@AuthenticationPrincipal PrincipalDetail principalDetail, @PathVariable int cno, Model model) {
-		
+	public String getCafe(@AuthenticationPrincipal PrincipalDetail principalDetail, @PathVariable int cno, Model model) throws Exception {
 		
 		String username = "aaa"; // 테스트 나중엔 시큐리티 적용
 		CafeVO cafe = cafeService.getCafeInfo(cno);
@@ -79,8 +78,9 @@ public class CafeController {
 		model.addAttribute("menu", menu);
 		model.addAttribute("review", review);
 		model.addAttribute("bmk", bmk);
-		
-		return "/cafe/info";
+
+
+		return "cafe/info";
 		
 	}
 		
@@ -88,12 +88,6 @@ public class CafeController {
 	
 
 
-	
-//	@GetMapping("/member/myPage")
-	// http://localhost/member/myPage
-//	public String myPage() {
-//		return "member/myPage"; // /WEB-INF/views/templates/member/myPage
-//	}
 	
 
 }

@@ -35,5 +35,12 @@
 		ON b.cno = c.cno
 		WHERE b.username = #{username} AND c.cno = #{cno}
     </select> 
-
+	<insert id="addBmkc" parameterType="com.pj.cherrypick.domain.BookmarkVO">
+		INSERT INTO bmk_cafe(username, cno)
+		VALUES( #{username}, #{cno})
+	</insert>
+	<delete id="delBmkc" parameterType="int">
+		DELETE FROM bmk_cafe 
+		WHERE username = #{username} AND cno = #{cno}
+	</delete>
 </mapper>
