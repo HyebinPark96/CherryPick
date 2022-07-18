@@ -54,6 +54,12 @@ public class SampleController {
 		return "test4";
 	}
 	
+	@GetMapping(value = "/teststar")
+	public String teststar(Model model) {
+		
+		return "testStar";
+	}
+	
 	
 	  @GetMapping(value = "/uploadForm") public String uploadForm(Model model) {
 	  

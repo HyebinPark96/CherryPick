@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>RateYo - Scratchpad</title>
+<meta charset="utf-8"></meta>
+<link rel="stylesheet" href="/css/jquery.rateyo.min.css" />
+</head>
+<body>
+
+	<div id="rateYo"></div>
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.rateyo.js"></script>
+
+	<script>
+		$(function() {
+
+			$("#rateYo").rateYo({
+				halfStar : true,
+				starWidth : "30px",
+				ratedFill : "#a6434b",
+				spacing : "2px",
+
+				onSet : function(rating, rateYoInstance) {
+
+					alert("Rating is set to: " + rating);
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>
