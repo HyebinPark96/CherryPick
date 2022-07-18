@@ -17,16 +17,40 @@
 	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
 
 	<div layout:fragment="content">
-	    <div id="summernote"></div>
+
+		<div class="content container">
+		
+			<form>
+			
+ 				<input type="hidden" id="username" th:value="${#authentication.principal.username}">
+			<!--	<input type="hidden" id="cno" th:value="${cafe.cno}"> -->
+				
+				<input type="text" id="title" class="form-control form-control" placeholder="제목을 작성해주세요."><br>
+		    	<textarea rows="30" cols="5" id="content"></textarea>
+		    	
+		    	<input type="range" class="form-control-range" id="score"  value="0" min="0" max="5">
+		    	
+		    	  <select class="selectpicker" id="waiting">
+				    <option>10</option> <!-- 10분 이하 -->
+				    <option>20</option><!-- 10~20분 이하 -->
+				    <option>30</option><!-- 20~30분 이하 -->
+				    <option>40</option><!-- 30분 초과 -->
+				  </select><br><br>
+		    	
+		    	<button type="button" id="reviewWriteBtn">작성하기</button>
+		    	
+	    	</form>
+	    	
+	    </div>
+	    
 	    <script>
-	      $('#summernote').summernote({
-	        placeholder: 'Hello Bootstrap 4',
+	      $('#content').summernote({
+	        placeholder: '내용을 입력해주세요.',
 	        tabsize: 2,
 	        height: 100
 	      });
 	    </script>
-	
-	
+
 	
 	</div>
 
