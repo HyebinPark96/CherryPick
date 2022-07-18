@@ -25,5 +25,5 @@ public interface ReviewMapper {
 	
 	public int getHeartCnt(int rno);
 	
-	public void writeReviewProc(ReviewVO reviewVO);
+	public void writeReviewProc(ReviewVO reviewVO, int cno);
 }

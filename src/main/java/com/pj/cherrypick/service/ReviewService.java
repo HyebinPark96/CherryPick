@@ -19,8 +19,8 @@ public class ReviewService {
 	
 	// 리뷰 작성
 	@Transactional(rollbackFor = Exception.class)
-	public void writeReviewProc(ReviewVO reviewVO) {
-		reviewMapper.writeReviewProc(reviewVO);
+	public void writeReviewProc(ReviewVO reviewVO, int cno) {
+		reviewMapper.writeReviewProc(reviewVO, cno);
 	}
 	
 }
