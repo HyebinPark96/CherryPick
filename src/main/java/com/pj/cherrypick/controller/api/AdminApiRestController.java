@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.MemberVO;
+import com.pj.cherrypick.service.AdminService;
 import com.pj.cherrypick.service.BizMemberService;
 import com.pj.cherrypick.service.MemberService;
 
@@ -21,10 +22,13 @@ public class AdminApiRestController {
 	
 	@Autowired
 	BizMemberService bizMemberService;
+	
+	@Autowired
+	AdminService adminService;
 
 	@PostMapping("/admin/memberManagement")
 	public List<MemberVO> memberManagement(@RequestBody HashMap<String, String> sort) { // JSON 데이터 받으므로 @RequestBody 사용
-		System.out.println("sort : " + sort.get("sort"));
+		
 		if(sort.get("sort").equals("member")) {
 			if(memberService.getMList() != null || memberService.getMList().size() > 0) {
 				List<MemberVO> memberList = memberService.getMList();
@@ -34,13 +38,25 @@ public class AdminApiRestController {
 		return null;
 	}
 	
-	@PostMapping("/admin/bizMemberManagement")
-	public List<BizMemberVO> bizMemberManagement(@RequestBody HashMap<String, String> sort) { // JSON 데이터 받으므로 @RequestBody 사용
-		System.out.println("sort : " + sort.get("sort"));
-		if(sort.get("sort").equals("biz")) {
-			if(bizMemberService.getMList() != null || bizMemberService.getMList().size() > 0) {
-				List<BizMemberVO> bizMemberList = bizMemberService.getMList();
-				return bizMemberList;
+	@PostMapping("/admin/authBizMemberManagement")
+	public List<BizMemberVO> bizMemberManagement(@RequestBody HashMap<String, String> sort) throws Exception {
+
+		if(sort.get("sort").equals("authBizMember")) {
+			if(adminService.bAuthList() != null || adminService.bAuthList().size() > 0) {
+				List<BizMemberVO> authBizMemberList = adminService.bAuthList();
+				return authBizMemberList;
+			}
+		}
+		return null;
+	}
+	
+	@PostMapping("/admin/unauthBizMemberManagement")
+	public List<BizMemberVO> unauthBizMemberManagement(@RequestBody HashMap<String, String> sort) throws Exception {
+
+		if(sort.get("sort").equals("unauthBizMember")) {
+			if(adminService.bUnauthList() != null || adminService.bUnauthList().size() > 0) {
+				List<BizMemberVO> unauthBizMemberList = adminService.bUnauthList();
+				return unauthBizMemberList;
 			}
 		}
 		return null;

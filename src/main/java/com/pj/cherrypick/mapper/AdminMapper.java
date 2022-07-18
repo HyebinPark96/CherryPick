@@ -27,16 +27,26 @@ public interface AdminMapper {
 
 	
 	/*2. 사업자회원*/
-	// 리스트
-	public List<BizMemberVO> bList() throws Exception;
+	
+	// 승인 사업자 회원 리스트
+	public List<BizMemberVO> bAuthList() throws Exception;
+	
+	// 미승인 사업자 회원 리스트
+	public List<BizMemberVO> bUnauthList() throws Exception;
 	
 	// 삭제
 	public void bDelete(String username) throws Exception;
 	
-	// 총 갯수
-	public int bCount() throws Exception;
+	// 승인 사업자 회원 수
+	public int bAuthCount(int bstat) throws Exception;
+	
+	// 미승인 사업자 회원 수
+	public int bUnauthCount(int bstat) throws Exception;
 	
 	// 목록 + 페이징
-	public List<BizMemberVO> bListPage(int displayPost, int postNum) throws Exception;
+	public List<BizMemberVO> bAuthListPage(int bstat, int displayPost, int postNum) throws Exception;
+	
+	// 목록 + 페이징
+	public List<BizMemberVO> bUnauthListPage(int bstat, int displayPost, int postNum) throws Exception;
 	
 }

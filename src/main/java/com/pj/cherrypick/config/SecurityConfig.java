@@ -27,14 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean // IoC
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
-		System.out.println("authenticationManagerBean 호출");
+		// System.out.println("authenticationManagerBean 호출");
 		return super.authenticationManagerBean();
 	}
 	
 	
 	@Bean // IoC
 	public BCryptPasswordEncoder encodePWD(){ // BCryptPasswordEncoder : BCrypt 해싱 함수(BCrypt hashing function)를 사용해서 비밀번호를 인코딩해주는 메서드와 사용자의 의해 제출된 비밀번호와 저장소에 저장되어 있는 비밀번호의 일치 여부를 확인해주는 메서드를 제공
-		System.out.println("encodePWD 호출");
+		// System.out.println("encodePWD 호출");
 		return new BCryptPasswordEncoder();
 	}
 	
@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	/* 즉, 패스워드 비교하는 메서드*/
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		System.out.println("configure(AuthenticationManagerBuilder auth) 호출");
+		// System.out.println("configure(AuthenticationManagerBuilder auth) 호출");
 		auth.userDetailsService(principalDetailService).passwordEncoder(encodePWD()); // 로그인 시 입력한 pwd를 똑같은 해시변환방식으로 변환하여 DB 해시값과 비교
 	}
 	

@@ -10,19 +10,19 @@
 		FROM cherrypick.member
 	</select>
 	
-	<!-- 게시물 삭제 -->
+	<!-- 회원 삭제 -->
 	<delete id="delete" parameterType="String">
 		DELETE FROM member
 		WHERE username = #{username}
 	</delete>
 	
-	<!-- 게시물 총 갯수 -->
+	<!-- 회원 총 갯수 -->
 	<select id="count" resultType="int">
 		SELECT COUNT(username)
 		FROM cherrypick.member
 	</select>
 	
-	<!-- 게시물 목록 + 페이징 : 게시물을 10개씩 출력-->
+	<!-- 리스트 목록 + 페이징 : 레코드를 10개씩 출력-->
 	<select id="listPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.MemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT username, password, name, phone, email, role
 		FROM cherrypick.member
@@ -31,28 +31,53 @@
 	</select>
 	
  	 <!-- 2. 사업자 회원  -->
-	<!-- 회원 목록 가져오기 -->
-	<select id="bList" resultType="com.pj.cherrypick.domain.BizMemberVO">
+	<!-- 미승인 회원 목록 가져오기 -->
+	<select id="bUnauthList" resultType="com.pj.cherrypick.domain.BizMemberVO">
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM cherrypick.bizMember
+		WHERE bstat = 0
 	</select>
 	
-	<!-- 게시물 삭제 -->
+	<!-- 승인 회원 목록 가져오기 -->
+	<select id="bAuthList" resultType="com.pj.cherrypick.domain.BizMemberVO">
+		SELECT bid, bpwd, bname, bstat, bphone, bemail
+		FROM cherrypick.bizMember
+		WHERE bstat = 1
+	</select>
+	
+	<!-- 회원 삭제 -->
 	<delete id="bDelete" parameterType="String">
 		DELETE FROM bizMember
 		WHERE bid = #{bid}
 	</delete>
 	
-	<!-- 게시물 총 갯수 -->
-	<select id="bCount" resultType="int">
-		SELECT COUNT(bid)
-		FROM bizMember
+	<!-- 미승인 회원 수 -->
+	<select id="bAuthCount" parameterType="int" resultType="int">
+		SELECT count(if(bstat = #{bstat}, bstat, null)) FROM bizMember;
 	</select>
 	
-	<!-- 게시물 목록 + 페이징 : 게시물을 10개씩 출력 -->
-	<select id="bListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+	<!-- 승인 회원 수 -->
+	<select id="bUnauthCount" parameterType="int" resultType="int">
+<!-- 		SELECT COUNT(bid)
+		FROM bizMember
+		WEHRE bstat = #{bstat} -->
+		SELECT count(if(bstat = #{bstat}, bstat, null)) FROM bizMember;
+	</select>
+	
+	<!-- 미승인 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
+	<select id="bAuthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM bizMember
+		WHERE bstat = #{bstat}
+		ORDER BY bid ASC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
+	<!-- 승인 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
+	<select id="bUnauthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT bid, bpwd, bname, bstat, bphone, bemail
+		FROM bizMember
+		WHERE bstat = #{bstat}
 		ORDER BY bid ASC
 		limit #{displayPost}, #{postNum}
 	</select>
