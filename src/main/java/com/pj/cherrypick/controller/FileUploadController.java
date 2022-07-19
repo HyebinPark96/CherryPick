@@ -1,26 +1,32 @@
 package com.pj.cherrypick.controller;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.stream.Collectors;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
+
+import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pj.cherrypick.service.StorageService;
 import com.pj.cherrypick.storage.StorageFileNotFoundException;
+
 
 @Controller
 public class FileUploadController {
@@ -43,6 +49,29 @@ public class FileUploadController {
 
 		return "redirect:/uploadForm";
 	}
+	
+	
+	
+	
+	//=======================
+	 @CrossOrigin("*")
+	  @RequestMapping("/test")
+	  public String home(MultipartHttpServletRequest request) {
+
+	    List<MultipartFile> files = request.getFiles("files");
+	    
+
+	    for (MultipartFile file : files) {
+	    	//System.out.println(file.getOriginalFilename() + ":" + file.getSize());
+
+
+	    	 
+	    	 storageService.store(file);
+	    }
+
+	    return "test";
+	  }
+	//=======================
 
 	@ExceptionHandler(StorageFileNotFoundException.class)
 	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
