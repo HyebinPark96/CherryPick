@@ -18,7 +18,6 @@ public class PrincipalDetailService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // 매개변수 mid로 DB에서 회원 존재 유무 체크하는 메서드 =>  회원이라면 회원정보 리턴
-		System.out.println("username : " + username);
 		MemberVO principal = memberMapper.findByUsername(username);
 		if (principal == null){
 			throw new UsernameNotFoundException("User not authorized.");

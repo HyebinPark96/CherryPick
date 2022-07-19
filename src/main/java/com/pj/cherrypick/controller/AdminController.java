@@ -39,19 +39,36 @@ public class AdminController {
 			model.addAttribute("select", num);
 			model.addAttribute("sort", sort); // member
 			
-		} else if(sort.equals("bizMember")) {
+		} else if(sort.equals("authBizMember")) {
 			
-			page.setCount(adminService.bCount());
-
+			BizMemberVO bizMember = new BizMemberVO();
+			bizMember.setBstat(1);
+			
+			page.setCount(adminService.bAuthCount(bizMember.getBstat()));
+			
 			List<BizMemberVO> list = null; 
-			list = adminService.bListPage(page.getDisplayPost(), page.getPostNum());
+			list = adminService.bAuthListPage(bizMember.getBstat(), page.getDisplayPost(), page.getPostNum());
 
 			model.addAttribute("list", list); 
 			model.addAttribute("page", page);
 			model.addAttribute("select", num);
-			model.addAttribute("sort", sort); // bizMember
+			model.addAttribute("sort", sort); // authBizMember
+			
+		} else if(sort.equals("unauthBizMember")) {
+			
+			BizMemberVO bizMember = new BizMemberVO();
+			bizMember.setBstat(0);
+			
+			page.setCount(adminService.bUnauthCount(bizMember.getBstat()));
+			
+			List<BizMemberVO> list = null; 
+			list = adminService.bUnauthListPage(bizMember.getBstat(), page.getDisplayPost(), page.getPostNum());
+
+			model.addAttribute("list", list); 
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("sort", sort); // unauthBizMember
 		}
-	
 
 		
 	}
