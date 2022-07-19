@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pj.cherrypick.domain.BizMemberVO;
+import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.service.AdminService;
 import com.pj.cherrypick.service.BizMemberService;
@@ -57,6 +58,18 @@ public class AdminApiRestController {
 			if(adminService.bUnauthList() != null || adminService.bUnauthList().size() > 0) {
 				List<BizMemberVO> unauthBizMemberList = adminService.bUnauthList();
 				return unauthBizMemberList;
+			}
+		}
+		return null;
+	}
+	
+	@PostMapping("/admin/cafeManageMent")
+	public List<CafeVO> cafeManageMent(@RequestBody HashMap<String, String> sort) throws Exception {
+
+		if(sort.get("sort").equals("cafe")) {
+			if(adminService.cafeList()!= null || adminService.cafeList().size() > 0) {
+				List<CafeVO> cafeList = adminService.cafeList();
+				return cafeList;
 			}
 		}
 		return null;
