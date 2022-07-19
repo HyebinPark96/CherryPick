@@ -39,16 +39,16 @@ public class FileUploadController {
 	}
 
 
-	@PostMapping("/uploadFile")
-	public String handleFileUpload(@RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes) {
-
-		storageService.store(file);
-		redirectAttributes.addFlashAttribute("message",
-				"You successfully uploaded " + file.getOriginalFilename() + "!");
-
-		return "redirect:/uploadForm";
-	}
+//	@PostMapping("/uploadFile")
+//	public String handleFileUpload(@RequestParam("file") MultipartFile file,
+//			RedirectAttributes redirectAttributes) {
+//
+//		storageService.store(file);
+//		redirectAttributes.addFlashAttribute("message",
+//				"You successfully uploaded " + file.getOriginalFilename() + "!");
+//
+//		return "redirect:/uploadForm";
+//	}
 	
 	
 	
@@ -56,7 +56,7 @@ public class FileUploadController {
 	//=======================
 	 @CrossOrigin("*")
 	  @RequestMapping("/test")
-	  public String home(MultipartHttpServletRequest request) {
+	  public String upload(MultipartHttpServletRequest request) {
 
 	    List<MultipartFile> files = request.getFiles("files");
 	    

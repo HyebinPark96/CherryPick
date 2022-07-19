@@ -7,7 +7,7 @@ let cindex = {
 			alert('2kooong2');
 			//this.fileupload(); - 구 파일업로드 테스트
 			this.submitFiles();
-			this.register(); 
+			//this.register(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 
 		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
@@ -23,8 +23,10 @@ let cindex = {
 			
 		//let files = $("input[name=files]")[0].files;
 	//		let i = 0;
-
-		for (let i = 0; i < 3; i++) {
+		var inputArr = document.getElementsByName("files");
+		for (let i = 0; i < inputArr.length; i++) {
+			console.log(inputArr[i]);
+			console.log(inputArr[i].files);
 			let files = $("input[name=files]")[i].files;
 			formData.append("files", files[0]);
 		}
