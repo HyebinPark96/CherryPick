@@ -32,18 +32,26 @@ function sendToListInfo(variable) {
 	location.href = `/cafe/list/${variable}`;
 }
 
-/*
+
 // 북마크 여부 확인
 $(document).ready(function() {
+	
+	var bmkList = new Array();
+	var bmkList = document.getElementsByName("bmk-list");
+
+	for (var i = 0; i < bmkList.length; i++) {
+		console.log(bmkList[i].value);
+	}
+	
 	
 	//chk 1=있음 0=없음
 	let chk = document.getElementById('bmk_check').value	
 	const cno = $("#cno").val();
 	const username = $("#username").val();
-	console.log(cno);
-	console.log(username);
+	console.log("cno:"+cno);
+	console.log("username:"+username);
 	const bmkImg = document.getElementById("bmkImg")
-	console.log(chk);
+	console.log("chk:"+chk);
 
 	if (chk > 0) {
 		bmkImg.src = "/img/bmk.png";
@@ -66,15 +74,17 @@ $(document).ready(function() {
 				}
 			}, error: function() {
 				$("#bmkImg").attr("src", "/img/bmk-empty.png");
-				console.log('오타 찾으세요')
+				console.log('오타')
 				
 			}
 
 		});
 
 	});
+	
 });
-*/
+
+
 
 
 

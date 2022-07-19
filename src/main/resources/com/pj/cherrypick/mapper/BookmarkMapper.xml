@@ -4,7 +4,7 @@
 <mapper namespace="com.pj.cherrypick.mapper.BookmarkMapper" >
 
 	
-	<!-- username으로 카페 북마크 여부 확인-->
+	<!-- username으로 카페(cno) 북마크 여부 확인-->
  	<select id="checkCafeBmk" resultType="com.pj.cherrypick.domain.BookmarkVO">
 		SELECT IF(COUNT(*) = 1, true, false) as chk
 		FROM bmk_cafe b
@@ -14,6 +14,18 @@
 		ON b.cno = c.cno
 		WHERE b.username = #{username} AND c.cno = #{cno}
     </select> 
+    
+	<!-- username으로 카페(cno) 북마크 여부 확인-->
+ 	<select id="checkCafeBmkAll" resultType="com.pj.cherrypick.domain.BookmarkVO">
+		SELECT IF(COUNT(*) = 1, true, false) as chk
+		FROM bmk_cafe b
+		LEFT JOIN member m
+		ON b.username = m.username
+		LEFT JOIN cafe c
+		ON b.cno = c.cno
+		WHERE b.username = #{username} AND c.cno = #{cno}
+    </select>    
+    
   	<!--  카페 북마크 추가 -->
 	<insert id="addBmkc" parameterType="hashmap">
 		INSERT INTO bmk_cafe(username, cno)

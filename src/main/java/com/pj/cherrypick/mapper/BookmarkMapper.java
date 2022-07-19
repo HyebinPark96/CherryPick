@@ -16,7 +16,7 @@ public interface BookmarkMapper {
 	// 내(username)가 이 카페(cno)를 북마크했는지 체크
 	BookmarkVO checkCafeBmk(Map<String, Object> m) throws Exception;
 	
-	BookmarkVO checkCafeBmk(BookmarkVO bookmarkvo) throws Exception;
+	BookmarkVO checkCafeBmkAll(BookmarkVO vo) throws Exception;
 	
 	// 북마크 카페 추가
 	public int addBmkc(String username, int cno) throws Exception;
