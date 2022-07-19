@@ -5,42 +5,49 @@ let cindex = {
 
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
 			alert('2kooong2');
-			this.fileupload();
+			//this.fileupload(); - 구 파일업로드 테스트
+			this.submitFiles();
 			//this.register(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 
 		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			this.fileupload();
+			//this.fileupload();
+			this.submitFiles();
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 
 	},
-	
-	fileupload: function(){
 
-		alert('파일 첨부를 실행합니다.');
-		
-		var data = new FormData();
-		data.append("file", $('#upload-file-input').prop('files')[0]);
+	//==================================
+	submitFiles: function() {
+		let formData = new FormData();
+			
+		//let files = $("input[name=files]")[0].files;
+	//		let i = 0;
+		var inputArr = document.getElementsByName("files");
+		for (let i = 0; i < inputArr.length; i++) {
+			console.log(inputArr[i]);
+			console.log(inputArr[i].files);
+			let files = $("input[name=files]")[i].files;
+			formData.append("files", files[0]);
+		}
 
 		$.ajax({
-			url: "/uploadFile",
-			type: "POST",
-			data: data,
-			enctype: 'multipart/form-data',
-			processData: false,
-			contentType: false,
+			url: 'http://localhost/test', //수정요망.
+			data: formData,
 			cache: false,
-			success: function() {
-				// Handle upload success
-				// ...
+			contentType: false,
+			processData: false,
+			type: 'POST',
+			success: function(data) {
+				console.log(data);
 			},
-			error: function() {
-				alert('파일 첨부 중 에러가 발생했습니다.');
-				// Handle upload error
-				// ...
+			error: function(e) {
+				console.log(e);
 			}
 		});
 	},
+
+	//카페 등록 메소드=====================
 
 	register: function() {
 		
@@ -56,6 +63,10 @@ let cindex = {
 		}
 		*/
 		
+		//파일명. 어떻게 받아올거야.
+		//1) 뷰에서 생성해서, 메소드 두개에다 각각 전달한다.
+		//2) submitfiles에서 생성해서, 전달한다.
+		//파일명은? 현재시간 추가 / 카페 넘버 추가 /
 		let data = {
 			bid: "bizTemp", 
 			cname: $("#cname").val(),
@@ -105,7 +116,35 @@ cindex.init();
 
 
 
+	/*
+	fileupload: function(){
 
+		alert('파일 첨부를 실행합니다.');
+		
+		var data = new FormData();
+		data.append("file", $('#upload-file-input').prop('files')[0]);
+
+		$.ajax({
+			url: "/uploadFile",
+			type: "POST",
+			data: data,
+			enctype: 'multipart/form-data',
+			processData: false,
+			contentType: false,
+			cache: false,
+			success: function() {
+				// Handle upload success
+				// ...
+			},
+			error: function() {
+				alert('파일 첨부 중 에러가 발생했습니다.');
+				// Handle upload error
+				// ...
+			}
+		});
+	},
+
+*/
 
 
 
