@@ -15,8 +15,10 @@ import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.domain.Page;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.AdminService;
 import com.pj.cherrypick.service.CafeService;
+import com.pj.cherrypick.service.ReviewService;
 
 @Controller
 public class AdminController {
@@ -26,6 +28,7 @@ public class AdminController {
 	
 	@Autowired
 	CafeService cafeService;
+
 	
 	/*1. 일반회원*/
 	// 게시물 목록 + 페이징 추가
@@ -93,7 +96,21 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/adminReview/{cno}")
-	public String adminReview(@PathVariable int cno) { 
+	public String adminReview(@PathVariable int cno,@RequestParam("num") int num, Model model) throws Exception { 
+		
+		Page page = new Page();
+		page.setNum(num);
+		
+		page.setCount(adminService.rCount());  
+		
+		List<ReviewVO> rList = null;
+		rList = adminService.getReviewList(cno, page.getDisplayPost(), page.getPostNum());
+		
+		CafeVO cafe = adminService.getCafeInfo(cno);
+		
+		model.addAttribute("rList", rList);
+		model.addAttribute("cafe", cafe);
+		
 		return "admin/adminReview";
 	}
 	

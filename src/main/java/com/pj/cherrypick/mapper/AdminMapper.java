@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.MemberVO;
+import com.pj.cherrypick.domain.ReviewVO;
 
 @Repository("com.pj.cherrypick.mapper.AdminMapper") // XML 위치
 @Mapper // 매퍼 사용하면 빈으로 등록되므로 Service단에서 Autowired로 사용 가능
@@ -59,5 +60,14 @@ public interface AdminMapper {
 	
 	// 사업장 총 갯수
 	public int cCount() throws Exception;
+	
+	// 사업장별 리뷰 가져오기
+	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum);
+	
+	// 리뷰 총 갯수
+	public int rCount() throws Exception; 
+	
+	// 사업장별 리뷰에서 사업장 정보 가져오기
+	public CafeVO getCafeInfo(int cno);
 	
 }

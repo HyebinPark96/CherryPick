@@ -249,8 +249,8 @@
 								<th scope="col">순번</th>
 								<th scope="col">카페명</th>
 								<th scope="col">대표번호</th>
-								<!-- 	<th scope="col">이메일</th> -->
-								<th scope="col">[자세히]</th>
+								<th scope="col">[자세히]</th> <!-- 카페 개별 페이지로 이동되거나 관리자만 볼 수 있는 페이지로 이동되도록 (컬럼수가 많아 다 보여주기 힘들 것 같아서) -->
+								<th scope="col">리뷰관리</th>
 								<th>삭제처리</th>
 							</tr>
 						</thead>
@@ -260,9 +260,14 @@
 								type="checkbox" value=""></td>
 								<td th:text="${cListStat.count + (page.num*10) - 10}">1,001</td>
 								<td th:text="${cList.cname}">random</td>
-								<!-- <td th:value="${}">data</td> -->
-								<td th:text="${cList.caddress}">placeholder</td>
-								<td></td>
+								<td th:text="${cList.cphone}">placeholder</td>
+								<td>info</td> 
+								<td>
+									<form th:action="@{adminReview/{cno}(cno=${cList.cno})}">
+											<input type="hidden" value="1" id="num" name="num">
+											<button type="submit" >이동</button>
+									</form>
+								</td> <!-- 어울리는 이미지 변경 부탁드립니당-->
 								<td><img class="divBtn icon-15" src="/img/minus.png"></td>
 							</tr>
 						</tbody>

@@ -82,6 +82,7 @@
 	
 	
 	
+	
 	<!-- 사업장 관리 : 취합 후 CafeMapper 로 옮기기!-->
 	<!-- 사업장 리스트 -->
 	<select id="cafeList" resultType="com.pj.cherrypick.domain.CafeVO">
@@ -104,6 +105,89 @@
 	</select>
 	
 	
+	
+	
+	
+	
+	
+	<!-- 리뷰관리 -->
+	<!-- 조인용 -->
+	<resultMap type="com.pj.cherrypick.domain.HeartVO" id="HeartVO">
+		<result column="hno" property="hno" />
+		<result column="rno" property="rno" />
+		<result column="username" property="username" />
+	</resultMap>
+	
+	<!-- 조인용 -->
+	<resultMap type="com.pj.cherrypick.domain.CafeVO" id="CafeVO">
+		<result column="cno" property="cno" />
+		<result column="bid" property="bid" />
+		<result column="cname" property="cname" />
+		<result column="c_lat" property="c_lat" />
+		<result column="c_long" property="c_long" />
+		<result column="cimage" property="cimage" />
+		<result column="caddress" property="caddress" />
+		<result column="cphone" property="cphone" />
+		<result column="copen" property="copen" />
+		<result column="cclose" property="cclose" />
+		<result column="parking" property="parking" />
+		<result column="pet" property="pet" />
+		<result column="kids" property="kids" />
+		<result column="seats" property="seats" />
+		<result column="cmenu_img" property="cmenu_img" />
+	</resultMap>
+	
+	<!-- 조인용 -->
+	<resultMap type="com.pj.cherrypick.domain.MemberVO" id="MemberVO">
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="email" property="email" />
+		<result column="role" property="role" />
+	</resultMap>
+	
+	<!-- 조인용 -->
+	<resultMap type="com.pj.cherrypick.domain.ReviewVO" id="ReviewVO">
+		<result column="rno" property="rno" />
+		<result column="username" property="username" />
+		<result column="cno" property="cno" />
+		<result column="date" property="date" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="score" property="score" />
+		<result column="waiting" property="waiting" />	
+		<collection property="HeartVO" resultMap="HeartVO" />
+		<collection property="CafeVO" resultMap="CafeVO" />
+		<collection property="MemberVO" resultMap="MemberVO" />
+	</resultMap>
+	
+	<!-- 조인해서 사업장별 리뷰와 관련 정보 가져오기 -->
+	<select id="getReviewList" resultMap="ReviewVO" parameterType="hashmap">  <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT r.*, c.*, m.*, h.*
+		FROM review r
+		LEFT JOIN cafe c
+		ON r.cno = c.cno
+		LEFT JOIN member m
+		ON r.username = m.username
+		LEFT JOIN heart h
+		ON r.rno = h.rno
+		WHERE r.cno= #{cno}
+		ORDER BY r.date DESC
+		LIMIT #{displayPost}, #{postNum}
+	</select>
 
+	<!-- 리뷰 총 갯수 -->
+	<select id="rCount" resultType="int">
+		SELECT COUNT(rno)
+		FROM review
+	</select>
+	
+	<!-- 사업장별 리뷰에서 사업장 정보 가져오기 -->
+	<select id="getCafeInfo" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO" >
+		SELECT *
+		FROM cafe
+		WHERE cno = #{cno}
+	</select>
 	
 </mapper>

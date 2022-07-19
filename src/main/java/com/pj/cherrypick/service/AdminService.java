@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.MemberVO;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.AdminMapper;
 
 @Service
@@ -105,5 +106,35 @@ public class AdminService {
 		return cCount;
 	}
 	
+	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum) {
+		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
+		
+		data.put("cno", cno);
+		data.put("displayPost", displayPost); // <K,V> = <S,I>
+		data.put("postNum", postNum); // <K,V> = <S,I>
+		
+		
+		if(adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum")).size()>0 || adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum"))!=null) {
+			return adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum"));
+		}
+		return null;
+	}
+	
+	public int rCount() throws Exception{
+		int rCount = 0;
+		if(adminMapper.rCount()!=0) {
+			rCount = adminMapper.rCount();
+		}
+		return rCount;
+	}
+	
+	public CafeVO getCafeInfo(int cno) throws Exception{
+		CafeVO cafe = null;
+		if(adminMapper.getCafeInfo(cno)!=null) {
+			cafe = adminMapper.getCafeInfo(cno);
+			return cafe;
+		}
+		return null;
+	}
 	
 }
