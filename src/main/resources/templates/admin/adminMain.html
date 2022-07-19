@@ -11,9 +11,10 @@
 
 	<div class="content" layout:fragment="content">
 	<input type="hidden" th:value="${num}" id="num">
+	<input type="hidden" value="cafe" id="cafe"> 
 
 		<!-- ==========회원관리=========== -->
-		<div class="container" id="memberManage">
+		<div class="container" id="memberManage" th:if="${sort}!='cafe'">
 
 			<h3>회원관리</h3>
 			<div class="d-flex justify-content-between">
@@ -26,7 +27,7 @@
 							for="flexRadioDefault0"> 전체 </label>
 					</div> -->
 					
-					<div class="d-flex" th:if="${sort}=='member'">
+					<div class="d-flex" th:if="${sort}=='member' AND ${sort}!='authBizMember' AND ${sort}!='unauthBizMember' AND ${sort}!='cafe'">
 						<span class="form-check">
 							<input class="form-check-input" type="radio" name="memberRadio"
 								id="member" value="member" checked> 
@@ -34,12 +35,17 @@
 						</span>
 						<span style="margin-left:10px;" class="form-check">
 							<input class="form-check-input" type="radio" name="memberRadio"
-								id="bizMember" value="biz"> <label class="form-check-label"
+								id="authBizMember" value="authBizMember"> <label class="form-check-label"
 								for="flexRadioDefault2"> 사업자회원 </label>
+						</span>
+						<span style="margin-left:10px;" class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="unauthBizMember" value="unauthBizMember"> <label class="form-check-label"
+								for="flexRadioDefault3"> 사업자회원(미승인) </label>
 						</span>
 					</div>
 					
-					<div class="d-flex" th:unless="${sort}=='member'">
+					<div class="d-flex" th:if="${sort}!='member' AND ${sort}=='authBizMember' AND ${sort}!='unauthBizMember' AND ${sort}!='cafe'">
 						<span class="form-check">
 							<input class="form-check-input" type="radio" name="memberRadio"
 								id="member" value="member"> 
@@ -47,8 +53,31 @@
 						</span>
 						<span style="margin-left:10px;" class="form-check">
 							<input class="form-check-input" type="radio" name="memberRadio"
-								id="bizMember" value="biz" checked> <label class="form-check-label"
+								id="authBizMember" value="authBizMember" checked> <label class="form-check-label"
 								for="flexRadioDefault2"> 사업자회원 </label>
+						</span>
+						<span style="margin-left:10px;" class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="unauthBizMember" value="unauthBizMember"> <label class="form-check-label"
+								for="flexRadioDefault2"> 사업자회원(미승인) </label>
+						</span>
+					</div>
+					
+					<div class="d-flex" th:if="${sort}!='member' AND ${sort}!='authBizMember' AND ${sort}=='unauthBizMember' AND ${sort}!='cafe'">
+						<span class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="member" value="member"> 
+								<label class="form-check-label" for="flexRadioDefault1"> 일반회원 </label>
+						</span>
+						<span style="margin-left:10px;" class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="authBizMember" value="authBizMember"> <label class="form-check-label"
+								for="flexRadioDefault2"> 사업자회원 </label>
+						</span>
+						<span style="margin-left:10px;" class="form-check">
+							<input class="form-check-input" type="radio" name="memberRadio"
+								id="unauthBizMember" value="unauthBizMember" checked> <label class="form-check-label"
+								for="flexRadioDefault2"> 사업자회원(미승인) </label>
 						</span>
 					</div>
 					
@@ -70,6 +99,7 @@
 							<th scope="col">전화번호</th>
 							<th scope="col">이메일</th>
 							<th scope="col">회원분류</th>
+							<th scope="col">탈퇴/승인처리</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -77,53 +107,85 @@
 						<!-- 일반회원 리스트 -->
  						<tr th:if="${sort}=='member'" th:each="list : ${list}">
 						
-								<td>
-									<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
-								</td>
-								<td th:text="${listStat.count + (page.num*10) - 10}"></td>
-								
-								<td th:text="${list.username}"></td>
-								
-								<td th:text="${list.name}">random</td>
-								
-								<td th:text="${list.phone}">data</td>
-								
-								<td th:text="${list.email}">placeholder</td>
-								
-								<td></td>
-								
-								<!-- <td th:if="${list.role}==0">회원</td>
-								<td th:if="${list.role}==1">관리자</td> -->
-	
-							</tr>
+							<td>
+								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+							</td>
+							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
 							
-							<!-- 사업자 회원 리스트 -->
-							 <tr th:if="${sort}=='bizMember'" th:each="list : ${list}">
-						
-								<td>
-									<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
-								</td>
-								<td th:text="${listStat.count + (page.num*10) - 10}"></td>
-								
-								<td th:text="${list.bid}"></td>
-								
-								<td th:text="${list.bname}">random</td>
-								
-								<td th:text="${list.bphone}">data</td>
-								
-								<td th:text="${list.bemail}">placeholder</td>
-								
-								<td></td>
-								
-								<!-- <td th:if="${list.role}==0">회원</td>
-								<td th:if="${list.role}==1">관리자</td> -->
-	
-							</tr>
+							<td th:text="${list.username}"></td>
+							
+							<td th:text="${list.name}">random</td>
+							
+							<td th:text="${list.phone}">data</td>
+							
+							<td th:text="${list.email}">placeholder</td>
+							
+							<td></td>
+							
+							<td><img class="divBtn icon-15" src="/img/minus.png"></td>
+							
+							<!-- <td th:if="${list.role}==0">회원</td>
+							<td th:if="${list.role}==1">관리자</td> -->
 
-						</tbody>
-					</table>
+						</tr>
+						
+						<!-- 승인 사업자 회원 리스트 -->
+						 <tr th:if="${sort}=='authBizMember'" th:each="list : ${list}">
+					
+							<td>
+								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+							</td>
+							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
+						
+							<td th:text="${list.bid}"></td>
+							
+							<td th:text="${list.bname}">random</td>
+							
+							<td th:text="${list.bphone}">data</td>
+							
+							<td th:text="${list.bemail}">placeholder</td>
+							
+							<td></td>
+							
+							<td><img class="divBtn icon-15" src="/img/minus.png"></td>
+							
+							<!-- <td th:if="${list.role}==0">회원</td>
+							<td th:if="${list.role}==1">관리자</td> -->
+
+						</tr>
+						
+						
+						<!-- 미승인 사업자 회원 리스트 -->
+						 <tr th:if="${sort}=='unauthBizMember'" th:each="list : ${list}">
+						 
+						 	<td>
+								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+							</td>
+							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
+							
+							<td th:text="${list.bid}"></td>
+							
+							<td th:text="${list.bname}">random</td>
+							
+							<td th:text="${list.bphone}">data</td>
+							
+							<td th:text="${list.bemail}">placeholder</td>
+							
+							<td></td>
+							
+							<td><img class="divBtn icon-15" src="/img/check.png"></td>
+							
+						</tr>
+
+					</tbody>
+				</table>
 				</div>
-				<Button class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button><br><br>
+				
+				
+				<!--  -->
+				<Button th:if="${sort}=='member' or ${sort}=='authBizMember'" class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button><br><br>
+				<Button th:if="${sort}=='unauthBizMember'" class="btn btn-primary" id="approveBtn">선택 탈퇴</Button><br><br>
+				
 				
 				<div class="pagination">
 					<th:block th:if="${page.prev}">
@@ -131,7 +193,7 @@
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
-						<span th:if="${select!=num}" class="page-item" >
+						<span th:if="${select!=num} and ${num}!=0" class="page-item" >
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link" ></a>
 						</span>
 						<span th:unless="${select!=num}" class="page-item active">
@@ -148,14 +210,17 @@
 
 		
 		<!-- 사업장(카페)관리 테이블 -->
-		<div id="cafeManage" class="container">
+		<div id="cafeManage" class="container" th:unless="${sort}!='cafe'">
 			<h3>사업장관리</h3>
 
 
 			<div class="d-flex justify-content-between">
+				<!-- 상단 왼쪽에 배치할 요소  -->
 				<div class="d-flex">
-
-					<div class="form-check">
+					
+					
+					<!-- (구) 승인대기, 등록됨  -->
+					<!-- <div class="form-check">
 						<input class="form-check-input" type="radio" name="cafeRadio"
 							id="waiting"> <label class="form-check-label"
 							for="flexRadioDefault1"> 승인대기 </label>
@@ -164,8 +229,9 @@
 						<input class="form-check-input" type="radio" name="cafeRadio"
 							id="approved" checked> <label class="form-check-label"
 							for="flexRadioDefault2"> 등록됨 </label>
-					</div>
+					</div> -->
 				</div>
+				<!-- 상단 오른쪽에 배치할 요소  -->
 				<div class="d-flex">
 					<div>번호순 | 업체명순</div>
 				</div>
@@ -183,27 +249,55 @@
 								<th scope="col">순번</th>
 								<th scope="col">카페명</th>
 								<th scope="col">대표번호</th>
-								<th scope="col">이메일</th>
-								<th scope="col">[자세히]</th>
+								<th scope="col">[자세히]</th> <!-- 카페 개별 페이지로 이동되거나 관리자만 볼 수 있는 페이지로 이동되도록 (컬럼수가 많아 다 보여주기 힘들 것 같아서) -->
+								<th scope="col">리뷰관리</th>
+								<th>삭제처리</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="m : ${#numbers.sequence(1, 5)}">
+							<tr th:each="cList : ${cList}">
 								<td><input class="form-check-input mt-0" name="aCafeChk"
 								type="checkbox" value=""></td>
-								<td>1,001</td>
-								<td>random</td>
-								<td>data</td>
-								<td>placeholder</td>
-								<td></td>
+								<td th:text="${cListStat.count + (page.num*10) - 10}">1,001</td>
+								<td th:text="${cList.cname}">random</td>
+								<td th:text="${cList.cphone}">placeholder</td>
+								<td>info</td> 
+								<td>
+									<form th:action="@{adminReview/{cno}(cno=${cList.cno})}">
+											<input type="hidden" value="1" id="num" name="num">
+											<button type="submit" >이동</button>
+									</form>
+								</td> <!-- 어울리는 이미지 변경 부탁드립니당-->
+								<td><img class="divBtn icon-15" src="/img/minus.png"></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<Button class="btn btn-danger">선택 삭제</Button>
+				<Button class="btn btn-danger">선택 삭제</Button><br><br>
+				
+				<div class="pagination">
+					<th:block th:if="${page.prev}">
+						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort})}" class="page-link">이전</a> ]</span>
+					</th:block>
+					
+					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
+						<span th:if="${select!=num} and ${num}!=0" class="page-item" >
+							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link" ></a>
+						</span>
+						<span th:unless="${select!=num}" class="page-item active">
+							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
+						</span>
+					</th:block>
+					
+					<th:block th:if="${page.next}">
+						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort})}" class="page-link">다음</a> ]</span>
+					</th:block>
+				</div>
+				
 			</div>
-
-			<div id="waitingTable">
+			
+			<!-- (구)승인대기 사업장 테이블 -->
+			<!-- <div id="waitingTable">
 				<div class="table-responsive">
 					<table class="table table-striped table-sm">
 						<thead>
@@ -233,7 +327,7 @@
 					</table>
 				</div>
 			</div>
-			<Button class="btn btn-primary">선택 승인</Button>
+			<Button class="btn btn-primary">선택 승인</Button> -->
 		</div>
 
 
@@ -251,12 +345,12 @@
 				$('input[name=wCafeChk]').prop('checked', this.checked);
 			});
 
-			//회원관리 /사업장 관리 선택
+ 			//회원관리 /사업장 관리 선택
 			var mem = document.getElementById("memberManage");
 			var cafe = document.getElementById("cafeManage");
 
-			mem.style.display = 'block';
-			cafe.style.display = 'none';
+/* 			mem.style.display = 'block';
+			cafe.style.display = 'none'; */
 
 			var bDisplay = true;
 
@@ -270,7 +364,7 @@
 				mem.style.display = 'none';
 			}
 
-			function displayMemTable() {
+/* 			function displayMemTable() {
 				mem.style.display = 'block';
 				cafe.style.display = 'none';
 			}
@@ -278,8 +372,8 @@
 			function displayCafeTable() {
 				cafe.style.display = 'block';
 				mem.style.display = 'none';
-			}
-
+			} */
+ 
 			
 			//사업장 - 변수
 			var opt = 0;

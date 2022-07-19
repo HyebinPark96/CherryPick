@@ -80,8 +80,7 @@ $(document).ready(function() {
 			
 			<!--reviewController에 cno 보내기 -->
 			<input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
-	
-			
+
 		</div>
 			
 
@@ -196,7 +195,7 @@ $(document).ready(function() {
 	var positions = [
 			{
 				content: /*[[${cafe.cname}]]*/,
-				latlng: new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/)
+				latlng: new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/
 			}
 			];
 
@@ -241,6 +240,13 @@ $(document).ready(function() {
 			<b>리뷰(<span style="font-size: 16px;"
 				th:text="${#lists.size(review)}">000</span>)
 			</b>
+
+			<form>
+				<!--reviewController에 cno 보내기 -->
+				<input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
+				<a th:href="@{/review/writeReview/{cno}(cno=${cafe.cno})}"><button type="button">리뷰 작성하기</button></a>
+			</form>
+			
 			<div class="cf-review">
 				<div class="cf-review-item" th:each="review, j : ${review}">
 					<div class="cf-review-writer">

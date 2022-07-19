@@ -1,14 +1,10 @@
 package com.pj.cherrypick.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.pj.cherrypick.domain.CafeVO;
-import com.pj.cherrypick.domain.HeartVO;
-import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.domain.ReviewVO;
 
 @Repository("com.pj.cherrypick.mapper.ReviewMapper") // XML 위치
@@ -25,5 +21,6 @@ public interface ReviewMapper {
 	
 	public int getHeartCnt(int rno);
 	
-	public void writeReviewProc(ReviewVO reviewVO, int cno);
+	public void writeReviewProc(ReviewVO reviewVO);
+
 }

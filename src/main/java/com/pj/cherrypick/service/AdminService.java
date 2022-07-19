@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pj.cherrypick.domain.BizMemberVO;
+import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.MemberVO;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.AdminMapper;
 
 @Service
@@ -39,8 +41,12 @@ public class AdminService {
 		return adminMapper.listPage(data.get("displayPost"), data.get("postNum")); // = listPage(int displayPost, int postNum)
 	};
 	
-	public List<BizMemberVO> bList() throws Exception{
-		return adminMapper.bList();
+	public List<BizMemberVO> bAuthList() throws Exception{
+		return adminMapper.bAuthList();
+	};
+	
+	public List<BizMemberVO> bUnauthList() throws Exception{
+		return adminMapper.bUnauthList();
 	};
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -48,18 +54,87 @@ public class AdminService {
 		adminMapper.bDelete(bid);
 	};
 	
-	public int bCount() throws Exception{
-		return adminMapper.bCount();
+	public int bAuthCount(int bstat) throws Exception{
+		return adminMapper.bAuthCount(bstat);
 	};
 	
-	public List<BizMemberVO> bListPage(int displayPost, int postNum) throws Exception{
+	public int bUnauthCount(int bstat) throws Exception{
+		return adminMapper.bUnauthCount(bstat);
+	};
+	
+	public List<BizMemberVO> bAuthListPage(int bstat, int displayPost, int postNum) throws Exception{
+		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
+
+		data.put("bstat", bstat);
+		data.put("displayPost", displayPost); // <K,V> = <S,I>
+		data.put("postNum", postNum); // <K,V> = <S,I>
+		
+		return adminMapper.bAuthListPage(data.get("bstat"), data.get("displayPost"), data.get("postNum"));
+	};
+	
+	public List<BizMemberVO> bUnauthListPage(int bstat, int displayPost, int postNum) throws Exception{
+		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
+		
+		data.put("bstat", bstat);
+		data.put("displayPost", displayPost); // <K,V> = <S,I>
+		data.put("postNum", postNum); // <K,V> = <S,I>
+		
+		return adminMapper.bUnauthListPage(data.get("bstat"), data.get("displayPost"), data.get("postNum"));
+	};
+	
+	public List<CafeVO> cafeList() throws Exception{
+		return adminMapper.cafeList();
+	}
+	
+	public List<CafeVO> cafeListPage(int displayPost, int postNum) throws Exception{
 		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
 		
 		data.put("displayPost", displayPost); // <K,V> = <S,I>
 		data.put("postNum", postNum); // <K,V> = <S,I>
 		
-		return adminMapper.bListPage(data.get("displayPost"), data.get("postNum")); // = listPage(int displayPost, int postNum)
-	};
+		if(adminMapper.cafeListPage(data.get("displayPost"), data.get("postNum")).size()>0 || adminMapper.cafeListPage(data.get("displayPost"), data.get("postNum"))!=null) {
+			return adminMapper.cafeListPage(data.get("displayPost"), data.get("postNum"));
+		}
+		return null;
+	}
 	
+	public int cCount() throws Exception{
+		int cCount = 0;
+		if(adminMapper.cCount()!=0) {
+			cCount = adminMapper.cCount();
+		}
+		return cCount;
+	}
+	
+	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum) {
+		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
+		
+		data.put("cno", cno);
+		data.put("displayPost", displayPost); // <K,V> = <S,I>
+		data.put("postNum", postNum); // <K,V> = <S,I>
+		
+		
+		if(adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum")).size()>0 || adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum"))!=null) {
+			return adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum"));
+		}
+		return null;
+	}
+	
+	public int rCount() throws Exception{
+		int rCount = 0;
+		if(adminMapper.rCount()!=0) {
+			rCount = adminMapper.rCount();
+		}
+		return rCount;
+	}
+	
+	public CafeVO getCafeInfo(int cno) throws Exception{
+		CafeVO cafe = null;
+		if(adminMapper.getCafeInfo(cno)!=null) {
+			cafe = adminMapper.getCafeInfo(cno);
+			return cafe;
+		}
+		return null;
+	}
 	
 }

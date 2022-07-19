@@ -11,13 +11,15 @@ let review = {
 		
 		let data = {
 			username: $("#username").val(),
-			 cno: $("#cno").val(),
 			title: $("#title").val(),
-			content: $("#content").val(), // 태그나 문자열 따질 것 없이 전부 가져온다.
+			content: $('#content').summernote('code'), // 태그나 문자열 따질 것 없이 전부 가져온다.
 			score: $("#score").val(),
-			waiting: $("#waiting option:selected").val()
+			waiting: $("#waiting option:selected").val(),
+			cno: $("#cno").val()
 		};
-
+		
+		console.log(data.content)
+	
 		$.ajax({
 			type: "POST",
 			url: "/review/writeReviewProc",

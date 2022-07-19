@@ -4,14 +4,6 @@
 	해야한다. -->
 <mapper namespace="com.pj.cherrypick.mapper.ReviewMapper">
 	
-	<!-- 내가 작성한 리뷰 총 갯수 -->
-	<select id="count" resultType="int" parameterType="String">
-		SELECT COUNT(rno)
-		FROM review
-		WHERE username = #{username}
-	</select>
-
-	
 	<resultMap type="com.pj.cherrypick.domain.HeartVO" id="HeartVO">
 		<result column="hno" property="hno" />
 		<result column="rno" property="rno" />
@@ -91,5 +83,6 @@
 		INSERT INTO review (username, cno, title, content, score, waiting)
 		VALUES (#{username}, #{cno}, #{title}, #{content}, #{score}, #{waiting})
 	</insert>
+
 
 </mapper>

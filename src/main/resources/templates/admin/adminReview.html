@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/layout-admin}">
+
+<!-- <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head> -->
+
+<!-- <body> -->
+
+<div class="content" layout:fragment="content">
+
+	<div class="container">
+		<h3 th:text="${cafe.cname} + ' 사업장의 리뷰관리'">리뷰관리</h3>
+
+
+		<div class="d-flex justify-content-between">
+			<!-- 상단 왼쪽에 배치할 요소  -->
+			<div class="d-flex">
+
+
+				<!-- (구) 승인대기, 등록됨  -->
+				<!-- <div class="form-check">
+						<input class="form-check-input" type="radio" name="cafeRadio"
+							id="waiting"> <label class="form-check-label"
+							for="flexRadioDefault1"> 승인대기 </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="cafeRadio"
+							id="approved" checked> <label class="form-check-label"
+							for="flexRadioDefault2"> 등록됨 </label>
+					</div> -->
+			</div>
+			
+			<!-- 상단 오른쪽에 배치할 요소  -->
+			<div class="d-flex">
+				<div>번호순 | 업체명순</div>
+			</div>
+			
+		</div>
+	</div>
+	
+</div>
+<!-- </body> -->
+</html>
+

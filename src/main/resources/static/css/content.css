@@ -305,6 +305,9 @@
 	height: 100px;
 }
 
-/*마이페이지*/
+/*리뷰페이지*/
 
+.rv-rating *{
+	color: gray;
+}
 
