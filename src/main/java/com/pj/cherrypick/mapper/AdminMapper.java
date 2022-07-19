@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.pj.cherrypick.domain.BizMemberVO;
+import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.MemberVO;
 
 @Repository("com.pj.cherrypick.mapper.AdminMapper") // XML 위치
@@ -48,5 +49,15 @@ public interface AdminMapper {
 	
 	// 목록 + 페이징
 	public List<BizMemberVO> bUnauthListPage(int bstat, int displayPost, int postNum) throws Exception;
+	
+	/*사업장 관리*/
+	// 사업장 리스트
+	public List<CafeVO> cafeList() throws Exception;
+	
+	// 목록 + 페이징
+	public List<CafeVO> cafeListPage(int displayPost, int postNum) throws Exception;
+	
+	// 사업장 총 갯수
+	public int cCount() throws Exception;
 	
 }

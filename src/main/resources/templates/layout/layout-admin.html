@@ -36,8 +36,8 @@
 		</div>
 		<nav class="title-bottom">
 			<div></div>
-			<Button id="memBtn" onclick="displayMemTable()">회원관리</Button>
-			<Button id="cafeBtn" onclick="displayCafeTable()">사업장관리</Button>
+			<a th:href="@{adminMain(num=1, sort='member')}"><Button id="memBtn" onclick="displayMemTable()">회원관리</Button></a>
+			<a th:href="@{adminMain(num=1, sort='cafe')}"><Button id="cafeBtn" onclick="displayCafeTable()">사업장관리</Button></a>
 			<div></div>
 		</nav>
 	</div>

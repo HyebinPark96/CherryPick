@@ -21,6 +21,10 @@ let index = {
 			this.unauthBizMember();
 		});
 		
+		$('#cafeBtn').on("click", () => {
+			this.cafeListPage();
+		});
+		
 	
 	},
 
@@ -87,6 +91,28 @@ let index = {
 			// 성공한 경우 호출
 			$('#unauthBizMember').prop("checked", true);
 			location.href = "/admin/adminMain?num=1&sort=unauthBizMember";
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			alert(JSON.stringify(error));
+		});
+	},
+
+	cafeListPage: function() {
+				
+		let data = {
+			sort: $("#cafe").val(),
+			num: $("#num").val()
+		};
+		
+		$.ajax({
+			type: "POST",
+			url: "/admin/cafeManageMent",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			location.href = "/admin/adminMain?num=1&sort=cafe";
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			alert(JSON.stringify(error));
