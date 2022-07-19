@@ -2,10 +2,44 @@
 
 let cindex = {
 	init: function() {
+
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			this.register(); 
+			alert('2kooong2');
+			this.fileupload();
+			//this.register(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 
+		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
+			this.fileupload();
+		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
+
+	},
+	
+	fileupload: function(){
+
+		alert('파일 첨부를 실행합니다.');
+		
+		var data = new FormData();
+		data.append("file", $('#upload-file-input').prop('files')[0]);
+
+		$.ajax({
+			url: "/uploadFile",
+			type: "POST",
+			data: data,
+			enctype: 'multipart/form-data',
+			processData: false,
+			contentType: false,
+			cache: false,
+			success: function() {
+				// Handle upload success
+				// ...
+			},
+			error: function() {
+				alert('파일 첨부 중 에러가 발생했습니다.');
+				// Handle upload error
+				// ...
+			}
+		});
 	},
 
 	register: function() {
