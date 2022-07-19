@@ -14,5 +14,5 @@ public class BookmarkVO {
 	private int bmkc_no;
 	private int cno;
 	private String username;
-	private int chk;
+	private Integer chk;
 }

@@ -1,10 +1,11 @@
 package com.pj.cherrypick.service;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pj.cherrypick.domain.BookmarkVO;
 import com.pj.cherrypick.mapper.BookmarkMapper;
@@ -16,24 +17,40 @@ public class BookmarkService {
 	@Autowired
 	private BookmarkMapper bookmarkMapper;
 	
-	public List<BookmarkVO> checkBmkc(String username, int cno) throws Exception {
-		return bookmarkMapper.checkBmkc(username, cno);
+	public int checkCafeBmk(String username, int cno) throws Exception {
+		
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("username", username);
+		m.put("cno", cno);
+		
+		BookmarkVO vo = bookmarkMapper.checkCafeBmk(m);
+		
+		
+		if (vo.getChk()==0 || vo.getChk()==null) {
+			return 0;
+		}else {
+			return 1;
+		}
 	}
 	
-	public Boolean checkBmkli(Map<String, Object> map) throws Exception {
-		return bookmarkMapper.checkBmkli(map);
-	}	
 	
-	public BookmarkVO checkCafeBmk(String username, int cno) throws Exception {
-		return bookmarkMapper.checkCafeBmk(username, cno);
+	@Transactional
+	public int addBmkc(String username, int cno) throws Exception {
+		
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("username", username);
+		m.put("cno", cno);
+		// System.out.println(m);
+		BookmarkVO vo = bookmarkMapper.checkCafeBmk(m);
+		
+		if(vo.getChk()==0 || vo.getChk()==null) {
+			bookmarkMapper.addBmkc(username, cno);
+			return 1;
+		}else {
+			bookmarkMapper.delBmkc(username, cno);
+			return 0;
+		}
 	}
 	
-	public void addBmkc(BookmarkVO bookmarkVO) throws Exception {
-		bookmarkMapper.addBmkc(bookmarkVO);
-	}
-	
-	public void delBmkc(String username, int cno) throws Exception {
-		bookmarkMapper.delBmkc(username, cno);
-	}	
-	
+
 }

@@ -25,6 +25,10 @@ public class CafeService {
 		return cafeMapper.getCafeAll();
 	}
 	
+/*	public List<CafeVO> getCafeAll2() {
+		return cafeMapper.getCafeAll();
+	}
+*/	
 	public ReviewVO getFirstReview(int cno) {
 		return cafeMapper.getFirstReview(cno);
 	}

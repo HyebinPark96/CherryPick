@@ -32,48 +32,51 @@ function sendToListInfo(variable) {
 	location.href = `/cafe/list/${variable}`;
 }
 
-
+/*
 // 북마크 여부 확인
- $(document).ready(function () {
-        let bmkVal = document.getElementById('bmk_check').value
-        const cno = $("#cno").val();
-        const username = $("#username").val();
-        console.log(cno);
-        console.log(username);
-        const bmkImg = document.getElementById("bmkImg")
-        console.log(bmkVal);
-		
-        if (bmkVal > 0) {
-            bmkImg.src = "/img/bmk.png";
-        } else {
-             bmkImg.src = "/img/bmk-empty.png";
-        }
-        
-// 북마크 버튼 클릭시 실행되는 코드
-/*        $("#bmkImg").on("click", function () {
-            $.ajax({
-                url: 'cafe/{cno}',
-                type: 'GET',
-                data: {'cno': cno, 'username': username},
-                success: function (data) {
-                    if (data == 1) {
-                        $("#bmkImg").attr("src", "/img/bmk.png");
-                        location.href="cafe/"+cno;
-                    } else {
-                        $("#bmkImg").attr("src", "/img/bmk-empty.png");
-                        location.href="cafe/"+cno;
-                    }
-                }, error: function () {
-                    $("#bmkImg").attr("src", "/img/bmk.png");
-                    console.log('오타 찾으세요')
-                }
+$(document).ready(function() {
+	
+	//chk 1=있음 0=없음
+	let chk = document.getElementById('bmk_check').value	
+	const cno = $("#cno").val();
+	const username = $("#username").val();
+	console.log(cno);
+	console.log(username);
+	const bmkImg = document.getElementById("bmkImg")
+	console.log(chk);
 
-            });
+	if (chk > 0) {
+		bmkImg.src = "/img/bmk.png";
+	} else {
+		bmkImg.src = "/img/bmk-empty.png";
+	}
 
-        });
-    });
+	// 북마크 버튼 클릭시 실행되는 코드
+	$("#bmkImg").on("click", function() {
+		$.ajax({
+			url: '/cafe/bmk/',
+			type: 'GET',
+			data: { 'cno': cno, 'username': username },
+			success: function(data) {
+				console.log(data);
+				if (data == 1) {
+					$("#bmkImg").attr("src", "/img/bmk.png");
+				} else {
+					$("#bmkImg").attr("src", "/img/bmk-empty.png");
+				}
+			}, error: function() {
+				$("#bmkImg").attr("src", "/img/bmk-empty.png");
+				console.log('오타 찾으세요')
+				
+			}
 
+		});
+
+	});
+});
 */
+
+
 
 
 

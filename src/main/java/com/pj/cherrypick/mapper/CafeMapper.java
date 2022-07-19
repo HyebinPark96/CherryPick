@@ -21,6 +21,9 @@ public interface CafeMapper {
 	// 전체 카페 보기
 	List<CafeVO> getCafeAll();
 	
+	// 전체 카페 보기
+//	List<CafeVO> getCafeAll2(BookmarkVO bookmarkVO); 
+	
 	// 전체 카페 보기 (평점높은순) 
 	List<CafeVO> getCafeAllByScore();
 	

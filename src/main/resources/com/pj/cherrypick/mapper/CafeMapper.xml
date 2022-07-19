@@ -3,14 +3,35 @@
 
 <mapper namespace="com.pj.cherrypick.mapper.CafeMapper" >
 
+	<!-- 전체 카페의 cno 가져오기 -->
+	 <select id="getCafeAll" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+ 		SELECT cno
+		FROM cafe
+    </select> 
+	
 	<!-- 전체 카페리스트업 쿼리-->
  	<select id="getCafeAll" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
  		SELECT *
  		FROM cafe c
- 		LEFT JOIN review r 
+ 		LEFT JOIN review r  
  		ON c.cno = r.cno
  		GROUP BY c.cno
     </select> 
+
+<!--  	<select id="getCafeAll2" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *, IF(COUNT(*) = 1, true, false) as chk
+		FROM bmk_cafe b
+		LEFT JOIN member m
+		ON b.username = m.username
+		LEFT JOIN cafe c
+		ON b.cno = c.cno
+		LEFT JOIN review r 
+ 		ON c.cno = r.cno
+		WHERE b.username = #{username} AND c.cno = #{cno}
+	</select> -->
+
+
+
     <!-- cno로 카페정보 호출-->
  	<select id="getCafeInfo" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">
         SELECT * FROM cafe WHERE cno = #{cno}

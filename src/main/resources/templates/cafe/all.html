@@ -60,10 +60,9 @@
 
 						</div>
 						<div class="bmk">						
-						<!--<b th:text="{$bmk}">cno?</b> -->
-	
-				<!--		  <img th:if="${bmk.cno == cafe.cno}" th:src="@{/img/bmk.png}" />
-						  <img th:if="${{bmk.cno != cafe.cno}" th:src="@{/img/bmk-empty.png}" /> -->				
+									<img id="bmkImg" src="">
+									<input type="hidden" id="bmk_check" th:if="${cafe.chk == 0}" th:value="0">
+									<input type="hidden" id="bmk_check" th:if="${cafe.chk != 0}" th:value="1"> 				
 						</div>
 
 					</div>

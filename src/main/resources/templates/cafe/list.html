@@ -54,7 +54,9 @@
 
 						</div>
 						<div>
-							<img src="/img/bmk-empty.png">
+							<img id="bmkImg" src="">
+							<input type="hidden" id="bmk_check" th:if="${bmk == 0}" th:value="0">
+							<input type="hidden" id="bmk_check" th:if="${bmk != 0}" th:value="1"> 
 						</div>
 
 					</div>

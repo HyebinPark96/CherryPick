@@ -34,6 +34,8 @@ public class CafeVO {
 	private String username;
 	private String title;
 	
+	//북마크체크용
+	private Integer chk;
 	
 	
 	
