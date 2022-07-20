@@ -1,5 +1,5 @@
 # [CherryPick] 
-## SpringBoot Project
+## SpringBoot Project (2022.07.11 ~ 진행중)
 ### 팀원 : 김서하, 박혜빈, 최효빈
 ### 사용스택 : HTML, CSS, JavaScript, jQuery, Ajax, MySQL, MyBatis, Spring Boot
 ### 주제 : 부산 전포동 대상 카페추천
