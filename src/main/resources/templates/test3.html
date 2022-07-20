@@ -1,132 +1,134 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{/layout/layout-main}">
-<div layout:fragment="content">
 
-	
 
-	<div>
-		<div class="divBtn btn btn-primary btn-lg" onclick="test()">테스트</div>
-	</div>
+<body>
+	<form id="form1">
+		<input type='file' onchange="readURL(this);" /> <img id="blah"
+			src="#" alt="your image" />
+		<div id="objectID" style="width: 500px; height: 500px;"></div>
+	</form>
 
-	<!-- 미리보기 box -->
-	<div class="box-2 img-result hide">
-		<img style="max-width: 100%;" src="" alt="" class="cropped">
-	</div>
 
-	<!-- 모달 영역 -->
-	<div id="imgModal" class="modal fade">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">이미지 첨부</h5>
-					<button type="button" data-bs-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
+	<script type="text/javascript">
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
 
-					<!-- Cropper 영역 -->
-					<div>
-						<div class="form-group.container">
-							<label for="file">Upload File</label> <input type="file"
-								id="file-input" required accept="image/*">
-							<!-- required accept: 파일 유형 제한 -->
-						</div>
-						<div class="box-2">
-							<div class="result"></div>
-						</div>
+				reader.onload = function(e) {
+					$('#objectID').css(
+							'background',
+							'transparent url(' + e.target.result
+									+ ') left top no-repeat');
+				}
 
-						<!-- <div class="box-2 img-result hide">
-									<img style="max-width:100%;" src="" alt="" class="cropped">
-								</div> -->
-
-						<div class="box">
-							<div class="options hide">
-								<label for="width">width</label> <input type="number"
-									class="img-w" value="300" min="100" max="1200">
-							</div>
-							<button class="btn save hide" data-bs-dismiss="modal">Save</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	<!-- cropper script -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
-	<script>
-	let result = document.querySelector(".result"), 
-	img_result = document.querySelector(".img-result"), 
-	img_w = document.querySelector(".img-w"), 
-	img_h = document.querySelector(".img-h"), 
-	options = document.querySelector(".options"), 
-	save = document.querySelector(".save"), 
-	cropped = document.querySelector(".cropped"), 
-	dwn = document.querySelector(".download"), 
-	upload = document.querySelector("#file-input"), 
-	cropper = "";
-	
-	upload.addEventListener('change',(e) =>{
-		console.log(e)
-
-		//이미지 자르기
-	 // start file reader
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e.target.result) {
-          // create new image
-          let img = document.createElement("img");
-          img.id = "image";
-          img.src = e.target.result;
-          // clean result before
-          result.innerHTML = "";
-          // append new image
-          result.appendChild(img);
-          // show save btn and options
-          save.classList.remove("hide");
-          options.classList.remove("hide");
-          // init cropper
-          cropper = new Cropper(img);
-        }
-      };
-      reader.readAsDataURL(e.target.files[0]);	
-	})
-	
-	//save button to crop the image
-	save.addEventListener('click',(e)=>{
-		e.preventDefault()
-	
-	 // get result to data uri
-    let imgSrc = cropper
-      .getCroppedCanvas({
-        width: img_w.value, 
-        // input value
-      })
-      .toDataURL();
-		
-		console.log(imgSrc);
-		
-		 // remove hide class of img
-	    cropped.classList.remove("hide");
-	    img_result.classList.remove("hide");
-	    // show image cropped
-
-	    cropped.src = imgSrc;
-	    dwn.classList.remove("hide");
-	    dwn.download = "imagename.png";
-	    dwn.setAttribute("href", imgSrc);
-	})
-	
-	function test() {
-			$("#imgModal").modal('show');
+				reader.readAsDataURL(input.files[0]);
+			}
 		}
-</script>
+	</script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
 
 
 
 
-</div>
-</html>
 
+
+
+<!-- <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    li {
+      list-style: none;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .real-upload {
+      display: none;
+    }
+
+    .upload {
+      width: 200px;
+      height: 200px;
+      background-color: antiquewhite;
+    }
+
+    .image-preview {
+      width: 1300px;
+      height: 200px;
+      background-color: aquamarine;
+      display: flex;
+      gap: 20px;
+    }
+  </style>
+</head>
+
+<body>
+	<div id="cimageView"  class="cf-img thumbnail">
+									style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');"
+									<img class="divBtn" onclick="location.href='#'"  src="/img/x.png" style="height: 20px; width:20px; margin:5px;">
+								</div>
+  <input type="file" class="real-upload" accept="image/*" required multiple>
+  <div class="upload"></div>
+  <ul class="image-preview"></ul>
+	<script>
+    function getImageFiles(e) {
+      const uploadFiles = [];
+      const files = e.currentTarget.files;
+      const imagePreview = document.querySelector('.image-preview');
+      const docFrag = new DocumentFragment();
+
+      if ([...files].length >= 7) {
+        alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
+        return;
+      }
+
+      // 파일 타입 검사
+      [...files].forEach(file => {
+        if (!file.type.match("image/.*")) {
+          alert('이미지 파일만 업로드가 가능합니다.');
+          return
+        }
+
+        // 파일 갯수 검사
+        if ([...files].length < 7) {
+          uploadFiles.push(file);
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const preview = createElement(e, file);
+            imagePreview.appendChild(preview);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    function createElement(e, file) {
+      const li = document.createElement('li');
+      const img = document.createElement('img');
+      img.setAttribute('src', e.target.result);
+      img.setAttribute('data-file', file.name);
+      li.appendChild(img);
+
+      return li;
+    }
+    
+    function createBgr(e) {
+     var cimageView = document.getElementById('cimageView');
+     cimageView.setAttribute("style", "background-image: url(" + e.target.result + ");");
+    }
+
+    const realUpload = document.querySelector('.real-upload');
+    const upload = document.querySelector('.upload');
+
+    upload.addEventListener('click', () => realUpload.click());
+
+    realUpload.addEventListener('change', createBgr(this));
+  </script>
+</body> -->

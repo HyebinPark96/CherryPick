@@ -6,7 +6,7 @@ let cindex = {
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
 			//this.fileupload(); - 구 파일업로드 테스트
 			this.submitFiles();
-			//this.register(); 
+			this.register(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 		
 		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
@@ -19,6 +19,7 @@ let cindex = {
 	//==================================
 	submitFiles: function() {
 		alert('시작');
+
 		let formData = new FormData();
 			
 		//let files = $("input[name=files]")[0].files;
@@ -61,7 +62,12 @@ let cindex = {
 		
 		alert('카페 등록을 실행합니다.');
 		
-		makeHashtag(); //storeRegister.html의 hashtag 함수
+		//파일명 받아오기
+		var cimage = $("#cimage").val().replace(/.*(\/|\\)/, '');
+		var cmenu_image = $("#cmenu_image").val().replace(/.*(\/|\\)/, '');
+		
+		//storeRegister.html의 hashtag 함수
+		makeHashtag(); 
 		
 		/*
 		let cname = $("#cname").val();
@@ -80,7 +86,7 @@ let cindex = {
 			cname: $("#cname").val(),
 			c_lat: 0,
 			c_long: 0,
-			cimage: "ready.png",
+			cimage: cimage,
 			caddress: $("#caddress").val(),
 			cphone: $("#cphone").val(),
 			copen: $("#copen").val(),
@@ -91,7 +97,7 @@ let cindex = {
 			seats: $("#seats").val(),
 			group: $("input[name=group]").filter(":checked").val(),
 			ctag: ctagStr,
-			cmenu_img: ""
+			cmenu_img: cmenu_image
 		};
 		
 		// ajax는 디폴트가 비동기 호출
@@ -121,39 +127,6 @@ let cindex = {
 }
 
 cindex.init();
-
-
-
-	/*
-	fileupload: function(){
-
-		alert('파일 첨부를 실행합니다.');
-		
-		var data = new FormData();
-		data.append("file", $('#upload-file-input').prop('files')[0]);
-
-		$.ajax({
-			url: "/uploadFile",
-			type: "POST",
-			data: data,
-			enctype: 'multipart/form-data',
-			processData: false,
-			contentType: false,
-			cache: false,
-			success: function() {
-				// Handle upload success
-				// ...
-			},
-			error: function() {
-				alert('파일 첨부 중 에러가 발생했습니다.');
-				// Handle upload error
-				// ...
-			}
-		});
-	},
-
-*/
-
 
 
 
