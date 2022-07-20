@@ -1,8 +1,6 @@
 package com.pj.cherrypick.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pj.cherrypick.domain.BookmarkVO;
-import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.mapper.BookmarkMapper;
 
 @Service
@@ -79,6 +76,40 @@ public class BookmarkService {
 		}
 	}	
 
+	public int checkListBmk(String username, int lino) throws Exception {
+
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("username", username);
+		m.put("lino", lino);
+
+		BookmarkVO vo = bookmarkMapper.checkListBmk(m);
+
+		if (vo.getChk() == 0 || vo.getChk() == null) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+
+	@Transactional
+	public int addBmkli(String username, int lino) throws Exception {
+
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("username", username);
+		m.put("lino", lino);
+		// System.out.println(m);
+		BookmarkVO vo = bookmarkMapper.checkListBmk(m);
+
+		if (vo.getChk() == 0 || vo.getChk() == null) {
+			bookmarkMapper.addBmkli(username, lino);
+			return 1;
+		} else {
+			bookmarkMapper.delBmkli(username, lino);
+			return 0;
+		}
+	}
+	
+	
 }
 	
 

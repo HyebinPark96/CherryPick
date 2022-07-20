@@ -20,5 +20,8 @@ public class ListVO {
 	private int li_cafe4;
 	private int li_cafe5;
 	
+	// 즐겨찾기 확인용
+	private Integer chk;
+	
 
 }

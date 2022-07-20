@@ -52,13 +52,15 @@ public class CafeController {
 			bmk = bookmarkService.checkCafeBmkAll(vo);
 		//	System.out.println("bmk:"+bmk);
 			list.add(i, bmk);
+			// list에 있는 chk값 cafes로 넘기기
+			cafes.get(i).setChk(list.get(i).getChk());
 		}
-		
+	
 		//System.out.println(cafes);
 		//System.out.println(list);
 		
 		model.addAttribute("cafes", cafes);		
-		model.addAttribute("bmk", list);
+		// model.addAttribute("bmk", list);
 		
 		return "cafe/all";
 	}
@@ -67,13 +69,36 @@ public class CafeController {
 	
 	// 카페리스트 (전체카페X lino로 리스트 불러오기)
 	@GetMapping("cafe/list/{lino}")
-	public String getEachList(@PathVariable int lino, Model model) {
+	public String getEachList(@AuthenticationPrincipal PrincipalDetail principalDetail, @PathVariable int lino, Model model) throws Exception {
+	
+		String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
+		model.addAttribute("username", username);
+		//시큐리티
+		//String username = principalDetail.getUsername();
+		
 		ListVO list = cafeService.getEachList(lino);
 		List<CafeVO> cafes = cafeService.getCafeList(lino);
 		model.addAttribute("list", list);
 		model.addAttribute("cafes", cafes);
+		
+		// 현재 로그인 유저가 이 리스트를 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
+		bookmarkService.checkListBmk(username, lino);
+		int bmk = bookmarkService.checkListBmk(username, lino);
+		System.out.println(bmk);
+		model.addAttribute("bmk", bmk);
+		
+		
 		return "cafe/list";
 	}
+	
+	// 카페 북마크 추가 (bmk) AJAX에서 요청한 정보를 받아서 처리후 보내는 메서드
+	@RequestMapping("/cafe/bmkli")
+	public @ResponseBody int bmkli(String username, int lino) throws Exception {
+		
+		int result = bookmarkService.addBmkli(username, lino);
+		return result;
+	}	
+
 
 	// 개별카페 상세정보
 	@GetMapping("/cafe/info/{cno}")

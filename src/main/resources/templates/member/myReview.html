@@ -52,7 +52,7 @@
 								</b>
 							</div>
 							<div>
-								<label th:text="${list.content}"></label> <!---->
+								<label th:utext="${list.content}"></label> <!---->
 							</div>
 							
 							(heart) : 
@@ -76,9 +76,9 @@
 							
 						</div>
 					</div>
-					<div
+<!-- 					<div
 						style="width: 300px; background-image: url('https://images.pexels.com/photos/7541176/pexels-photo-7541176.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load');">
-					</div>
+					</div> -->
 
 				</div>
 				<hr>
@@ -86,7 +86,7 @@
 			
 			<div class="pagination">
 					<th:block th:if="${page.prev}">
-						<span class="page-item" >[ <a th:href="@{myReview(num=${page.startPageNum - 1})}" class="page-link">이전</a> ]</span>
+						<span class="page-item" ><a th:href="@{myReview(num=${page.startPageNum - 1})}" class="page-link">이전</a> </span>
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
@@ -99,7 +99,7 @@
 					</th:block>
 					
 					<th:block th:if="${page.next}">
-						<span class="page-item">[ <a th:href="@{myReview(num=${page.endPageNum + 1})}" class="page-link">다음</a> ]</span>
+						<span class="page-item"><a th:href="@{myReview(num=${page.endPageNum + 1})}" class="page-link">다음</a></span>
 					</th:block>
 				</div>
 

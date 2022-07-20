@@ -3,6 +3,11 @@
 <!-- namespace의 값은, MemberMapper.xml의 쿼리를 호출할 Mapper Class의 경로와 클래스명으로 하도록 
 	해야한다. -->
 <mapper namespace="com.pj.cherrypick.mapper.ReviewMapper">
+
+	<select id="count" parameterType="String" resultType="int">
+		SELECT count(if(username = #{username}, username, null)) FROM review;
+	</select>
+	
 	
 	<resultMap type="com.pj.cherrypick.domain.HeartVO" id="HeartVO">
 		<result column="hno" property="hno" />

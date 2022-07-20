@@ -65,9 +65,12 @@ public interface AdminMapper {
 	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum);
 	
 	// 리뷰 총 갯수
-	public int rCount() throws Exception; 
+	public int rCount(int cno) throws Exception; 
 	
 	// 사업장별 리뷰에서 사업장 정보 가져오기
-	public CafeVO getCafeInfo(int cno);
+	public CafeVO getCafeInfo(int cno)  throws Exception;
+	
+	// 특정 사업장 리뷰 1개 상세보기
+	public ReviewVO getOneReview(int rno)  throws Exception;
 	
 }

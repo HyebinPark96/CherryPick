@@ -96,18 +96,19 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/adminReview/{cno}")
-	public String adminReview(@PathVariable int cno,@RequestParam("num") int num, Model model) throws Exception { 
+	public String adminReview(@PathVariable int cno, @RequestParam("num") int num, Model model) throws Exception { 
 		
 		Page page = new Page();
 		page.setNum(num);
 		
-		page.setCount(adminService.rCount());  
+		page.setCount(adminService.rCount(cno));  
 		
 		List<ReviewVO> rList = null;
 		rList = adminService.getReviewList(cno, page.getDisplayPost(), page.getPostNum());
 		
 		CafeVO cafe = adminService.getCafeInfo(cno);
 		
+		model.addAttribute("cno", cno);
 		model.addAttribute("rList", rList);
 		model.addAttribute("cafe", cafe);
 		model.addAttribute("page", page);
@@ -116,8 +117,13 @@ public class AdminController {
 		return "admin/adminReview";
 	}
 	
-	@GetMapping("/admin/adminReviewView/{rno}")
-	public String adminReviewView(@PathVariable("rno") int rno) {
+	@GetMapping("/admin/adminReviewView/{cno}")
+	public String adminReviewView(@PathVariable int cno, @RequestParam("rno") int rno, Model model) throws Exception {
+		
+		ReviewVO review = null;
+		review = adminService.getOneReview(rno);
+		
+		model.addAttribute("review", review);
 		
 		return "admin/adminReviewView";
 	}

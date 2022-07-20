@@ -65,13 +65,16 @@ public class AdminApiRestController {
 	
 	@PostMapping("/admin/cafeManageMent")
 	public List<CafeVO> cafeManageMent(@RequestBody HashMap<String, String> sort) throws Exception {
-
-		if(sort.get("sort").equals("cafe")) {
-			if(adminService.cafeList()!= null || adminService.cafeList().size() > 0) {
-				List<CafeVO> cafeList = adminService.cafeList();
-				return cafeList;
+		
+		if(sort.get("sort")!=null) {
+			if(sort.get("sort").equals("cafe")) {
+				if(adminService.cafeList()!= null || adminService.cafeList().size() > 0) {
+					List<CafeVO> cafeList = adminService.cafeList();
+					return cafeList;
+				}
 			}
 		}
+
 		return null;
 	}
 	
