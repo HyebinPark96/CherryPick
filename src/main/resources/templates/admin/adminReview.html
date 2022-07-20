@@ -14,31 +14,52 @@
 
 
 		<div class="d-flex justify-content-between">
-			<!-- 상단 왼쪽에 배치할 요소  -->
-			<div class="d-flex">
 
-
-				<!-- (구) 승인대기, 등록됨  -->
-				<!-- <div class="form-check">
-						<input class="form-check-input" type="radio" name="cafeRadio"
-							id="waiting"> <label class="form-check-label"
-							for="flexRadioDefault1"> 승인대기 </label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="cafeRadio"
-							id="approved" checked> <label class="form-check-label"
-							for="flexRadioDefault2"> 등록됨 </label>
-					</div> -->
-			</div>
-			
-			<!-- 상단 오른쪽에 배치할 요소  -->
+			<!-- 상단 오른쪽에 배치할 요소 
 			<div class="d-flex">
 				<div>번호순 | 업체명순</div>
+			</div> -->
+
+			<!-- 리뷰 게시판 테이블 -->
+			<div class="table-responsive">
+				<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th scope="col"><input class="form-check-input mt-0" name="memChkAll" type="checkbox" value=""></th>
+							<th scope="col">순번</th>
+							<th scope="col">제목</th>
+							<th scope="col">작성날짜</th>
+							<th scope="col">작성자 ID</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<!-- 일반회원 리스트 -->
+						<tr th:each="rList : ${rList}">
+
+							<td><input class="form-check-input mt-0" name="memChk" type="checkbox" value=""></td>
+
+							<td th:text="${rListStat.count + (page.num*10) - 10}"></td>
+
+							<td><a th:href="@{'/admin/adminReviewView/' + ${rList.rno}}" th:text="${rList.title}"></a></td>
+
+							<td th:utext="${rList.date}">data</td>
+
+							<td th:text="${rList.username}"></td>
+
+						</tr>
+
+
+					</tbody>
+				</table>
+				
+				<button class="btn btn-danger">선택 삭제</button><br><br>
+				
 			</div>
-			
+
 		</div>
 	</div>
-	
+
 </div>
 <!-- </body> -->
 </html>

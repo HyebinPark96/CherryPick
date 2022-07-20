@@ -110,8 +110,16 @@ public class AdminController {
 		
 		model.addAttribute("rList", rList);
 		model.addAttribute("cafe", cafe);
+		model.addAttribute("page", page);
+		model.addAttribute("select", num);
 		
 		return "admin/adminReview";
+	}
+	
+	@GetMapping("/admin/adminReviewView/{rno}")
+	public String adminReviewView(@PathVariable("rno") int rno) {
+		
+		return "admin/adminReviewView";
 	}
 	
 }
