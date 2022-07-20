@@ -4,12 +4,11 @@ let cindex = {
 	init: function() {
 
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			alert('2kooong2');
 			//this.fileupload(); - 구 파일업로드 테스트
 			this.submitFiles();
-			//this.register(); 
+			this.register(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
-
+		
 		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
 			//this.fileupload();
 			this.submitFiles();
@@ -19,20 +18,23 @@ let cindex = {
 
 	//==================================
 	submitFiles: function() {
+		alert('ㄴㄱㅁ');
 		let formData = new FormData();
 			
 		//let files = $("input[name=files]")[0].files;
 	//		let i = 0;
 		var inputArr = document.getElementsByName("files");
 		for (let i = 0; i < inputArr.length; i++) {
-			console.log(inputArr[i]);
-			console.log(inputArr[i].files);
-			let files = $("input[name=files]")[i].files;
-			formData.append("files", files[0]);
+			//console.log(inputArr[i]);
+			//console.log(inputArr[i].files[0]);
+			let fileArr = $("input[name=files]")[i].files;
+			formData.append("files", fileArr[0]);
+			//console.log(files[i]);
 		}
 
 		$.ajax({
-			url: 'http://localhost/test', //수정요망.
+			//url: 'http://localhost/test', //추후 적절한 이름으로 수정요망.
+			url: '/cafe/uploadProc',
 			data: formData,
 			cache: false,
 			contentType: false,
@@ -40,6 +42,12 @@ let cindex = {
 			type: 'POST',
 			success: function(data) {
 				console.log(data);
+				if (data) {
+					alert("완료");
+					//아무 파일도 안 올려도 이게 뜬다.
+				} else {
+					alert("전송된 값 없음");
+				}
 			},
 			error: function(e) {
 				console.log(e);
@@ -92,7 +100,7 @@ let cindex = {
 		$.ajax({
 			type: "POST",
 			url: "/cafe/regCafeProc",
-			data: JSON.stringify(data), // 자바스크립트의 data 객체를 Java가 알아듣도록 변경			
+			data: JSON.stringify(data), // 자바스크립트의 data 객체를 Java가 알아듣도록 변경
 			contentType: "application/json; charset=utf-8",
 			dataType: "json" // json이라면 => javascript 오브젝트로 변경하여 아래 함수의 파라미터로 전달
 		}).done(function(resp) {
