@@ -122,6 +122,10 @@ let cindex = {
 		});
 		
 	},
+	
+	menuRegister: function(){
+		
+	}
 
 
 }

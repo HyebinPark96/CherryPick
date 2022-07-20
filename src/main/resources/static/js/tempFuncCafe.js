@@ -41,7 +41,6 @@ function initItem(blk, itm) {
 initItem('ctag-block', 'ctag-item');
 initItem('menulist-block', 'menulist-item');
 initItem('cimage-block', 'cimage-item');
-initItem('modal-block', 'modal-item');
 
 //숨겨져 있는 원본을 복사하고, 화면에 표시한다(display = 'block')
 function addItem(blk, itm, max) {
@@ -59,6 +58,10 @@ function addItem(blk, itm, max) {
 function removeItem(class_name, i){
 	const element = document.getElementsByClassName(class_name);
 	element[i].remove(); 
+}
+
+function modal(){
+	$("#inputModal").modal('show');
 }
 
 //안한거 : +버튼, x버튼이 눌렸을 때 +버튼의 display를 토글하라.
@@ -83,7 +86,6 @@ function test() {
 }
 
 function previewImg(input) {
-	alert('blank');
 }
 
   function readURL(input, id) {
