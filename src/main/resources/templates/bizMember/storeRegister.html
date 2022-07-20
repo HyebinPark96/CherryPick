@@ -33,7 +33,7 @@
 				</div>
 				<!-- action="/cafe/regCafeProc" -->
 				
-				<form id="cfFrm" action="/cafe/regCafeProc" method="post">
+				<!-- <form id="cfFrm" action="/cafe/regCafeProc" method="post"> -->
 					<table>
 						<tr>
 							<th>업체명</th>
@@ -128,7 +128,7 @@
 					<div class="row">
 						<div id="cimage-block" class="row">
 							<div class="cimage-item col-md-3">
-								<div id="" class="cf-img thumbnail">
+								<div id="objectID" class="cf-img thumbnail" >
 									<!-- style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');" -->
 									<img class="divBtn icon-20" onclick="location.href='#'"
 										src="/img/x.png" style="margin: 5px;">
@@ -211,7 +211,7 @@
 						</div>
 					</div>
 					<hr>
-				</form>
+				<!-- </form> -->
 				
 				<div id="cimageView"></div>
 
@@ -226,17 +226,41 @@
 					완료</button>
 
 				<br>
-	
-				<!-- <div class="divBtn btn btn-primary btn-lg" onclick="test()">테스트</div> -->
+				<input type='file' onchange="readURL(this, objectID);" />
+     
+				
+				<div class="divBtn btn btn-primary btn-lg" onclick="modal()">모달 생성 테스트</div>
+				<div class="divBtn btn btn-primary btn-lg" onclick="removeItem('modal-item', 0)">모달 삭제 테스트</div>
 	
 			</div>
+			
+			<!-- 모달 영역 -->
+			<div id="modal-block">
+				<div class="modal fade modal-item">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">이미지 첨부</h5>
+								<button type="button" data-bs-dismiss="modal">&times;</button>
+								<input type='file' onchange="readURL(this, objectID);" />
+							</div>
+							<div class="modal-body">
+	
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+
 
 
 			<!-- 미리보기 box -->
 			<div class="box-2 img-result hide">
 				<img style="max-width: 100%;" src="" alt="" class="cropped">
 			</div>
-			<!-- 모달 영역 -->
+			<!-- Cropper 모달 영역 -->
 			<div id="imgModal" class="modal fade">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">

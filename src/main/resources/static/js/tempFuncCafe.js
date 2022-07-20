@@ -41,6 +41,7 @@ function initItem(blk, itm) {
 initItem('ctag-block', 'ctag-item');
 initItem('menulist-block', 'menulist-item');
 initItem('cimage-block', 'cimage-item');
+initItem('modal-block', 'modal-item');
 
 //숨겨져 있는 원본을 복사하고, 화면에 표시한다(display = 'block')
 function addItem(blk, itm, max) {
@@ -53,6 +54,11 @@ function addItem(blk, itm, max) {
 		var clone = blk.appendChild(itmArr[0].cloneNode(true));
 		clone.style.display = 'block';
 	}
+}
+
+function removeItem(class_name, i){
+	const element = document.getElementsByClassName(class_name);
+	element[i].remove(); 
 }
 
 //안한거 : +버튼, x버튼이 눌렸을 때 +버튼의 display를 토글하라.
@@ -80,6 +86,19 @@ function previewImg(input) {
 	alert('blank');
 }
 
+  function readURL(input, id) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $(id).css('background', 'transparent url('+e.target.result +') center center no-repeat').css('background-size', 'cover');
+                
+                
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
 //미리보기 관련
 //<!--document.getElementById('a').style.backgroundImage = "url(/img/check.png)";-->
