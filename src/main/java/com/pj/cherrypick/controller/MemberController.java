@@ -88,7 +88,7 @@ public class MemberController {
 		Page page = new Page();
 		
 		page.setNum(num);
-		page.setCount(reviewService.count(principalDetail.getUsername().toString())); 
+		page.setCount(reviewService.count(principalDetail.getUsername())); 
 		
 		List<ReviewVO> myReviewList = memberService.getMyReviewList(principalDetail.getUsername().toString(), page.getDisplayPost(), page.getPostNum());
 		
