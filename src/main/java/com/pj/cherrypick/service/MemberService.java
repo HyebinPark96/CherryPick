@@ -1,6 +1,7 @@
 package com.pj.cherrypick.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pj.cherrypick.domain.HeartVO;
 import com.pj.cherrypick.domain.MemberVO;
 import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.MemberMapper;
@@ -140,6 +140,11 @@ public class MemberService {
 	
 	// 내가 작성한 리뷰 리스트 가져오기
 	public List<ReviewVO> getMyReviewList(String username, int displayPost, int postNum) {
+		HashMap<String, String> data = new HashMap();
+		  
+		data.put("displayPost", Integer.toString(displayPost));
+		data.put("postNum", Integer.toString(postNum));
+		
 		return reviewMapper.getMyReviewList(username, displayPost, postNum);
 	}
 	

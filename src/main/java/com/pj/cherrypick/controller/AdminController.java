@@ -101,7 +101,8 @@ public class AdminController {
 		Page page = new Page();
 		page.setNum(num);
 		
-		page.setCount(adminService.rCount(cno));  
+		page.setCount(adminService.rCount(cno));
+		// System.out.println("rCount : " + adminService.rCount(cno));
 		
 		List<ReviewVO> rList = null;
 		rList = adminService.getReviewList(cno, page.getDisplayPost(), page.getPostNum());
