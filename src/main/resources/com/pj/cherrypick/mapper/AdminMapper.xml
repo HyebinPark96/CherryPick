@@ -178,9 +178,8 @@
 	</select>
 
 	<!-- 리뷰 총 갯수 -->
-	<select id="rCount" resultType="int">
-		SELECT COUNT(rno)
-		FROM review
+	<select id="rCount" parameterType="int" resultType="int">
+		SELECT count(if(cno = #{cno}, cno, null)) FROM review;
 	</select>
 	
 	<!-- 사업장별 리뷰에서 사업장 정보 가져오기 -->
@@ -188,6 +187,13 @@
 		SELECT *
 		FROM cafe
 		WHERE cno = #{cno}
+	</select>
+	
+	<!-- 특정 사업장 리뷰 1개 상세보기 -->
+	<select id="getOneReview"  resultType="com.pj.cherrypick.domain.ReviewVO" >
+		SELECT *
+		FROM review
+		WHERE rno = #{rno}
 	</select>
 	
 </mapper>

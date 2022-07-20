@@ -101,7 +101,7 @@ public class AdminController {
 		Page page = new Page();
 		page.setNum(num);
 		
-		page.setCount(adminService.rCount());  
+		page.setCount(adminService.rCount(cno));  
 		
 		List<ReviewVO> rList = null;
 		rList = adminService.getReviewList(cno, page.getDisplayPost(), page.getPostNum());
@@ -118,7 +118,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/adminReviewView/{cno}")
-	public String adminReviewView(@PathVariable int cno, @RequestParam("rno") int rno) {
+	public String adminReviewView(@PathVariable int cno, @RequestParam("rno") int rno, Model model) throws Exception {
+		
+		ReviewVO review = null;
+		review = adminService.getOneReview(rno);
+		
+		model.addAttribute("review", review);
 		
 		return "admin/adminReviewView";
 	}

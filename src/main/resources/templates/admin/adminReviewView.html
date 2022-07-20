@@ -8,7 +8,17 @@
 <!-- <body> -->
 
 <div class="content" layout:fragment="content">
-
+	<h3> 리뷰보기</h3>
+	
+	<!-- 카페관련 정보는 추가예정 -->
+	
+	<!-- 리뷰관련 정보 -->
+	<label th:text="${review.username}">작성자</label>
+	<label th:text="${review.date}">작성일</label>
+	<label th:text="${review.title}">리뷰제목</label>
+	<label th:utext="${review.content}">리뷰내용</label>
+	<label th:text="${review.score}">별점</label>
+	<label th:text="${review.waiting}">웨이팅</label>
 </div>
 <!-- </body> -->
 </html>

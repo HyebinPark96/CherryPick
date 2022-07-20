@@ -120,10 +120,10 @@ public class AdminService {
 		return null;
 	}
 	
-	public int rCount() throws Exception{
+	public int rCount(int cno) throws Exception{
 		int rCount = 0;
-		if(adminMapper.rCount()!=0) {
-			rCount = adminMapper.rCount();
+		if(adminMapper.rCount(cno)!=0) {
+			rCount = adminMapper.rCount(cno);
 		}
 		return rCount;
 	}
@@ -133,6 +133,15 @@ public class AdminService {
 		if(adminMapper.getCafeInfo(cno)!=null) {
 			cafe = adminMapper.getCafeInfo(cno);
 			return cafe;
+		}
+		return null;
+	}
+	
+	public ReviewVO getOneReview(int rno) throws Exception{
+		ReviewVO review = null;
+		if(adminMapper.getOneReview(rno)!=null) {
+			review = adminMapper.getOneReview(rno);
+			return review;
 		}
 		return null;
 	}
