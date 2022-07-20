@@ -115,7 +115,7 @@ let index = {
 			location.href = "/admin/adminMain?num=1&sort=cafe";
 		}).fail(function(error) {
 			// 실패한 경우 호출
-			alert(JSON.stringify(error));
+			console.log(JSON.stringify(error));
 		});
 	},
 
