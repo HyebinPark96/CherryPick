@@ -7,6 +7,7 @@ let cindex = {
 			//this.fileupload(); - 구 파일업로드 테스트
 			this.submitFiles();
 			this.register(); 
+			this.menuRegister(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 		
 		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩

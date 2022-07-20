@@ -1,5 +1,5 @@
 /**
- * 
+ * storeRegister 내의 항목들을 동적으로 제어한다.
  */
 
 
@@ -28,37 +28,7 @@ $(document).ready(function() {
 	});
 });
 
-//▼▼▼▼====입력란 추가 관련 메소드====▼▼▼▼
-//초기설정 : 입력란의 복사본을 하나 만들고, 원본은 숨긴다(display = 'none')
 
-function initItem(blk, itm) {
-	var blk = document.getElementById(blk);
-	var itm = document.getElementsByClassName(itm);
-	blk.appendChild(itm[0].cloneNode(true));
-	itm[0].style.display = 'none';
-}
-
-initItem('ctag-block', 'ctag-item');
-initItem('menulist-block', 'menulist-item');
-initItem('cimage-block', 'cimage-item');
-
-//숨겨져 있는 원본을 복사하고, 화면에 표시한다(display = 'block')
-function addItem(blk, itm, max) {
-	var blk = document.getElementById(blk);
-	var itmArr = document.getElementsByClassName(itm);
-
-	//갯수 제한을 넘기면 더 이상 엘리먼트를 생성하지 않는다.
-	//실제 엘리먼트의 갯수는 (화면에 표시된 갯수 + 숨겨진 원본 1개)이므로, 판별조건에 -1을 붙여준다.
-	if (itmArr.length - 1 < max) {
-		var clone = blk.appendChild(itmArr[0].cloneNode(true));
-		clone.style.display = 'block';
-	}
-}
-
-function removeItem(class_name, i){
-	const element = document.getElementsByClassName(class_name);
-	element[i].remove(); 
-}
 
 function modal(){
 	$("#inputModal").modal('show');
@@ -80,13 +50,46 @@ function makeHashtag() {
 		}
 	}
 }
-
+//cropper.js 모달 호출
 function test() {
 	$("#imgModal").modal('show');
 }
 
 
-function previewImg(input, name, opt) {
+//=====###입력란 추가/삭제 관련 메소드###=========
+
+//각 요소를 몇 개 만들고 싶은지 갯수를 정하자.
+var menuNum = 3;
+
+
+
+//변경-삭제되지 않고 숨김/표시를 하는 엘리멘트를 생성할 것이다.
+function initMenu(blk, itm, num, opt) {
+	var blk = document.getElementById(blk);
+	var itm = document.getElementsByClassName(itm);
+	
+	if(opt==1){
+		itm[0].style.display = 'none';
+	}
+	
+	//총 갯수 num만큼 만들겠다 = num-1번 복제하겠다.
+	for (var i=0; i<num-1; i++){
+		blk.appendChild(itm[0].cloneNode(true));
+	}
+	itm[0].style.display = 'block';
+}
+
+initMenu('menulist-block', 'menulist-item', menuNum, 0);
+
+
+
+function showItem(){
+	//사전에 생성된 클래스 이름을 받아온다.
+	//
+}
+
+
+function previewImg(input, name, opt, idx) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 		
@@ -96,20 +99,46 @@ function previewImg(input, name, opt) {
 			}
 			reader.readAsDataURL(input.files[0]);	
 		}else if(opt=="class"){
-			alert('optic blast beam-')
+			
+			
+			reader.onload = function(e) {
+			$('.'+name).eq(idx).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
+			}
+			reader.readAsDataURL(input.files[0]);
 		}else{
 			alert('put accurate parameter.')
 		}
 	}
 }
 
-function dynamicInput(){
-	//새 인풋을 생성해.
-	
-	//새로 생성한(마지막)인풋만 표시해서 모달을 띄워.
+//▼▼▼▼====입력란 추가 관련 메소드====▼▼▼▼
+//초기설정 : 입력란의 복사본을 하나 만들고, 원본은 숨긴다(display = 'none')
+
+function initItem(blk, itm) {
+	var blk = document.getElementById(blk);
+	var itm = document.getElementsByClassName(itm);
+	blk.appendChild(itm[0].cloneNode(true));
+	itm[0].style.display = 'none';
 }
 
-function dynamicPreview(blk, itm, max, classname){
-	addItem(blk, itm, max);
-	previewImg(this, classname, "class")
+initItem('ctag-block', 'ctag-item');
+//initItem('cimage-block', 'cimage-item');
+
+//숨겨져 있는 원본을 복사하고, 화면에 표시한다(display = 'block')
+function addItem(blk, itm, max) {
+	var blk = document.getElementById(blk);
+	var itmArr = document.getElementsByClassName(itm);
+
+	//갯수 제한을 넘기면 더 이상 엘리먼트를 생성하지 않는다.
+	//실제 엘리먼트의 갯수는 (화면에 표시된 갯수 + 숨겨진 원본 1개)이므로, 판별조건에 -1을 붙여준다.
+	if (itmArr.length - 1 < max) {
+		var clone = blk.appendChild(itmArr[0].cloneNode(true));
+		clone.style.display = 'block';
+	}
 }
+
+function removeItem(class_name, i){
+	const element = document.getElementsByClassName(class_name);
+	element[i].remove(); 
+}
+

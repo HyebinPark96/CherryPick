@@ -118,17 +118,18 @@
 					</div>
 
 					<img class="divBtn icon-30"
-						onclick="addItem('ctag-block', 'ctag-item', 5)"
+						onclick="addItem('ctag-block','ctag-item', 5)"
 						src="/img/circle-plus-pink.png">
+						
 					<hr>
 
 					<!-- 이미지 등록 -->
 					
-					<div class="text-20">이미지 등록</div>
+					<div class="text-20">대표 이미지 등록</div>
 					<div class="row">
 						<div id="cimage-block" class="row">
 							<div class="cimage-item col-md-3">
-								<div id="cmenuPreview" class="cf-img thumbnail" >
+								<div id="cimage_Preview" class="cf-img thumbnail" >
 									<!-- style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');" -->
 									<img class="divBtn icon-20" onclick="location.href='#'"
 										src="/img/x.png" style="margin: 5px;">
@@ -187,15 +188,15 @@
 							<div class="menulist-item">
 								<div class="d-flex" style="gap: 10px;">
 									<div class="divBtn hoverbox" onclick="modal()"
-										style="background-image: url('/img/add-image.png'); width: 150px; height: 100px;">
+										style="background-image: url('/img/add-image.png'); width: 150px; height: 125px;">
 										<div id="overlay5">
 											<div class="hoverbox-img-caption">새 이미지 추가</div>
 											<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
 										</div>
 									</div>
-									<div>
-										<img onclick="location.href='#'" class="divBtn"
-											src="/img/sample.jpg" alt="메뉴썸네일" width="150" />
+									<div class="m_img_preview" style="width: 150px; height: 125px;">
+										<!-- <img onclick="location.href='#'" class="divBtn"
+											src="/img/sample.jpg" alt="메뉴썸네일" width="150" /> -->
 									</div>
 									<table>
 										<tr>
@@ -220,16 +221,16 @@
 												class="form-control" placeholder="메뉴에 대해 설명해주세요."></td>
 										</tr>
 									</table>
-									<div class="divBtn">
+									<!-- <div class="divBtn">
 										<img class="icon-20" src="/img/x.png">
-									</div>
+									</div>-->
 								</div>
 							</div>
 						</div>
-						<div onclick="addItem('menulist-block', 'menulist-item', 3)"
+						<!-- <div onclick=""
 							class="divBtn hoverbox" style="width: 150px; height: 100px;">
 							<img class="icon-30" src="/img/circle-plus.png">
-						</div>
+						</div>-->
 					</div>
 					<hr>
 				<!-- </form> -->
@@ -260,16 +261,15 @@
 							</div>
 							<div class="modal-body">
 								<div>카페 이미지</div>
-								<input id="cimage" type="file" name="files" onchange="previewImg(this, cmenuPreview, 'id');" accept="image/*" />
-								<input type="file" name="files" accept="image/*" /> 
-								<input type="file" name="files" accept="image/*" />
+								<input id="cimage" type="file" name="files" onchange="previewImg(this, cimage_Preview, 'id', 0);" accept="image/*" />
+								
 								<div>메뉴판 이미지</div> 
-								<input id="cmenu_image" type="file" name="files" onchange="previewImg(this, cmenu_preview, 'id');" accept="image/*" />
+								<input id="cmenu_image" type="file" name="files" onchange="previewImg(this, cmenu_preview, 'id', 0);" accept="image/*" />
 								 
 								<div>메뉴 이미지</div> 
-								<input type="file" name="files" accept="image/*" />
-								<input type="file" name="files" accept="image/*" />
-								<input type="file" name="files" onchange="previewImg(this, objectID, 'id');" accept="image/*" />
+								<input id="m_img1" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 0);" accept="image/*" />
+								<input id="m_img2" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 1);" accept="image/*" />
+								<input id="m_img3" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 2);" accept="image/*" />
 								
 							</div>
 						</div>
