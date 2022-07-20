@@ -1,4 +1,6 @@
+ 
 <!doctype html>
+
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout-main}">
@@ -210,7 +212,7 @@
 						>등록 완료</button>	 -->
 				</form>
 				
-				<input id="upload-file-input" type="file" name="files" multiple/>
+				<input id="upload-file-input" type="file" name="files"/>
 					<input type="file" name="files" />
 					<input type="file" name="files" />
 					<input type="file" name="files" />
@@ -220,13 +222,8 @@
 					완료</button>
 
 				<br>
-				<div class="divBtn btn btn-primary btn-lg" onclick="test()">테스트</div>
+				<!-- <div class="divBtn btn btn-primary btn-lg" onclick="test()">테스트</div> -->
 
-				<form id="upload-file-form">
-					<label
-						for="upload-file-input">Upload your file:</label> <input
-						id="upload-file-input" type="file" name="uploadfile" accept="*" />			
-				</form>
 			</div>
 
 

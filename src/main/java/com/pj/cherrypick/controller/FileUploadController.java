@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,7 +31,9 @@ import com.pj.cherrypick.storage.StorageFileNotFoundException;
 
 @Controller
 public class FileUploadController {
-
+/*
+ * 
+ * 
 	private final StorageService storageService;
 
 	@Autowired
@@ -54,18 +57,13 @@ public class FileUploadController {
 	
 	
 	//=======================
-	 @CrossOrigin("*")
 	  @RequestMapping("/test")
 	  public String upload(MultipartHttpServletRequest request) {
-
+		System.out.println("upload on");
 	    List<MultipartFile> files = request.getFiles("files");
-	    
 
 	    for (MultipartFile file : files) {
-	    	//System.out.println(file.getOriginalFilename() + ":" + file.getSize());
-
-
-	    	 
+	    	System.out.println(file.getOriginalFilename() + ":" + file.getSize());
 	    	 storageService.store(file);
 	    }
 
@@ -76,6 +74,9 @@ public class FileUploadController {
 	@ExceptionHandler(StorageFileNotFoundException.class)
 	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
 		return ResponseEntity.notFound().build();
+	
 	}
-
+*
+*
+*/
 }
