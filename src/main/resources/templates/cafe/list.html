@@ -19,9 +19,22 @@
 				<div>
 				<span style="font-size: 12px; color: #bbb;"> 조회수 000,000회 |
 					등록일 0000-00-00 </span></div>  
-				리스트 이름: <b th:text="${list.liname}">liname</b><br>
+				리스트 이름: <b th:text="${list.liname}">liname</b><span>	
+			<img id="bmkliImg" src="">
+			<input type="hidden" id="bmkli_check" th:if="${bmk == 0}" th:value="0">
+			<input type="hidden" id="bmkli_check" th:if="${bmk != 0}" th:value="1"> 
+			</span><br> 
+
 				<span th:text="${list.username}">username</span>님이 만든
 				이 리스트를 <span>n</span>명이 담았습니다.
+			
+
+		
+			<!--cafe.js에 user/lino 보내기 -->
+			<input id="lino" type="hidden" th:value="${list.lino}">
+			<input id="username" type="hidden" th:value="${username}">
+			
+			
 			</div>
 			<hr>
 			<!--구분선-->
@@ -54,9 +67,9 @@
 
 						</div>
 						<div>
-							<img id="bmkImg" src="">
+					<!--		<img id="bmkImg" src="">
 							<input type="hidden" id="bmk_check" th:if="${bmk == 0}" th:value="0">
-							<input type="hidden" id="bmk_check" th:if="${bmk != 0}" th:value="1"> 
+							<input type="hidden" id="bmk_check" th:if="${bmk != 0}" th:value="1">  -->
 						</div>
 
 					</div>
@@ -94,11 +107,11 @@
 		data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/);
 	positions.push(data);
 	var cno = /*[[${cafe.cno}]]*/;
-	console.log("cno", cno);
-	console.log("data:", data);
-	console.log("positions:", positions);
+//	console.log("cno", cno);
+//	console.log("data:", data);
+//	console.log("positions:", positions);
 	var cimage = /*[[${cafe.cimage}]]*/;
-	console.log(cimage);
+//	console.log(cimage);
 	/*[/]*/
 
 
