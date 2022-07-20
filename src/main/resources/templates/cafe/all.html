@@ -42,6 +42,7 @@
 						<div class="col p-4 d-flex flex-column position-static">
 							<strong class="d-inline-block mb-2 text-success" th:text="${cafe.cname}">카페
 								이름</strong>
+							
 							<div th:text="${cafe.ctag}">카페 해시태그</div>
 							<div class="mb-1 text-muted" th:text="${cafe.caddress}">부산광역시 경상남도 서울시</div>
 	
@@ -57,30 +58,43 @@
 								</div>
 	
 							</div>
+							
 							<a th:id="${cafe.cno}" th:onclick="sendToInfo(this.getAttribute('id'))">더보기</a>
-	
-						<!--js에 user/cno 보내기 -->
+							
+				
+						</div>
+					<div>
+					<!--	<img id="bmkImg" src="" alt="${cafe.chk}"> -->
+						<img id="bmkImg" th:if="${cafe.chk == 0 }" src="/img/bmk-empty.png"> 
+						<img id="bmkImg" th:if="${cafe.chk != 0 }" src="/img/bmk.png"> 
+							<input type="hidden" name="bmk-list" id="bmk_check" th:if="${cafe.chk == 0}" th:value="0">
+							<input type="hidden" name="bmk-list" id="bmk_check" th:if="${cafe.chk != 0}" th:value="1"> 
+					</div>
+					</div>
+				<!--js에 user/cno 보내기 -->
 						<input id="username" type="hidden" th:value="${username}">
 						<input id="cno" type="hidden" th:value="${cafe.cno}">
-						</div>
-					</div>
-	
-				</div> <!--cflist-item end -->
+					
+				</div>
+
+				
+				
+				 <!--cflist-item end -->
 	</div> <!--cflist container end-->
-				<div class="bmk-list"th:each="bmk : ${bmk}">
+	<!--			<div class="bmk-list"th:each="bmk : ${bmk}">
 					<div class = "bmkImg" name="bmk-list">
 						<img id="bmkImg" src="">
 						<input type="hidden" id="bmk_check" th:if="${bmk.chk == 0}" th:value="0">
 						<input type="hidden" id="bmk_check" th:if="${bmk.chk != 0}" th:value="1">
 					</div>
-				</div>
+				</div> -->
 
 				<div class="sharebar input-group mb-3">
 					<input type="text" value="https://sampletext.com">
 					<button class="btn btn-outline-secondary" type="button"
 						id="button-addon2">공유하기</button>
 				</div>
-			<!-- 지도 영역 시작-->
+			 <!--지도 영역 시작-->
 			<div id="map" style="width:80%;height:350px;"></div>
 			<!-- 지도 출력 스크립트 (타임리프 변수를 사용하기 때문에 외부 js파일로 못 뺌 ㅠ) -->
 <script th:inline="javascript">
@@ -170,6 +184,7 @@
 	/*]]>*/
 </script> 
 <!--지도 영역 끝 -->
+
 </div>
 </div>
 

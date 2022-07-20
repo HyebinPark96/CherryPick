@@ -37,5 +37,27 @@
 		WHERE username = #{username} AND cno = #{cno}
 	</delete>
 
+	<!-- username으로 리스트(lino) 북마크 여부 확인-->
+ 	<select id="checkListBmk" resultType="com.pj.cherrypick.domain.BookmarkVO">
+		SELECT IF(COUNT(*) = 1, true, false) as chk
+		FROM bmk_list b
+		LEFT JOIN member m
+		ON b.username = m.username
+		LEFT JOIN list l
+		ON b.lino = l.lino
+		WHERE b.username = #{username} AND l.lino = #{lino}
+    </select> 
+
+  	<!--  리스트 북마크 추가 -->
+	<insert id="addBmkli" parameterType="hashmap">
+		INSERT INTO bmk_list(username, lino)
+		VALUES( #{username}, #{lino})
+	</insert>
+	<!--  리스트 북마크 삭제 -->
+	<delete id="delBmkli" parameterType="hashmap">
+		DELETE FROM bmk_list 
+		WHERE username = #{username} AND lino = #{lino}
+	</delete>
+
 
 </mapper>
