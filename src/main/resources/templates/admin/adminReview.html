@@ -41,7 +41,7 @@
 
 							<td th:text="${rListStat.count + (page.num*10) - 10}"></td>
 
-							<td><a th:href="@{'/admin/adminReviewView/' + ${rList.rno}}" th:text="${rList.title}"></a></td>
+							<td><a th:href="@{'/admin/adminReviewView/' + ${cno}(rno=${rList.rno})}" th:text="${rList.title}"></a></td>
 
 							<td th:utext="${rList.date}">data</td>
 
@@ -49,11 +49,29 @@
 
 						</tr>
 
-
 					</tbody>
 				</table>
-				
+
 				<button class="btn btn-danger">선택 삭제</button><br><br>
+				
+				<div class="pagination">
+					<th:block th:if="${page.prev}">
+						<span class="page-item">[ <a th:href="@{/admin/adminReview(num=${page.startPageNum - 1})}" class="page-link">이전</a> ]
+						</span>
+					</th:block>
+
+					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
+						<span th:if="${select!=num} and ${num}!=0" class="page-item"> <a th:href="@{'/admin/adminReview/' + ${cno}(num=${num})}" th:text="${num}" class="page-link"></a>
+						</span>
+						<span th:unless="${select!=num}" class="page-item active"> <a th:href="@{'/admin/adminReview/' + ${cno}(num=${num})}"  th:text="${num}" class="page-link"></a>
+						</span>
+					</th:block>
+
+					<th:block th:if="${page.next}">
+						<span class="page-item">[ <a th:href="@{/admin/adminReview(num=${page.endPageNum + 1})}" class="page-link">다음</a> ]
+						</span>
+					</th:block>
+				</div>
 				
 			</div>
 
