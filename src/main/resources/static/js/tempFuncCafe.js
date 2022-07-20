@@ -85,8 +85,6 @@ function test() {
 	$("#imgModal").modal('show');
 }
 
-function previewImg(input) {
-}
 
   function readURL(input, id) {
         if (input.files && input.files[0]) {
