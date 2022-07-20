@@ -86,19 +86,30 @@ function test() {
 }
 
 
-  function readURL(input, id) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+function previewImg(input, name, opt) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		
+		if(opt=="id"){
+			reader.onload = function(e) {
+			$(name).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
+			}
+			reader.readAsDataURL(input.files[0]);	
+		}else if(opt=="class"){
+			alert('optic blast beam-')
+		}else{
+			alert('put accurate parameter.')
+		}
+	}
+}
 
-            reader.onload = function (e) {
-                $(id).css('background', 'transparent url('+e.target.result +') center center no-repeat').css('background-size', 'cover');
-                
-                
-            }
+function dynamicInput(){
+	//새 인풋을 생성해.
+	
+	//새로 생성한(마지막)인풋만 표시해서 모달을 띄워.
+}
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-//미리보기 관련
-//<!--document.getElementById('a').style.backgroundImage = "url(/img/check.png)";-->
+function dynamicPreview(blk, itm, max, classname){
+	addItem(blk, itm, max);
+	previewImg(this, classname, "class")
+}
