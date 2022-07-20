@@ -5,7 +5,9 @@
 <mapper namespace="com.pj.cherrypick.mapper.ReviewMapper">
 
 	<select id="count" parameterType="String" resultType="int">
-		SELECT count(if(username = #{username}, username, null)) FROM review;
+		SELECT count(*)
+		FROM review
+		WHERE username = #{username};
 	</select>
 	
 	
@@ -69,7 +71,7 @@
 		ON r.username = m.username
 		LEFT JOIN heart h
 		ON r.rno = h.rno
-		WHERE m.username = #{username}
+		WHERE r.username = #{username}
 		ORDER BY r.date DESC
 		LIMIT #{displayPost}, #{postNum}
 	</select>
