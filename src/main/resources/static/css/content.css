@@ -311,3 +311,9 @@
 	color: gray;
 }
 
+
+/*리뷰 관리 페이지*/
+
+.ad-review-content{
+	min-height: 100px; margin-top: 10px; border:1px solid #999; border-radius:10px; 
+}
