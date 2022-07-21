@@ -17,10 +17,6 @@ public class CafeService {
 	@Autowired
 	private CafeMapper cafeMapper;
 	
-	public List<CafeVO> getCafeAllByScore() {
-		return cafeMapper.getCafeAllByScore();
-	}
-
 	public List<CafeVO> getCafeAll() {
 		return cafeMapper.getCafeAll();
 	}
@@ -61,6 +57,16 @@ public class CafeService {
 		return cafeMapper.getMyListBmk(username);
 	}
 	
+	public List<CafeVO> getCafeAllByScore() {
+		return cafeMapper.getCafeAllByScore();
+	}
+	
+	public List<CafeVO> getCafeAllByReview() {
+		return cafeMapper.getCafeAllByReview();
+	}
 
+	public List<CafeVO> getCafeAllByBmk() {
+		return cafeMapper.getCafeAllByBmk();
+	}
 	
 }

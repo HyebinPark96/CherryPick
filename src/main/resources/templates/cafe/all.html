@@ -19,12 +19,16 @@
 				<div>등록된 카페 수: <span th:text="${#lists.size(cafes)}">카페 수</span>개</div>
 	
 				<div class="cflist-sort">
-					<select id="sort" onchange="sort();">
+				<span id="sort0" onclick="sort(0);" >최신순</span> | 
+				<span id="sort1" onclick="sort(1);" >즐겨찾기순</span> | 
+				<span id="sort2" onclick="sort(2);" >별점높은순</span>  | 
+				<span id="sort3" onclick="sort(3);" >리뷰많은순</span>
+				<!--	<select id="sort" onchange="sort();">
 						<option value="0">최신순</option>
 						<option value="1">즐겨찾기순</option>
 						<option value="2">별점높은순</option>
-						<option value="3">리뷰많은순</option>
-					</select>
+						<option value="3">리뷰많은순</option> 
+					</select> -->
 				</div>
 			</div>
 			<hr>
