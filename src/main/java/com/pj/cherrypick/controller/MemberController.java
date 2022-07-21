@@ -90,7 +90,8 @@ public class MemberController {
 		page.setNum(num);
 		page.setCount(reviewService.count(principalDetail.getUsername())); 
 		
-		List<ReviewVO> myReviewList = memberService.getMyReviewList(principalDetail.getUsername().toString(), page.getDisplayPost(), page.getPostNum());
+		List<ReviewVO> myReviewList = null;
+		myReviewList = memberService.getMyReviewList(principalDetail.getUsername(), page.getDisplayPost(), page.getPostNum());
 		
 		model.addAttribute("list", myReviewList);
 		model.addAttribute("page", page);
