@@ -7,18 +7,73 @@
 
 <!-- <body> -->
 
-<div class="content" layout:fragment="content">
+<div class="content container" layout:fragment="content">
 	<h3> 리뷰보기</h3>
 	
 	<!-- 카페관련 정보는 추가예정 -->
 	
 	<!-- 리뷰관련 정보 -->
-	<label th:text="${review.username}">작성자</label>
-	<label th:text="${review.date}">작성일</label>
-	<label th:text="${review.title}">리뷰제목</label>
+	<div class="d-flex justify-content-end">
+		<label th:text="${review.username}" style="font-weight:bold;">작성자</label>
+		&nbsp;
+		<label th:text="'/'+${review.date}" class="gray">작성일</label>
+	</div>
+	<label th:text="${review.title}" class="text-large">리뷰제목</label>
 	<label th:utext="${review.content}">리뷰내용</label>
 	<label th:text="${review.score}">별점</label>
 	<label th:text="${review.waiting}">웨이팅</label>
+
+
+	<div class="text-20">별점</div>
+	<div class="d-flex align-items-end" style="margin-bottom: 20px">
+		<div id="rateYo"></div>
+		<div class="rv-rating align-self-end">
+			<span id="rateBar"></span> <input id="score" type="number" step="0.5"
+				readonly>
+		</div>
+	
+	</div>
+	
+	<div>
+		<div class="text-20">
+			웨이팅(분)&nbsp;<img class="icon-30" src="/img/clock.png">
+		</div>
+		<input style="width: 300px;" type="range" class="form-control-range"
+			id="waiting" th:value="${review.waiting}" min="0" max="70" step="10" readonly>
+		<div style="color: gray;" id="waitingLbl">대기시간을 알려주세요.</div>
+	</div>
+	
+	<!-- 웨이팅 스크립트 -->
+		<script>
+			
+			
+			var wVal = parseInt($('#waiting').val());
+
+			switch (wVal) {
+			case 0:
+				$('#waitingLbl').html("10분 미만");
+				break
+			case 10:
+			case 20:
+			case 30:
+			case 40:
+			case 50:
+			case 60:
+
+				$('#waitingLbl').html(wVal + "분 ~" + (wVal + 10) + "분");
+				break
+
+			case 70:
+				$('#waitingLbl').html("1시간 이상");
+				break
+			default:
+				$('#waitingLbl').html("올바른 값이 아닙니다.");
+				break
+			}
+		</script>
+
 </div>
+	
+	
 <!-- </body> -->
 </html>

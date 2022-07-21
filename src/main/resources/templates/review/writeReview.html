@@ -39,22 +39,11 @@
 		    			<input id="score" type="number" step="0.5" readonly >
 		    		</div>
 
-					<!-- <input type="range" class="form-control-range" id="score"  value="0" min="0" max="5" step="0.5" oninput="document.getElementById('value1').innerHTML=this.value;"> -->
-			    	<!-- <span id="value1">5</span>점<br><br> -->
 		    	</div>
 		    	
 		    	<div>
 		    		<div class="text-20">웨이팅(분)&nbsp;<img class="icon-30" src="/img/clock.png"></div>
 		    		<input style="width:300px;"type="range" class="form-control-range" id="waiting" value="0" min="0" max="70" step="10">
-		    		<!-- oninput="document.getElementById('wValue').innerHTML=this.value;" -->
-					<!-- <select class="selectpicker" id="waiting">
-					    <option>10</option> 10분
-					    <option>20</option>10~20분
-					    <option>30</option>20~30분
-					    <option>40</option>30~40분
-					   	<option>50</option>40~50분
-					    <option>60</option>50~60분
-				 	</select><br><br> -->
 				 	<div style="color:gray;"id="waitingLbl">대기시간을 알려주세요.</div>
 				</div>
 				
@@ -99,7 +88,7 @@
 		<script>
 			$(document).on('input', '#waiting', function() {
 				var wVal = parseInt($(this).val());
-				//;
+				
 			    
 			    switch(wVal){
                 case 0 :
