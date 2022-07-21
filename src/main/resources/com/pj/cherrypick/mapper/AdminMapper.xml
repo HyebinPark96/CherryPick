@@ -71,14 +71,7 @@
 	</select>
 	
  	<!-- 2. 사업자 회원 관리 -->
-	<!-- 미승인 회원 목록 가져오기 -->
-	<select id="bUnauthList" resultType="com.pj.cherrypick.domain.BizMemberVO">
-		SELECT bid, bpwd, bname, bstat, bphone, bemail
-		FROM cherrypick.bizMember
-		WHERE bstat = 0
-	</select>
-	
-	<!-- 승인 회원 목록 가져오기 -->
+ 	<!-- 승인 회원 목록 가져오기 -->
 	<select id="bAuthList" resultType="com.pj.cherrypick.domain.BizMemberVO">
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM cherrypick.bizMember
@@ -91,12 +84,12 @@
 		WHERE bid = #{bid}
 	</delete>
 	
-	<!-- 미승인 사업자 회원 수 -->
+	<!-- 사업자 회원 수 -->
 	<select id="bAuthCount" parameterType="int" resultType="int">
 		SELECT count(if(bstat = #{bstat}, bstat, null)) FROM bizMember;
 	</select>
 	
-	<!-- 미승인 사업자 회원 수 -->
+	<!-- 사업자 회원 수 -->
 	<select id="bAuthSearchCount" parameterType="int" resultType="int">
 		SELECT COUNT(*) 
 		FROM bizMember
@@ -115,12 +108,20 @@
 	
 	</select>
 	
-	<!-- 승인 사업자 회원 수 -->
+	
+	<!-- 미승인 회원 목록 가져오기 -->
+	<select id="bUnauthList" resultType="com.pj.cherrypick.domain.BizMemberVO">
+		SELECT bid, bpwd, bname, bstat, bphone, bemail
+		FROM cherrypick.bizMember
+		WHERE bstat = 0
+	</select>
+	
+	<!-- 미승인 사업자 회원 수 -->
 	<select id="bUnauthCount" parameterType="int" resultType="int">
 		SELECT count(if(bstat = #{bstat}, bstat, null)) FROM bizMember;
 	</select>
 	
-	<!-- 승인 사업자 회원 수 -->
+	<!-- 미승인 사업자 회원 수 -->
 	<select id="bUnauthSearchCount" parameterType="int" resultType="int">
 		SELECT COUNT(*) 
 		FROM bizMember
@@ -139,7 +140,7 @@
 		
 	</select>
 	
-	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
+	<!-- 승인 사업자 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
 	<select id="bAuthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM bizMember
@@ -148,7 +149,7 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
-	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 -->
+	<!-- 승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 -->
 	<select id="bAuthListPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM bizMember
@@ -169,7 +170,7 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
-	<!-- 승인 사업자 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
+	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
 	<select id="bUnauthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM bizMember
@@ -178,7 +179,7 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
-	<!-- 승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 -->
+	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 -->
 	<select id="bUnauthListPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
 		FROM bizMember
@@ -218,10 +219,42 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
+	<!-- 사업장 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 -->
+	<select id="cafeListPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT cno, bid, cname, c_lat, c_long, cimage, caddress, cphone, copen, cclose, parking, pet, kids, seats <!-- group, ctag, cmenu_img -->
+		FROM cafe
+		
+		<if test='searchType.equals("cname")'>
+			WHERE cname LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("cphone")'>
+			WHERE cphone LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY cno ASC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
 	<!-- 사업장 총 갯수 -->
 	<select id="cCount" resultType="int">
 		SELECT COUNT(cno)
 		FROM cafe
+	</select>
+	
+	<!-- 사업장 총 갯수 -->
+	<select id="cSearchCount" resultType="int">
+		SELECT COUNT(cno)
+		FROM cafe
+		
+		<if test='searchType.equals("cname")'>
+			WHERE cname LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("cphone")'>
+			WHERE cphone LIKE concat('%', #{keyword}, '%')
+		</if>
+
 	</select>
 	
 	

@@ -102,10 +102,10 @@ public class AdminController {
 		
 		} else if(sort.equals("cafe")) {
 			
-			page.setCount(adminService.cCount());
+			page.setCount(adminService.cSearchCount(searchType, keyword));
 			
 			List<CafeVO> cList = null;
-			cList = adminService.cafeListPage(page.getDisplayPost(), page.getPostNum());
+			cList = adminService.cafeListPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 			
 			model.addAttribute("cList", cList);
 			model.addAttribute("page", page);

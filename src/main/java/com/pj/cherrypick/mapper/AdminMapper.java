@@ -48,13 +48,13 @@ public interface AdminMapper {
 	public int bAuthCount(int bstat) throws Exception;
 	
 	// 승인 사업자 회원 수
-	public int bAuthSearchCount(int bstat) throws Exception;
+	public int bAuthSearchCount(int bstat, String searchType, String keyword) throws Exception;
 	
 	// 미승인 사업자 회원 수
 	public int bUnauthCount(int bstat) throws Exception;
 	
 	// 미승인 사업자 회원 수
-	public int bUnauthSearchCount(int bstat) throws Exception;
+	public int bUnauthSearchCount(int bstat, String searchType, String keyword) throws Exception;
 	
 	// 목록 + 페이징
 	public List<BizMemberVO> bAuthListPage(int bstat, int displayPost, int postNum) throws Exception;
@@ -75,8 +75,14 @@ public interface AdminMapper {
 	// 목록 + 페이징
 	public List<CafeVO> cafeListPage(int displayPost, int postNum) throws Exception;
 	
+	// 목록 + 페이징 + 검색
+	public List<CafeVO> cafeListPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception;
+	
 	// 사업장 총 갯수
 	public int cCount() throws Exception;
+	
+	// 사업장 총 갯수
+	public int cSearchCount(String searchType, String keyword) throws Exception;
 	
 	// 사업장별 리뷰 가져오기
 	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum);
