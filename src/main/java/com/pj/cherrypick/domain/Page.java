@@ -100,5 +100,26 @@ public class Page {
 		displayPost = (num - 1) * postNum;
 
 	}
+	
+	// 검색 타입과 검색어
+	private String searchType;
+	private String keyword;
+	
+	public void setSearchTypeKeyword(String searchType, String keyword) {
+		if(searchType.equals("") || keyword.equals("")) { // 검색 X
+			this.searchType = "";
+			this.keyword = "";
+		} else { // 검색 O
+			this.searchType = searchType;
+			this.keyword = keyword;
+		}
+	}
+	
+	public String getSearchType() {
+		return searchType;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
 
 }

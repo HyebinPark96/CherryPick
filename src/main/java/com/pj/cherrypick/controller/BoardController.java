@@ -177,6 +177,9 @@ public class BoardController {
 		// page.setCount(boardService.count()); 
 		page.setCount(boardService.searchCount(searchType, keyword));  // 검색 조건에 맞는 레코드 COUNT 구해와서 페이징처리하기 위함
 
+		// 검색 타입과 검색어
+		page.setSearchTypeKeyword(searchType, keyword);
+		
 		List<BoardVO> list = null; 
 		list = boardService.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 
