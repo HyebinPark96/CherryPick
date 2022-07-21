@@ -1,16 +1,14 @@
 
-
 let cindex = {
+	
 	init: function() {
-
+		
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			//this.fileupload(); - 구 파일업로드 테스트
-			this.submitFiles();
-			//this.register(); 
+			//this.submitFiles();
+			this.register(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 		
 		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			//this.fileupload();
 			this.submitFiles();
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 
@@ -19,10 +17,9 @@ let cindex = {
 	//==================================
 	submitFiles: function() {
 		alert('시작');
+
 		let formData = new FormData();
 			
-		//let files = $("input[name=files]")[0].files;
-	//		let i = 0;
 		var inputArr = document.getElementsByName("files");
 		for (let i = 0; i < inputArr.length; i++) {
 			//console.log(inputArr[i]);
@@ -33,7 +30,6 @@ let cindex = {
 		}
 
 		$.ajax({
-			//url: 'http://localhost/test', //추후 적절한 이름으로 수정요망.
 			url: '/cafe/uploadProc',
 			data: formData,
 			cache: false,
@@ -61,7 +57,12 @@ let cindex = {
 		
 		alert('카페 등록을 실행합니다.');
 		
-		makeHashtag(); //storeRegister.html의 hashtag 함수
+		//파일명 받아오기
+		var cimage = $("#cimage").val().replace(/.*(\/|\\)/, '');
+		var cmenu_image = $("#cmenu_image").val().replace(/.*(\/|\\)/, '');
+		
+		//storeRegister.html의 hashtag 함수
+		makeHashtag(); 
 		
 		/*
 		let cname = $("#cname").val();
@@ -71,16 +72,14 @@ let cindex = {
 		}
 		*/
 		
-		//파일명. 어떻게 받아올거야.
-		//1) 뷰에서 생성해서, 메소드 두개에다 각각 전달한다.
-		//2) submitfiles에서 생성해서, 전달한다.
-		//파일명은? 현재시간 추가 / 카페 넘버 추가 /
+		
+		//유일한 파일명 만들 방법은? 현재시간 추가 / 카페 넘버 추가 / -> 카페 넘버는 현재로는 데이터 삽입이 끝나야 얻어올 수 있어.
 		let data = {
-			bid: "bizTemp", 
+			bid: $("#bid").val(),
 			cname: $("#cname").val(),
 			c_lat: 0,
 			c_long: 0,
-			cimage: "ready.png",
+			cimage: cimage,
 			caddress: $("#caddress").val(),
 			cphone: $("#cphone").val(),
 			copen: $("#copen").val(),
@@ -91,7 +90,7 @@ let cindex = {
 			seats: $("#seats").val(),
 			group: $("input[name=group]").filter(":checked").val(),
 			ctag: ctagStr,
-			cmenu_img: ""
+			cmenu_img: cmenu_image
 		};
 		
 		// ajax는 디폴트가 비동기 호출
@@ -105,10 +104,14 @@ let cindex = {
 			dataType: "json" // json이라면 => javascript 오브젝트로 변경하여 아래 함수의 파라미터로 전달
 		}).done(function(resp) {
 			// 성공한 경우 호출
-//			alert(resp);
-			alert("등록되었습니다. \n등록하신 정보는 [사업장 관리]페이지에서 수정하실 수 있습니다.");
-			location.href = "/";
+			alert(resp);
+			cno = Object.values(resp)[2];
+			alert(cno); 
+			
+			alert("등록되었습니다. \n메뉴 등록을 호출합니다..");
+			//location.href = "/";
 //			"/bizMember/storeManagement";
+			cindex.menuRegister(cno);
 
 		}).fail(function(error) {
 			// 실패한 경우 호출
@@ -116,44 +119,61 @@ let cindex = {
 		});
 		
 	},
+	
+	menuRegister: function(cno){
+		
+		alert('메뉴 등록을 실행합니다.');
+		alert('menuRegister cno:' + cno);
+		/*
+		//파일명 배열 생성
+		var m_img = $(".m_img");
+		var m_img_fname = [];
+		
+		m_img.each( function(i) { 
+			var fname = $('.m_img').eq(i).val().replace(/.*(\/|\\)/, '');
+			m_img_fname.push(fname);
+			alert(m_img_fname[i]);
+		} );*/
+		
+		//ajax를 List CafeVO를 넘길 거야.
+		//일단 딴거 재지 말고 3번 모두 실행.
+		var menuList = [];
+		
+		for (var i = 0; i < 3; i++) {
+			let data = {
+				cno: cno,
+				m_name: $('.m_name').eq(i).val(),
+				m_img: $('.m_img').eq(i).val().replace(/.*(\/|\\)/, ''),
+				m_detail: $('.m_detail').eq(i).val(),
+				m_size: "",
+				m_price: $('.m_price').eq(i).val(),
+				m_tag: ""
 
+			};
+			
+			menuList.push(data);
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "/cafe/regMenuProc",
+			data: JSON.stringify(menuList), // 자바스크립트의 data 객체를 Java가 알아듣도록 변경
+			contentType: "application/json; charset=utf-8",
+			dataType: "json" // json이라면 => javascript 오브젝트로 변경하여 아래 함수의 파라미터로 전달
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			
+			alert("메뉴도 등록되었습니다. \n등록하신 정보는 [사업장 관리]페이지에서 수정하실 수 있습니다.");
+			location.href = "/";
 
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			alert(JSON.stringify(error));
+		});
+	}
 }
 
 cindex.init();
-
-
-
-	/*
-	fileupload: function(){
-
-		alert('파일 첨부를 실행합니다.');
-		
-		var data = new FormData();
-		data.append("file", $('#upload-file-input').prop('files')[0]);
-
-		$.ajax({
-			url: "/uploadFile",
-			type: "POST",
-			data: data,
-			enctype: 'multipart/form-data',
-			processData: false,
-			contentType: false,
-			cache: false,
-			success: function() {
-				// Handle upload success
-				// ...
-			},
-			error: function() {
-				alert('파일 첨부 중 에러가 발생했습니다.');
-				// Handle upload error
-				// ...
-			}
-		});
-	},
-
-*/
-
 
 
 
