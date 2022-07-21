@@ -106,7 +106,7 @@ let index = {
 		
 		$.ajax({
 			type: "POST",
-			url: "/admin/cafeManageMent",
+			url: "/admin/cafeManagement",
 			data: JSON.stringify(data), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
@@ -118,6 +118,7 @@ let index = {
 			console.log(JSON.stringify(error));
 		});
 	},
+	
 
 }
 
