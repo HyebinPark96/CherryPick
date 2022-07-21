@@ -77,7 +77,7 @@ public class AdminService {
 	};
 	
 	public int bAuthSearchCount(int bstat, String searchType, String keyword) throws Exception{
-		return adminMapper.bAuthSearchCount(bstat);
+		return adminMapper.bAuthSearchCount(bstat, searchType, keyword);
 	};
 	
 	public int bUnauthCount(int bstat) throws Exception{
@@ -85,7 +85,7 @@ public class AdminService {
 	};
 	
 	public int bUnauthSearchCount(int bstat, String searchType, String keyword) throws Exception{
-		return adminMapper.bUnauthSearchCount(bstat);
+		return adminMapper.bUnauthSearchCount(bstat, searchType, keyword);
 	};
 	
 	public List<BizMemberVO> bAuthListPage(int bstat, int displayPost, int postNum) throws Exception{
@@ -138,6 +138,7 @@ public class AdminService {
 		return adminMapper.cafeList();
 	}
 	
+	// 사업장 리스트 목록 + 페이징 : 레코드를 10개씩 출력
 	public List<CafeVO> cafeListPage(int displayPost, int postNum) throws Exception{
 		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
 		
@@ -150,12 +151,38 @@ public class AdminService {
 		return null;
 	}
 	
+	// 사업장 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력
+	public List<CafeVO> cafeListPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("displayPost", displayPost); 
+		data.put("postNum", postNum);
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		if(adminMapper.cafeListPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
+				data.get("searchType").toString(), data.get("keyword").toString()).size()>0 || adminMapper.cafeListPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
+						data.get("searchType").toString(), data.get("keyword").toString())!=null) {
+			return adminMapper.cafeListPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
+					data.get("searchType").toString(), data.get("keyword").toString());
+		}
+		return null;
+	}
+	
 	public int cCount() throws Exception{
 		int cCount = 0;
 		if(adminMapper.cCount()!=0) {
 			cCount = adminMapper.cCount();
 		}
 		return cCount;
+	}
+	
+	public int cSearchCount(String searchType, String keyword) throws Exception{
+		int cSearchCount = 0;
+		if(adminMapper.cSearchCount(searchType, keyword)!=0) {
+			cSearchCount = adminMapper.cSearchCount(searchType, keyword);
+		}
+		return cSearchCount;
 	}
 	
 	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum) {
