@@ -24,9 +24,6 @@ public interface CafeMapper {
 	// 전체 카페 보기
 	List<CafeVO> getCafeAll2(); 
 	
-	// 전체 카페 보기 (평점높은순) 
-	List<CafeVO> getCafeAllByScore();
-	
 	// 특정카페(cno) 리뷰 1개씩만 리스트로 불러오기 (미리보기)
 	ReviewVO getFirstReview(int cno);
 	
@@ -48,5 +45,13 @@ public interface CafeMapper {
 	// 내(username)가 북마크한 리스트 불러오기
 	List<ListVO> getMyListBmk(String username);
 	
+	/*             카페목록 정렬               */
+	// 별점높은순 정렬
+	List<CafeVO> getCafeAllByScore();
 	
+	// 리뷰많은순
+	List<CafeVO> getCafeAllByReview();
+	
+	// 북마크순
+	List<CafeVO> getCafeAllByBmk();
 }

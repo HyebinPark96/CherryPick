@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
@@ -31,14 +32,28 @@ public class CafeController {
 
 
 	// 전체 카페목록 
-	@GetMapping("/cafe/all")
-	public String getCafeAll(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) throws Exception {
+	@GetMapping("/cafe/all/{sort}")
+	public String getCafeAll(@AuthenticationPrincipal PrincipalDetail principalDetail, 
+			@PathVariable Integer sort, Model model) throws Exception {
 		
 		String username = "aaa";
 		model.addAttribute("username", username);
 		//String username = principalDetail.getUsername();
-
-		List<CafeVO> cafes = cafeService.getCafeAll2();		
+		
+		List<CafeVO> cafes = new ArrayList<>(); 
+		
+		
+		if(sort==0 || sort==null ) { //최신순
+			sort=0;
+			cafes = cafeService.getCafeAll2();	
+		}else if(sort==1) { // 즐겨찾기순
+			cafes = cafeService.getCafeAllByBmk();	
+		}else if(sort==2) { // 별점순
+			cafes = cafeService.getCafeAllByScore();	
+		}else if(sort==3) { // 리뷰많은순
+			cafes = cafeService.getCafeAllByReview();	
+		}
+			
 		List<BookmarkVO> list = new ArrayList<>();
 		BookmarkVO vo = new BookmarkVO();
 		BookmarkVO bmk = new BookmarkVO();
@@ -64,7 +79,6 @@ public class CafeController {
 		
 		return "cafe/all";
 	}
-
 
 	
 	// 카페리스트 (전체카페X lino로 리스트 불러오기)

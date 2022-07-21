@@ -66,15 +66,7 @@
 	<select id="getReview" parameterType="int" resultType="com.pj.cherrypick.domain.ReviewVO">
 		SELECT * FROM review WHERE cno = #{cno}
 	</select>	
-	<!-- 전체카페 평점높은순으로 -->
-	<select id="getCafeAllByScore" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
-		SELECT *, AVG(r.score) AS avg 
-		FROM cafe c
-		LEFT JOIN review r
-		ON c.cno = r.cno
-		GROUP BY c.cno
-		ORDER BY avg DESC
-	</select>
+
 	<!-- 내가 북마크한 카페 리스트 (myPage) -->
  	<select id="getMyCafeBmk" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
  		SELECT *
@@ -105,4 +97,36 @@
 		WHERE b.username = #{username}
 		GROUP BY l.liname
     </select> 
+    
+    <!-- 카페정렬 -->
+    <!-- 즐겨찾기순 -->
+    <select id="getCafeAllByBmk" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *, COUNT(b.cno)AS cnt
+ 		FROM cafe c
+ 		LEFT JOIN review r  
+ 		ON c.cno = r.cno
+ 		left JOIN bmk_cafe b
+ 		ON b.cno = c.cno
+ 		GROUP BY c.cno
+ 		ORDER BY cnt DESC
+    </select> 
+    <!-- 리뷰많은순 -->
+    <select id="getCafeAllByReview" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *, COUNT(r.cno)AS cnt
+ 		FROM cafe c
+ 		LEFT JOIN review r  
+ 		ON c.cno = r.cno
+ 		GROUP BY c.cno
+ 		ORDER BY cnt DESC
+    </select> 
+    <!-- 별점순 -->
+    <select id="getCafeAllByScore" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *, AVG(r.score) AS avg
+ 		FROM cafe c
+ 		LEFT JOIN review r  
+ 		ON c.cno = r.cno
+ 		GROUP BY c.cno
+ 		ORDER BY AVG DESC
+    </select> 
+    
 </mapper>
