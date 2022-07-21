@@ -9,12 +9,14 @@ let review = {
 
 	reviewWrite: function() {
 		
+		var waitingValue = parseInt($("#waiting").val());
+		
 		let data = {
 			username: $("#username").val(),
 			title: $("#title").val(),
 			content: $('#content').summernote('code'), // 태그나 문자열 따질 것 없이 전부 가져온다.
 			score: $("#score").val(),
-			waiting: $("#waiting option:selected").val(),
+			waiting: waitingValue,
 			cno: $("#cno").val()
 		};
 		
