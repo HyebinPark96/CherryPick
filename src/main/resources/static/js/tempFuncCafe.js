@@ -4,6 +4,7 @@
 
 
 //숫자 입력란(.input-number)에 ,로 숫자 구분
+/*
 function updateTextView(_obj) {
 	var num = getNumber(_obj.val());
 	if (num == 0) {
@@ -27,6 +28,8 @@ $(document).ready(function() {
 		updateTextView($(this));
 	});
 });
+*/
+//int를 Stirng으로 바꿔 버려서 보류.
 
 
 

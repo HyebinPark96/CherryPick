@@ -201,24 +201,25 @@
 									<table>
 										<tr>
 											<th>메뉴명</th>
-											<td><input id="m_name" value="" type="text"
-												class="form-control" placeholder=""></td>
+											<td><input value="" type="text"
+												class="m_name form-control" placeholder=""></td>
 										</tr>
 
 										<tr>
 											<th>메뉴가격</th>
 											<td>
-												<div class="">
-													<span class="ctag-item-prefix">#</span> <input id="m_price"
-														value="" type="text" class="input-number form-control"
+												<div class="d-flex">
+													<span class="ctag-item-prefix">#</span> 
+													<input 
+														value="" type="text" class="m_price input-number form-control"
 														placeholder="">
 												</div>
 											</td>
 										</tr>
 										<tr>
 											<th>메뉴설명</th>
-											<td><input id="m_detail" value="" type="text"
-												class="form-control" placeholder="메뉴에 대해 설명해주세요."></td>
+											<td><input value="" type="text"
+												class="m_detail form-control" placeholder="메뉴에 대해 설명해주세요."></td>
 										</tr>
 									</table>
 									<!-- <div class="divBtn">
@@ -267,9 +268,9 @@
 								<input id="cmenu_image" type="file" name="files" onchange="previewImg(this, cmenu_preview, 'id', 0);" accept="image/*" />
 								 
 								<div>메뉴 이미지</div> 
-								<input id="m_img1" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 0);" accept="image/*" />
-								<input id="m_img2" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 1);" accept="image/*" />
-								<input id="m_img3" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 2);" accept="image/*" />
+								<input id="m_img1" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 0);" accept="image/*" />
+								<input id="m_img2" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 1);" accept="image/*" />
+								<input id="m_img3" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 2);" accept="image/*" />
 								
 							</div>
 						</div>
