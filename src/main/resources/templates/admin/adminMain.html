@@ -10,6 +10,7 @@
 <!-- <body> -->
 
 	<div class="content" layout:fragment="content">
+	<input type="hidden" th:value="${sort}" id="sort">
 	<input type="hidden" th:value="${num}" id="num">
 	<input type="hidden" value="cafe" id="cafe"> 
 
@@ -84,7 +85,7 @@
 				
 				<!-- 회원관리 - 정렬 탭 -->
 				<div class="d-flex">
-					<div>번호순 | 이름순</div>
+					<div>아이디순 | 가입일자순</div>
 				</div>
 			</div>
 			<!-- 회원관리 테이블 -->
@@ -181,23 +182,23 @@
 				</table>
 				</div>
 				
-				<Button th:if="${sort}=='member' or ${sort}=='authBizMember'" class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button><br>
-				<Button th:if="${sort}=='unauthBizMember'" class="btn btn-primary" id="approveBtn">선택 탈퇴</Button><br>
+				<Button th:if="${sort}=='member' or ${sort}=='authBizMember'" class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button>
+				<Button th:if="${sort}=='unauthBizMember'" class="btn btn-primary" id="approveBtn">선택 탈퇴</Button>
+				<br><br>
 				
 				<!-- 검색창 : 길이조절 필요 -->
 				<form name="searchForm">
 				
-					<select name="type" class="custom-select mb-3">
-					    <option selected>검색 유형 선택</option>
-					    <option value="id">아이디</option>
-					    <option value="name">성명</option>
-						<option value="phone">전화번호</option>
+					<select name="searchType" class="custom-select mb-3">
+					    <option th:selected="${searchType == 'id'}" value="id">아이디</option>
+					    <option th:selected="${searchType == 'name'}" value="name">성명</option>
+						<option th:selected="${searchType == 'phone'}" value="phone">전화번호</option>
 					</select>
 					  
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" name="keyword" placeholder="Search">
+						<input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="Search">
 						<div class="input-group-append">
-							<button class="btn btn-success" type="submit">검색</button>
+							<button class="btn btn-success" type="button" id="searchBtn" onclick="search()">검색</button>
 						</div>
 					</div>
 				
@@ -207,20 +208,20 @@
 				
 				<div class="pagination">
 					<th:block th:if="${page.prev}">
-						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort})}" class="page-link">이전</a> ]</span>
+						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword})}" class="page-link">이전</a> ]</span>
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
 						<span th:if="${select!=num} and ${num}!=0" class="page-item" >
-							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link" ></a>
+							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword})}" th:text="${num}" class="page-link" ></a>
 						</span>
-						<span th:unless="${select!=num}" class="page-item active">
+						<span th:if="${select==num}" class="page-item active">
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
 						</span>
 					</th:block>
 					
 					<th:block th:if="${page.next}">
-						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort})}" class="page-link">다음</a> ]</span>
+						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword})}" class="page-link">다음</a> ]</span>
 					</th:block>
 				</div>
 
@@ -296,17 +297,16 @@
 				<!-- 검색창 : 길이조절 필요 -->
 				<form name="searchForm">
 				
-					<select name="type" class="custom-select mb-3">
-					    <option selected>검색 유형 선택</option>
-					    <option value="id">아이디</option>
-					    <option value="name">성명</option>
-						<option value="phone">전화번호</option>
+					<select name="searchType" class="custom-select mb-3">
+					    <option th:selected="${searchType == 'id'}" th:value="id">아이디</option>
+					    <option th:selected="${searchType == 'name'}" th:value="name">성명</option>
+						<option th:selected="${searchType == 'phone'}" th:value="phone">전화번호</option>
 					</select>
 					  
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" name="keyword" placeholder="Search">
+						<input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="Search">
 						<div class="input-group-append">
-							<button class="btn btn-success" type="submit">검색</button>
+							<button class="btn btn-success" type="button" id="searchBtn" onclick="search()">검색</button>
 						</div>
 					</div>
 				
@@ -456,6 +456,14 @@
 					}
 				});
 			}
+			
+			let searchBtn = document.getElementById("searchBtn");
+			function search(){
+				let searchType = document.getElementsByName('searchType')[0].value;
+				let keyword = document.getElementsByName('keyword')[0].value;
+				let sort = document.getElementById('sort').value;
+				location.href = "/admin/adminMain?num=1" + "&sort=" + sort + "&searchType=" + searchType + "&keyword=" + keyword;
+			};
 		</script>
 	</div>
 <!-- </body> -->

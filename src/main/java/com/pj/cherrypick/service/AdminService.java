@@ -32,6 +32,11 @@ public class AdminService {
 		return adminMapper.count();
 	};
 	
+	public int searchCount(String searchType, String keyword) throws Exception{
+		return adminMapper.searchCount(searchType, keyword);
+	};
+	
+	// 목록 + 페이징
 	public List<MemberVO> listPage(int displayPost, int postNum) throws Exception{
 		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
 		
@@ -39,6 +44,19 @@ public class AdminService {
 		data.put("postNum", postNum); // <K,V> = <S,I>
 		
 		return adminMapper.listPage(data.get("displayPost"), data.get("postNum")); // = listPage(int displayPost, int postNum)
+	};
+	
+	// 목록 + 페이징 + 검색
+	public List<MemberVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("displayPost", displayPost); 
+		data.put("postNum", postNum);
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return adminMapper.listPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
+				data.get("searchType").toString(), data.get("keyword").toString());
 	};
 	
 	public List<BizMemberVO> bAuthList() throws Exception{
@@ -58,8 +76,16 @@ public class AdminService {
 		return adminMapper.bAuthCount(bstat);
 	};
 	
+	public int bAuthSearchCount(int bstat, String searchType, String keyword) throws Exception{
+		return adminMapper.bAuthSearchCount(bstat);
+	};
+	
 	public int bUnauthCount(int bstat) throws Exception{
 		return adminMapper.bUnauthCount(bstat);
+	};
+	
+	public int bUnauthSearchCount(int bstat, String searchType, String keyword) throws Exception{
+		return adminMapper.bUnauthSearchCount(bstat);
 	};
 	
 	public List<BizMemberVO> bAuthListPage(int bstat, int displayPost, int postNum) throws Exception{
@@ -72,7 +98,20 @@ public class AdminService {
 		return adminMapper.bAuthListPage(data.get("bstat"), data.get("displayPost"), data.get("postNum"));
 	};
 	
-	public List<BizMemberVO> bUnauthListPage(int bstat, int displayPost, int postNum) throws Exception{
+	public List<BizMemberVO> bAuthListPageSearch(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>(); 
+
+		data.put("bstat", bstat);
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum); 
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return adminMapper.bAuthListPageSearch((int)data.get("bstat"), (int)data.get("displayPost"), (int)data.get("postNum"),
+				data.get("searchType").toString(), data.get("keyword").toString());
+	};
+	
+	public List<BizMemberVO> bUnauthListPage(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception{
 		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
 		
 		data.put("bstat", bstat);
@@ -80,6 +119,19 @@ public class AdminService {
 		data.put("postNum", postNum); // <K,V> = <S,I>
 		
 		return adminMapper.bUnauthListPage(data.get("bstat"), data.get("displayPost"), data.get("postNum"));
+	};
+	
+	public List<BizMemberVO> bUnauthListPageSearch(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>(); 
+
+		data.put("bstat", bstat);
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum); 
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return adminMapper.bUnauthListPageSearch((int)data.get("bstat"), (int)data.get("displayPost"), (int)data.get("postNum"),
+				data.get("searchType").toString(), data.get("keyword").toString());
 	};
 	
 	public List<CafeVO> cafeList() throws Exception{

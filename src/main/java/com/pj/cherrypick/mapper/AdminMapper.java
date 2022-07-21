@@ -24,9 +24,14 @@ public interface AdminMapper {
 	// 총 갯수
 	public int count() throws Exception;
 	
+	// 총 갯수
+	public int searchCount(String searchType, String keyword) throws Exception;
+	
 	// 목록 + 페이징
 	public List<MemberVO> listPage(int displayPost, int postNum) throws Exception;
-
+	
+	// 목록 + 페이징 + 검색
+	public List<MemberVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception;
 	
 	/*2. 사업자회원*/
 	
@@ -42,14 +47,26 @@ public interface AdminMapper {
 	// 승인 사업자 회원 수
 	public int bAuthCount(int bstat) throws Exception;
 	
+	// 승인 사업자 회원 수
+	public int bAuthSearchCount(int bstat) throws Exception;
+	
 	// 미승인 사업자 회원 수
 	public int bUnauthCount(int bstat) throws Exception;
+	
+	// 미승인 사업자 회원 수
+	public int bUnauthSearchCount(int bstat) throws Exception;
 	
 	// 목록 + 페이징
 	public List<BizMemberVO> bAuthListPage(int bstat, int displayPost, int postNum) throws Exception;
 	
+	// 목록 + 페이징 + 검색
+	public List<BizMemberVO> bAuthListPageSearch(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception;
+	
 	// 목록 + 페이징
 	public List<BizMemberVO> bUnauthListPage(int bstat, int displayPost, int postNum) throws Exception;
+	
+	// 목록 + 페이징 + 검색
+	public List<BizMemberVO> bUnauthListPageSearch(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception;
 	
 	/*사업장 관리*/
 	// 사업장 리스트

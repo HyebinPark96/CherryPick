@@ -33,56 +33,77 @@ public class AdminController {
 	/*1. 일반회원*/
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value = "/admin/adminMain", method = RequestMethod.GET)
-	public void getListPage(Model model, @RequestParam("num") int num, @RequestParam("sort") String sort) throws Exception{ // num : 페이지 번호
+	public void getListPage(Model model, @RequestParam("num") int num, @RequestParam("sort") String sort,
+			@RequestParam(value = "searchType", required = false, defaultValue = "id") String searchType, 
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) throws Exception{ // num : 페이지 번호
+		
 		Page page = new Page();
 		page.setNum(num);
 		
 		if(sort.equals("member")) {
-			
-			page.setCount(adminService.count());  
 
+			page.setCount(adminService.searchCount(searchType, keyword));  
+			
+			// 검색 타입과 검색어
+			page.setSearchTypeKeyword(searchType, keyword);
+			
 			List<MemberVO> list = null; 
-			list = adminService.listPage(page.getDisplayPost(), page.getPostNum());
+			list = adminService.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 			
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);
 			model.addAttribute("select", num);
 			model.addAttribute("sort", sort); 
+			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 			
 		} else if(sort.equals("authBizMember")) { /*2. 승인 사업자 회원*/
 			
 			BizMemberVO bizMember = new BizMemberVO();
 			bizMember.setBstat(1);
 			
-			page.setCount(adminService.bAuthCount(bizMember.getBstat()));
+			page.setCount(adminService.bAuthSearchCount(bizMember.getBstat(), searchType, keyword));
+			
+			// 검색 타입과 검색어
+			page.setSearchTypeKeyword(searchType, keyword);
 			
 			List<BizMemberVO> list = null; 
-			list = adminService.bAuthListPage(bizMember.getBstat(), page.getDisplayPost(), page.getPostNum());
+			list = adminService.bAuthListPageSearch(bizMember.getBstat(), page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 			
 			model.addAttribute("list", list); 
 			model.addAttribute("page", page);
 			model.addAttribute("select", num);
 			model.addAttribute("sort", sort); 
 			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
+			
 		} else if(sort.equals("unauthBizMember")) { /*3. 미승인 사업자 회원*/
 			
 			BizMemberVO bizMember = new BizMemberVO();
 			bizMember.setBstat(0);
 			
-			page.setCount(adminService.bUnauthCount(bizMember.getBstat()));
+			page.setCount(adminService.bUnauthSearchCount(bizMember.getBstat(), searchType, keyword));
+			
+			// 검색 타입과 검색어
+			page.setSearchTypeKeyword(searchType, keyword);
 			
 			List<BizMemberVO> list = null; 
-			list = adminService.bUnauthListPage(bizMember.getBstat(), page.getDisplayPost(), page.getPostNum());
+			list = adminService.bUnauthListPageSearch(bizMember.getBstat(), page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 			
 			model.addAttribute("list", list);
 			model.addAttribute("page", page);
 			model.addAttribute("select", num);
 			model.addAttribute("sort", sort); 
+			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
 		
 		} else if(sort.equals("cafe")) {
 			
-			page.setCount(adminService.cCount());  
-
+			page.setCount(adminService.cCount());
+			
 			List<CafeVO> cList = null;
 			cList = adminService.cafeListPage(page.getDisplayPost(), page.getPostNum());
 			
@@ -90,6 +111,10 @@ public class AdminController {
 			model.addAttribute("page", page);
 			model.addAttribute("select", num);
 			model.addAttribute("sort", sort);
+			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
+			
 		}
 
 		
