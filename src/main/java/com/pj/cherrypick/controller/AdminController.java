@@ -18,7 +18,6 @@ import com.pj.cherrypick.domain.Page;
 import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.AdminService;
 import com.pj.cherrypick.service.CafeService;
-import com.pj.cherrypick.service.ReviewService;
 
 @Controller
 public class AdminController {
@@ -35,13 +34,13 @@ public class AdminController {
 	@RequestMapping(value = "/admin/adminMain", method = RequestMethod.GET)
 	public void getListPage(Model model, @RequestParam("num") int num, @RequestParam("sort") String sort,
 			@RequestParam(value = "searchType", required = false, defaultValue = "id") String searchType, 
-			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) throws Exception{ // num : 페이지 번호
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(value = "orderBy", required = false, defaultValue = "") String orderBy) throws Exception{ // num : 페이지 번호
 		
 		Page page = new Page();
 		page.setNum(num);
 		
-		if(sort.equals("member")) {
-
+		if(sort.equals("member") && !orderBy.trim().equals("orderByRegDate")) { // 이름순 정렬
 			page.setCount(adminService.searchCount(searchType, keyword));  
 			
 			// 검색 타입과 검색어
@@ -54,6 +53,24 @@ public class AdminController {
 			model.addAttribute("page", page);
 			model.addAttribute("select", num);
 			model.addAttribute("sort", sort); 
+			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
+			
+		} else if(sort.equals("member") && orderBy.equals("orderByRegDate")) { // 가입일자순 정렬
+			page.setCount(adminService.searchCount(searchType, keyword));  
+			
+			// 검색 타입과 검색어
+			page.setSearchTypeKeyword(searchType, keyword);
+			
+			List<MemberVO> list = null; 
+			list = adminService.listPageSearchOrderByRegDate(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("sort", sort);
+			model.addAttribute("orderBy", orderBy);
 			
 			model.addAttribute("searchType", searchType);
 			model.addAttribute("keyword", keyword);

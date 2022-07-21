@@ -63,7 +63,7 @@ public class AdminApiRestController {
 		return null;
 	}
 	
-	@PostMapping("/admin/cafeManageMent")
+	@PostMapping("/admin/cafeManagement")
 	public List<CafeVO> cafeManageMent(@RequestBody HashMap<String, String> sort) throws Exception {
 		
 		if(sort.get("sort")!=null) {
@@ -77,5 +77,6 @@ public class AdminApiRestController {
 
 		return null;
 	}
+	
 	
 }

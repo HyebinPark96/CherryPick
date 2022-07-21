@@ -18,6 +18,9 @@ public interface AdminMapper {
 	// 리스트
 	public List<MemberVO> list() throws Exception;
 	
+	// SELECT 전체 회원 목록 출력 (가입일자순)
+	public List<MemberVO> listPageSearchOrderByRegDate(String searchType, String keyword);
+	
 	// 삭제
 	public void delete(String username) throws Exception;
 	
@@ -30,8 +33,12 @@ public interface AdminMapper {
 	// 목록 + 페이징
 	public List<MemberVO> listPage(int displayPost, int postNum) throws Exception;
 	
-	// 목록 + 페이징 + 검색
+	// 목록 + 페이징 + 검색 : 이름순 정렬
 	public List<MemberVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception;
+	
+	// 목록 + 페이징 + 검색 : 가입일자순 정렬
+	public List<MemberVO> listPageSearchOrderByRegDate(int displayPost, int postNum, String searchType, String keyword) throws Exception;
+	
 	
 	/*2. 사업자회원*/
 	

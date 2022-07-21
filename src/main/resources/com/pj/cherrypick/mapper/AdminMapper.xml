@@ -49,7 +49,7 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
-	<!-- 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력-->
+	<!-- 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력, 아이디순 정렬-->
 	<select id="listPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.MemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT username, password, name, phone, email, role
 		FROM cherrypick.member
@@ -67,6 +67,27 @@
 		</if>
 		
 		ORDER BY username ASC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
+	<!-- 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력, 가입일자순 정렬-->
+	<select id="listPageSearchOrderByRegDate" parameterType="hashmap" resultType="com.pj.cherrypick.domain.MemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT username, password, name, phone, email, role
+		FROM cherrypick.member
+		
+		<if test="searchType.equals('id')">
+			WHERE username LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE name LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE phone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY regDate DESC
 		limit #{displayPost}, #{postNum}
 	</select>
 	

@@ -23,6 +23,12 @@ public class AdminService {
 		return adminMapper.list();
 	};
 	
+	public List<MemberVO> listPageSearchOrderByRegDate(String searchType, String keyword) {
+		List<MemberVO> mListOrderByRegDate = null;
+		mListOrderByRegDate = adminMapper.listPageSearchOrderByRegDate(searchType, keyword);
+		return mListOrderByRegDate;
+	}
+	
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(String username) throws Exception{
 		adminMapper.delete(username);
@@ -46,7 +52,7 @@ public class AdminService {
 		return adminMapper.listPage(data.get("displayPost"), data.get("postNum")); // = listPage(int displayPost, int postNum)
 	};
 	
-	// 목록 + 페이징 + 검색
+	// 목록 + 페이징 + 검색 : 이름순 정렬
 	public List<MemberVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception{
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		
@@ -56,6 +62,19 @@ public class AdminService {
 		data.put("keyword", keyword);
 		
 		return adminMapper.listPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
+				data.get("searchType").toString(), data.get("keyword").toString());
+	};
+	
+	// 목록 + 페이징 + 검색 : 가입일자순 정렬
+	public List<MemberVO> listPageSearchOrderByRegDate(int displayPost, int postNum, String searchType, String keyword) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("displayPost", displayPost); 
+		data.put("postNum", postNum);
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return adminMapper.listPageSearchOrderByRegDate((int)data.get("displayPost"), (int)data.get("postNum"), 
 				data.get("searchType").toString(), data.get("keyword").toString());
 	};
 	
