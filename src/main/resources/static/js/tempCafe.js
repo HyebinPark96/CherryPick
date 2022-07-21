@@ -6,7 +6,6 @@ let cindex = {
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
 			//this.submitFiles();
 			this.register(); 
-			//this.menuRegister(cno); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 		
 		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
@@ -76,7 +75,7 @@ let cindex = {
 		
 		//유일한 파일명 만들 방법은? 현재시간 추가 / 카페 넘버 추가 / -> 카페 넘버는 현재로는 데이터 삽입이 끝나야 얻어올 수 있어.
 		let data = {
-			bid: "bizTemp", 
+			bid: $("#bid").val(),
 			cname: $("#cname").val(),
 			c_lat: 0,
 			c_long: 0,
