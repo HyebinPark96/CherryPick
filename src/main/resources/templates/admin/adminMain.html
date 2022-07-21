@@ -293,6 +293,25 @@
 				</div>
 				<Button class="btn btn-danger">선택 삭제</Button><br><br>
 				
+				<!-- 검색창 : 길이조절 필요 -->
+				<form name="searchForm">
+				
+					<select name="type" class="custom-select mb-3">
+					    <option selected>검색 유형 선택</option>
+					    <option value="id">아이디</option>
+					    <option value="name">성명</option>
+						<option value="phone">전화번호</option>
+					</select>
+					  
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" name="keyword" placeholder="Search">
+						<div class="input-group-append">
+							<button class="btn btn-success" type="submit">검색</button>
+						</div>
+					</div>
+				
+				</form>
+				
 				<div class="pagination">
 					<th:block th:if="${page.prev}">
 						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort})}" class="page-link">이전</a> ]</span>
