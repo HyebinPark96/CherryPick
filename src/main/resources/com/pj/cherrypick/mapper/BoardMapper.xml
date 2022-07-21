@@ -51,4 +51,53 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
+	<!-- 게시물 목록 + 페이징 : 게시물을 10개씩 출력-->
+	<select id="listPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BoardVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT bno, title, content, writer, regDate, viewCnt
+		FROM tbl_board
+		
+		<!-- WHERE title LIKE '%#{keyword}%' : '%'keyword'%'로 인식하므로 문제 발생 => concat 함수로 문자열 합치기-->
+		<if test='searchType.equals("title")'>
+			WHERE title LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("content")'>
+		WHERE content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("title_content")'>
+		WHERE title LIKE concat('%', #{keyword}, '%')
+			or content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("writer")'>
+		WHERE writer LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY bno DESC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
+	<!-- 게시물 총 갯수 + 검색 적용 -->
+	<select id="searchCount" parameterType="hashMap" resultType="int">
+		SELECT count(bno) FROM tbl_board
+		
+		<if test='searchType.equals("title")'>
+			WHERE title LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("content")'>
+		WHERE content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("title_content")'>
+		WHERE title LIKE concat('%', #{keyword}, '%')
+			or content LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("writer")'>
+		WHERE writer LIKE concat('%', #{keyword}, '%')
+		</if>
+	</select>
+	
 </mapper>

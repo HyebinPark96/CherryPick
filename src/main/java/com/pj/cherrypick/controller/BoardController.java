@@ -149,7 +149,6 @@ public class BoardController {
 
 		model.addAttribute("list", list); 
 		model.addAttribute("page", page);
-		System.out.println("ss" + page.getStartPageNum());
 		
 		/*아래 코드는 page 관련 코드이므로 위 코드 한 줄로 요약 가능 => 뷰에서 page.변수명으로 접근 가능*/
 		
@@ -164,6 +163,30 @@ public class BoardController {
 		*/
 
 		model.addAttribute("select", num);
+	}
+	
+	// 게시물 목록 + 페이징 추가  + 검색
+	@RequestMapping(value = "/listPageSearch", method = RequestMethod.GET)
+	public void getListPageSearch(Model model, @RequestParam("num") int num, 
+			@RequestParam(value = "searchType", required = false, defaultValue = "title") String searchType, 
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) throws Exception{ // num : 페이지 번호
+		
+		Page page = new Page();
+		
+		page.setNum(num);
+		// page.setCount(boardService.count()); 
+		page.setCount(boardService.searchCount(searchType, keyword));  // 검색 조건에 맞는 레코드 COUNT 구해와서 페이징처리하기 위함
+
+		List<BoardVO> list = null; 
+		list = boardService.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+
+		model.addAttribute("list", list); 
+		model.addAttribute("page", page);
+		model.addAttribute("select", num);
+		
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
+		
 	}
 	
 }

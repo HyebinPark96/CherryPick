@@ -31,8 +31,10 @@ public interface BoardMapper {
 	// 게시물 목록 + 페이징
 	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception;
 
+	// 게시물 목록 + 페이징 + 검색
+	public List<BoardVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception;
 	
-	
-	
+	// 게시물 총 갯수 + 검색 전용
+	public int searchCount(String searchType, String keyword) throws Exception;
 	
 }
