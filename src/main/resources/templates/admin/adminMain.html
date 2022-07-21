@@ -87,9 +87,15 @@
 				<!-- 회원관리 - 정렬 탭 -->
 				<div>
 					<div class="d-flex">
-						<button type="button" id="sortByIdBtn">아이디순</button>
+						<a th:href="@{adminMain(num=1, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${id})}">
+							<button type="button" id="sortByIdBtn">아이디순</button>
+						</a>
+						
 						<label> | </label>
-						<a th:href="@{adminMain(num=1, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=orderByRegDate)}"><button type="button" id="sortByRegDateBtn">가입일자순</button></a>
+						
+						<a th:href="@{adminMain(num=1, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=orderByRegDate)}">
+							<button type="button" id="sortByRegDateBtn">가입일자순</button>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -213,12 +219,12 @@
 				
 				<div class="pagination">
 					<th:block th:if="${page.prev}">
-						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=orderByRegDate)}" class="page-link">이전</a> ]</span>
+						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${orderBy})}" class="page-link">이전</a> ]</span>
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
 						<span th:if="${select!=num} and ${num}!=0" class="page-item" >
-							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=orderByRegDate)}" th:text="${num}" class="page-link" ></a>
+							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${orderBy})}" th:text="${num}" class="page-link" ></a>
 						</span>
 						<span th:if="${select==num}" class="page-item active">
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
@@ -226,7 +232,7 @@
 					</th:block>
 					
 					<th:block th:if="${page.next}">
-						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=orderByRegDate)}" class="page-link">다음</a> ]</span>
+						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${orderBy})}" class="page-link">다음</a> ]</span>
 					</th:block>
 				</div>
 

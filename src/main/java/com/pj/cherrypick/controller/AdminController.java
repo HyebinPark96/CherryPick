@@ -41,6 +41,7 @@ public class AdminController {
 		page.setNum(num);
 		
 		if(sort.equals("member") && !orderBy.trim().equals("orderByRegDate")) { // 이름순 정렬
+
 			page.setCount(adminService.searchCount(searchType, keyword));  
 			
 			// 검색 타입과 검색어
