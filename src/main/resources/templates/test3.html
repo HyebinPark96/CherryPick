@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 
 <body>
 	<form id="form1">
@@ -27,7 +28,107 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
+=======
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
+     <input type='file' onchange="readURL(this);" />
+     <div style="width:500px; height:500px;" id="objectID"></div>
+
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#objectID').css('background', 'transparent url('+e.target.result +') left top no-repeat');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+>>>>>>> 56d9530dc598459f0cb9ba72e22f9a2e65cbb2e0
+
+<!-- <input type='file' accept='image/*' onchange='openFile(event)'><br> -->
+<!-- <input type='file' accept='image/*' onchange='readURL(event)'><br>
+<img id='output'>
+<div id="objectID" style="width: 500px; height: 400px;"></div>
+<script>
+  var openFile = function(event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      $('#objectID').css(
+				'background',
+				'transparent url(' + reader.result
+						+ ') left top no-repeat');
+	}
+    reader.readAsDataURL(input.files[0]);
+  }; -->
+/*   var openFile = function(event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('output');
+      output.src = dataURL;
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
+ */   
+ /*  function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('#objectID').css(
+						'background',
+						'transparent url(' + e.target.result
+								+ ') left top no-repeat');
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}  */
+<!-- </script>
+ -->
+
+
+<!-- 
+
+<body>
+	<form id="form1">
+		<input type='file' onchange="readURL(this);" /> 
+		<div id="objectID"></div>
+	</form>
+
+
+	<script type="text/javascript">
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#objectID').css(
+							'background',
+							'transparent url(' + e.target.result
+									+ ') left top no-repeat');
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+ -->
 
 
 
