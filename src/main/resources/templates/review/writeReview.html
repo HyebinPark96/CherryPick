@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     
+    <!-- 별점 css -->
     <link rel="stylesheet" href="/css/jquery.rateyo.min.css" />
 </head>
 
@@ -35,16 +36,24 @@
 		    	<div class="d-flex align-items-end" style="margin-bottom: 20px" >
 		    		<div id="rateYo"></div>
 		    		<div class="rv-rating align-self-end"> 
-		    			<span id="rateBar"></span>
+		    		
+		    			<span id="rateBar">/</span>
 		    			<input id="score" type="number" step="0.5" readonly >
-		    		</div>
+		    			
+	    		</div>
 
 		    	</div>
 		    	
 		    	<div>
 		    		<div class="text-20">웨이팅(분)&nbsp;<img class="icon-30" src="/img/clock.png"></div>
-		    		<input style="width:300px;"type="range" class="form-control-range" id="waiting" value="0" min="0" max="70" step="10">
-				 	<div style="color:gray;"id="waitingLbl">대기시간을 알려주세요.</div>
+		    		<div style="width: 300px;">
+			    		<div class="d-flex justify-content-between">
+							<div>0h</div>
+							<div>1h 10m+</div>
+						</div>
+			    		<input style="width:100%;"type="range" class="form-control-range" id="waiting" value="0" min="0" max="70" step="10">
+					 	<div style="color:gray;"id="waitingLbl">대기시간을 알려주세요.</div>
+				 	</div>
 				</div>
 				
 	    	</form>
@@ -66,22 +75,27 @@
 	
 		<!-- 별점 스크립트 -->
 		<script>
-			$(function() {
-	
-				$("#rateYo").rateYo({
-					halfStar : true,
-					starWidth : "25px",
-					ratedFill : "#a6434b",
-					spacing : "2px",
-	
-					onSet : function(rating, rateYoInstance) {
-						$("#rateBar").text("/");
-						$("#score").val(rating);
-						//alert("Rating is set to: " + rating);
-					}
-				});
-	
+		//별점 기본 5점
+		$("#score").val(5);
+		
+		$(function() {
+
+			$("#rateYo").rateYo({
+				halfStar : true,
+				starWidth : "25px",
+				ratedFill : "#a6434b",
+				spacing : "2px",
+				rating: 5,
+
+
+				onSet : function(rating, rateYoInstance) {
+					$("#score").val(rating);
+
+					//alert("Rating is set to: " + rating);
+				}
 			});
+
+		});
 		</script>
 			
 		<!-- 웨이팅 스크립트 -->
@@ -105,7 +119,7 @@
                 break
                
                 case 70 :
-                	$('#waitingLbl').html("1시간 이상");
+                	$('#waitingLbl').html("1시간 10분 이상");
                 break
                 default :
                 	$('#waitingLbl').html("올바른 값이 아닙니다.");
