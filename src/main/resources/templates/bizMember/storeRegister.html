@@ -128,12 +128,10 @@
 					
 					<div class="text-20">대표 이미지 등록</div>
 					<div class="row">
-						<div id="cimage-block" class="row">
-							<div class="cimage-item col-md-3">
-								<div id="cimage_Preview" class="cf-img thumbnail" >
-									<!-- style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');" -->
-									<img class="divBtn icon-20" onclick="location.href='#'"
-										src="/img/x.png" style="margin: 5px;">
+						<div id="cimage-block">
+							<div class="cimage-item">
+								<div id="cimage_Preview" style="width: 300px; height: 200px;">
+									<img class="divBtn icon-20" onclick="deleteImg('#cimage', '#cimage_btn', '#cimage_Preview', 0, 0)" src="/img/x.png" style="margin: 5px;">
 								</div>
 							</div>
 							<!-- 							<div class="cimage-item  col-md-3 img-result "> -->
@@ -144,8 +142,8 @@
 						</div>
 
 						<div class="col-md-3">
-							<div class="divBtn cf-img hoverbox thumbnail" onclick="modal()"
-								style="background-image: url('/img/add-image.png');">
+							<div id="cimage_btn" class="divBtn hoverbox" onclick="modal('#cImgModal')"
+								style="background-image: url('/img/add-image.png');  width: 300px; height: 200px; background-size: contain; background-repeat: no-repeat;">
 								<!-- OnClick="addItem('cimage-block', 'cimage-item', 3)" -->
 								<div id="overlay5">
 									<div class="hoverbox-img-caption">새 이미지 추가</div>
@@ -169,8 +167,8 @@
 						</div>
 
 
-						<div class="divBtn hoverbox" onclick="modal()"
-							style="background-image: url('/img/add-image.png'); width: 300px; height: 200px;">
+						<div id="cmenu_btn"class="divBtn hoverbox" onclick="modal('#cmenuImgModal')"
+							style="background-image: url('/img/add-image.png'); width: 300px; height: 200px; background-size: contain no-repeat;">
 							<div id="overlay5">
 								<div class="hoverbox-img-caption">새 이미지 추가</div>
 								<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
@@ -188,7 +186,7 @@
 
 							<div class="menulist-item">
 								<div class="d-flex" style="gap: 10px;">
-									<div class="divBtn hoverbox" onclick="modal()"
+									<div class="m_img_btn divBtn hoverbox" onclick="modal('#mImgModal3')"
 										style="background-image: url('/img/add-image.png'); width: 150px; height: 125px;">
 										<div id="overlay5">
 											<div class="hoverbox-img-caption">새 이미지 추가</div>
@@ -247,22 +245,9 @@
 				<br>
      
 				
-				<div class="divBtn btn btn-primary btn-lg" onclick="modal()">모달 호출 테스트</div>
-				<!-- <div class="divBtn btn btn-primary btn-lg" onclick="test()">모달 호출 테스트2</div> -->
-	
 			</div>
 			
-			<!-- 모달 영역 -->
-			<div id="inputModal" class="modal fade modal-item">
-					<div class="modal-dialog modal-dialog-centered">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">이미지 첨부</h5>
-								<button type="button" data-bs-dismiss="modal">&times;</button>
-								
-							</div>
-							<div class="modal-body">
-								<div>카페 이미지</div>
+	<!-- 		<div>카페 이미지</div>
 								<input id="cimage" type="file" name="files" onchange="previewImg(this, cimage_Preview, 'id', 0);" accept="image/*" />
 								
 								<div>메뉴판 이미지</div> 
@@ -270,129 +255,152 @@
 								 
 								<div>메뉴 이미지</div> 
 								<input id="m_img1" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 0);" accept="image/*" />
-								<input id="m_img2" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 1);" accept="image/*" />
-								<input id="m_img3" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 2);" accept="image/*" />
-								
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-
-			<!-- 미리보기 box -->
-			<div class="box-2 img-result hide">
-				<img style="max-width: 100%;" src="" alt="" class="cropped">
-			</div>
-			<!-- Cropper 모달 영역 -->
-			<div id="imgModal" class="modal fade">
+								<input id="m_img2" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 1);" accept="image/*" /> -->
+			
+			<!-- 모달 영역 -->
+			<div id="cImgModal" class="modal fade modal-item">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">이미지 첨부</h5>
+							<h5 class="modal-title">카페 대표 이미지</h5>
 							<button type="button" data-bs-dismiss="modal">&times;</button>
 						</div>
-						<div class="modal-body">
+						<div class="modal-body d-flex justify-content-center">
 
-							<!-- Cropper 영역 -->
-							<div>
-								<div class="form-group.container">
-									<label for="file">Upload File</label> <input type="file"
-										id="file-input" required accept="image/*">
-									<!-- required accept: 파일 유형 제한 -->
-								</div>
-								<div class="box-2">
-									<div class="result"></div>
-								</div>
+							<div class="drop-zone">
 
-								<!-- <div class="box-2 img-result hide">
-									<img style="max-width:100%;" src="" alt="" class="cropped">
-								</div> -->
-
-								<div class="box">
-									<div class="options hide">
-										<label for="width">width</label> <input type="number"
-											class="img-w" value="300" min="100" max="1200">
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input id="cimage" type="file" name="files" class="drop-zone__input"
+												onchange="previewImg(this, cimage_btn, cimage_Preview, 'id', 0);"
+												accept="image/*">
+										</div>
 									</div>
-									<button class="btn save hide" data-bs-dismiss="modal">Save</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			
+			<div id="cmenuImgModal" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">카페 메뉴판 이미지</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
 
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input id="cmenu_image" type="file" name="files" class="drop-zone__input" onchange="previewImg(this, cmenu_btn, cmenu_preview, 'id', 0);" accept="image/*">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mImgModal1" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">메뉴 이미지 / 1</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
+
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input id="m_img1" class="m_img drop-zone__input" type="file" name="files" onchange="previewImg(this, null, 'm_img_preview', 'class', 0);" accept="image/*" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mImgModal2" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">메뉴 이미지 / 2</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
+
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input id="m_img2" class="m_img drop-zone__input" type="file" name="files" onchange="previewImg(this, null, 'm_img_preview', 'class', 1);" accept="image/*" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mImgModal3" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">메뉴 이미지 / 3</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
+
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input type="file" name="files" class="m_img drop-zone__input"
+												onchange="previewImg(this, null, 'm_img_preview', 'class', 2);"
+												accept="image/*">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-
 	</div>
 
-
-	<!-- cropper script -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js"></script>
-	<script>
-	let result = document.querySelector(".result"), 
-	img_result = document.querySelector(".img-result"), 
-	img_w = document.querySelector(".img-w"), 
-	img_h = document.querySelector(".img-h"), 
-	options = document.querySelector(".options"), 
-	save = document.querySelector(".save"), 
-	//여기서 값을 받아올거야.
-	cropped = document.querySelector(".cropped"),
-	
-	
-	upload = document.querySelector("#file-input"), 
-	cropper = "";
-	
-	upload.addEventListener('change',(e) =>{
-		console.log(e)
-
-		//이미지 자르기
-	 // start file reader
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e.target.result) {
-          // create new image
-          let img = document.createElement("img");
-          img.id = "image";
-          img.src = e.target.result;
-          // clean result before
-          result.innerHTML = "";
-          // append new image
-          result.appendChild(img);
-          // show save btn and options
-          save.classList.remove("hide");
-          options.classList.remove("hide");
-          // init cropper
-          cropper = new Cropper(img);
-        }
-      };
-      reader.readAsDataURL(e.target.files[0]);	
-	})
-	
-	//save button to crop the image
-	save.addEventListener('click',(e)=>{
-		e.preventDefault()
-	
-	 // get result to data uri
-    let imgSrc = cropper
-      .getCroppedCanvas({
-        width: img_w.value,
-        // input value
-      })
-      .toDataURL();
-		
-		console.log(imgSrc);
-		
-		//이제 이 cropped를 숨기고, 표시하는 게 아닌.... 없애고, 생성하고 싶어.
-		 // remove hide class of img
-	    cropped.classList.remove("hide");
-	    img_result.classList.remove("hide");
-	    // show image cropped
-
-	    cropped.src = imgSrc;
-	})
-</script>
 
 	<script src="/js/tempFuncCafe.js"></script>
 	<!-- DB 연결 스크립트 -->
