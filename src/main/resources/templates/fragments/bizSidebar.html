@@ -13,10 +13,10 @@
 		<div id="sidebar-contents">
 			<div>
 				<!-- <b th:text="${#authentication.principal.username}+'님'"></b> -->
-				<span th:text="${session.bizMember.bid}">John Doe</span><b>님</b>
+				<span th:if="${session.bizMember.bid}" th:text="${session.bizMember.bid}">John Doe</span><b>님</b>
 				<hr>
 			</div>
-			<form th:action="@{/bizMember/storeManagement}" method="post">
+			<form th:action="@{/bizMember/storeList}" method="post">
 				<button type="submit">사업장 관리</button>
 			</form>
 			<form th:action="@{/bizMember/storeRegister}" method="post">

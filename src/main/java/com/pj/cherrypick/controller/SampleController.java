@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.pj.cherrypick.domain.BizMemberVO;
+import com.pj.cherrypick.domain.CafeVO;
 
 @Controller
 public class SampleController {
@@ -17,11 +18,6 @@ public class SampleController {
 		return "demomain";
 	}
 	
-	@PostMapping("/bizMember/storeRegister")
-	public String storeManagement(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, Model model) {
-		model.addAttribute("bizMember", bizMember);
-		return "bizMember/storeRegister"; // model 들고 뷰로 이동
-	}
 	
 	@GetMapping(value = "/demo2")
 	public String demo2(Model model) {
@@ -64,8 +60,6 @@ public class SampleController {
 	  @GetMapping(value = "/uploadForm") public String uploadForm(Model model) {
 	  
 	  return "uploadForm"; }
-	 
-	
 	
 	
 } 

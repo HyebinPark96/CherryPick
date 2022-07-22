@@ -6,6 +6,24 @@
     <insert id="createCafe" parameterType="com.pj.cherrypick.domain.CafeVO">
     	INSERT INTO cafe VALUES (null, #{bid}, #{cname}, #{c_lat}, #{c_long}, #{cimage}, #{caddress}, #{cphone}, #{copen}, #{cclose}, #{parking}, #{pet}, #{kids}, #{seats}, #{group}, #{ctag}, #{cmenu_img})
     </insert>
+
+    <select id="listCafe" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *
+		FROM cherrypick.cafe
+        WHERE bid = #{bid}
+	</select>
+
+    <select id="getCafe" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *
+		FROM cherrypick.cafe
+        WHERE cno = #{cno}
+	</select>
+
+    <select id="getCafeMenu" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *
+		FROM cherrypick.cafeMenu
+        WHERE cno = #{cno}
+	</select>
 </mapper>
 
 

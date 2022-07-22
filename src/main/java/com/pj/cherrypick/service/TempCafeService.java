@@ -1,9 +1,12 @@
 package com.pj.cherrypick.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pj.cherrypick.domain.BoardVO;
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.mapper.TempCafeMapper;
@@ -50,6 +53,17 @@ public class TempCafeService {
 		return -1;
 		
 	}
+
+	public List<CafeVO> listCafe(String bid) throws Exception {
+		return cafeMapper.listCafe(bid);
+	}
 	
+	public CafeVO getCafe(int cno) throws Exception {
+		return cafeMapper.getCafe(cno);
+	}
+
+	public List<CafeMenuVO> getCafeMenu(int cno) throws Exception {
+		return cafeMapper.getCafeMenu(cno);
+	}
 
 }

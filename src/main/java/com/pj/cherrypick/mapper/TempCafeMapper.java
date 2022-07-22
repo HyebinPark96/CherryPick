@@ -1,8 +1,11 @@
 package com.pj.cherrypick.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
 
 @Repository("com.pj.cherrypick.mapper.TempCafeMapper")
@@ -10,6 +13,14 @@ import com.pj.cherrypick.domain.CafeVO;
 public interface TempCafeMapper {
 	
 	int createCafe(CafeVO cafe);
+	
 	int getCafeNo();
 	
+	public List<CafeVO> listCafe(String bid) throws Exception;
+
+	public CafeVO getCafe(int cno) throws Exception;
+
+	public List<CafeMenuVO> getCafeMenu(int cno) throws Exception;
+	
+
 }
