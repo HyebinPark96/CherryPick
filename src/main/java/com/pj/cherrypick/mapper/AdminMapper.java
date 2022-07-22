@@ -115,8 +115,14 @@ public interface AdminMapper {
 	// 사업장별 리뷰 가져오기
 	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum);
 	
+	// 검색한 사업장별 리뷰 가져오기 
+	public List<ReviewVO> getReviewListSearch(int cno, int displayPost, int postNum, String searchType, String keyword);
+	
 	// 리뷰 총 갯수
 	public int rCount(int cno) throws Exception; 
+	
+	// 검색 리뷰 총 갯수
+	public int rSearchCount(int cno, String searchType, String keyword) throws Exception; 
 	
 	// 사업장별 리뷰에서 사업장 정보 가져오기
 	public CafeVO getCafeInfo(int cno)  throws Exception;

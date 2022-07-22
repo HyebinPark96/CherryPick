@@ -23,7 +23,7 @@ public class AdminService {
 		return adminMapper.list();
 	};
 	
-	public List<MemberVO> listPageSearchOrderByRegDate(String searchType, String keyword) {
+	public List<MemberVO> listPageSearchOrderByRegDate(String searchType, String keyword) throws Exception {
 		List<MemberVO> mListOrderByRegDate = null;
 		mListOrderByRegDate = adminMapper.listPageSearchOrderByRegDate(searchType, keyword);
 		return mListOrderByRegDate;
@@ -210,10 +210,8 @@ public class AdminService {
 		data.put("displayPost", displayPost); // <K,V> = <S,I>
 		data.put("postNum", postNum); // <K,V> = <S,I>
 		
-		if(adminMapper.cafeListPage(data.get("displayPost"), data.get("postNum")).size()>0 || adminMapper.cafeListPage(data.get("displayPost"), data.get("postNum"))!=null) {
-			return adminMapper.cafeListPage(data.get("displayPost"), data.get("postNum"));
-		}
-		return null;
+		
+		return adminMapper.cafeListPage(data.get("displayPost"), data.get("postNum"));
 	}
 	
 	// 사업장 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력
@@ -225,13 +223,8 @@ public class AdminService {
 		data.put("searchType", searchType);
 		data.put("keyword", keyword);
 		
-		if(adminMapper.cafeListPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
-				data.get("searchType").toString(), data.get("keyword").toString()).size()>0 || adminMapper.cafeListPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
-						data.get("searchType").toString(), data.get("keyword").toString())!=null) {
-			return adminMapper.cafeListPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
-					data.get("searchType").toString(), data.get("keyword").toString());
-		}
-		return null;
+		return adminMapper.cafeListPageSearch((int)data.get("displayPost"), (int)data.get("postNum"), 
+				data.get("searchType").toString(), data.get("keyword").toString());
 	}
 	
 	public int cCount() throws Exception{
@@ -250,24 +243,43 @@ public class AdminService {
 		return cSearchCount;
 	}
 	
-	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum) {
+	public List<ReviewVO> getReviewList(int cno, int displayPost, int postNum) throws Exception {
 		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
 		
 		data.put("cno", cno);
 		data.put("displayPost", displayPost); // <K,V> = <S,I>
 		data.put("postNum", postNum); // <K,V> = <S,I>
 		
+
+		return adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum"));
+	}
+	
+	public List<ReviewVO> getReviewListSearch(int cno, int displayPost, int postNum, String searchType, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
 		
-		if(adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum")).size()>0 || adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum"))!=null) {
-			return adminMapper.getReviewList(data.get("cno"), data.get("displayPost"), data.get("postNum"));
-		}
-		return null;
+		data.put("cno", cno);
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return adminMapper.getReviewListSearch((int)data.get("cno"), (int)data.get("displayPost"), 
+					(int)data.get("postNum"), data.get("searchType").toString(), data.get("keyword").toString());
 	}
 	
 	public int rCount(int cno) throws Exception{
 		int rCount = 0;
 		if(adminMapper.rCount(cno)!=0) {
 			rCount = adminMapper.rCount(cno);
+		}
+		return rCount;
+	}
+	
+	public int rSearchCount(int cno, String searchType, String keyword) throws Exception{
+		int rCount = 0;
+		if(adminMapper.rSearchCount(cno, searchType, keyword)!=0) {
+			rCount = adminMapper.rSearchCount(cno, searchType, keyword);
 		}
 		return rCount;
 	}

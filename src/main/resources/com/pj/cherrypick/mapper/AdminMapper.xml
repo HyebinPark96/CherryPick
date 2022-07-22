@@ -439,11 +439,60 @@
 		ORDER BY r.date DESC
 		LIMIT #{displayPost}, #{postNum}
 	</select>
+		
+	<!-- 조인해서 사업장별 리뷰와 관련 정보 가져오기 -->
+	<select id="getReviewListSearch" resultMap="ReviewVO" parameterType="hashmap">  <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT r.*, c.*, m.*, h.*
+		FROM review r
+		LEFT JOIN cafe c
+		ON r.cno = c.cno
+		LEFT JOIN member m
+		ON r.username = m.username
+		LEFT JOIN heart h
+		ON r.rno = h.rno
+		
+		<if test="searchType.equals('id')">
+			WHERE r.cno= #{cno} AND r.username LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('title')">
+			WHERE r.cno= #{cno} AND r.title LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('content')">
+			WHERE r.cno= #{cno} AND r.content LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY r.date DESC
+		LIMIT #{displayPost}, #{postNum}
+	</select>
 
 	<!-- 리뷰 총 갯수 -->
 	<select id="rCount" parameterType="int" resultType="int">
-		SELECT count(if(cno = #{cno}, cno, null)) FROM review;
+		SELECT COUNT(*) 
+		FROM review
+		WHERE cno = #{cno}
 	</select>
+	
+	<select id="rSearchCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM review
+		
+		<if test="searchType.equals('id')">
+			WHERE cno = #{cno} AND username LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('title')">
+			WHERE cno = #{cno} AND title LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('content')">
+			WHERE cno = #{cno} AND content LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+	</select>
+	
+
 	
 	<!-- 사업장별 리뷰에서 사업장 정보 가져오기 -->
 	<select id="getCafeInfo" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO" >

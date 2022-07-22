@@ -183,16 +183,17 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/adminReview/{cno}")
-	public String adminReview(@PathVariable int cno, @RequestParam("num") int num, Model model) throws Exception { 
+	public String adminReview(@PathVariable int cno, @RequestParam("num") int num, 
+			@RequestParam(value = "searchType", required = false, defaultValue = "id") String searchType, 
+			@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, Model model) throws Exception { 
 		
 		Page page = new Page();
 		page.setNum(num);
 		
-		page.setCount(adminService.rCount(cno));
-		// System.out.println("rCount : " + adminService.rCount(cno));
+		page.setCount(adminService.rSearchCount(cno, searchType, keyword));
 		
 		List<ReviewVO> rList = null;
-		rList = adminService.getReviewList(cno, page.getDisplayPost(), page.getPostNum());
+		rList = adminService.getReviewListSearch(cno, page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 		
 		CafeVO cafe = adminService.getCafeInfo(cno);
 		
@@ -201,6 +202,9 @@ public class AdminController {
 		model.addAttribute("cafe", cafe);
 		model.addAttribute("page", page);
 		model.addAttribute("select", num);
+		
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
 		
 		return "admin/adminReview";
 	}
