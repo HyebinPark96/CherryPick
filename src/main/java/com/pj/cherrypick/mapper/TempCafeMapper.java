@@ -16,6 +16,8 @@ public interface TempCafeMapper {
 	
 	int getCafeNo();
 	
+	int createMenu(CafeMenuVO menu);
+	
 	public List<CafeVO> listCafe(String bid) throws Exception;
 
 	public CafeVO getCafe(int cno) throws Exception;

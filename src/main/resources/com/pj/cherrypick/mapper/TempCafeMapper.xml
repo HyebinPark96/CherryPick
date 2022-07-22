@@ -7,6 +7,14 @@
     	INSERT INTO cafe VALUES (null, #{bid}, #{cname}, #{c_lat}, #{c_long}, #{cimage}, #{caddress}, #{cphone}, #{copen}, #{cclose}, #{parking}, #{pet}, #{kids}, #{seats}, #{group}, #{ctag}, #{cmenu_img})
     </insert>
 
+	<select id="getCafeNo" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+
+	<insert id="createMenu" parameterType="com.pj.cherrypick.domain.CafeMenuVO">
+    	INSERT INTO cafeMenu VALUES	(null, #{cno}, #{m_name}, #{m_img}, #{m_detail}, #{m_size}, #{m_price}, #{m_tag})
+    </insert>
+
     <select id="listCafe" resultType="com.pj.cherrypick.domain.CafeVO">
 		SELECT *
 		FROM cherrypick.cafe

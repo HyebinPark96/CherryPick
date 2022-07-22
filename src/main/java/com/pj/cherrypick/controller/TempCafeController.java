@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.pj.cherrypick.domain.BizMemberVO;
-import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.service.TempCafeService;
 
@@ -28,7 +27,7 @@ public class TempCafeController {
 		model.addAttribute("bizMember", bizMember);
 		return "bizMember/storeRegister"; // model 들고 뷰로 이동
 	}
-/*
+
 	@PostMapping("/bizMember/storeList")
 	public void listCafe(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, CafeVO cafe,
 			Model model) {
@@ -40,9 +39,17 @@ public class TempCafeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		if(cafeList.size()>0) {
+			System.out.println(cafeList.get(0).getCno());
+		}else {
+			System.out.println("no cafe selected");
+		}
+		
+		
 		model.addAttribute("cafe", cafeList);
 	}
-	
+	/*
 	@PostMapping("/bizMember/storeManagement")
 	public void getCafe(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, CafeVO cafe,
 			Model model) {

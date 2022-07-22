@@ -17,8 +17,6 @@ public class TempCafeService {
 	
 	@Autowired
 	private TempCafeMapper cafeMapper;
-	@Autowired
-	private TempMenuMapper menuMapper;
 	
 	@Transactional
 	public int createCafe(CafeVO cafe) {
@@ -44,7 +42,7 @@ public class TempCafeService {
 	@Transactional
 	public int createMenu(CafeMenuVO menu) {
 		try {
-			menuMapper.createMenu(menu);
+			cafeMapper.createMenu(menu);
 			return 1;
 		} catch(Exception e) {
 			e.printStackTrace();
