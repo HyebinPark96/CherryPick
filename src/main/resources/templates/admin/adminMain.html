@@ -111,7 +111,8 @@
 							<th scope="col">전화번호</th>
 							<th scope="col">이메일</th>
 							<th scope="col">가입일자</th>
-							<th scope="col" th:if="${sort}=='authBizMember' OR ${sort}=='unauthBizMember'">탈퇴/승인처리</th>
+							<th scope="col" th:if="${sort}=='authBizMember'">승인취소</th>
+							<th scope="col" th:if="${sort}=='unauthBizMember'">승인</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -120,7 +121,8 @@
  						<tr th:if="${sort}=='member'" th:each="list : ${list}">
 						
 							<td>
-								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+								<input class="form-check-input mt-0" name="memChk" 
+									type="checkbox" th:value="${list.username}">
 							</td>
 							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
 							
@@ -133,9 +135,6 @@
 							<td th:text="${list.email}">placeholder</td>
 							
 							<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
-							
-							<!-- <td th:if="${list.role}==0">회원</td>
-							<td th:if="${list.role}==1">관리자</td> -->
 
 						</tr>
 						
@@ -143,11 +142,11 @@
 						 <tr th:if="${sort}=='authBizMember'" th:each="list : ${list}">
 					
 							<td>
-								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+								<input class="form-check-input mt-0" name="memChk" type="checkbox" th:value="${list.bid}">
 							</td>
 							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
 						
-							<td th:text="${list.bid}"></td>
+							<td th:text="${list.bid}" th:name="bid" th:value="${list.bid}"></td>
 							
 							<td th:text="${list.bname}">random</td>
 							
@@ -155,9 +154,11 @@
 							
 							<td th:text="${list.bemail}">placeholder</td>
 							
-							<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
+							<td th:text="${#dates.format(list.regDate,'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
 							
-							<td><img class="divBtn icon-15" src="/img/minus.png"></td>
+							<td>
+								<button name="cancleApprovalBtn" th:value="${list.bid}"><img class="divBtn icon-15" src="/img/minus.png"></button>
+							</td>
 							
 							<!-- <td th:if="${list.role}==0">회원</td>
 							<td th:if="${list.role}==1">관리자</td> -->
@@ -169,7 +170,7 @@
 						 <tr th:if="${sort}=='unauthBizMember'" th:each="list : ${list}">
 						 
 						 	<td>
-								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+								<input class="form-check-input mt-0" name="memChk" type="checkbox" th:value="${list.bid}">
 							</td>
 							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
 							
@@ -183,7 +184,9 @@
 							
 							<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
 							
-							<td><img class="divBtn icon-15" src="/img/check.png"></td>
+							<td>
+								<button name="approvalBtn" th:value="${list.bid}"><img class="divBtn icon-15" src="/img/check.png" name="approval"></button>
+							</td>
 							
 						</tr>
 
@@ -191,8 +194,14 @@
 				</table>
 				</div>
 				
-				<Button th:if="${sort}=='member' or ${sort}=='authBizMember'" class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button>
-				<Button th:if="${sort}=='unauthBizMember'" class="btn btn-primary" id="approveBtn">선택 탈퇴</Button>
+				<form name="withdrawalFrm">
+					<input type="hidden" value="" id="memChkArr">
+				</form>
+				
+				<Button th:if="${sort}=='member'" class="btn btn-danger" id="withdrawalBtnForMem">선택 탈퇴</Button>
+				<Button th:if="${sort}=='authBizMember'" class="btn btn-danger" id="withdrawalBtnForAuthBiz">선택 탈퇴</Button>
+				<Button th:if="${sort}=='unauthBizMember'" class="btn btn-primary" id="checkApprovalBtn">선택 승인</Button>
+				
 				<br><br>
 				
 				<!-- 검색창 : 길이조절 필요 -->
@@ -465,6 +474,7 @@
 				});
 			}
 			
+			// 검색기능 
 			let searchBtn = document.getElementById("searchBtn");
 			function search(){
 				let searchType = document.getElementsByName('searchType')[0].value;
@@ -472,6 +482,8 @@
 				let sort = document.getElementById('sort').value;
 				location.href = "/admin/adminMain?num=1" + "&sort=" + sort + "&searchType=" + searchType + "&keyword=" + keyword;
 			};
+			
+			
 		</script>
 	</div>
 <!-- </body> -->

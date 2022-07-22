@@ -42,6 +42,10 @@ public class AdminService {
 		return adminMapper.searchCount(searchType, keyword);
 	};
 	
+	public void withdrawalForMem(String username[]) throws Exception{
+		adminMapper.withdrawalForMem(username);
+	}
+	
 	// 목록 + 페이징
 	public List<MemberVO> listPage(int displayPost, int postNum) throws Exception{
 		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
@@ -106,6 +110,22 @@ public class AdminService {
 	public int bUnauthSearchCount(int bstat, String searchType, String keyword) throws Exception{
 		return adminMapper.bUnauthSearchCount(bstat, searchType, keyword);
 	};
+	
+	public void withdrawalForAuthBiz(String bid[]) throws Exception{
+		adminMapper.withdrawalForAuthBiz(bid);
+	}
+	
+	public void cancleApproval(String bid) throws Exception{
+		adminMapper.cancleApproval(bid);
+	}
+	
+	public void approval(String bid) throws Exception{
+		adminMapper.approval(bid);
+	}
+	
+	public void checkApproval(String bid[]) throws Exception{
+		adminMapper.checkApproval(bid);
+	}
 	
 	public List<BizMemberVO> bAuthListPage(int bstat, int displayPost, int postNum) throws Exception{
 		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
