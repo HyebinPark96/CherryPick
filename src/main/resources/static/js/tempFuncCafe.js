@@ -33,25 +33,39 @@ $(document).ready(function() {
 
 $('#cimage_Preview').hide();
 $('#cmenu_preview').hide();
-//$('.m_img_preview').hide();
+$('.m_img_preview:eq(0)').hide();
+$('.m_img_preview:eq(1)').hide();
+$('.m_img_preview:eq(2)').hide();
 
 
 
 
-//모달 호출 기능 부여 (메뉴 이미지 3개)
-/*
-var mBtns = document.getElementsByClassName("m_img_btn");
-
-for (var i = 0; i < mBtns.length; i++) {
-	var id = 'mImgModal' + (i+1);
-	alert(id);
-   	mBtns[i].addEventListener('click', $(id).modal('show'), false);
-}*/
 
 function modal(modalId){
-	//모달 표시.
 	$(modalId).modal('show');
 }
+
+
+
+/*
+		if(opt=="id"){
+			reader.onload = function(e) {
+				$(btn).hide();
+				$(img).show();
+				$(img).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
+			}
+			reader.readAsDataURL(input.files[0]);	
+		}else if(opt=="class"){
+			
+			reader.onload = function(e) {
+				$('.'+img).eq(idx).css('display', 'block');
+				$('.'+img).eq(idx).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
+			}
+			reader.readAsDataURL(input.files[0]);
+		}else{
+			alert('put accurate parameter.')
+		}
+*/
 
 //안한거 : +버튼, x버튼이 눌렸을 때 +버튼의 display를 토글하라.
 
@@ -79,7 +93,7 @@ var menuNum = 3;
 
 
 
-//변경-삭제되지 않고 숨김/표시를 하는 엘리멘트를 생성할 것이다.
+//메뉴 입력란 생성
 function initMenu(blk, itm, num, opt) {
 	var blk = document.getElementById(blk);
 	var itm = document.getElementsByClassName(itm);
@@ -93,16 +107,24 @@ function initMenu(blk, itm, num, opt) {
 		blk.appendChild(itm[0].cloneNode(true));
 	}
 	itm[0].style.display = 'block';
+	
+	
 }
 
 initMenu('menulist-block', 'menulist-item', menuNum, 0);
 
+$('.m_img_btn:eq(0)').click(function(){
+   	modal('#mImgModal1');
+});
 
+$('.m_img_btn:eq(1)').click(function(){
+   	modal('#mImgModal2');
+});
 
-function showItem(){
-	//사전에 생성된 클래스 이름을 받아온다.
-	//
-}
+$('.m_img_btn:eq(2)').click(function(){
+   	modal('#mImgModal3');
+});
+
 
 
 function previewImg(input, btn, img, opt, idx) {
@@ -118,8 +140,8 @@ function previewImg(input, btn, img, opt, idx) {
 			reader.readAsDataURL(input.files[0]);	
 		}else if(opt=="class"){
 			
-			
 			reader.onload = function(e) {
+				$('.'+btn).eq(idx).hide();
 				$('.'+img).eq(idx).css('display', 'block');
 				$('.'+img).eq(idx).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
 			}
@@ -131,10 +153,32 @@ function previewImg(input, btn, img, opt, idx) {
 }
 
 function deleteImg(input, btn, img, opt, idx){
-	$(input).val("");
-	$(btn).show();
-	$(img).hide();
+	
+	if(opt=="id"){
+		$(input).val("");
+		$(btn).show();
+		$(img).hide();
+	}else if(opt=="class"){
+		$('.'+input).eq(idx).val("");
+		$('.'+btn).eq(idx).show();
+		$('.'+img).eq(idx).hide();
+	}else{
+		alert('put accurate parameter.')
+	}
 }
+
+
+$('.m_img_x:eq(0)').click(function(){
+   	deleteImg('m_img', 'm_img_btn', 'm_img_preview', 'class', 0);
+});
+
+$('.m_img_x:eq(1)').click(function(){
+   	deleteImg('m_img', 'm_img_btn', 'm_img_preview', 'class', 1);
+});
+
+$('.m_img_x:eq(2)').click(function(){
+   	deleteImg('m_img', 'm_img_btn', 'm_img_preview', 'class', 2);
+});
 
 //▼▼▼▼====입력란 추가 관련 메소드====▼▼▼▼
 //초기설정 : 입력란의 복사본을 하나 만들고, 원본은 숨긴다(display = 'none')
@@ -147,7 +191,6 @@ function initItem(blk, itm) {
 }
 
 initItem('ctag-block', 'ctag-item');
-//initItem('cimage-block', 'cimage-item');
 
 //숨겨져 있는 원본을 복사하고, 화면에 표시한다(display = 'block')
 function addItem(blk, itm, max) {
@@ -180,13 +223,6 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
   inputElement.addEventListener("change", (e) => {
     if (inputElement.files.length) {
       //updateThumbnail(dropZoneElement, inputElement.files[0]);
-      console.log(e.target);
-      //$('#modalwindow').modal('hide');  parent('.modal')
-      
-      console.log(e.target.closest(`.modal`));
-      console.log($('#cmenuImgModal'));
-      //e.target.closest(`.modal`).modal('hide');
-      //$('#cmenuImgModal').modal('hide');
       $(e.target).closest(`.modal`).modal('hide');
     }
   });

@@ -1,0 +1,45 @@
+
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/layout-main}">
+<head>
+</head>
+
+
+
+<div layout:fragment="content">
+
+	<div id="page-wrapper" class="d-flex">
+
+		<div id="sidebar-wrapper" class="col-md-1"
+			th:replace="fragments/bizSidebar:: sidebar"></div>
+
+		<table class="table">
+			<tr th:each="cafe : ${cafe}">
+				<td th:text="${cafe.cno}"></td>
+				<!-- <td><a th:href="@{view(bno=${list.bno})}"
+					th:text="${list.title}"></a></td>-->
+				<td th:text="${cafe.cname}"></td>
+				<td th:text="${cafe.caddress}"></td>
+
+
+				<td><form th:action="@{bizMember/storeManagement}" method="post">
+					<button type="submit">자세히</button>
+				</form></td>
+			</tr>
+		</table>
+
+		<!-- 등록된 사업장이 없습니다. -->
+
+	</div>
+</div>
+
+
+
+
+
+
+
+</html>
