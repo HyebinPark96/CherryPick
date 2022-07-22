@@ -99,8 +99,8 @@ public class MemberService {
 	}
 
 	public List<MemberVO> getMList() {
-		List<MemberVO> mList = new ArrayList<MemberVO>();
-		mList =  memberMapper.getMList();
+		List<MemberVO> mList = null;
+		mList = memberMapper.getMList();
 		return mList;
 	}
 	

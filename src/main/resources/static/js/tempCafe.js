@@ -4,14 +4,10 @@ let cindex = {
 	init: function() {
 		
 		$("#btn-register").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			//this.submitFiles();
+			this.submitFiles();
 			this.register(); 
 		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
 		
-		$("#uploadTest").on("click", () => { // 람다식 쓰는 이유 : this 바인딩
-			this.submitFiles();
-		}); // on("1","2") : 파라미터 1번 이벤트 발생시 파라미터 2번을 수행하라는 의미
-
 	},
 
 	//==================================
@@ -20,13 +16,14 @@ let cindex = {
 
 		let formData = new FormData();
 			
-		var inputArr = document.getElementsByName("files");
+		//var inputArr = document.getElementsByName("files");
+		var inputArr = document.getElementsByClassName("drop-zone__input");
 		for (let i = 0; i < inputArr.length; i++) {
-			//console.log(inputArr[i]);
-			//console.log(inputArr[i].files[0]);
+			console.log(inputArr[i]);
+			console.log(inputArr[i].files[0]);
 			let fileArr = $("input[name=files]")[i].files;
 			formData.append("files", fileArr[0]);
-			//console.log(files[i]);
+			console.log(fileArr[i]);
 		}
 
 		$.ajax({

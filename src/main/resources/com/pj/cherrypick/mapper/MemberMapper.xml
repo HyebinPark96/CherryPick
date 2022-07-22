@@ -5,7 +5,15 @@
 
 	<!-- Mapper 인터페이스의 메소드명과 XML의 id가 같아야 함 -->
  	<select id="getMList" resultType="com.pj.cherrypick.domain.MemberVO">
-        SELECT * FROM member
+        SELECT * 
+        FROM member
+		ORDER BY username <!-- 이름 오름차순으로 정렬하기 -->
+    </select>
+    
+    <select id="getMListSortByRegDate" resultType="com.pj.cherrypick.domain.MemberVO">
+    	SELECT * 
+    	FROM member
+    	ORDER BY regDate DESC <!-- 가입일자 최신순으로 정렬하기 -->
     </select>
     
     <insert id="signUp" parameterType="com.pj.cherrypick.domain.MemberVO">

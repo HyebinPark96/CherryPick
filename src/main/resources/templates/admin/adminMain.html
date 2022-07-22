@@ -2,16 +2,17 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout-admin}">
 
-<!-- <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>CherryPick</title>
-</head> -->
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</head> 
 
 <!-- <body> -->
 
 	<div class="content" layout:fragment="content">
+	<input type="hidden" th:value="${sort}" id="sort">
+	<input type="hidden" th:value="orderByRegDate" id="orderBy">
 	<input type="hidden" th:value="${num}" id="num">
-	<input type="hidden" value="cafe" id="cafe"> 
+	<input type="hidden" value="cafe" id="cafe">
 
 		<!-- ==========회원관리=========== -->
 		<div class="container" id="memberManage" th:if="${sort}!='cafe'">
@@ -83,8 +84,18 @@
 					
 				
 				<!-- 회원관리 - 정렬 탭 -->
-				<div class="d-flex">
-					<div>번호순 | 이름순</div>
+				<div>
+					<div class="d-flex">
+						<a th:href="@{adminMain(num=1, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${id})}">
+							<button type="button" id="sortByIdBtn">아이디순</button>
+						</a>
+						
+						<label> | </label>
+						
+						<a th:href="@{adminMain(num=1, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=orderByRegDate)}">
+							<button type="button" id="sortByRegDateBtn">가입일자순</button>
+						</a>
+					</div>
 				</div>
 			</div>
 			<!-- 회원관리 테이블 -->
@@ -98,8 +109,9 @@
 							<th scope="col">성명</th>
 							<th scope="col">전화번호</th>
 							<th scope="col">이메일</th>
-							<th scope="col">회원분류</th>
-							<th scope="col">탈퇴/승인처리</th>
+							<th scope="col">가입일자</th>
+							<th scope="col" th:if="${sort}=='authBizMember'">승인취소</th>
+							<th scope="col" th:if="${sort}=='unauthBizMember'">승인</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -108,7 +120,8 @@
  						<tr th:if="${sort}=='member'" th:each="list : ${list}">
 						
 							<td>
-								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+								<input class="form-check-input mt-0" name="memChk" 
+									type="checkbox" th:value="${list.username}">
 							</td>
 							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
 							
@@ -120,12 +133,7 @@
 							
 							<td th:text="${list.email}">placeholder</td>
 							
-							<td></td>
-							
-							<td><img class="divBtn icon-15" src="/img/minus.png"></td>
-							
-							<!-- <td th:if="${list.role}==0">회원</td>
-							<td th:if="${list.role}==1">관리자</td> -->
+							<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
 
 						</tr>
 						
@@ -133,11 +141,11 @@
 						 <tr th:if="${sort}=='authBizMember'" th:each="list : ${list}">
 					
 							<td>
-								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+								<input class="form-check-input mt-0" name="memChk" type="checkbox" th:value="${list.bid}">
 							</td>
 							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
 						
-							<td th:text="${list.bid}"></td>
+							<td th:text="${list.bid}" th:name="bid" th:value="${list.bid}"></td>
 							
 							<td th:text="${list.bname}">random</td>
 							
@@ -145,9 +153,11 @@
 							
 							<td th:text="${list.bemail}">placeholder</td>
 							
-							<td></td>
+							<td th:text="${#dates.format(list.regDate,'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
 							
-							<td><img class="divBtn icon-15" src="/img/minus.png"></td>
+							<td>
+								<button name="cancleApprovalBtn" th:value="${list.bid}"><img class="divBtn icon-15" src="/img/minus.png"></button>
+							</td>
 							
 							<!-- <td th:if="${list.role}==0">회원</td>
 							<td th:if="${list.role}==1">관리자</td> -->
@@ -159,7 +169,7 @@
 						 <tr th:if="${sort}=='unauthBizMember'" th:each="list : ${list}">
 						 
 						 	<td>
-								<input class="form-check-input mt-0" name="memChk" type="checkbox" value="">
+								<input class="form-check-input mt-0" name="memChk" type="checkbox" th:value="${list.bid}">
 							</td>
 							<td th:text="${listStat.count + (page.num*10) - 10}"></td>
 							
@@ -171,9 +181,11 @@
 							
 							<td th:text="${list.bemail}">placeholder</td>
 							
-							<td></td>
+							<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
 							
-							<td><img class="divBtn icon-15" src="/img/check.png"></td>
+							<td>
+								<button name="approvalBtn" th:value="${list.bid}"><img class="divBtn icon-15" src="/img/check.png" name="approval"></button>
+							</td>
 							
 						</tr>
 
@@ -181,46 +193,58 @@
 				</table>
 				</div>
 				
-				<Button th:if="${sort}=='member' or ${sort}=='authBizMember'" class="btn btn-danger" id="signOutBtn">선택 탈퇴</Button><br>
-				<Button th:if="${sort}=='unauthBizMember'" class="btn btn-primary" id="approveBtn">선택 탈퇴</Button><br>
+				<form name="withdrawalFrm">
+					<input type="hidden" value="" id="memChkArr">
+				</form>
+				
+				<Button th:if="${sort}=='member'" class="btn btn-danger" id="withdrawalBtnForMem">선택 탈퇴</Button>
+				<Button th:if="${sort}=='authBizMember'" class="btn btn-danger" id="withdrawalBtnForAuthBiz">선택 탈퇴</Button>
+				<Button th:if="${sort}=='unauthBizMember'" class="btn btn-primary" id="checkApprovalBtn">선택 승인</Button>
+				
+				<br><br>
 				
 				<!-- 검색창 : 길이조절 필요 -->
-				<form name="searchForm">
 				
-					<select name="type" class="custom-select mb-3">
-					    <option selected>검색 유형 선택</option>
-					    <option value="id">아이디</option>
-					    <option value="name">성명</option>
-						<option value="phone">전화번호</option>
+				<div class="d-flex align-items-center" style="width: 300px;">
+				
+					<select name="searchType" class="custom-select mb-3">
+					    <option th:selected="${searchType == 'id'}" value="id">아이디</option>
+					    <option th:selected="${searchType == 'name'}" value="name">성명</option>
+						<option th:selected="${searchType == 'phone'}" value="phone">전화번호</option>
 					</select>
 					  
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" name="keyword" placeholder="Search">
+						<input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="Search">
 						<div class="input-group-append">
-							<button class="btn btn-success" type="submit">검색</button>
+							<button type="button" id="searchBtn" onclick="search()">
+							<div class="input-group-addon" style="background-color: #ddd; padding: 7px; border-radius: 3px;">
+								<i class="fa fa-search"></i>
+							</div>
+						</button>
 						</div>
 					</div>
 				
-				</form>
+				</div>
+				
 				
 
 				
 				<div class="pagination">
 					<th:block th:if="${page.prev}">
-						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort})}" class="page-link">이전</a> ]</span>
+						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${orderBy})}" class="page-link">이전</a> ]</span>
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
 						<span th:if="${select!=num} and ${num}!=0" class="page-item" >
-							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link" ></a>
+							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${orderBy})}" th:text="${num}" class="page-link" ></a>
 						</span>
-						<span th:unless="${select!=num}" class="page-item active">
+						<span th:if="${select==num}" class="page-item active">
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
 						</span>
 					</th:block>
 					
 					<th:block th:if="${page.next}">
-						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort})}" class="page-link">다음</a> ]</span>
+						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${orderBy})}" class="page-link">다음</a> ]</span>
 					</th:block>
 				</div>
 
@@ -249,10 +273,10 @@
 							for="flexRadioDefault2"> 등록됨 </label>
 					</div> -->
 				</div>
-				<!-- 상단 오른쪽에 배치할 요소  -->
+				<!-- 상단 오른쪽에 배치할 요소  
 				<div class="d-flex">
 					<div>번호순 | 업체명순</div>
-				</div>
+				</div>-->
 			</div>
 
 
@@ -293,22 +317,46 @@
 				</div>
 				<Button class="btn btn-danger">선택 삭제</Button><br><br>
 				
+				
+				
+				
+				<!-- 검색창 : 길이조절 필요 -->
+				<div class="d-flex align-items-center" style="width: 300px;">
+				
+					<select name="searchType" class="custom-select mb-3">
+					    <option th:selected="${searchType == 'cname'}" th:value="cname">카페명</option>
+						<option th:selected="${searchType == 'cphone'}" th:value="cphone">전화번호</option>
+					</select>
+					  
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="Search">
+						<div class="input-group-append">
+							<button type="button" id="searchBtn" onclick="search()">
+							<div class="input-group-addon" style="background-color: #ddd; padding: 7px; border-radius: 3px;">
+								<i class="fa fa-search"></i>
+							</div>
+						</button>
+						</div>
+					</div>
+				
+				</div>
+				
 				<div class="pagination">
 					<th:block th:if="${page.prev}">
-						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort})}" class="page-link">이전</a> ]</span>
+						<span class="page-item" >[ <a th:href="@{adminMain(num=${page.startPageNum - 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword})}" class="page-link">이전</a> ]</span>
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
 						<span th:if="${select!=num} and ${num}!=0" class="page-item" >
-							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link" ></a>
+							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword})}" th:text="${num}" class="page-link" ></a>
 						</span>
-						<span th:unless="${select!=num}" class="page-item active">
+						<span th:if="${select==num}" class="page-item active">
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
 						</span>
 					</th:block>
 					
 					<th:block th:if="${page.next}">
-						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort})}" class="page-link">다음</a> ]</span>
+						<span class="page-item">[ <a th:href="@{adminMain(num=${page.endPageNum + 1}, sort=${sort}, searchType=${searchType}, keyword=${keyword})}" class="page-link">다음</a> ]</span>
 					</th:block>
 				</div>
 				
@@ -437,6 +485,17 @@
 					}
 				});
 			}
+			
+			// 검색기능 
+			let searchBtn = document.getElementById("searchBtn");
+			function search(){
+				let searchType = document.getElementsByName('searchType')[0].value;
+				let keyword = document.getElementsByName('keyword')[0].value;
+				let sort = document.getElementById('sort').value;
+				location.href = "/admin/adminMain?num=1" + "&sort=" + sort + "&searchType=" + searchType + "&keyword=" + keyword;
+			};
+			
+			
 		</script>
 	</div>
 <!-- </body> -->

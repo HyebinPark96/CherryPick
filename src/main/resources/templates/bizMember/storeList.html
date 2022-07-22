@@ -1,0 +1,44 @@
+
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/layout-main}">
+<head>
+</head>
+
+
+
+<div layout:fragment="content">
+
+	<div id="page-wrapper" class="d-flex">
+
+		<div id="sidebar-wrapper" class="col-md-1"
+			th:replace="fragments/bizSidebar:: sidebar"></div>
+			
+		<!-- GET방식 -->
+		
+		<div th:each="cafe : ${cafe}">
+
+			<div>[[${cafe.cno}]]</div>
+			<div>[[${cafe.cname}]]</div>
+			<div>[[${cafe.caddress}]]</div>
+
+			<a th:href="@{'/bizMember/storeManagement/' + ${cafe.cno}}">자세히</a>
+		</div>
+		 
+		
+		<hr>
+
+	</div>
+	
+
+</div>
+
+
+
+
+
+
+
+</html>

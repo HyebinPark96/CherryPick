@@ -22,25 +22,92 @@
 		FROM cherrypick.member
 	</select>
 	
+	<!-- 회원 수 -->
+	<select id="searchCount" resultType="int">
+		SELECT COUNT(username)
+		FROM cherrypick.member
+		
+		<if test="searchType.equals('id')">
+			WHERE username LIKE CONCAT('%', #{keyword}, '%');
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE name LIKE CONCAT('%', #{keyword}, '%');
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE phone LIKE CONCAT('%', #{keyword}, '%'); 
+		</if>
+		
+	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="withdrawalForMem" parameterType="java.util.ArrayList">
+		DELETE 
+		FROM member
+		
+	    <where>
+		    <foreach collection="array" item="username" open="" close="" separator="OR">
+		        (username = #{username})
+		    </foreach>
+	    </where>
+		
+	</delete>
+	
 	<!-- 리스트 목록 + 페이징 : 레코드를 10개씩 출력-->
 	<select id="listPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.MemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
-		SELECT username, password, name, phone, email, role
+		SELECT *
 		FROM cherrypick.member
 		ORDER BY username ASC
 		limit #{displayPost}, #{postNum}
 	</select>
 	
- 	 <!-- 2. 사업자 회원 관리 -->
-	<!-- 미승인 회원 목록 가져오기 -->
-	<select id="bUnauthList" resultType="com.pj.cherrypick.domain.BizMemberVO">
-		SELECT bid, bpwd, bname, bstat, bphone, bemail
-		FROM cherrypick.bizMember
-		WHERE bstat = 0
+	<!-- 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력, 아이디순 정렬-->
+	<select id="listPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.MemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT *
+		FROM cherrypick.member
+		
+		<if test="searchType.equals('id')">
+			WHERE username LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE name LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE phone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY username ASC
+		limit #{displayPost}, #{postNum}
 	</select>
 	
-	<!-- 승인 회원 목록 가져오기 -->
+	<!-- 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력, 가입일자순 정렬-->
+	<select id="listPageSearchOrderByRegDate" parameterType="hashmap" resultType="com.pj.cherrypick.domain.MemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT *
+		FROM cherrypick.member
+		
+		<if test="searchType.equals('id')">
+			WHERE username LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE name LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE phone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY regDate DESC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
+ 	<!-- 2. 사업자 회원 관리 -->
+ 	<!-- 승인 회원 목록 가져오기 -->
 	<select id="bAuthList" resultType="com.pj.cherrypick.domain.BizMemberVO">
-		SELECT bid, bpwd, bname, bstat, bphone, bemail
+		SELECT *
 		FROM cherrypick.bizMember
 		WHERE bstat = 1
 	</select>
@@ -51,36 +118,200 @@
 		WHERE bid = #{bid}
 	</delete>
 	
-	<!-- 미승인 사업자 회원 수 -->
+	<!-- 사업자 회원 수 -->
 	<select id="bAuthCount" parameterType="int" resultType="int">
 		SELECT count(if(bstat = #{bstat}, bstat, null)) FROM bizMember;
 	</select>
 	
-	<!-- 승인 사업자 회원 수 -->
+	<!-- 사업자 회원 수 -->
+	<select id="bAuthSearchCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM bizMember
+
+		<if test='searchType.equals("id")'>
+			WHERE bstat = #{bstat} AND bid LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("name")'>
+			WHERE bstat = #{bstat} AND bname LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("phone")'>
+			WHERE bstat = #{bstat} AND bphone LIKE concat('%', #{keyword}, '%')
+		</if>
+	
+	</select>
+	
+	
+	<!-- 미승인 회원 목록 가져오기 -->
+	<select id="bUnauthList" resultType="com.pj.cherrypick.domain.BizMemberVO">
+		SELECT *
+		FROM cherrypick.bizMember
+		WHERE bstat = 0
+	</select>
+	
+	<!-- 미승인 사업자 회원 수 -->
 	<select id="bUnauthCount" parameterType="int" resultType="int">
 		SELECT count(if(bstat = #{bstat}, bstat, null)) FROM bizMember;
 	</select>
 	
-	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
-	<select id="bAuthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
-		SELECT bid, bpwd, bname, bstat, bphone, bemail
+	<!-- 미승인 사업자 회원 수 -->
+	<select id="bUnauthSearchCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
 		FROM bizMember
-		WHERE bstat = #{bstat}
-		ORDER BY bid ASC
-		limit #{displayPost}, #{postNum}
+		
+		<if test='searchType.equals("id")'>
+			WHERE bstat = #{bstat} AND bid LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("name")'>
+			WHERE bstat = #{bstat} AND bname LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("phone")'>
+			WHERE bstat = #{bstat} AND bphone LIKE concat('%', #{keyword}, '%')
+		</if>
+		
 	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="withdrawalForAuthBiz" parameterType="java.util.ArrayList">
+		DELETE 
+		FROM bizMember
+		
+	    <where>
+		    <foreach collection="array" item="bid" open="" close="" separator="OR">
+		        (bid = #{bid})
+		    </foreach>
+	    </where>
+		
+	</delete>
+	
+	<update id="cancleApproval" parameterType="String">
+		UPDATE bizMember
+		SET bstat = 0
+		WHERE bid = #{bid}
+	</update>
+	
+	<update id="approval" parameterType="String">
+		UPDATE bizMember
+		SET bstat = 1
+		WHERE bid = #{bid}
+	</update>
+		
+	<update id="checkApproval" parameterType="String">
+		UPDATE bizMember
+		SET bstat = 1
+		
+		<where>
+		    <foreach collection="array" item="bid" open="" close="" separator="OR">
+		        (bid = #{bid})
+		    </foreach>
+	    </where>
+	
+	</update>
 	
 	<!-- 승인 사업자 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
-	<select id="bUnauthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
-		SELECT bid, bpwd, bname, bstat, bphone, bemail
+	<select id="bAuthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT *
 		FROM bizMember
 		WHERE bstat = #{bstat}
 		ORDER BY bid ASC
 		limit #{displayPost}, #{postNum}
 	</select>
 	
+	<!-- 승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 -->
+	<select id="bAuthListPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT *
+		FROM bizMember
+		
+		<if test="searchType.equals('id')">
+			WHERE bstat = #{bstat} AND bid LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE bstat = #{bstat} AND bname LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE bstat = #{bstat} AND bphone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY bid ASC
+		limit #{displayPost}, #{postNum}
+	</select>
 	
+	<!-- 승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 : 가입일자 내림차순 정렬 -->
+	<select id="bAuthListPageSearchOrderByRegDate" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT *
+		FROM bizMember
+		
+		<if test="searchType.equals('id')">
+			WHERE bstat = #{bstat} AND bid LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE bstat = #{bstat} AND bname LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE bstat = #{bstat} AND bphone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY regDate DESC
+		limit #{displayPost}, #{postNum}
+	</select>
 	
+	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
+	<select id="bUnauthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT *
+		FROM bizMember
+		WHERE bstat = #{bstat}
+		ORDER BY bid ASC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
+	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 -->
+	<select id="bUnauthListPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT *
+		FROM bizMember
+		
+		<if test="searchType.equals('id')">
+			WHERE bstat = #{bstat} AND bid LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE bstat = #{bstat} AND bname LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE bstat = #{bstat} AND bphone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY bid ASC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
+	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력, 가입일자 내림차순 정렬-->
+	<select id="bUnauthListPageSearchOrderByRegDate" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT *
+		FROM bizMember
+		
+		<if test="searchType.equals('id')">
+			WHERE bstat = #{bstat} AND bid LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE bstat = #{bstat} AND bname LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE bstat = #{bstat} AND bphone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY regDate DESC
+		limit #{displayPost}, #{postNum}
+	</select>
 	
 	
 	<!-- 사업장 관리 : 취합 후 CafeMapper 로 옮기기!-->
@@ -98,10 +329,42 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
+	<!-- 사업장 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 -->
+	<select id="cafeListPageSearch" parameterType="hashmap" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT cno, bid, cname, c_lat, c_long, cimage, caddress, cphone, copen, cclose, parking, pet, kids, seats <!-- group, ctag, cmenu_img -->
+		FROM cafe
+		
+		<if test='searchType.equals("cname")'>
+			WHERE cname LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("cphone")'>
+			WHERE cphone LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY cno ASC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
 	<!-- 사업장 총 갯수 -->
 	<select id="cCount" resultType="int">
 		SELECT COUNT(cno)
 		FROM cafe
+	</select>
+	
+	<!-- 사업장 총 갯수 -->
+	<select id="cSearchCount" resultType="int">
+		SELECT COUNT(cno)
+		FROM cafe
+		
+		<if test='searchType.equals("cname")'>
+			WHERE cname LIKE concat('%', #{keyword}, '%')
+		</if>
+		
+		<if test='searchType.equals("cphone")'>
+			WHERE cphone LIKE concat('%', #{keyword}, '%')
+		</if>
+
 	</select>
 	
 	
@@ -176,11 +439,60 @@
 		ORDER BY r.date DESC
 		LIMIT #{displayPost}, #{postNum}
 	</select>
+		
+	<!-- 조인해서 사업장별 리뷰와 관련 정보 가져오기 -->
+	<select id="getReviewListSearch" resultMap="ReviewVO" parameterType="hashmap">  <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT r.*, c.*, m.*, h.*
+		FROM review r
+		LEFT JOIN cafe c
+		ON r.cno = c.cno
+		LEFT JOIN member m
+		ON r.username = m.username
+		LEFT JOIN heart h
+		ON r.rno = h.rno
+		
+		<if test="searchType.equals('id')">
+			WHERE r.cno= #{cno} AND r.username LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('title')">
+			WHERE r.cno= #{cno} AND r.title LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('content')">
+			WHERE r.cno= #{cno} AND r.content LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY r.date DESC
+		LIMIT #{displayPost}, #{postNum}
+	</select>
 
 	<!-- 리뷰 총 갯수 -->
 	<select id="rCount" parameterType="int" resultType="int">
-		SELECT count(if(cno = #{cno}, cno, null)) FROM review;
+		SELECT COUNT(*) 
+		FROM review
+		WHERE cno = #{cno}
 	</select>
+	
+	<select id="rSearchCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM review
+		
+		<if test="searchType.equals('id')">
+			WHERE cno = #{cno} AND username LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('title')">
+			WHERE cno = #{cno} AND title LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('content')">
+			WHERE cno = #{cno} AND content LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+	</select>
+	
+
 	
 	<!-- 사업장별 리뷰에서 사업장 정보 가져오기 -->
 	<select id="getCafeInfo" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO" >
