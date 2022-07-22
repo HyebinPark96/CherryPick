@@ -67,7 +67,6 @@ function modal(modalId){
 		}
 */
 
-//안한거 : +버튼, x버튼이 눌렸을 때 +버튼의 display를 토글하라.
 
 //해쉬태그 생성 관련
 var ctagStr = "";

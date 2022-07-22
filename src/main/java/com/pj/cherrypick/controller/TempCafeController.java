@@ -49,15 +49,14 @@ public class TempCafeController {
 	}
 	
 
-	@PostMapping("/bizMember/storeManagement/{cno}")
-	public void storeManagement(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, CafeVO cafe, CafeMenuVO cmenu, Model model) {
-		model.addAttribute("bizMember", bizMember);
-		
-		
-		
+	@GetMapping("/bizMember/storeManagement/{cno}")
+	public String storeManagement(@SessionAttribute(name = "bizMember", required = false) @PathVariable int cno, Model model) {
+		//@RequestParam("cno")int cno,
+		// BizMemberVO bizMember, CafeVO cafe, CafeMenuVO cmenu, Model model
+		//model.addAttribute("bizMember", bizMember);
+		model.addAttribute("cno", cno);
+		return "bizMember/storeManagement";
 	}
-	
 
-	
 
 }
