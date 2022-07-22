@@ -47,26 +47,6 @@ function modal(modalId){
 
 
 
-/*
-		if(opt=="id"){
-			reader.onload = function(e) {
-				$(btn).hide();
-				$(img).show();
-				$(img).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
-			}
-			reader.readAsDataURL(input.files[0]);	
-		}else if(opt=="class"){
-			
-			reader.onload = function(e) {
-				$('.'+img).eq(idx).css('display', 'block');
-				$('.'+img).eq(idx).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
-			}
-			reader.readAsDataURL(input.files[0]);
-		}else{
-			alert('put accurate parameter.')
-		}
-*/
-
 
 //해쉬태그 생성 관련
 var ctagStr = "";
@@ -200,7 +180,7 @@ function addItem(blk, itm, max) {
 	//실제 엘리먼트의 갯수는 (화면에 표시된 갯수 + 숨겨진 원본 1개)이므로, 판별조건에 -1을 붙여준다.
 	if (itmArr.length - 1 < max) {
 		var clone = blk.appendChild(itmArr[0].cloneNode(true));
-		clone.style.display = 'block';
+		clone.style.display = 'flex';
 	}
 }
 
@@ -229,6 +209,7 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
   dropZoneElement.addEventListener("dragover", (e) => {
     e.preventDefault();
     dropZoneElement.classList.add("drop-zone--over");
+    
   });
 
   ["dragleave", "dragend"].forEach((type) => {
@@ -243,7 +224,10 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
 
     if (e.dataTransfer.files.length) {
       inputElement.files = e.dataTransfer.files;
-      updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+      console.log(inputElement);
+      $(inputElement).trigger('change');
+      //updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+      $(e.target).closest(`.modal`).modal('hide');
     }
 
     dropZoneElement.classList.remove("drop-zone--over");
@@ -269,7 +253,7 @@ function updateThumbnail(dropZoneElement, file) {
     thumbnailElement = document.createElement("div");
     thumbnailElement.classList.add("drop-zone__thumb");
     dropZoneElement.appendChild(thumbnailElement);
-    dropZoneElement.thumbnailElement.show();
+    //dropZoneElement.thumbnailElement.show();
   }
 
   thumbnailElement.dataset.label = file.name;

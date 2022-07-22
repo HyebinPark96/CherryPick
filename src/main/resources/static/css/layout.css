@@ -103,6 +103,14 @@ textarea:focus, input:focus {
 
 /*========박스========*/
 /*첫글자가 있는 입력 상자*/
+.margin-top-10{
+	margin-top: 10px;
+}
+
+.margin-top-20{
+	margin-top: 20px;
+}
+
 .input-box {
   display: flex;
   align-items: center;
@@ -155,7 +163,7 @@ textarea:focus, input:focus {
 
 .hoverbox-img-caption {
 	font-weight: 300;
-	font-size: 20px;
+	font-size: 1em;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 }
@@ -403,27 +411,7 @@ textarea:focus, input:focus {
 	width: 100%;
 	padding: 20px;
 }
-/* 
-.sidebar-nav li {
-	text-indent: 1.5em;
-	line-height: 2.8em;
-}
 
-.sidebar-nav li a {
-	display: block;
-	text-decoration: none;
-	color: #fff;
-}
-
-.sidebar-nav li a:hover {
-	color: black;
-}
-
-.sidebar-nav>.sidebar-brand {
-	font-size: 1.3em;
-	line-height: 3em;
-}
- */
 /*========footer 요소========*/
 .footer-logo {
 	width: 150px;
