@@ -191,6 +191,27 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
+	<!-- 승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력 : 가입일자 내림차순 정렬 -->
+	<select id="bAuthListPageSearchOrderByRegDate" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT bid, bpwd, bname, bstat, bphone, bemail
+		FROM bizMember
+		
+		<if test="searchType.equals('id')">
+			WHERE bstat = #{bstat} AND bid LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE bstat = #{bstat} AND bname LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE bstat = #{bstat} AND bphone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY regDate DESC
+		limit #{displayPost}, #{postNum}
+	</select>
+	
 	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 : 레코드를 10개씩 출력 -->
 	<select id="bUnauthListPage" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
 		SELECT bid, bpwd, bname, bstat, bphone, bemail
@@ -221,8 +242,26 @@
 		limit #{displayPost}, #{postNum}
 	</select>
 	
-	
-	
+	<!-- 미승인 사업자 회원 리스트 목록 + 페이징 + 검색 : 레코드를 10개씩 출력, 가입일자 내림차순 정렬-->
+	<select id="bUnauthListPageSearchOrderByRegDate" parameterType="hashmap" resultType="com.pj.cherrypick.domain.BizMemberVO"> <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT bid, bpwd, bname, bstat, bphone, bemail
+		FROM bizMember
+		
+		<if test="searchType.equals('id')">
+			WHERE bstat = #{bstat} AND bid LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('name')">
+			WHERE bstat = #{bstat} AND bname LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		<if test="searchType.equals('phone')">
+			WHERE bstat = #{bstat} AND bphone LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		
+		ORDER BY regDate DESC
+		limit #{displayPost}, #{postNum}
+	</select>
 	
 	
 	<!-- 사업장 관리 : 취합 후 CafeMapper 로 옮기기!-->
