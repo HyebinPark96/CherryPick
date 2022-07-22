@@ -131,7 +131,7 @@
 						<div id="cimage-block">
 							<div class="cimage-item">
 								<div id="cimage_Preview" style="width: 300px; height: 200px;">
-									<img class="divBtn icon-20" onclick="deleteImg('#cimage', '#cimage_btn', '#cimage_Preview', 0, 0)" src="/img/x.png" style="margin: 5px;">
+									<img class="divBtn icon-20" onclick="deleteImg('#cimage', '#cimage_btn', '#cimage_Preview', 'id', 0)" src="/img/x.png" style="margin: 5px;">
 								</div>
 							</div>
 							<!-- 							<div class="cimage-item  col-md-3 img-result "> -->
@@ -161,7 +161,7 @@
 						<div>
 							<b>전체 메뉴판</b>
 							<div id="cmenu_preview" style="width: 300px; height: 200px;">
-							<img class="divBtn icon-20" onclick="location.href='#'"
+							<img class="divBtn icon-20" onclick="deleteImg('#cmenu', '#cmenu_btn', '#cmenu_preview', 'id', 0)"
 										src="/img/x.png" style="margin: 5px;">
 							</div>
 						</div>
@@ -186,7 +186,7 @@
 
 							<div class="menulist-item">
 								<div class="d-flex" style="gap: 10px;">
-									<div class="m_img_btn divBtn hoverbox" onclick="modal('#mImgModal3')"
+									<div class="m_img_btn divBtn hoverbox" 
 										style="background-image: url('/img/add-image.png'); width: 150px; height: 125px;">
 										<div id="overlay5">
 											<div class="hoverbox-img-caption">새 이미지 추가</div>
@@ -194,8 +194,7 @@
 										</div>
 									</div>
 									<div class="m_img_preview" style="width: 150px; height: 125px;">
-										<!-- <img onclick="location.href='#'" class="divBtn"
-											src="/img/sample.jpg" alt="메뉴썸네일" width="150" /> -->
+										<img class="m_img_x divBtn icon-20" src="/img/x.png" style="margin: 5px;">
 									</div>
 									<table>
 										<tr>
@@ -247,15 +246,6 @@
 				
 			</div>
 			
-	<!-- 		<div>카페 이미지</div>
-								<input id="cimage" type="file" name="files" onchange="previewImg(this, cimage_Preview, 'id', 0);" accept="image/*" />
-								
-								<div>메뉴판 이미지</div> 
-								<input id="cmenu_image" type="file" name="files" onchange="previewImg(this, cmenu_preview, 'id', 0);" accept="image/*" />
-								 
-								<div>메뉴 이미지</div> 
-								<input id="m_img1" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 0);" accept="image/*" />
-								<input id="m_img2" class="m_img" type="file" name="files" onchange="previewImg(this, 'm_img_preview', 'class', 1);" accept="image/*" /> -->
 			
 			<!-- 모달 영역 -->
 			<div id="cImgModal" class="modal fade modal-item">
@@ -333,7 +323,7 @@
 										<div>
 											이곳을 클릭하세요.
 											<div></div>
-											<input id="m_img1" class="m_img drop-zone__input" type="file" name="files" onchange="previewImg(this, null, 'm_img_preview', 'class', 0);" accept="image/*" />
+											<input id="m_img1" class="m_img drop-zone__input" type="file" name="files" onchange="previewImg(this, 'm_img_btn', 'm_img_preview', 'class', 0);" accept="image/*" />
 										</div>
 									</div>
 								</div>
@@ -360,7 +350,7 @@
 										<div>
 											이곳을 클릭하세요.
 											<div></div>
-											<input id="m_img2" class="m_img drop-zone__input" type="file" name="files" onchange="previewImg(this, null, 'm_img_preview', 'class', 1);" accept="image/*" />
+											<input id="m_img2" class="m_img drop-zone__input" type="file" name="files" onchange="previewImg(this, 'm_img_btn', 'm_img_preview', 'class', 1);" accept="image/*" />
 										</div>
 									</div>
 								</div>
@@ -388,7 +378,7 @@
 											이곳을 클릭하세요.
 											<div></div>
 											<input type="file" name="files" class="m_img drop-zone__input"
-												onchange="previewImg(this, null, 'm_img_preview', 'class', 2);"
+												onchange="previewImg(this, 'm_img_btn', 'm_img_preview', 'class', 2);"
 												accept="image/*">
 										</div>
 									</div>
