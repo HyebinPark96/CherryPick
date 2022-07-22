@@ -1,5 +1,7 @@
 package com.pj.cherrypick.domain;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +18,5 @@ public class BizMemberVO {
 	private int bstat;
 	private String bphone;
 	private String bemail;
+	private Timestamp regDate;
 }

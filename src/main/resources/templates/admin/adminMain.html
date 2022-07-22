@@ -110,8 +110,8 @@
 							<th scope="col">성명</th>
 							<th scope="col">전화번호</th>
 							<th scope="col">이메일</th>
-							<th scope="col">회원분류</th>
-							<th scope="col">탈퇴/승인처리</th>
+							<th scope="col">가입일자</th>
+							<th scope="col" th:if="${sort}=='authBizMember' OR ${sort}=='unauthBizMember'">탈퇴/승인처리</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -132,9 +132,7 @@
 							
 							<td th:text="${list.email}">placeholder</td>
 							
-							<td></td>
-							
-							<td><img class="divBtn icon-15" src="/img/minus.png"></td>
+							<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
 							
 							<!-- <td th:if="${list.role}==0">회원</td>
 							<td th:if="${list.role}==1">관리자</td> -->
@@ -157,7 +155,7 @@
 							
 							<td th:text="${list.bemail}">placeholder</td>
 							
-							<td></td>
+							<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
 							
 							<td><img class="divBtn icon-15" src="/img/minus.png"></td>
 							
@@ -183,7 +181,7 @@
 							
 							<td th:text="${list.bemail}">placeholder</td>
 							
-							<td></td>
+							<td th:text="${#dates.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}">placeholder</td>
 							
 							<td><img class="divBtn icon-15" src="/img/check.png"></td>
 							
