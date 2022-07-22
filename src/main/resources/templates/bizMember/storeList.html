@@ -25,9 +25,7 @@
 				<td th:text="${cafe.caddress}"></td>
 
 
-				<td><form th:action="@{bizMember/storeManagement}" method="post">
-					<button type="submit">자세히</button>
-				</form></td>
+				<td><a th:href="@{'/bizMember/storeManagement/' + ${cno}}">자세히</a></td>
 			</tr>
 		</table>
 
