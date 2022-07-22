@@ -25,7 +25,9 @@
 				<td th:text="${cafe.caddress}"></td>
 
 
-				<td>자세히</td>
+				<td><form th:action="@{bizMember/storeManagement}" method="post">
+					<button type="submit">자세히</button>
+				</form></td>
 			</tr>
 		</table>
 
