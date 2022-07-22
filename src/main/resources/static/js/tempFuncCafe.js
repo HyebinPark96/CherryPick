@@ -31,10 +31,26 @@ $(document).ready(function() {
 */
 //int를 Stirng으로 바꿔 버려서 보류.
 
+$('#cimage_Preview').hide();
+$('#cmenu_preview').hide();
+//$('.m_img_preview').hide();
 
 
-function modal(){
-	$("#inputModal").modal('show');
+
+
+//모달 호출 기능 부여 (메뉴 이미지 3개)
+/*
+var mBtns = document.getElementsByClassName("m_img_btn");
+
+for (var i = 0; i < mBtns.length; i++) {
+	var id = 'mImgModal' + (i+1);
+	alert(id);
+   	mBtns[i].addEventListener('click', $(id).modal('show'), false);
+}*/
+
+function modal(modalId){
+	//모달 표시.
+	$(modalId).modal('show');
 }
 
 //안한거 : +버튼, x버튼이 눌렸을 때 +버튼의 display를 토글하라.
@@ -53,10 +69,7 @@ function makeHashtag() {
 		}
 	}
 }
-//cropper.js 모달 호출
-function test() {
-	$("#imgModal").modal('show');
-}
+
 
 
 //=====###입력란 추가/삭제 관련 메소드###=========
@@ -92,26 +105,35 @@ function showItem(){
 }
 
 
-function previewImg(input, name, opt, idx) {
+function previewImg(input, btn, img, opt, idx) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 		
 		if(opt=="id"){
 			reader.onload = function(e) {
-			$(name).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
+				$(btn).hide();
+				$(img).show();
+				$(img).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
 			}
 			reader.readAsDataURL(input.files[0]);	
 		}else if(opt=="class"){
 			
 			
 			reader.onload = function(e) {
-			$('.'+name).eq(idx).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
+				$('.'+img).eq(idx).css('display', 'block');
+				$('.'+img).eq(idx).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
 			}
 			reader.readAsDataURL(input.files[0]);
 		}else{
 			alert('put accurate parameter.')
 		}
 	}
+}
+
+function deleteImg(input, btn, img, opt, idx){
+	$(input).val("");
+	$(btn).show();
+	$(img).hide();
 }
 
 //▼▼▼▼====입력란 추가 관련 메소드====▼▼▼▼
@@ -145,3 +167,87 @@ function removeItem(class_name, i){
 	element[i].remove(); 
 }
 
+
+
+//드래그&드롭 파일첨부 관련 메소드
+document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+  const dropZoneElement = inputElement.closest(".drop-zone");
+
+  dropZoneElement.addEventListener("click", (e) => {
+    inputElement.click();
+  });
+
+  inputElement.addEventListener("change", (e) => {
+    if (inputElement.files.length) {
+      //updateThumbnail(dropZoneElement, inputElement.files[0]);
+      console.log(e.target);
+      //$('#modalwindow').modal('hide');  parent('.modal')
+      
+      console.log(e.target.closest(`.modal`));
+      console.log($('#cmenuImgModal'));
+      //e.target.closest(`.modal`).modal('hide');
+      //$('#cmenuImgModal').modal('hide');
+      $(e.target).closest(`.modal`).modal('hide');
+    }
+  });
+
+  dropZoneElement.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZoneElement.classList.add("drop-zone--over");
+  });
+
+  ["dragleave", "dragend"].forEach((type) => {
+    dropZoneElement.addEventListener(type, (e) => {
+      dropZoneElement.classList.remove("drop-zone--over");
+      
+    });
+  });
+
+  dropZoneElement.addEventListener("drop", (e) => {
+    e.preventDefault();
+
+    if (e.dataTransfer.files.length) {
+      inputElement.files = e.dataTransfer.files;
+      updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+    }
+
+    dropZoneElement.classList.remove("drop-zone--over");
+  });
+});
+
+/**
+ * Updates the thumbnail on a drop zone element.
+ *
+ * @param {HTMLElement} dropZoneElement
+ * @param {File} file
+ */
+function updateThumbnail(dropZoneElement, file) {
+  let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+	
+  // First time - remove the prompt
+  if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+    dropZoneElement.querySelector(".drop-zone__prompt").style.display='none';
+  }
+
+  // First time - there is no thumbnail element, so lets create it
+  if (!thumbnailElement) {
+    thumbnailElement = document.createElement("div");
+    thumbnailElement.classList.add("drop-zone__thumb");
+    dropZoneElement.appendChild(thumbnailElement);
+    dropZoneElement.thumbnailElement.show();
+  }
+
+  thumbnailElement.dataset.label = file.name;
+
+  // Show thumbnail for image files
+  if (file.type.startsWith("image/")) {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+    };
+  } else {
+    thumbnailElement.style.backgroundImage = null;
+  }
+}
