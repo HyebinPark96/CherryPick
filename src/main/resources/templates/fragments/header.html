@@ -45,8 +45,8 @@
 
 			<!-- 사업자 -->
 			<div sec:authorize-expr="!isAuthenticated()" th:if="${bizMember != null}" class="title-top-right">
-				<form th:action="@{bizMember/storeManagement}" method="post">
-					<button type="submit">Store Management</button>
+				<form th:action="@{bizMember/storeList}" method="post">
+					<button type="submit">My Store</button>
 				</form>
 				<div>&nbsp;|&nbsp;</div>
 				<form th:action="@{bizMember/myPage}" method="post">

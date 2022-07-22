@@ -41,7 +41,7 @@ public class TempCafeController {
 		}
 		
 		if(cafeList.size()>0) {
-			System.out.println(cafeList.get(0).getCno());
+			System.out.println("current cno is : " + cafeList.get(0).getCno());
 		}else {
 			System.out.println("no cafe selected");
 		}
