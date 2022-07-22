@@ -40,7 +40,7 @@ public class AdminController {
 		Page page = new Page();
 		page.setNum(num);
 		
-		if(sort.equals("member") && !orderBy.trim().equals("orderByRegDate")) { // 이름순 정렬
+		if(sort.equals("member") && !orderBy.trim().equals("orderByRegDate")) { // 1. 일반 회원 이름순 정렬
 
 			page.setCount(adminService.searchCount(searchType, keyword));  
 			
@@ -58,7 +58,7 @@ public class AdminController {
 			model.addAttribute("searchType", searchType);
 			model.addAttribute("keyword", keyword);
 			
-		} else if(sort.equals("member") && orderBy.equals("orderByRegDate")) { // 가입일자순 정렬
+		} else if(sort.equals("member") && orderBy.equals("orderByRegDate")) { // 2. 일반 회원 가입일자순 정렬
 			page.setCount(adminService.searchCount(searchType, keyword));  
 			
 			// 검색 타입과 검색어
@@ -76,7 +76,7 @@ public class AdminController {
 			model.addAttribute("searchType", searchType);
 			model.addAttribute("keyword", keyword);
 			
-		} else if(sort.equals("authBizMember")) { /*2. 승인 사업자 회원*/
+		} else if(sort.equals("authBizMember") && !orderBy.trim().equals("orderByRegDate")) { /*2. 승인 사업자 회원*/ // 3. 승인 사업자 회원 이름순 정렬
 			
 			BizMemberVO bizMember = new BizMemberVO();
 			bizMember.setBstat(1);
@@ -92,12 +92,34 @@ public class AdminController {
 			model.addAttribute("list", list); 
 			model.addAttribute("page", page);
 			model.addAttribute("select", num);
-			model.addAttribute("sort", sort); 
+			model.addAttribute("sort", sort);
 			
 			model.addAttribute("searchType", searchType);
 			model.addAttribute("keyword", keyword);
 			
-		} else if(sort.equals("unauthBizMember")) { /*3. 미승인 사업자 회원*/
+		} else if(sort.equals("authBizMember") && orderBy.trim().equals("orderByRegDate")) { // 4. 승인 사업자 회원 가입일자순 정렬
+			
+			BizMemberVO bizMember = new BizMemberVO();
+			bizMember.setBstat(1);
+			
+			page.setCount(adminService.bAuthSearchCount(bizMember.getBstat(), searchType, keyword));
+			
+			// 검색 타입과 검색어
+			page.setSearchTypeKeyword(searchType, keyword);
+			
+			List<BizMemberVO> list = null; 
+			list = adminService.bAuthListPageSearchOrderByRegDate(bizMember.getBstat(), page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+			
+			model.addAttribute("list", list); 
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("sort", sort);
+			model.addAttribute("orderBy", orderBy);
+			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
+			
+		} else if(sort.equals("unauthBizMember") && !orderBy.trim().equals("orderByRegDate")) { // 5. 미승인 사업자 회원 이름순 정렬
 			
 			BizMemberVO bizMember = new BizMemberVO();
 			bizMember.setBstat(0);
@@ -114,6 +136,28 @@ public class AdminController {
 			model.addAttribute("page", page);
 			model.addAttribute("select", num);
 			model.addAttribute("sort", sort); 
+			
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("keyword", keyword);
+		
+		} else if(sort.equals("unauthBizMember") && orderBy.trim().equals("orderByRegDate")) { // 6. 미승인 사업자 회원 가입일자순 정렬
+			
+			BizMemberVO bizMember = new BizMemberVO();
+			bizMember.setBstat(0);
+			
+			page.setCount(adminService.bUnauthSearchCount(bizMember.getBstat(), searchType, keyword));
+			
+			// 검색 타입과 검색어
+			page.setSearchTypeKeyword(searchType, keyword);
+			
+			List<BizMemberVO> list = null; 
+			list = adminService.bUnauthListPageSearchOrderByRegDate(bizMember.getBstat(), page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("page", page);
+			model.addAttribute("select", num);
+			model.addAttribute("sort", sort);
+			model.addAttribute("orderBy", orderBy);
 			
 			model.addAttribute("searchType", searchType);
 			model.addAttribute("keyword", keyword);

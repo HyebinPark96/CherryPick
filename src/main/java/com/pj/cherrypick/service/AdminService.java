@@ -130,6 +130,19 @@ public class AdminService {
 				data.get("searchType").toString(), data.get("keyword").toString());
 	};
 	
+	public List<BizMemberVO> bAuthListPageSearchOrderByRegDate(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>(); 
+
+		data.put("bstat", bstat);
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum); 
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return adminMapper.bAuthListPageSearchOrderByRegDate((int)data.get("bstat"), (int)data.get("displayPost"), (int)data.get("postNum"),
+				data.get("searchType").toString(), data.get("keyword").toString());
+	};
+	
 	public List<BizMemberVO> bUnauthListPage(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception{
 		HashMap<String, Integer> data = new HashMap<String, Integer>(); // Key 와 Value의 제네릭
 		
@@ -150,6 +163,19 @@ public class AdminService {
 		data.put("keyword", keyword);
 		
 		return adminMapper.bUnauthListPageSearch((int)data.get("bstat"), (int)data.get("displayPost"), (int)data.get("postNum"),
+				data.get("searchType").toString(), data.get("keyword").toString());
+	};
+	
+	public List<BizMemberVO> bUnauthListPageSearchOrderByRegDate(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception{
+		HashMap<String, Object> data = new HashMap<String, Object>(); 
+
+		data.put("bstat", bstat);
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum); 
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return adminMapper.bUnauthListPageSearchOrderByRegDate((int)data.get("bstat"), (int)data.get("displayPost"), (int)data.get("postNum"),
 				data.get("searchType").toString(), data.get("keyword").toString());
 	};
 	

@@ -69,11 +69,17 @@ public interface AdminMapper {
 	// 목록 + 페이징 + 검색
 	public List<BizMemberVO> bAuthListPageSearch(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception;
 	
+	// 목록 + 페이징 + 검색 : 가입일자 내림차순 정렬
+	public List<BizMemberVO> bAuthListPageSearchOrderByRegDate(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception;
+
 	// 목록 + 페이징
 	public List<BizMemberVO> bUnauthListPage(int bstat, int displayPost, int postNum) throws Exception;
 	
 	// 목록 + 페이징 + 검색
 	public List<BizMemberVO> bUnauthListPageSearch(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception;
+	
+	// 목록 + 페이징 + 검색 : 가입일자 내림차순 정렬
+	public List<BizMemberVO> bUnauthListPageSearchOrderByRegDate(int bstat, int displayPost, int postNum, String searchType, String keyword) throws Exception;
 	
 	/*사업장 관리*/
 	// 사업장 리스트
