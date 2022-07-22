@@ -5,12 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.pj.cherrypick.domain.BizMemberVO;
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.TempCafeService;
 
 @Controller
@@ -41,22 +45,18 @@ public class TempCafeController {
 			e.printStackTrace();
 		}
 		
-		if(cafeList.size()>0) {
-			System.out.println("current cno is : " + cafeList.get(0).getCno());
-		}else {
-			System.out.println("no cafe selected");
-		}
-		
-		
 		model.addAttribute("cafe", cafeList);
 	}
 	
 
-	@PostMapping("/bizMember/storeManagement")
-	public String storeManagement(@SessionAttribute(name = "bizMember", required = false) BizMemberVO bizMember, Model model) {
-		model.addAttribute("bizMember", bizMember);
-		return "bizMember/storeManagement"; // model 들고 뷰로 이동
+	@GetMapping("/bizMember/storeManagement/{cno}")
+	public String storeManagement(@SessionAttribute(name = "bizMember", required = false) @PathVariable int cno, Model model) {
+		//@RequestParam("cno")int cno,
+		// BizMemberVO bizMember, CafeVO cafe, CafeMenuVO cmenu, Model model
+		//model.addAttribute("bizMember", bizMember);
+		model.addAttribute("cno", cno);
+		return "bizMember/storeManagement";
 	}
-	
+
 
 }
