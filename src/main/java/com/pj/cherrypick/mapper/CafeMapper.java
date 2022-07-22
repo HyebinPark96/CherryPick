@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.pj.cherrypick.domain.BookmarkVO;
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.FilterVO;
 import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.domain.ReviewVO;
 
@@ -22,7 +22,7 @@ public interface CafeMapper {
 	List<CafeVO> getCafeAll();
 	
 	// 전체 카페 보기
-	List<CafeVO> getCafeAll2(); 
+	List<CafeVO> getCafeAll2(FilterVO filter); 
 	
 	// 특정카페(cno) 리뷰 1개씩만 리스트로 불러오기 (미리보기)
 	ReviewVO getFirstReview(int cno);
@@ -47,11 +47,11 @@ public interface CafeMapper {
 	
 	/*             카페목록 정렬               */
 	// 별점높은순 정렬
-	List<CafeVO> getCafeAllByScore();
+	List<CafeVO> getCafeAllByScore(FilterVO filter);
 	
 	// 리뷰많은순
-	List<CafeVO> getCafeAllByReview();
+	List<CafeVO> getCafeAllByReview(FilterVO filter);
 	
 	// 북마크순
-	List<CafeVO> getCafeAllByBmk();
+	List<CafeVO> getCafeAllByBmk(FilterVO filter);
 }

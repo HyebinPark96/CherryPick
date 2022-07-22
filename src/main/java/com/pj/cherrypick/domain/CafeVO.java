@@ -25,7 +25,6 @@ public class CafeVO {
 	private int pet;
 	private int kids;
 	private int seats;
-	private int smoke;
 	private int group;
 	private String ctag;
 	private String cmenu_img;
@@ -36,9 +35,6 @@ public class CafeVO {
 	
 	//북마크체크용
 	private Integer chk;
-	
-	
-	
 	
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.FilterVO;
 import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.mapper.CafeMapper;
@@ -21,8 +22,8 @@ public class CafeService {
 		return cafeMapper.getCafeAll();
 	}
 	
-	public List<CafeVO> getCafeAll2() {
-		return cafeMapper.getCafeAll2();
+	public List<CafeVO> getCafeAll2(FilterVO filter) {
+		return cafeMapper.getCafeAll2(filter);
 	}
 	
 	public ReviewVO getFirstReview(int cno) {
@@ -57,16 +58,17 @@ public class CafeService {
 		return cafeMapper.getMyListBmk(username);
 	}
 	
-	public List<CafeVO> getCafeAllByScore() {
-		return cafeMapper.getCafeAllByScore();
+	public List<CafeVO> getCafeAllByScore(FilterVO filter) {
+		System.out.println("[service] getCafeAllByScore");
+		return cafeMapper.getCafeAllByScore(filter);
 	}
 	
-	public List<CafeVO> getCafeAllByReview() {
-		return cafeMapper.getCafeAllByReview();
+	public List<CafeVO> getCafeAllByReview(FilterVO filter) {
+		return cafeMapper.getCafeAllByReview(filter);
 	}
 
-	public List<CafeVO> getCafeAllByBmk() {
-		return cafeMapper.getCafeAllByBmk();
+	public List<CafeVO> getCafeAllByBmk(FilterVO filter) {
+		return cafeMapper.getCafeAllByBmk(filter);
 	}
 	
 }

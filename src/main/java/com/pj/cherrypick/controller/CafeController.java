@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.BookmarkVO;
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.FilterVO;
 import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.BookmarkService;
@@ -32,29 +34,37 @@ public class CafeController {
 
 
 	// 전체 카페목록 
-	@GetMapping("/cafe/all/{sort}")
+	@RequestMapping("/cafe/all/")
 	public String getCafeAll(@AuthenticationPrincipal PrincipalDetail principalDetail, 
-			@PathVariable Integer sort, Model model) throws Exception {
+			@RequestParam(required=false, defaultValue="0") Integer sort,
+			@RequestBody(required=false) FilterVO filter, Model model) throws Exception {
+		
+		System.out.println("---------------------------------------------");
+		System.out.println("[sort]:"+sort);
+		System.out.println("[filter]:"+filter);
 		
 		String username = "aaa";
 		model.addAttribute("username", username);
 		//String username = principalDetail.getUsername();
 		
 		List<CafeVO> cafes = new ArrayList<>(); 
-		
-		
-		if(sort==0 || sort==null ) { //최신순
-			sort=0;
-			cafes = cafeService.getCafeAll2();	
+				
+		if(sort==0 || sort ==null) { //최신순
+			//sort = 0;
+			cafes = cafeService.getCafeAll2(filter);	
+			model.addAttribute("cafes", cafes);	
 		}else if(sort==1) { // 즐겨찾기순
-			cafes = cafeService.getCafeAllByBmk();	
+			cafes = cafeService.getCafeAllByBmk(filter);	
+			model.addAttribute("cafes", cafes);	
 		}else if(sort==2) { // 별점순
-			cafes = cafeService.getCafeAllByScore();	
+			cafes = cafeService.getCafeAllByScore(filter);	
+			model.addAttribute("cafes", cafes);
 		}else if(sort==3) { // 리뷰많은순
-			cafes = cafeService.getCafeAllByReview();	
+			cafes = cafeService.getCafeAllByReview(filter);	
+			model.addAttribute("cafes", cafes);	
 		}
 			
-		List<BookmarkVO> list = new ArrayList<>();
+/*		List<BookmarkVO> list = new ArrayList<>();
 		BookmarkVO vo = new BookmarkVO();
 		BookmarkVO bmk = new BookmarkVO();
 		
@@ -73,11 +83,12 @@ public class CafeController {
 	
 		//System.out.println(cafes);
 		//System.out.println(list);
+*/	
+		System.out.println("[username]:"+username);
+		System.out.println("[cafes]:"+cafes);
+		System.out.println("[model]:"+model);
 		
-		model.addAttribute("cafes", cafes);		
-		// model.addAttribute("bmk", list);
-		
-		return "cafe/all";
+		return "/cafe/all";
 	}
 
 	
@@ -148,7 +159,13 @@ public class CafeController {
 	}	
 
 
+/*	@GetMapping("/cafe/test")
+	public @ResponseBody void test(@RequestBody(required=false) FilterVO filter ) throws Exception {
+		
+		System.out.println("[filter]:"+filter);
+			}	*/
 	
 	
+
 
 }
