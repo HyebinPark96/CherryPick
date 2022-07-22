@@ -30,6 +30,9 @@ public interface AdminMapper {
 	// 총 갯수
 	public int searchCount(String searchType, String keyword) throws Exception;
 	
+	// 회원탈퇴
+	public void withdrawalForMem(String username[]);
+	
 	// 목록 + 페이징
 	public List<MemberVO> listPage(int displayPost, int postNum) throws Exception;
 	
@@ -62,6 +65,18 @@ public interface AdminMapper {
 	
 	// 미승인 사업자 회원 수
 	public int bUnauthSearchCount(int bstat, String searchType, String keyword) throws Exception;
+	
+	// 회원탈퇴
+	public void withdrawalForAuthBiz(String bid[]) throws Exception;
+	
+	// 승인취소
+	public void cancleApproval(String bid) throws Exception;
+	
+	// 승인
+	public void approval(String bid) throws Exception;
+	
+	// 선택 승인
+	public void checkApproval(String bid[]) throws Exception;
 	
 	// 목록 + 페이징
 	public List<BizMemberVO> bAuthListPage(int bstat, int displayPost, int postNum) throws Exception;
