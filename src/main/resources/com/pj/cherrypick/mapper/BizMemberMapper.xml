@@ -9,7 +9,7 @@
     </select>
     
     <insert id="signUp" parameterType="com.pj.cherrypick.domain.BizMemberVO">
-    	INSERT INTO bizMember VALUES (#{bid}, #{bpwd}, #{bname}, #{bstat}, #{bphone}, #{bemail})
+    	   	INSERT INTO bizMember (bid, bpwd, bname, bstat, bphone, bemail) VALUES (#{bid}, #{bpwd}, #{bname}, #{bstat}, #{bphone}, #{bemail})
     </insert>
     
     <select id="findByBid" resultType="com.pj.cherrypick.domain.BizMemberVO">

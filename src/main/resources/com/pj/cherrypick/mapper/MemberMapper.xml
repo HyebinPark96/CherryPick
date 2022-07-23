@@ -17,7 +17,7 @@
     </select>
     
     <insert id="signUp" parameterType="com.pj.cherrypick.domain.MemberVO">
-    	INSERT INTO member VALUES (#{username}, #{password}, #{name}, #{phone}, #{email}, #{role})
+    	INSERT INTO member (username, password, name, phone, email, role) VALUES (#{username}, #{password}, #{name}, #{phone}, #{email}, #{role})
     </insert>
     
     <select id="findByUsername" resultType="com.pj.cherrypick.domain.MemberVO">

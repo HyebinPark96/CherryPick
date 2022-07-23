@@ -230,14 +230,14 @@ let index = {
 	
 	
 	
-	bIdCheck: function() {
+	bidCheck: function() {
 		let data = {
 			bid: $("#bid").val()
 		};
 
 		$.ajax({
 			type: "POST",
-			url: "/auth/bIdCheck",
+			url: "/auth/bidCheck",
 			data: JSON.stringify(data), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
