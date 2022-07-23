@@ -54,29 +54,30 @@ public class tempCafeApiController {
 	
 	@PostMapping("/cafe/regCafeProc")
 	public TempResponseDto<Integer> save(@RequestBody CafeVO cafe) {
+		//리턴 값 하나가 추가된 TempResponseDto를 사용한다.
 		System.out.println("tempCaf On");
 		int result = cafeService.createCafe(cafe);
 		int cno = cafeService.getCafeNo();
 		return new TempResponseDto<Integer>(HttpStatus.OK.value(), result, cno);
 		// 자바 오브젝트를 Json으로 변환해서 리턴(Jackson)
 	}
-/*
-	@PostMapping("/cafe/regCafeProc")
-	public ResponseDto<Integer> save(@RequestBody CafeVO cafe) {
-		System.out.println("tempCaf On");
-		int result = cafeService.createCafe(cafe);
-		//int cno = cafeService.getCno();
+	
+	@PostMapping("/cafe/updateCafeProc")
+	public ResponseDto<Integer> updateCafe(@RequestBody CafeVO cafe) throws Exception{
+		System.out.println("upCaf On");
+		int result = cafeService.updateCafe(cafe);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
-		// 자바 오브젝트를 Json으로 변환해서 리턴(Jackson)
 	}
-	*/
+	
+	
+	
 	@PostMapping("/cafe/regMenuProc")
 	public ResponseDto<Integer> saveMenu(@RequestBody List<CafeMenuVO> menu){
 		int result = 0;
 		for (int i = 0; i < menu.size(); i++) {
 			System.out.println("cno = " + menu.get(i).getCno());
 			int m = cafeService.createMenu(menu.get(i));
-			//이거 잘 되면 메뉴서비스는 지워.
+
 			if(m==1 && result != -1) {
 				result = 1;
 				System.out.println(result);
@@ -87,6 +88,22 @@ public class tempCafeApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);		
 	}
 
+	@PostMapping("/cafe/updateMenuProc")
+	public ResponseDto<Integer> updateMenu(@RequestBody List<CafeMenuVO> menu) throws Exception{
+		int result = 0;
+		for (int i = 0; i < menu.size(); i++) {
+			int m = cafeService.updateMenu(menu.get(i));
+
+			if(m==1 && result != -1) {
+				result = 1;
+				System.out.println(result);
+			}else{
+				result = -1;
+			};
+		}
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
+	}
+	
 	
 
 }

@@ -18,6 +18,9 @@ public class TempCafeService {
 	@Autowired
 	private TempCafeMapper cafeMapper;
 	
+	
+	//검토 : @Transactional 어노테이션이 굳이 필요한가?
+	
 	@Transactional
 	public int createCafe(CafeVO cafe) {
 		try {
@@ -28,12 +31,11 @@ public class TempCafeService {
 			System.out.println(e.getMessage());
 		}
 		return -1;
-		
 	}
 	
 	@Transactional
 	public int getCafeNo() {
-			int cno = cafeMapper.getCafeNo();
+		int cno = cafeMapper.getCafeNo();
 			
 		return cno;
 		
@@ -49,7 +51,6 @@ public class TempCafeService {
 			System.out.println(e.getMessage());
 		}
 		return -1;
-		
 	}
 
 	public List<CafeVO> listCafe(String bid) throws Exception {
@@ -63,5 +64,31 @@ public class TempCafeService {
 	public List<CafeMenuVO> getCafeMenu(int cno) throws Exception {
 		return cafeMapper.getCafeMenu(cno);
 	}
+	
+	@Transactional
+	public int updateCafe(CafeVO cafe) throws Exception {
+		try {
+			cafeMapper.updateCafe(cafe);
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return -1;
+	}
+
+	@Transactional
+	public int updateMenu(CafeMenuVO menu) throws Exception {
+		try {
+			cafeMapper.updateMenu(menu);
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return -1;
+	}
+	
+	
 
 }
