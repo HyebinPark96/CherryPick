@@ -1,9 +1,10 @@
 /**
- * storeRegister 내의 항목들을 동적으로 제어한다.
+ * storeRegister 내의 항목들을 제어하는 스크립트들.
  */
 
 
 //숫자 입력란(.input-number)에 ,로 숫자 구분
+//int를 Stirng으로 바꿔 버리는 문제가 있어서 주석처리함.
 /*
 function updateTextView(_obj) {
 	var num = getNumber(_obj.val());
@@ -29,15 +30,13 @@ $(document).ready(function() {
 	});
 });
 */
-//int를 Stirng으로 바꿔 버려서 보류.
+
 
 $('#cimage_Preview').hide();
 $('#cmenu_preview').hide();
 $('.m_img_preview:eq(0)').hide();
 $('.m_img_preview:eq(1)').hide();
 $('.m_img_preview:eq(2)').hide();
-
-
 
 
 
