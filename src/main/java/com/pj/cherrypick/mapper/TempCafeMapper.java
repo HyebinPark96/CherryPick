@@ -23,6 +23,10 @@ public interface TempCafeMapper {
 	public CafeVO getCafe(int cno) throws Exception;
 
 	public List<CafeMenuVO> getCafeMenu(int cno) throws Exception;
+
+	int updateCafe(CafeVO cafe);
+	
+	int updateMenu(CafeMenuVO menu);
 	
 
 }

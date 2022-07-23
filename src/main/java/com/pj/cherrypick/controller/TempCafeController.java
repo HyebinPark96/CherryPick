@@ -51,10 +51,20 @@ public class TempCafeController {
 
 	@GetMapping("/bizMember/storeManagement/{cno}")
 	public String storeManagement(@SessionAttribute(name = "bizMember", required = false) @PathVariable int cno, Model model) {
-		//@RequestParam("cno")int cno,
-		// BizMemberVO bizMember, CafeVO cafe, CafeMenuVO cmenu, Model model
-		//model.addAttribute("bizMember", bizMember);
+		
+		CafeVO cafe = null;
+		List<CafeMenuVO> menulist = null;
+		
+		try {
+			cafe = cafeService.getCafe(cno);
+			menulist = cafeService.getCafeMenu(cno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		model.addAttribute("cno", cno);
+		model.addAttribute("cafe", cafe);
+		model.addAttribute("menu", menulist);
 		return "bizMember/storeManagement";
 	}
 
