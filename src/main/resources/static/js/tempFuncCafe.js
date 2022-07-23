@@ -130,6 +130,30 @@ function previewImg(input, btn, img, opt, idx) {
 	}
 }
 
+function previewImg(btn, img, opt, idx) {
+
+
+	if (opt == "id") {
+		reader.onload = function(e) {
+			$(btn).hide();
+			$(img).show();
+			$(img).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
+		}
+		reader.readAsDataURL(input.files[0]);
+	} else if (opt == "class") {
+
+		reader.onload = function(e) {
+			$('.' + btn).eq(idx).hide();
+			$('.' + img).eq(idx).css('display', 'block');
+			$('.' + img).eq(idx).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
+		}
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		alert('put accurate parameter.')
+	}
+}
+
+
 function deleteImg(input, btn, img, opt, idx){
 	
 	if(opt=="id"){
