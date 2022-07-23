@@ -19,7 +19,6 @@
 
 		<!-- 본문 -->
 		<div class="content" id="page-content-wrapper">
-			
 			<div>
 				<div class="text-large" th:text="${cafe.cname}"
 					style="text-decoration: underline;">카페 이름</div>
@@ -30,7 +29,7 @@
 				<div class="container">
 					<div class="bzcf-body">
 						<div class="text-20">
-							<b>등록 정보</b>&nbsp;<img class="icon-20 divBtn" src="/img/edit.png">
+							<b>등록 정보</b><!-- &nbsp;<img class="icon-20 divBtn" src="/img/edit.png"> -->
 						</div>
 						<div class="margin-top-10"></div>
 						<input type="hidden" id="bid" th:value="${session.bizMember.bid}">
@@ -67,7 +66,7 @@
 						</div>
 						<div class="margin-top-40"></div>
 						<div class="text-20">
-							<b>세부내용</b>&nbsp;<img class="icon-20 divBtn" src="/img/edit.png">
+							<b>세부내용</b><!-- &nbsp;<img class="icon-20 divBtn" src="/img/edit.png"> -->
 						</div>
 						<div class="bzcf-form container" id="details-panel">
 							<div class="margin-top-20"></div>
@@ -434,57 +433,88 @@
 	<!-- DB 연결 스크립트 -->
 	<script src="/js/tempCafe.js"></script>
 	<script>
-	/* 
-		var meno1 = alert([[${menu[0].meno}]]);
-		var meno2 = alert([[${menu[1].meno}]]);
-		var meno3 = alert([[${menu[2].meno}]]); */
-		//@@해시태그
+		//==========해시태그==========
 		
 		//값 가져오기
 		
 		//'#'로 구분, 빈 값('') 제거
-		var ctagArr = "[[${cafe.ctag}]]".split("#").filter(function(e) { return e !== '' })
-		console.log(ctagArr);
+		var initCtagArr = "[[${cafe.ctag}]]".split("#").filter(function(e) { return e !== '' })
+		
 		
 		//태그 갯수-1만큼 빈칸 추가하고 값 집어넣기
-		for (var i = 0; i < ctagArr.length; i++){
-			console.log('a'+i);
+		for (var i = 0; i < initCtagArr.length; i++){
+			if(i>0)
+				addItem('ctag-block','ctag-item', 5);
+			$('.ctag-item-value').eq(i+1).val(initCtagArr[i]);
 		}
 		
 		
-		//@@이미지
-		var cimageUrl = "[[${cafe.cimage}]]";
-		var cmenuImgUrl = "[[${cafe.cmenu_img}]]";
+		//==========이미지 세팅==========
+		//보완점 : 
+		// 현재 파일등록 및 수정은 무조건 file Input만 인식한다.   
+		// - 이미 등록해 놓은 이미지를 건들지 않아도, 수정완료 시점에서 DB값이 초기화될 수 있다.
+		// - 또한 이미 등록해 놓은 이미지를 삭제하는 경우를 고려해야 한다. 
 		
+		// 파일명 DB에 넣기 전에 기존 등록된 이미지가 있고 + 새로 등록된 파일이 없는지 검증할 수 있을까.
+			
+		//1.thymeleaf로부터 파일명 받아오기
+		var cimageFname = "[[${cafe.cimage}]]";
+		var cmenuImgFname = "[[${cafe.cmenu_img}]]";
+		var menu1ImgFname = "[[${menu[0].m_img}]]";
+		var menu2ImgFname = "[[${menu[1].m_img}]]";
+		var menu3ImgFname = "[[${menu[2].m_img}]]";
 		
-		if(cimageUrl !=null && cimageUrl.length > 0){
-			console.log(cimageUrl);
+		var menuFnames = []; 
+		menuFnames.push(menu1ImgFname);
+		menuFnames.push(menu2ImgFname);
+		menuFnames.push(menu3ImgFname);
+
+		//2.함수 선언 : 초기 이미지 세팅, 버튼 숨김
+		function setImage(btn, img, fname, opt, idx){
+			if(fname != null && fname.trim().length > 0){
+				console.log(btn);
+				console.log(img);
+				console.log(fname);
+				console.log(opt);
+				console.log(idx);
+				if(opt=="id"){
+					$(btn).hide();
+					$(img).show();
+					$(img).css('background', 'transparent url("/upload/' + fname + '") center center no-repeat').css('background-size', 'cover');	
+				}
+				else if(opt=="class"){
+					$('.'+btn).eq(idx).hide();
+					$('.'+img).eq(idx).css('display', 'block');
+					$('.'+img).eq(idx).css('background', 'transparent url("/upload/' + fname + '") center center no-repeat').css('background-size', 'cover');
+				}	
+			}
 		}
 		
-		if(cmenuImgUrl !=null && cmenuImgUrl.length > 0){
-			console.log(cmenuImgUrl);
+		//3. 실행
+		setImage(cimage_btn, cimage_Preview, cimageFname, "id", 0);
+		setImage(cmenu_btn, cmenu_preview, cmenuImgFname, "id", 0);
+		 
+		for (var i=0; i<3; i++){
+			setImage('m_img_btn', 'm_img_preview', menuFnames[i], "class", i);
 		}
 
-
-		//이미지 미리보기 띄우기 + 버튼 숨기기
-		//(이미지가 있다면) 조건 적용
 		
-		//previewImg <img src="/img/ + ${cafe.cmenu}"/>
-
-		//백그라운드 속성으로 집어넣기
-		//previewImg <img src="/img/ + ${cafe.cmenu}"
+		//==========메뉴 값 세팅==========
+		
+		//m_name m_price m_detail
+	</script>
 	
-		/*
-		$(btn).hide();
-		$(img).show();
-		$(img).css(
-				'background',
-				'transparent url(' + e.target.result
-						+ ') center center no-repeat').css('background-size',
-				'cover');
-		*/
+	
+	
+	<script th:inline="javascript">
 		
-		//메뉴 값 구하기
+		var menuList = [[${menu}]];
+		
+		for(var i = 0; i<3; i++){
+			$('.m_name').eq(i).val(menuList[i].m_name);
+			$('.m_price').eq(i).val(menuList[i].m_price);
+			$('.m_detail').eq(i).val(menuList[i].m_detail); 
+		}		
 	</script>
 	
 </div>

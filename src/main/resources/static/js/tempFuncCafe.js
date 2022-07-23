@@ -125,31 +125,8 @@ function previewImg(input, btn, img, opt, idx) {
 			}
 			reader.readAsDataURL(input.files[0]);
 		}else{
-			alert('put accurate parameter.')
+			alert('put accurate parameter on previewImg')
 		}
-	}
-}
-
-function previewImg(btn, img, opt, idx) {
-
-
-	if (opt == "id") {
-		reader.onload = function(e) {
-			$(btn).hide();
-			$(img).show();
-			$(img).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
-		}
-		reader.readAsDataURL(input.files[0]);
-	} else if (opt == "class") {
-
-		reader.onload = function(e) {
-			$('.' + btn).eq(idx).hide();
-			$('.' + img).eq(idx).css('display', 'block');
-			$('.' + img).eq(idx).css('background', 'transparent url(' + e.target.result + ') center center no-repeat').css('background-size', 'cover');
-		}
-		reader.readAsDataURL(input.files[0]);
-	} else {
-		alert('put accurate parameter.')
 	}
 }
 
@@ -165,7 +142,7 @@ function deleteImg(input, btn, img, opt, idx){
 		$('.'+btn).eq(idx).show();
 		$('.'+img).eq(idx).hide();
 	}else{
-		alert('put accurate parameter.')
+		alert('put accurate parameter on deleteImg')
 	}
 }
 
@@ -214,7 +191,9 @@ function removeItem(class_name, i){
 
 
 
-//드래그&드롭 파일첨부 관련 메소드
+//(플러그인)드래그&드롭 파일첨부 관련 메소드
+//[!]이미지 미리보기는 상단의 previewImg가 담당하며, 
+//아래의 메소드 중 thumbnail과 관련된 메소드는 모달창에 미리보기 띄워주는 메소드.
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
   const dropZoneElement = inputElement.closest(".drop-zone");
 
