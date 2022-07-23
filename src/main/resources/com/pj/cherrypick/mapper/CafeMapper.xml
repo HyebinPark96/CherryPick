@@ -17,9 +17,20 @@
  		FROM cafe c
  		LEFT JOIN review r  
  		ON c.cno = r.cno
- 		<if test="fpark != null">
- 		WHERE c.parking = #{fpark} and c.kids = #{fkids} and c.pet = #{fpet} and c.group = #{fgroup}
+ 		<where>
+ 		<if test="fpark == 1">
+ 		AND c.parking = 1
  		</if>
+ 		<if test="fpet == 1">
+ 		AND c.pet = 1
+ 		</if> 	
+ 		<if test="fkids == 1">
+ 		AND c.kids = 1
+ 		</if> 	
+ 		<if test="fgroup == 1">
+ 		AND c.group = 1
+ 		</if> 
+ 		</where>
  		GROUP BY c.cno
 	</select> 
 
@@ -110,9 +121,20 @@
  		ON c.cno = r.cno
  		left JOIN bmk_cafe b
  		ON b.cno = c.cno
- 		<if test="fpark != null">
- 		WHERE c.parking = #{fpark} and c.kids = #{fkids} and c.pet = #{fpet} and c.group = #{fgroup}
+ 		<where>
+ 		<if test="fpark == 1">
+ 		AND c.parking = 1
  		</if>
+ 		<if test="fpet == 1">
+ 		AND c.pet = 1
+ 		</if> 	
+ 		<if test="fkids == 1">
+ 		AND c.kids = 1
+ 		</if> 	
+ 		<if test="fgroup == 1">
+ 		AND c.group = 1
+ 		</if> 
+ 		</where>
  		GROUP BY c.cno
  		ORDER BY cnt DESC
     </select> 
@@ -122,9 +144,20 @@
  		FROM cafe c
  		LEFT JOIN review r  
  		ON c.cno = r.cno
- 		<if test="fpark != null">
- 		WHERE c.parking = #{fpark} and c.kids = #{fkids} and c.pet = #{fpet} and c.group = #{fgroup}
+ 		<where>
+ 		<if test="fpark == 1">
+ 		AND c.parking = 1
  		</if>
+ 		<if test="fpet == 1">
+ 		AND c.pet = 1
+ 		</if> 	
+ 		<if test="fkids == 1">
+ 		AND c.kids = 1
+ 		</if> 	
+ 		<if test="fgroup == 1">
+ 		AND c.group = 1
+ 		</if> 
+ 		</where>
  		GROUP BY c.cno
  		ORDER BY cnt DESC
     </select> 
@@ -134,9 +167,20 @@
  		FROM cafe c
  		LEFT JOIN review r  
  		ON c.cno = r.cno
- 		<if test="fpark != null">
- 		WHERE c.parking = #{fpark} and c.kids = #{fkids} and c.pet = #{fpet} and c.group = #{fgroup}
+ 		<where>
+ 		<if test="fpark == 1">
+ 		AND c.parking = 1
  		</if>
+ 		<if test="fpet == 1">
+ 		AND c.pet = 1
+ 		</if> 	
+ 		<if test="fkids == 1">
+ 		AND c.kids = 1
+ 		</if> 	
+ 		<if test="fgroup == 1">
+ 		AND c.group = 1
+ 		</if> 
+ 		</where>
  		GROUP BY c.cno
  		ORDER BY AVG DESC
     </select> 
