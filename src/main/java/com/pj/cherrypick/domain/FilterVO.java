@@ -16,6 +16,7 @@ public class FilterVO {
 	private Integer fpet;
 	private Integer fkids;
 	private Integer fgroup;
+	private Integer sort;
 	
 	
 }

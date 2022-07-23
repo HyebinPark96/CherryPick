@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pj.cherrypick.config.auth.PrincipalDetail;
-import com.pj.cherrypick.domain.BookmarkVO;
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.FilterVO;
@@ -31,26 +29,43 @@ public class CafeController {
 	private CafeService cafeService;
 	@Autowired
 	private BookmarkService bookmarkService;
-
+	
 
 	// 전체 카페목록 
-	@RequestMapping("/cafe/all/")
+	@RequestMapping("cafe")
 	public String getCafeAll(@AuthenticationPrincipal PrincipalDetail principalDetail, 
-			@RequestParam(required=false, defaultValue="0") Integer sort,
-			@RequestBody(required=false) FilterVO filter, Model model) throws Exception {
+			@RequestBody(required=false) FilterVO vo, Model model) throws Exception {
+		
+		FilterVO filter = new FilterVO();
+		
+		if (vo!=null) {
+			filter.setFgroup(vo.getFgroup());
+			filter.setFkids(vo.getFkids());
+			filter.setFpark(vo.getFpark());
+			filter.setFpet(vo.getFpark());
+			filter.setSort(vo.getSort());
+		}else {
+			filter.setSort(0);
+			filter.setFgroup(0);
+			filter.setFkids(0);
+			filter.setFpet(0);
+			filter.setFpark(0);
+		} 		
 		
 		System.out.println("---------------------------------------------");
-		System.out.println("[sort]:"+sort);
 		System.out.println("[filter]:"+filter);
 		
 		String username = "aaa";
 		model.addAttribute("username", username);
+		model.addAttribute("filter", filter);
 		//String username = principalDetail.getUsername();
+		
+		Integer sort = filter.getSort();
 		
 		List<CafeVO> cafes = new ArrayList<>(); 
 				
 		if(sort==0 || sort ==null) { //최신순
-			//sort = 0;
+	
 			cafes = cafeService.getCafeAll2(filter);	
 			model.addAttribute("cafes", cafes);	
 		}else if(sort==1) { // 즐겨찾기순
@@ -88,8 +103,8 @@ public class CafeController {
 		System.out.println("[cafes]:"+cafes);
 		System.out.println("[model]:"+model);
 		
-		return "/cafe/all";
-	}
+		return "cafe/all";
+	}	
 
 	
 	// 카페리스트 (전체카페X lino로 리스트 불러오기)
@@ -159,11 +174,11 @@ public class CafeController {
 	}	
 
 
-/*	@GetMapping("/cafe/test")
-	public @ResponseBody void test(@RequestBody(required=false) FilterVO filter ) throws Exception {
+	@GetMapping("/seoha/test")
+	public String test() throws Exception {
 		
-		System.out.println("[filter]:"+filter);
-			}	*/
+		return "cafe/all";
+	}	
 	
 	
 
