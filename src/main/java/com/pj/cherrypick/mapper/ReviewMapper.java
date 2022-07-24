@@ -27,4 +27,5 @@ public interface ReviewMapper {
 	
 	public void updateReviewProc(ReviewVO reviewVO);
 
+	public void deleteReviewProc(int rno);
 }

@@ -74,15 +74,19 @@
 							</span>
 							
 							<div th:each="CafeVO, iter:${list.CafeVO}">
-								<form th:action="@{updateReview}">
+								<form th:action="@{/review/updateReview}" th:method="PUT">
 									<button class="btn btn-secondary">수정</button>
+									<input type="hidden" name="_method" value="PUT">
 									<input type="hidden" name="rno" th:value="${list.rno}">
 									<input type="hidden" name="cname" th:value="${CafeVO.cname}">
 									<input type="hidden" name="num" th:value="${page.num}">
 								</form>
 								
-								<form>
+								<form th:action="@{/review/deleteReview}" th:method="DELETE">
 									<button class="btn btn-danger">삭제</button>
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="rno" th:value="${list.rno}">
+									<input type="hidden" name="num" th:value="${page.num}">
 								</form>
 								
 							</div>

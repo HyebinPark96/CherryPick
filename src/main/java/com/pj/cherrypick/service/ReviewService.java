@@ -32,8 +32,14 @@ public class ReviewService {
 	// 리뷰 수정
 	@Transactional(rollbackFor = Exception.class)
 	public void updateReviewProc(ReviewVO reviewVO) {
-		System.out.println("reviewVO : " + reviewVO);
 		reviewMapper.updateReviewProc(reviewVO);
 	}
+	
+	// 리뷰 삭제
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteReviewProc(int rno) {
+		reviewMapper.deleteReviewProc(rno);
+	}
+	
 	
 }

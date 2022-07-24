@@ -102,6 +102,11 @@
 		SET title = #{title}, content = #{content}, score = #{score}, waiting = #{waiting}
 		WHERE rno = #{rno}
 	</update>
+	
+	<delete id="deleteReviewProc" parameterType="int">
+		DELETE FROM review
+		WHERE rno = #{rno}
+	</delete>
 
 
 </mapper>

@@ -3,6 +3,7 @@ package com.pj.cherrypick.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,9 +38,9 @@ public class ReviewController {
 		return "review/writeReview";
 	}
 	
-	@GetMapping("/member/updateReview")
+	@PutMapping("/review/updateReview")
 	public String updateReview(@RequestParam("rno") int rno, @RequestParam("cname") String cname, 
-			@RequestParam("num") int num, Model model) {
+			@RequestParam("num") int num, Model model) throws Exception {
 		
 		// System.out.println("rno : " + rno);
 		
@@ -54,5 +55,11 @@ public class ReviewController {
 		model.addAttribute("num", num);
 		
 		return "review/updateReview";
+	}
+	
+	@DeleteMapping("/review/deleteReview")
+	public String deleteReview(@RequestParam("rno") int rno, @RequestParam("num") int num) throws Exception {
+		reviewService.deleteReviewProc(rno);
+		return "redirect:/member/myReview?num=" + num;
 	}
 }
