@@ -12,17 +12,27 @@
 	<div id="sidebar-wrapper">
 		<div id="sidebar-contents">
 			<div>
-				<!-- <b th:text="${#authentication.principal.username}+'님'"></b> -->
-				<span th:if="${session.bizMember.bid}" th:text="${session.bizMember.bid}">John Doe</span><b>님</b>
-				<hr>
+				<div>
+					<!-- <b th:text="${#authentication.principal.username}+'님'"></b> -->
+					<img class="icon-30" src="/img/human-w.png"><span th:if="${session.bizMember.bid}" th:text="${session.bizMember.bid}">John Doe</span><b>님</b>
+					<hr>
+				</div>
+				<div class="d-flex">
+					<img class="icon-20" src="/img/edit-w.png">
+					<form th:action="@{/bizMember/storeList}" method="post">
+						<button type="submit">사업장 관리</button>
+					</form>
+				</div>
+				<div class="d-flex">
+					<img class="icon-20" src="/img/home-w.png">
+					<form th:action="@{/bizMember/storeRegister}" method="post">
+						<button type="submit">신규 사업장 등록</button>
+					</form>
+				</div>
 			</div>
-			<form th:action="@{/bizMember/storeList}" method="post">
-				<button type="submit">사업장 관리</button>
-			</form>
-			<form th:action="@{/bizMember/storeRegister}" method="post">
-				<button type="submit">신규 사업장 등록</button>
-			</form>
+			<!-- <img src="/img/logo.png" style="width:170px;"> -->
 		</div>
+		
 	</div>
 	<!-- /사이드바 -->
 

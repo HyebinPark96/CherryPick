@@ -48,7 +48,7 @@ public class TempCafeController {
 		model.addAttribute("cafe", cafeList);
 	}
 	
-
+	//!======무조건 Post방식으로 고쳐.========
 	@GetMapping("/bizMember/storeManagement/{cno}")
 	public String storeManagement(@SessionAttribute(name = "bizMember", required = false) @PathVariable int cno, Model model) {
 		

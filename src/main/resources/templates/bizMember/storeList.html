@@ -17,25 +17,31 @@
 			th:replace="fragments/bizSidebar:: sidebar"></div>
 
 		<!-- GET방식 -->
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">카페이름</th>
-					<th scope="col">주소</th>
-					<th scope="col">자세히</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="cafe : ${cafe}">
-					<th scope="row">[[${cafe.cno}]]</th>
-					<td><a th:href="@{'/bizMember/storeManagement/' + ${cafe.cno}}">[[${cafe.cname}]]</a></td>
-					<td>[[${cafe.caddress}]]</td>
-					<td><a th:href="@{'/bizMember/storeManagement/' + ${cafe.cno}}">Click</a></td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="container">
+			<div class="margin-top-40"></div>
+			<div><span class="text-large" th:text="${session.bizMember.bid}">Username</span><span><b>님의 등록 카페 목록</b></span></div>
+			<hr>
+			<div class="content contianer">
+				<table class="table" style="text-align: center;">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">업체명</th>
+							<th scope="col">주소</th>
+							<th scope="col">자세히</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cafe : ${cafe}">
+							<th scope="row">[[${cafe.cno}]]</th>
+							<td><a th:href="@{'/bizMember/storeManagement/' + ${cafe.cno}}">[[${cafe.cname}]]</a></td>
+							<td>[[${cafe.caddress}]]</td>
+							<td><a th:href="@{'/bizMember/storeManagement/' + ${cafe.cno}}">Click</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
 		<hr>
 

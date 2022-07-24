@@ -158,7 +158,7 @@ let cindex = {
 			// 성공한 경우 호출
 			
 			alert("등록되었습니다. \n등록하신 정보는 [사업장 관리]페이지에서 수정하실 수 있습니다.");
-			location.href = "/";
+			location.href = "/bizMember/storeList";
 
 		}).fail(function(error) {
 			// 실패한 경우 호출
@@ -265,6 +265,7 @@ let cindex = {
 			
 			alert("등록되었습니다. \n등록하신 정보는 [사업장 관리]페이지에서 수정하실 수 있습니다.");
 			location.href = "/";
+			///bizMember/storeList로 Post방식으로 리디렉션할 수 있도록 할 것.
 
 		}).fail(function(error) {
 			// 실패한 경우 호출
