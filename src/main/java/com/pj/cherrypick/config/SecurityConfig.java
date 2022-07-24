@@ -67,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				// 로그인 성공시 세션에 UserDetail 타입으로 저장되어야 함. 
 				// 그러나 Member Object 타입을 전달받으므로 변환과정 거쳐야 함.
 				.defaultSuccessUrl("/"); // 로그인 성공하면 index로 이동
+		
 				
 	}
 }

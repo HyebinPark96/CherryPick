@@ -104,13 +104,13 @@
 	/*[# th:each="cafe : ${cafes}"]*/
 	var data = {};
 	data.content = /*[[${cafe.cname}]]*/
-		data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/);
+		data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/"", /*[[${cafe.c_long}]]*/);
 	positions.push(data);
-	var cno = /*[[${cafe.cno}]]*/;
+	var cno = /*[[${cafe.cno}]]*/"";
 //	console.log("cno", cno);
 //	console.log("data:", data);
 //	console.log("positions:", positions);
-	var cimage = /*[[${cafe.cimage}]]*/;
+	var cimage = /*[[${cafe.cimage}]]*/"";
 //	console.log(cimage);
 	/*[/]*/
 

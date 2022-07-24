@@ -47,23 +47,23 @@ $(document).ready(function() {
 	console.log(fgroup);
 	console.log(sort);
 					
-
+/*
 	for (i = 0; i < 4; i++) {
 	if (sort == i ){
 		$('#sort'+sort).attr('checked', true);
 	}
 }
 	
-/*	var checklist = [fpark, fpet, fkids, fgroup];
+	var checklist = [fpark, fpet, fkids, fgroup];
 	
-	for (let value in checklist) {
- 	 if(value==1) {
-		$('#'+value).attr('checked', true);
-	}else {
-		$('#'+value).attr('checked', false);
+
+/*	 if(fkids == 1) {
+		$('#fkids').attr('checked', true);
 	}
-}
 */
+	
+
+
 	var filter = { 'fpark' : fpark, 'fpet' : fpet, 'fkids' : fkids, 'fgroup' : fgroup, 'sort' : sort}
 	
 	var url="cafe";
@@ -98,7 +98,7 @@ $(document).ready(function() {
 		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
 		data: JSON.stringify(filter) ,
 		contentType: 'application/json',
-		dataType: 'text', 
+		dataType: 'html', 
 		success: function(data) {
 				console.log("[ajax] sort radio success")
 				
@@ -121,7 +121,7 @@ $(document).ready(function() {
 		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
 		data: JSON.stringify(filter) ,
 		contentType: 'application/json',
-		dataType: 'text', 
+		dataType: 'json', 
 		success: function(data) {
 				console.log("[ajax] sort radio success")
 				
@@ -146,7 +146,7 @@ $(document).ready(function() {
 		dataType: 'text', 
 		success: function(data) {
 				console.log("[ajax] sort radio success")
-				window.location.href="all"
+				$("html").html(data);
 				
 			}, error: function() {
 				console.log("[ajax] sort radio failed")
@@ -169,6 +169,7 @@ $(document).ready(function() {
 		dataType: 'text', 
 		success: function(data) {
 				console.log("[ajax] sort radio success")
+				$("html").html(data);
 				
 			}, error: function() {
 				console.log("[ajax] sort radio failed")
@@ -196,6 +197,7 @@ $(document).ready(function() {
 		dataType: 'text', 
 		success: function(data) {
 				console.log("[ajax] park checkbox success")
+				$("html").html(data);
 				
 			}, error: function() {
 				console.log("[ajax] park checkbox failed")
@@ -224,6 +226,7 @@ $(document).ready(function() {
 		dataType: 'text', 
 		success: function(data) {
 				console.log("[ajax] pet checkbox success")
+				$("html").html(data);
 				
 			}, error: function() {
 				console.log("[ajax] pet checkbox failed")
@@ -250,6 +253,11 @@ $(document).ready(function() {
 		dataType: 'text', 
 		success: function(data) {
 				console.log("[ajax] kids checkbox success")
+				console.log(data);
+				$("html").html(data);
+
+				
+
 				
 			}, error: function() {
 				console.log("[ajax] kids checkbox failed")

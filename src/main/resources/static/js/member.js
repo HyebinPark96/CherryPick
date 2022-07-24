@@ -290,7 +290,20 @@ let index = {
 
 
 }
+	// 뒤로가기
+	function goBack() {
+		window.history.back();
+	}
+	
+	//홈으로
+	function goHome() {
+		window.location.href="/";
+	}
 
+	function goHere(variable) {
+		window.location.href="/"+variable;
+	}
+	
 index.init();
 
 

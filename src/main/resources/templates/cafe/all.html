@@ -5,14 +5,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	
-	<script src="../js/cafe.js" async></script>
+
 
 	<title>CherryPick</title>
 </head>
 
 <body> -->
+	<script src="../js/cafe.js" async></script>
 	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
-	<div class="content container" layout:fragment="content">
+<div id="cafedata">
+	<div class="content container" layout:fragment="content" id="all">
 		<div class="item">
 			<div class="cflist-label">
 	
@@ -29,19 +31,23 @@
 				
 				
 				<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sort" id="sort0" value="option1">
+  <input class="form-check-input" type="radio" name="sort" id="sort0" value="option1"
+   th:checked="${filter.sort}==0">
   <label class="form-check-label" for="sort0" checked>최신순</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sort" id="sort1" value="option2">
+  <input class="form-check-input" type="radio" name="sort" id="sort1" value="option2"
+  th:checked="${filter.sort}==1">>
   <label class="form-check-label" for="sort1">즐겨찾기순</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sort" id="sort2" value="option3">
+  <input class="form-check-input" type="radio" name="sort" id="sort2" value="option3"
+  th:checked="${filter.sort}==2">>
   <label class="form-check-label" for="sort2">별점높은순</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sort" id="sort3" value="option4">
+  <input class="form-check-input" type="radio" name="sort" id="sort3" value="option4"
+  th:checked="${filter.sort}==3">>
   <label class="form-check-label" for="sort3">리뷰많은순</label>
 </div>		
 				
@@ -60,19 +66,23 @@
 			</div>
 			<hr>
 <div class="form-check form-switch">
-  <input class="form-check-input" name="filter_park" type="checkbox" role="switch" id="fpark">
+  <input class="form-check-input" name="filter_park" type="checkbox" role="switch" id="fpark"
+   th:checked="${filter.fpark}==1">
   <label class="form-check-label" for="flexSwitchCheck_parking">주차 가능</label>
 </div>
 <div class="form-check form-switch">
-  <input class="form-check-input" name="filter_pet" type="checkbox" role="switch" id="fpet">
+  <input class="form-check-input" name="filter_pet" type="checkbox" role="switch" id="fpet" 
+  	th:checked="${filter.fpet}==1">
   <label class="form-check-label" for="flexSwitchCheck_pet">애견동반 가능</label>
 </div>
 <div class="form-check form-switch">
-  <input class="form-check-input" name="filter_kids" type="checkbox" role="switch" id="fkids">
+  <input class="form-check-input" name="filter_kids" type="checkbox" role="switch" id="fkids"
+   th:checked="${filter.fkids}==1">
   <label class="form-check-label" for="flexSwitchCheck_kids">유아동반 가능</label>
 </div>
 <div class="form-check form-switch">
-  <input class="form-check-input" name="filter_group" type="checkbox" role="switch" id="fgroup">
+  <input class="form-check-input" name="filter_group" type="checkbox" role="switch" id="fgroup"
+   th:checked="${filter.fgroup}==1">
   <label class="form-check-label" for="flexSwitchCheck_group">단체석</label>
 </div>
 
@@ -187,10 +197,10 @@
 	/*[# th:each="cafe : ${cafes}"]*/
 	var data = {};
 	data.content = /*[[${cafe.cname}]]*/
-		data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/, /*[[${cafe.c_long}]]*/);
+		data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/"", /*[[${cafe.c_long}]]*/);
 	positions.push(data);
-	var cno = /*[[${cafe.cno}]]*/;
-	var cimage = /*[[${cafe.cimage}]]*/;
+	var cno = /*[[${cafe.cno}]]*/"";
+	var cimage = /*[[${cafe.cimage}]]*/"";
 	//console.log("cno", cno);
 	//console.log("data:", data);
 	//console.log("positions:", positions);
@@ -238,6 +248,7 @@
 
 </div>
 </div>
+
 
 <!-- </body> -->
 </html>

@@ -303,7 +303,7 @@
 								<td th:text="${cListStat.count + (page.num*10) - 10}">1,001</td>
 								<td th:text="${cList.cname}">random</td>
 								<td th:text="${cList.cphone}">placeholder</td>
-								<td>info</td> 
+								<td><a th:href="@{/cafe/info/}+${cList.cno}">info</a></td>
 								<td>
 									<form th:action="@{adminReview/{cno}(cno=${cList.cno})}">
 											<input type="hidden" value="1" id="num" name="num">

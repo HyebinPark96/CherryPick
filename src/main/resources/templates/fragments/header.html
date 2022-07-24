@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
 <div th:fragment="header-title" class="title">
 	<div class="title-banner">
 		<div class="title-top">
 			<div class="title-top-left">
-				<img src="/img/logo.png" width="150px">
+				<img src="/img/logo.png" width="150px" onclick="goHome();">
 			</div>
 
 			<div sec:authorize="isAuthenticated()" class="title-top-right">
@@ -60,8 +62,8 @@
 
 		</div>
 		<div class="title-center">
-			<span style="font-size: 12px; color: #ddd;">주목할 만한, 글귀 한 구절!</span>
-			<h3>망고플레이트</h3>
+			<span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span>
+			<h3>CherryPick</h3>
 
 			<div class="title-searchbar">
 				<div>
@@ -76,12 +78,12 @@
 <div th:fragment="header-navbar" class="title">
 	<nav class="title-bottom">
 		<div></div>
-		<Button>HOME</Button>
-		<Button>LINK A</Button>
-		<Button>LINK B</Button>
-		<Button>LINK C</Button>
-		<Button>LINK D</Button>
-		<Button>LINK E</Button>
+		<Button onclick="goHome();">HOME</Button>
+		<Button onclick="goHere('cafe');">CAFES</Button>
+		<Button onclick="goHere('cafe/list/1');">LIST</Button>
+		<Button>REVIEW</Button>
+		<Button>EVENT</Button>
+		<Button>CUSTOMER SERVICE</Button>
 		<div></div>
 	</nav>
 </div>
@@ -89,7 +91,7 @@
 <div th:fragment="header-sub">
 	<div class="sub">
 		<div class="sub-left">
-			<img class="logo-pink" src="/img/logo-pink.png"></img>
+			<img class="logo-pink" src="/img/logo-pink.png" onclick="goHome();"></img>
 		</div>
 		<div class="sub-searchbar">
 			<div>
@@ -100,4 +102,5 @@
 	</div>
 
 </div>
+
 </html>

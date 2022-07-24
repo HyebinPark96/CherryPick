@@ -32,6 +32,63 @@ public class CafeController {
 	
 
 	// 전체 카페목록 
+	@RequestMapping("cafe2")
+	public FilterVO getCafeAllInit(@AuthenticationPrincipal PrincipalDetail principalDetail, 
+			@RequestBody(required=false) FilterVO vo, Model model) throws Exception {
+		
+		FilterVO filter = new FilterVO();
+		
+		if (vo!=null) {
+			filter.setFgroup(vo.getFgroup());
+			filter.setFkids(vo.getFkids());
+			filter.setFpark(vo.getFpark());
+			filter.setFpet(vo.getFpark());
+			filter.setSort(vo.getSort());
+		}else {
+			filter.setSort(0);
+			filter.setFgroup(0);
+			filter.setFkids(0);
+			filter.setFpet(0);
+			filter.setFpark(0);
+		} 		
+		
+		System.out.println("---------------------------------------------");
+		System.out.println("[filter]:"+filter);
+		
+		String username = "aaa";
+		model.addAttribute("username", username);
+		model.addAttribute("filter", filter);
+		//String username = principalDetail.getUsername();
+		
+		Integer sort = filter.getSort();
+		
+		List<CafeVO> cafes = new ArrayList<>(); 
+				
+		if(sort==0 || sort ==null) { //최신순
+	
+			cafes = cafeService.getCafeAll2(filter);	
+			model.addAttribute("cafes", cafes);	
+		}else if(sort==1) { // 즐겨찾기순
+			cafes = cafeService.getCafeAllByBmk(filter);	
+			model.addAttribute("cafes", cafes);	
+		}else if(sort==2) { // 별점순
+			cafes = cafeService.getCafeAllByScore(filter);	
+			model.addAttribute("cafes", cafes);
+		}else if(sort==3) { // 리뷰많은순
+			cafes = cafeService.getCafeAllByReview(filter);	
+			model.addAttribute("cafes", cafes);	
+		}
+				
+		System.out.println("[username]:"+username);
+		System.out.println("[cafes]:"+cafes);
+		System.out.println("[model2]:"+model);
+		
+		return filter;
+	}	
+	
+	
+
+	// 전체 카페목록 
 	@RequestMapping("cafe")
 	public String getCafeAll(@AuthenticationPrincipal PrincipalDetail principalDetail, 
 			@RequestBody(required=false) FilterVO vo, Model model) throws Exception {
