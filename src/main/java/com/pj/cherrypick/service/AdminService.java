@@ -42,6 +42,7 @@ public class AdminService {
 		return adminMapper.searchCount(searchType, keyword);
 	};
 	
+	@Transactional(rollbackFor = Exception.class)
 	public void withdrawalForMem(String username[]) throws Exception{
 		adminMapper.withdrawalForMem(username);
 	}
@@ -300,6 +301,11 @@ public class AdminService {
 			return review;
 		}
 		return null;
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public void adminReviewDelete(int rno[]) throws Exception{
+		adminMapper.adminReviewDelete(rno);
 	}
 	
 }

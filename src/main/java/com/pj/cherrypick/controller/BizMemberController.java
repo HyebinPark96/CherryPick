@@ -11,9 +11,9 @@ import com.pj.cherrypick.domain.BizMemberVO;
 public class BizMemberController {
 	
 	// http://localhost/auth/findBIdForm
-	@GetMapping("/auth/findBIdForm")
+	@GetMapping("/auth/findBidForm")
 	public String findBUsernameForm() {
-		return "bizMember/findusernameForm"; // /WEB-INF/views/templates/bizMember/findusernameForm
+		return "bizMember/findUsernameForm"; // /WEB-INF/views/templates/bizMember/findusernameForm
 	}
 	
 	// http://localhost/auth/findBpwdForm

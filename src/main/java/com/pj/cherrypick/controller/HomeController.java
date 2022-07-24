@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.pj.cherrypick.domain.ListVO;
+import com.pj.cherrypick.domain.HomeVO;
 import com.pj.cherrypick.service.HomeService;
 
 @Controller
@@ -20,7 +20,7 @@ public class HomeController {
 	// 홈화면
 	@GetMapping("/home")
 	public String getCafeAll(Model model) {
-		List<ListVO> today = homeservice.getTodayList();
+		List<HomeVO> today = homeservice.getTodayList();
 		model.addAttribute("today", today);
 		return "home";
 		}

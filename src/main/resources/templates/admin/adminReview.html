@@ -34,7 +34,9 @@
 					<!-- 일반회원 리스트 -->
 					<tr th:each="rList : ${rList}">
 
-						<td><input class="form-check-input mt-0" name="memChk" type="checkbox" value=""></td>
+						<td>
+							<input class="form-check-input mt-0" name="memChk" type="checkbox" th:value="${rList.rno}">
+						</td>
 
 						<td th:text="${rListStat.count + (page.num*10) - 10}"></td>
 
@@ -50,7 +52,7 @@
 			</table>
 		</div>
 
-		<button class="btn btn-danger">선택 삭제</button><br><br>
+		<button class="btn btn-danger" type="button" id="adminReviewDeleteBtn">선택 삭제</button><br><br>
 		
 		<!-- fa fa-search class : font-awesome 요소(head 태그에 cdn 있음 -->
 		<div style="width: 300px;">

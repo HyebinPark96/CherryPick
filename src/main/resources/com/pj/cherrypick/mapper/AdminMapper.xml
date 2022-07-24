@@ -502,10 +502,24 @@
 	</select>
 	
 	<!-- 특정 사업장 리뷰 1개 상세보기 -->
-	<select id="getOneReview"  resultType="com.pj.cherrypick.domain.ReviewVO" >
+	<select id="getOneReview" resultType="com.pj.cherrypick.domain.ReviewVO" >
 		SELECT *
 		FROM review
 		WHERE rno = #{rno}
 	</select>
+	
+	
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="adminReviewDelete" parameterType="int">
+		DELETE FROM review
+		
+		<where>
+		    <foreach collection="array" item="rno" open="" close="" separator="OR">
+		        (rno = #{rno})
+		    </foreach>
+	    </where>
+	    
+	</delete>
 	
 </mapper>

@@ -52,6 +52,11 @@ let index = {
 			this.checkApproval();
 		});
 		
+		$('#adminReviewDeleteBtn').on("click", () => {
+			this.checkAdminReviewDelete();
+		});
+		
+		
 		/*
 		$('button[name=cancleApprovalBtn]').on("click", () => {
 			this.cancleApproval(idx);
@@ -288,6 +293,39 @@ let index = {
 		}).done(function(resp) {
 			// 성공한 경우 호출
 			location.href = "/admin/adminMain?num=1&sort=unauthBizMember";
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			console.log(JSON.stringify(error));
+		});
+	},
+	
+	
+	
+	checkAdminReviewDelete: function() {
+
+		//빈 배열 선언 후 담아준다.
+		let checkedAdminReviewDeleteArr= [];
+		$("input[name=memChk]:checked").each(function(){
+			let checkedAdminReviewDelete = $(this).val();
+		    checkedAdminReviewDeleteArr.push(checkedAdminReviewDelete);
+		   	// console.log(checkedAdminReviewDelete);
+		})
+		
+		let data = {
+			cno: $("#cno").val()
+		};
+		
+		console.log(data.cno);
+
+		$.ajax({
+			type: "POST",
+			url: "/admin/adminReviewDelete",
+			data: JSON.stringify(checkedAdminReviewDeleteArr), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			location.href = "/admin/adminReview/" + data.cno + "?num=1";
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			console.log(JSON.stringify(error));
