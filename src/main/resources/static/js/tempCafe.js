@@ -67,13 +67,16 @@ let cindex = {
 		makeHashtag(); 
 		
 		/*
-		let cname = $("#cname").val();
-		if (cname.length == 0) {
-			alert("카페 이름을 입력해주세요.");
+		if(!cindex.verify("#cname", "카페 이름"))
 			return false;
-		}
+			
+		if(!cindex.verify("#caddress", "카페 주소"))
+			return false;
+			
+		if(!cindex.verify("#cphone", "전화번호"))
+			return false;
+		//왜 커트 당하고 버튼 누르면 다시 카페등록 작동이 안되는가? 콘솔도 안 뜨고.
 		*/
-		
 		
 		//유일한 파일명 만들 방법은? 현재시간 추가 / 카페 넘버 추가 / -> 카페 넘버는 현재로는 데이터 삽입이 끝나야 얻어올 수 있어.
 		
@@ -158,7 +161,7 @@ let cindex = {
 			// 성공한 경우 호출
 			
 			alert("등록되었습니다. \n등록하신 정보는 [사업장 관리]페이지에서 수정하실 수 있습니다.");
-			location.href = "/bizMember/storeList";
+			location.href = "/";
 
 		}).fail(function(error) {
 			// 실패한 경우 호출
@@ -187,6 +190,16 @@ let cindex = {
 			return false;
 		}
 		*/
+		if(!cindex.verify("#cname", "카페 이름"))
+			return false;
+		
+		/*
+		if(!cindex.verify("#caddress", "카페 주소"))
+			return false;
+			
+		if(!cindex.verify("#cphone", "전화번호"))
+			return false;
+		 */
 		
 		//유일한 파일명 만들 방법은? 현재시간 추가 / 카페 넘버 추가 / -> 카페 넘버는 현재로는 데이터 삽입이 끝나야 얻어올 수 있어.
 		let data = {
@@ -271,6 +284,17 @@ let cindex = {
 			// 실패한 경우 호출
 			alert(JSON.stringify(error));
 		});
+	},
+
+	
+	verify: function(id, txt){
+		
+		var target = $(id).val().trim();
+		if(target.length == 0 || target == ""){
+			alert('필수 항목을 입력해주세요. (' +txt+')');
+			return false;
+		}
+
 	}
 }
 
