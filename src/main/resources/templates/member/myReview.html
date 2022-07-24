@@ -60,21 +60,32 @@
 							<span>
 								<b th:if="${list.HeartVO.size}>1" th:text="${#lists.size(list.HeartVO)}"></b>
 							</span>
+							
 							<span th:each="HeartVO : ${list.HeartVO}">
 							
 								<span th:if="${HeartVO.hno}!=0">
-									<b th:if="${HeartVOStat.size}==1" th:text="${HeartVOStat.count}">2</b>
+									<b th:if="${HeartVOStat.size}==1" th:text="${HeartVOStat.count}"></b><br><br>
 								</span>
 								
 								<span th:unless="${HeartVO.hno}!=0">
-									<b th:text="${HeartVOStat.index}">2</b>
+									<b th:text="${HeartVOStat.index}"></b><br><br>
 								</span>
-<!-- 								<span th:unless="${iter.size}!=0">
-									<b th:if="${iter.index}==0" th:text="0">0</b>
-								</span> -->
+
 							</span>
 							
-							
+							<div th:each="CafeVO, iter:${list.CafeVO}">
+								<form th:action="@{updateReview}">
+									<button class="btn btn-secondary">수정</button>
+									<input type="hidden" name="rno" th:value="${list.rno}">
+									<input type="hidden" name="cname" th:value="${CafeVO.cname}">
+									<input type="hidden" name="num" th:value="${page.num}">
+								</form>
+								
+								<form>
+									<button class="btn btn-danger">삭제</button>
+								</form>
+								
+							</div>
 						</div>
 					</div>
 <!-- 					<div
@@ -91,11 +102,14 @@
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
-						<span th:if="${select!=num}" class="page-item" >
+						<span th:if="${select!=num} AND ${num!=0}" class="page-item" >
 							<a th:href="@{myReview(num=${num})}" th:text="${num}" class="page-link" ></a>
 						</span>
-						<span th:unless="${select!=num}" class="page-item active">
+						<span th:unless="${select!=num} AND ${num!=0}" class="page-item active">
 							<a th:href="@{myReview(num=${num})}" th:text="${num}" class="page-link"></a>
+						</span>
+						<span th:if="${num==0}">
+							<label>아직 한 건의 리뷰도 작성하지 않았습니다!</label>
 						</span>
 					</th:block>
 					

@@ -24,4 +24,16 @@ public class ReviewService {
 		reviewMapper.writeReviewProc(reviewVO);
 	}
 	
+	// 수정을 위해 작성한 리뷰 가져오기
+	public ReviewVO getOneReviewForUpdate(int rno) {
+		return reviewMapper.getOneReviewForUpdate(rno);
+	}
+	
+	// 리뷰 수정
+	@Transactional(rollbackFor = Exception.class)
+	public void updateReviewProc(ReviewVO reviewVO) {
+		System.out.println("reviewVO : " + reviewVO);
+		reviewMapper.updateReviewProc(reviewVO);
+	}
+	
 }

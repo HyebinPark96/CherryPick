@@ -90,6 +90,18 @@
 		INSERT INTO review (username, cno, title, content, score, waiting)
 		VALUES (#{username}, #{cno}, #{title}, #{content}, #{score}, #{waiting})
 	</insert>
+	
+	<select id="getOneReviewForUpdate" parameterType="int" resultType="com.pj.cherrypick.domain.ReviewVO">
+		SELECT * 
+		FROM review
+		WHERE rno = #{rno}
+	</select>
+	
+	<update id="updateReviewProc" parameterType="com.pj.cherrypick.domain.ReviewVO">
+		UPDATE review 
+		SET title = #{title}, content = #{content}, score = #{score}, waiting = #{waiting}
+		WHERE rno = #{rno}
+	</update>
 
 
 </mapper>

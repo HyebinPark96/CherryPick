@@ -302,4 +302,8 @@ public class AdminService {
 		return null;
 	}
 	
+	public void adminReviewDelete(int rno[]) throws Exception{
+		adminMapper.adminReviewDelete(rno);
+	}
+	
 }
