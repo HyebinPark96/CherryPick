@@ -42,7 +42,7 @@
 				<!-- th로 cafeVO 받아오기 -->
 				<div class="cflist-item" th:each="cafe : ${cafes}">
 					<div class="cflist-thumb">
-						<img th:src="@{${'/img/' + cafe.cimage}}" alt="카페썸네일" width="200" />
+						<img th:src="@{${'/img/' + cafe.cimage}}" alt="카페썸네일" style="width:150px; height: 150px; object-fit:cover;"/>
 					</div>
 					<div class="d-flex">
 						<div class="col p-4 d-flex flex-column position-static">
