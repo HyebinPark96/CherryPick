@@ -29,7 +29,6 @@
 
 						<div>
 							<div>
-								<b th:text="${#authentication.principal.username}">username님</b>
 							</div>
 							<div>email@naver.com</div>
 							<!-- <div th:text="${member.email}">email@naver.com</div> -->
@@ -52,23 +51,23 @@
 		<!-- 본문 -->
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2 divBtn">
-					<img id="pickBtn" src="/img/ready.png" class="img-thumbnail">
+				<div class="col-md-2 divBtn" onclick="selectModal(0)">
+					<img id="pickBtn" src="/img/ready.png" class="hoverimg img-thumbnail">
 				</div>
-				<!-- 
+				
 				<div class="col-md-2">
-					<img src="/img/ready.png" class="img-thumbnail">
-				</div>
-				<div class="col-md-2">
-					<img src="/img/ready.png" class="img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(1)" class="hoverimg img-thumbnail">
 				</div>
 				<div class="col-md-2">
-					<img src="/img/ready.png" class="img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(2)" class="hoverimg img-thumbnail">
 				</div>
 				<div class="col-md-2">
-					<img src="/img/ready.png" class="img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(3)" class="hoverimg img-thumbnail">
 				</div>
-				 -->
+				<div class="col-md-2">
+					<img src="/img/ready.png" onclick="selectModal(4)"class="hoverimg img-thumbnail">
+				</div>
+				
 
 			</div>
 			
@@ -85,35 +84,35 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr class="resultRow">
 						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>#mdo</td>
+						<td class="rCname"></td>
+						<td class="rCaddress"></td>
+						<td class="rCtag"></td>
 					</tr>
-					<tr>
+					<tr class="resultRow">
 						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
+						<td class="rCname"></td>
+						<td class="rCaddress"></td>
+						<td class="rCtag"></td>
 					</tr>
-					<tr>
+					<tr class="resultRow">
 						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>#twitter</td>
+						<td class="rCname"></td>
+						<td class="rCaddress"></td>
+						<td class="rCtag"></td>
 					</tr>
-					<tr>
+					<tr class="resultRow">
 						<th scope="row">4</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>#twitter</td>
+						<td class="rCname"></td>
+						<td class="rCaddress"></td>
+						<td class="rCtag"></td>
 					</tr>
-					<tr>
+					<tr class="resultRow">
 						<th scope="row">5</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
+						<td class="rCname"></td>
+						<td class="rCaddress"></td>
+						<td class="rCtag"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -135,7 +134,7 @@
 							<input type="text" class="form-control"
 								aria-label="Amount (to the nearest dollar)">
 							<div class="input-group-append">
-								<span class="divBtn input-group-text" onclick=""><b>확인</b></span>
+								<span class="divBtn input-group-text"><b>확인</b></span>
 							</div>
 						</div>
 						
@@ -154,10 +153,10 @@
 									<tbody>
 										<tr>
 											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>#mdo</td>
-											<td><img class="divBtn icon-20" src="/img/check.png"></td>
+											<td class="cname">Mark</td>
+											<td class="caddress">Otto</td>
+											<td class="ctag">#mdo</td>
+											<td><img class="selectBtn divBtn icon-20" src="/img/check.png"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -198,16 +197,52 @@
 			</div>
 		</div>
 		
-		
+		<script src="/js/addCherry.js"></script>
 		
 		<script>
+			var currItem = null;
+		
 			$('#menuBtn').on('click', function() {
 				$('#menuModal').modal('show');
 			});
 			
-			$('#pickBtn').on('click', function() {
+			//$('#pickBtn').on('click', function() {
+				
+			function selectModal(idx){
 				$('#pickModal').modal('show');
-			});
+				currItem = idx;
+			}
+		</script>
+		
+		<script>
+		
+			
+			$(".selectBtn").click(function(event)
+				{
+				   let myparent = $(this.parentNode.parentNode); //jquery obj
+				   var cname = myparent.find('.cname').text();
+				   var caddress = myparent.find('.caddress').text();
+				   var ctag = myparent.find('.ctag').text();
+				   
+				   //let parent = $(this.parentNode)[0]; //plain DOM obj
+/* 					console.log(myparent);
+					console.log(cname);
+					console.log(caddress);
+					console.log(ctag);
+					alert(cname.text());
+					alert(caddress.text());
+					alert(ctag.text());
+ */					
+					
+ 					var r = $(".resultRow").eq(currItem);
+ 					r.children().css( 'color', 'blue' );
+ 					console.log(r.children());
+ 					r.children().eq(1).text(cname);
+ 					r.children().eq(2).text(caddress);
+ 					r.children().eq(3).text(ctag);
+ 					//input이 타깃일 경우, text 대신 val
+
+				});
 		</script>
 		
 
