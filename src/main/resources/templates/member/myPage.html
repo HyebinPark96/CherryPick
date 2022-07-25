@@ -20,33 +20,51 @@
 			</div>
 			<hr> -->
 			<div class="d-flex align-items-center row">
-					<div class="col-md-1">
+				<div class="d-flex justify-content-between align-items-center">
+					<div class="d-flex">
+						<div>&nbsp;&nbsp;&nbsp;</div>
 						<img class="back-icon" src="../img/back.png" onclick="goBack();">
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<div class="text-20">나의 Cherrypick</div>
 					</div>
-					<div class="col-md-10" style="text-align: right">
-						<p>
-							<b th:text="${#authentication.principal.username}">username님</b>
-						</p>
-						<p th:text="${member.email}">email@naver.com</p>
-					</div>
+					
+					<div class="d-flex justify-content-end" style="text-align: right">
+					<div class="d-flex">
 
-					<div class="col-md-1">
-						<a id="mEdit" href="/member/checkPwdForEdit"><img class="icon-20" src="../img/edit.png"></a>
+						<div>
+							<div>
+								<b th:text="${#authentication.principal.username}">username님</b>
+							</div>
+							<div th:text="${member.email}">email@naver.com</div>
+						</div>
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<div id="menuBtn" class="divBtn">
+							<img class="icon-30" src="../img/menu.png">
+						</div>
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<!-- 메뉴버튼 액션은 하단의 script 태그에 -->
 					</div>
+					<!-- <a id="mEdit" href="/member/checkPwdForEdit"><img class="icon-20" src="../img/edit.png"></a> -->
+				</div>
+				</div>
+				
+
+
 			</div>
-			
-			<div class="divBtn">
+
+			<!-- <div class="divBtn">
 				<a th:href="@{myReview(num=1)}">
-					<button type="submit">내가 작성한 리뷰 보러가기</button>
+					<button class="ulBtn" type="submit">내가 작성한 리뷰 보러가기</button>
 				</a>
-			</div>
+			</div> -->
 			
 			<hr>
 			<div class="content-top-tab">
-
-				<div class="divBtn" onclick="showCafeBmk()">카페</div>
+				<div id="tab-cafe" class="divBtn" onclick="showCafeBmk()">카페</div>
 				<div>|</div>
-				<div class="divBtn" onclick="showCafeListBmk()">리스트</div>
+				<div id="tab-list" class="divBtn" onclick="showCafeListBmk()">리스트</div>
 			</div>
 		</div>
 		<hr>
@@ -125,6 +143,29 @@
 			</div> 
 
 		</div>
+		
+		
+		<!-- 모달 영역 -->
+		<div id="menuModal" class="modal fade modal-item">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">회원 메뉴</h5>
+						<button type="button" data-bs-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body d-flex flex-column align-items-center">
+
+
+						<div><a id="mEdit" href="/member/checkPwdForEdit">회원정보 수정</a></div>
+						<div><a href="/member/myPage">나의 CherryPick</a></div>
+						<div class="divBtn">
+							<a th:href="@{myReview(num=1)}">나의 리뷰</a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 		<!-- ==============화면 표시 스크립트============ -->
@@ -135,15 +176,23 @@
 			var cfLiBmk = document.getElementById("cfLiBmk");
 
 			cfLiBmk.style.display = 'none';
+			
+			$('#tab-cafe').css("font-weight", "bold");
+			$('#tab-list').css("font-weight", "");
+			
 
 			function showCafeBmk() {
 				cfBmk.style.display = 'flex';
 				cfLiBmk.style.display = 'none';
+				$('#tab-cafe').css("font-weight", "bold");
+				$('#tab-list').css("font-weight", "");
 			}
 
 			function showCafeListBmk() {
 				cfBmk.style.display = 'none';
 				cfLiBmk.style.display = 'flex';
+				$('#tab-cafe').css("font-weight", "");
+				$('#tab-list').css("font-weight", "bold");
 			}
 
 			function seeCafeListItem() {
@@ -186,6 +235,14 @@
 			 }
 			 mem.style.display = 'none';
 			 }  */
+		</script>
+		<script>
+			$('#menuBtn').on('click', function() { 
+				$('#menuModal').modal('show');	
+			});
+			
+			
+		
 		</script>
 	</div>
 
