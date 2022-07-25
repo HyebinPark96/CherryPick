@@ -18,46 +18,34 @@ let cindex = {
 		
 		//cno 받아서 숫자로 바꾸기
 		
+		alert($(".cno").eq(0).val());
+		alert($(".cno").eq(1).val());
+		alert($(".cno").eq(2).val());
 		
 		
 		let data = {
-			username: 
+			username: $("#username").val(),
 			liname: $("#liname").val(),
-			licafe1: parseInt($(".liname").eq(0).val(), 10),
-			cimage: cimage,
-			caddress: $("#caddress").val(),
-			cphone: $("#cphone").val(),
-			copen: $("#copen").val(),
-			cclose: $("#cclose").val(),
-			parking: $("input[name=parking]").filter(":checked").val(),
-			pet: $("input[name=pet]").filter(":checked").val(),
-			kids: $("input[name=kids]").filter(":checked").val(),
-			seats: $("#seats").val(),
-			group: $("input[name=group]").filter(":checked").val(),
-			ctag: ctagStr,
-			cmenu_img: cmenu_image
+			li_cafe1: parseInt($(".cno").eq(0).val(), 10),
+			li_cafe2: parseInt($(".cno").eq(1).val(), 10),
+			li_cafe3: parseInt($(".cno").eq(2).val(), 10),
+			li_cafe4: parseInt($(".cno").eq(3).val(), 10),
+			li_cafe5: parseInt($(".cno").eq(4).val(), 10),
 		};
-		
-		
-		// ajax는 디폴트가 비동기 호출
-		// ajax 통신 성공 => 서버가 json 리턴 => 자동으로 자바스크립트 오브젝트로 변환
 		
 		$.ajax({
 			type: "POST",
-			url: "/cafe/regCafeProc",
+			url: "/member/regListProc",
 			data: JSON.stringify(data), // 자바스크립트의 data 객체를 Java가 알아듣도록 변경
 			contentType: "application/json; charset=utf-8",
 			dataType: "json" // json이라면 => javascript 오브젝트로 변경하여 아래 함수의 파라미터로 전달
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			//alert(resp);
-			cno = Object.values(resp)[2];
-			//alert(cno); 
 			
-			//alert("등록되었습니다. \n메뉴 등록을 호출합니다..");
+			alert("리스트가 등록되었습니다.");
 			//location.href = "/";
 //			"/bizMember/storeManagement";
-			cindex.menuRegister(cno);
+
 
 		}).fail(function(error) {
 			// 실패한 경우 호출

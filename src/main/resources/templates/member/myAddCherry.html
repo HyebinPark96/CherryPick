@@ -28,9 +28,11 @@
 					<div class="d-flex">
 
 						<div>
-							<div></div>
-							<div>email@naver.com</div>
-							<!-- <div th:text="${member.email}">email@naver.com</div> -->
+							<div>
+								<b th:text="${#authentication.principal.username}">username</b>
+							</div>
+							<div th:text="${member.email}">email@naver.com</div>
+							<!--  -->
 						</div>
 						<div>&nbsp;&nbsp;&nbsp;</div>
 						<div>&nbsp;&nbsp;&nbsp;</div>
@@ -49,13 +51,15 @@
 
 		<!-- 본문 -->
 		<div class="container d-flex flex-column align-items-center">
-			<label></label>
-			<input id="liname" type="text" placeholder="리스트의 이름을 입력해 주세요." style="padding: 3px; border: 1px solid #ccc; border-radius:5px; min-width: 400px;">
-			<input class="cno" type="text"> <input class="cno"
-				type="text"> <input class="cno" type="text"> <input
-				class="cno" type="text"> <input class="cno" type="text">
+			<label class="text-20">리스트 이름</label> <input id="liname" type="text" placeholder="리스트의 이름을 입력해 주세요."
+				style="padding: 3px; border: 1px solid #ccc; border-radius: 5px; min-width: 400px;"> 
+				<div style="display:none;">
+				<input id="username" type="hidden" th:value="${#authentication.principal.username}">
+				<input class="cno" type="text"> <input class="cno" type="text"> <input class="cno" type="text"> <input class="cno" type="text"> <input class="cno" type="text">
+				</div>
+			<div class="margin-top-40"></div>
 			<div class="gray">썸네일을 클릭해 카페를 추가합니다.</div>
-			<div class="margin-top-20"></div>
+			<div class="margin-top-10"></div>
 			<div class="row align-items-center">
 				<div class="col-md-1"></div>
 				<div class="col-md-2 divBtn">
@@ -200,14 +204,13 @@
 					<div class="modal-body d-flex flex-column align-items-center">
 
 
-						<div>
-							<a id="mEdit" href="/member/checkPwdForEdit">회원정보 수정</a>
+						<div><a id="mEdit" href="/member/checkPwdForEdit">회원정보 수정</a></div>
+						<div><a href="/member/myPage">나의 CherryPick</a></div>
+						<div><a href="/member/myAddCherry">새로운 Cherry 만들기</a></div>
+						<div class="divBtn">
+							<a th:href="@{myReview(num=1)}">나의 리뷰</a>
 						</div>
-						<div>
-							<a href="/member/myPage">나의 CherryPick</a>
-						</div>
-						<div class="divBtn"></div>
-
+						
 					</div>
 				</div>
 			</div>

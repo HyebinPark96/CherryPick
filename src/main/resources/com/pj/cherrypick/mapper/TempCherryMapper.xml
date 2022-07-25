@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.pj.cherrypick.mapper.TempCherryMapper" >
+
+    <insert id="addCherry" parameterType="com.pj.cherrypick.domain.ListVO">
+    	INSERT INTO list VALUES (null, #{username}, #{liname}, #{li_cafe1}, #{li_cafe2}, #{li_cafe3}, #{li_cafe4}, #{li_cafe5})
+    </insert>
+
+</mapper>
+
+
+
