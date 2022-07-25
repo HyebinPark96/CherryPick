@@ -23,5 +23,8 @@ public class ListVO {
 	// 즐겨찾기 확인용
 	private Integer chk;
 	
+	// 썸네일 띄우기
+	private Integer cno;
+	private String cimage;
 
 }

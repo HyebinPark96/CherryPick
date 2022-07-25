@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout/layout-main}">
+<!-- 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head>
+
+
+<body> -->
+<div layout:fragment="content">
+	<header>
+		
+	</header>
+
+
+	<main class="content container">
+
+<div class="cherrycards">
+	<div class="card" style="width: 18rem;">
+  <img src="https://images.unsplash.com/photo-1560772336-0a9953caf5b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">나만의 체리픽 만들기</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+	<div class="card" style="width: 18rem;">
+  <img src="https://images.unsplash.com/photo-1606651734087-2deb7d734b84?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGNoZXJyeXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">내가 만든 체리픽 보기</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+</div>
+		<div>
+			<h5>새로운 체리픽</h5>
+			<hr>
+		</div>
+
+		<div class="main-pick">
+			<div class="row">
+				<div class="col-md-4" th:each="latest : ${latest}">
+					<div class="divBtn thumbnail main-pick-item" th:id="${latest.lino}" th:onclick="sendToListInfo(this.getAttribute('id'))"
+							th:style="'background-image:url(/upload/' +${latest.cimage} + ');'">
+						<div th:text="${latest.liname}">카페 리스트 이름을 입력해주세요.</div>
+
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+
+		<div>
+			<h5>베스트 체리픽</h5>
+			<hr>
+		</div>
+
+		<div class="cfresult">
+			<div class="row">
+				<div class="col-md-4" th:each="latest : ${latest}">
+					<div class="divBtn thumbnail main-pick-item" th:id="${latest.lino}" th:onclick="sendToListInfo(this.getAttribute('id'))"
+							th:style="'background-image:url(/upload/' +${latest.cimage} + ');'">
+
+						<div th:text="${latest.liname}">카페 리스트 이름을 입력해주세요.</div>
+						
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</main>
+</div>
+<!-- </body> -->
+</html>
