@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 // 에러 페이지를 커스터마이징 하는 에러 컨트롤러는 반드시 ErrorController 인터페이스를 구현해야 한다!
 public class WebErrorController implements ErrorController{
 
-	    @GetMapping("/error")
+	    @GetMapping("error")
 	    public String handleError(HttpServletRequest request) {
 	        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
