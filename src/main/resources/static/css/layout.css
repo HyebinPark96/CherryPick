@@ -1,3 +1,5 @@
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+
 .text-large {
 	font-size: 25px;
 	font-weight: bold;
@@ -441,19 +443,16 @@ textarea:focus, input:focus {
 	text-align: center;
 }
 
-.footer-list-container {
+.footer-list{
 	color: #bbb;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 }
 
-.footer-list{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	gap: 15vw;
+.contact-head{
+	font-size: 17px;
+}
+
+.contact-body{
+	font-size: 14px;
 }
 
 
