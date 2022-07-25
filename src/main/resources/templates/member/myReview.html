@@ -90,51 +90,56 @@
 						<div>
 							
 							<!-- -->
-							<div class="container" style="background-color: #EAE4E4; border-radius: 10px; min-height: 100px;">
+							<div class="container myreview-content">
 								<label th:utext="${list.content}"></label>
 								<!---->
 							</div>
 							<br>
-							<div>
-								<b> 나의 별점 : <i class="fa fa-star" style="color: #a6434b"></i><label th:text="${list.score}"></label> <!-- -->
-								</b>
-							</div>
+							
 
 
 							<div class="margin-top-10"></div>
 							
-							<span> <img class="icon-20" src="/img/heart.png">&nbsp;<b
-								th:if="${list.HeartVO.size}>1"
-								th:text="${#lists.size(list.HeartVO)}"></b>
-							</span> <span th:each="HeartVO : ${list.HeartVO}"> <span
-								th:if="${HeartVO.hno}!=0"> <b
-									th:if="${HeartVOStat.size}==1" th:text="${HeartVOStat.count}"></b>
-							</span> <span th:unless="${HeartVO.hno}!=0"> <b
-									th:text="${HeartVOStat.index}"></b>
-							</span>
-
-							</span>
-							
-							<div class="margin-top-10"></div>
-
-							<div th:each="CafeVO, iter:${list.CafeVO}">
-								<form th:action="@{/review/updateReview}" th:method="PUT"
-									style="display: inline-block">
-									<button class="btn btn-secondary">수정</button>
-									<input type="hidden" name="_method" value="PUT"> <input
-										type="hidden" name="rno" th:value="${list.rno}"> <input
-										type="hidden" name="cname" th:value="${CafeVO.cname}">
-									<input type="hidden" name="num" th:value="${page.num}">
-								</form>
-
-								<form th:action="@{/review/deleteReview}" th:method="DELETE"
-									style="display: inline-block">
-									<button class="btn btn-danger">삭제</button>
-									<input type="hidden" name="_method" value="DELETE"> <input
-										type="hidden" name="rno" th:value="${list.rno}"> <input
-										type="hidden" name="num" th:value="${page.num}">
-								</form>
-
+							<div class="d-flex justify-content-between align-items-center">
+								<div>
+									<div>
+										<b> 나의 별점 : <i class="fa fa-star" style="color: #a6434b"></i><label th:text="${list.score}"></label> <!-- -->
+										</b>
+									</div>
+									<div class="margin-top-10"></div>
+									<span> <img class="icon-20" src="/img/heart.png">&nbsp;<b
+										th:if="${list.HeartVO.size}>1"
+										th:text="${#lists.size(list.HeartVO)}"></b>
+									</span> <span th:each="HeartVO : ${list.HeartVO}"> <span
+										th:if="${HeartVO.hno}!=0"> <b
+											th:if="${HeartVOStat.size}==1" th:text="${HeartVOStat.count}"></b>
+									</span> <span th:unless="${HeartVO.hno}!=0"> <b
+											th:text="${HeartVOStat.index}"></b>
+									</span>
+		
+									</span>
+								</div>
+								
+	
+								<div th:each="CafeVO, iter:${list.CafeVO}">
+									<form th:action="@{/review/updateReview}" th:method="PUT"
+										style="display: inline-block">
+										<button class="btn btn-secondary">수정</button>
+										<input type="hidden" name="_method" value="PUT"> <input
+											type="hidden" name="rno" th:value="${list.rno}"> <input
+											type="hidden" name="cname" th:value="${CafeVO.cname}">
+										<input type="hidden" name="num" th:value="${page.num}">
+									</form>
+	
+									<form th:action="@{/review/deleteReview}" th:method="DELETE"
+										style="display: inline-block">
+										<button class="btn btn-danger">삭제</button>
+										<input type="hidden" name="_method" value="DELETE"> <input
+											type="hidden" name="rno" th:value="${list.rno}"> <input
+											type="hidden" name="num" th:value="${page.num}">
+									</form>
+	
+								</div>
 							</div>
 						</div>
 					</div>

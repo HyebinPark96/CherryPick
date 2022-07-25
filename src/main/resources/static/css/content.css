@@ -314,6 +314,11 @@
 	color: gray;
 }
 
+/*나의 리뷰페이지(회원)*/
+.myreview-content{
+	background-color: #EAE4E4; border-radius: 10px; min-height: 100px; padding: 10px;
+}
+
 
 /*리뷰 관리 페이지*/
 
