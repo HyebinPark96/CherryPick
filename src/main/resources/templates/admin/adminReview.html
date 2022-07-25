@@ -85,9 +85,9 @@
 
 			<th:block th:each="num : ${#numbers.sequence(page.startPageNum, page.endPageNum)}">
 				
-				<span th:if="${select!=num} and ${num}!=0" class="page-item"> <a th:href="@{'/admin/adminReview/' + ${cno}(num=${num}, searchType=${searchType}, keyword=${keyword})}" th:text="${num}" class="page-link"></a>
+				<span th:if="${select!=num} AND ${page.count}!=0" class="page-item"> <a th:href="@{'/admin/adminReview/' + ${cno}(num=${num}, searchType=${searchType}, keyword=${keyword})}" th:text="${num}" class="page-link"></a>
 				</span>
-				<span th:if="${select==num}" class="page-item active"> <a th:href="@{'/admin/adminReview/' + ${cno}(num=${num})}"  th:text="${num}" class="page-link"></a>
+				<span th:if="${select==num} AND ${page.count}!=0" class="page-item active"> <a th:href="@{'/admin/adminReview/' + ${cno}(num=${num})}"  th:text="${num}" class="page-link"></a>
 				</span>
 			</th:block>
 

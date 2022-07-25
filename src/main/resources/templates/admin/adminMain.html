@@ -237,10 +237,10 @@
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
-						<span th:if="${select!=num} AND ${num}!=0" class="page-item" >
+						<span th:if="${select!=num} AND ${page.count}!=0" class="page-item" >
 							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${orderBy})}" th:text="${num}" class="page-link" ></a>
 						</span>
-						<span th:unless="${select!=num} AND ${num}!=0" class="page-item active">
+						<span th:if="${select==num} AND ${page.count}!=0" class="page-item active">
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
 						</span>
 					</th:block>
@@ -353,10 +353,10 @@
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
-						<span th:if="${select!=num} AND ${num}!=0" class="page-item" >
+						<span th:if="${select!=num} AND ${page.count}!=0" class="page-item" >
 							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword})}" th:text="${num}" class="page-link" ></a>
 						</span>
-						<span th:unless="${select!=num} AND ${num}!=0" class="page-item active">
+						<span th:if="${select==num} AND ${page.count}!=0" class="page-item active">
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
 						</span>
 					</th:block>
