@@ -74,9 +74,9 @@ public class CafeController {
 			model.addAttribute("cafes", cafes);	
 		}
 				
-		System.out.println("[username]:"+username);
-		System.out.println("[cafes]:"+cafes);
-		System.out.println("[model]:"+model);	
+		//System.out.println("[username]:"+username);
+		//System.out.println("[cafes]:"+cafes);
+		//System.out.println("[model]:"+model);	
 		
 		return "cafe/all";
 	}	
@@ -88,8 +88,8 @@ public class CafeController {
 	@ResponseBody
 	public List<CafeVO> selectCafe(@RequestParam int number) throws Exception {
 		
-		System.out.println("ResponseBody: selectCafe--------------------------------------------");
-		System.out.println(number);
+		//System.out.println("ResponseBody: selectCafe--------------------------------------------");
+		//System.out.println(number);
 		List<CafeVO> cafes = cafeService.getCafeAll();
 				
 		return cafes;
@@ -114,7 +114,7 @@ public class CafeController {
 		// 현재 로그인 유저가 이 리스트를 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
 		bookmarkService.checkListBmk(username, lino);
 		int bmk = bookmarkService.checkListBmk(username, lino);
-		System.out.println(bmk);
+		//System.out.println(bmk);
 		model.addAttribute("bmk", bmk);
 		
 		
