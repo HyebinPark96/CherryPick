@@ -24,8 +24,8 @@ public class SampleController {
 		model.addAttribute("bizMember", bizMember);
 		List<HomeVO> today = homeservice.getTodayList();
 		model.addAttribute("today", today);
-		System.out.println("[model]:"+model);
-		System.out.println("[today]:"+today);
+		//System.out.println("[model]:"+model);
+		//System.out.println("[today]:"+today);
 		return "index";
 	}
 	
