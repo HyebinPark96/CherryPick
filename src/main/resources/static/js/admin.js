@@ -356,7 +356,7 @@ let index = {
 
 		//빈 배열 선언 후 담아준다.
 		let checkedAdminReviewDeleteArr= [];
-		$("input[name=memChk]:checked").each(function(){
+		$("input[name=reviewChk]:checked").each(function(){
 			let checkedAdminReviewDelete = $(this).val();
 		    checkedAdminReviewDeleteArr.push(checkedAdminReviewDelete);
 		   	// console.log(checkedAdminReviewDelete);
