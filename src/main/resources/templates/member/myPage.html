@@ -82,7 +82,7 @@
 					<!-- th로 cafelist 받아오기 -->
 					<div class="cflist-item" th:each="cafe : ${cafes}">
 						<div class="cflist-thumb">
-						<img th:src="@{${'/img/' + cafe.cimage}}" alt = "카페썸네일" width="200"/>
+						<img th:src="@{${'/img/' + cafe.cimage}}" alt="카페썸네일" style="width:150px; height: 150px; object-fit:cover;"/>
 						</div>
 	
 						<div class="d-flex">
@@ -106,9 +106,7 @@
 							</div>
 							<a th:id="${cafe.cno}" th:onclick="sendToInfo(this.getAttribute('id'))">더보기</a>
 							</div>
-							<div>
-								<img src="../img/bmk-empty.png">
-							</div>
+
 
 						</div>
 
@@ -123,7 +121,9 @@
 			
 					<div th:unless="${list.size}">북마크된 리스트가 없습니다.</div>
 					<div class="cflist-item" th:each="list : ${list}">
-						<div class="cflist-thumb" style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');"></div>
+						<div class="cflist-thumb">
+						<img th:src="@{${'/img/' + list.cimage}}" alt="카페썸네일" style="width:150px; height: 150px; object-fit:cover;"/>
+						</div>
 
 						<div class="d-flex">
 							<div class="col p-4 d-flex flex-column position-static">
@@ -133,9 +133,7 @@
 								</div>
 								<div class="cflist-review"></div>
 							</div>
-							<div>
-								<img src="../img/bmk-empty.png">
-							</div>
+
 						</div>
 
 					</div>
