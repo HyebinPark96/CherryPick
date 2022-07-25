@@ -71,10 +71,10 @@
 									<b th:text="${HeartVOStat.index}"></b>
 								</span>
 
-							</span>
+							</span><br>
 							
 							<div th:each="CafeVO, iter:${list.CafeVO}">
-								<form th:action="@{/review/updateReview}" th:method="PUT">
+								<form th:action="@{/review/updateReview}" th:method="PUT" style="display:inline-block">
 									<button class="btn btn-secondary">수정</button>
 									<input type="hidden" name="_method" value="PUT">
 									<input type="hidden" name="rno" th:value="${list.rno}">
@@ -82,7 +82,7 @@
 									<input type="hidden" name="num" th:value="${page.num}">
 								</form>
 								
-								<form th:action="@{/review/deleteReview}" th:method="DELETE">
+								<form th:action="@{/review/deleteReview}" th:method="DELETE" style="display:inline-block">
 									<button class="btn btn-danger">삭제</button>
 									<input type="hidden" name="_method" value="DELETE">
 									<input type="hidden" name="rno" th:value="${list.rno}">
