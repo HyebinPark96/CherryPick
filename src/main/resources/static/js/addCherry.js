@@ -17,11 +17,11 @@ let cindex = {
 		//liname 받아오기
 		
 		//cno 받아서 숫자로 바꾸기
-		
+		/*
 		alert($(".cno").eq(0).val());
 		alert($(".cno").eq(1).val());
 		alert($(".cno").eq(2).val());
-		
+		*/
 		
 		let data = {
 			username: $("#username").val(),
@@ -43,8 +43,8 @@ let cindex = {
 			// 성공한 경우 호출
 			
 			alert("리스트가 등록되었습니다.");
-			//location.href = "/";
-//			"/bizMember/storeManagement";
+			
+			location.href = "/member/myPage";
 
 
 		}).fail(function(error) {
