@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="memberMenu">
+	<div id="menuModal" class="modal fade modal-item">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">회원 메뉴</h5>
+					<button type="button" data-bs-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body d-flex flex-column align-items-center">
+	
+	
+					<div>
+						<a id="mEdit" href="/member/checkPwdForEdit">회원정보 수정</a>
+					</div>
+					<div>
+						<a href="/member/myPage">나의 CherryPick</a>
+					</div>
+					<div>
+						<a href="/member/myAddCherry">새로운 Cherry 만들기</a>
+					</div>
+					<div class="divBtn">
+						<a th:href="@{myReview(num=1)}">나의 리뷰</a>
+					</div>
+	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
