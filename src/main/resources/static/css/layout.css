@@ -50,7 +50,7 @@ textarea:focus, input:focus {
 }
 
 .content-top {
-	padding-left: 10px;
+	/* padding-left: 10px; */
 }
 
 .content-top-tab {
@@ -82,6 +82,7 @@ textarea:focus, input:focus {
 
 .back-icon {
 	width: 20px;
+	height: 30px;
 }
 
 
@@ -151,6 +152,10 @@ textarea:focus, input:focus {
 
 .divBtn {
 	cursor: pointer;
+}
+
+.ulBtn * :hover{
+	text-decoration: underline; 
 }
 
 .hoverbox {
@@ -507,4 +512,8 @@ textarea:focus, input:focus {
   background: rgba(0, 0, 0, 0.75);
   font-size: 14px;
   text-align: center;
+}
+
+#menuModal .modal-body{
+	gap: 20px;
 }
