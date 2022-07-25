@@ -38,7 +38,11 @@
 
     <!-- cno로 카페정보 호출-->
  	<select id="getCafeInfo" parameterType="int" resultType="com.pj.cherrypick.domain.CafeVO">
-        SELECT * FROM cafe WHERE cno = #{cno}
+     	SELECT * , round(AVG(r.score),2) AS avgscore, round(AVG(r.waiting),0) AS avgwait
+		FROM cafe c 
+		LEFT JOIN review r
+		ON c.cno = r.cno
+		WHERE c.cno = #{cno}
     </select> 
     <!-- cno로 리뷰첫번째 호출 (안씀)-->
     <select id="getFirstReview" parameterType="com.pj.cherrypick.domain.ReviewVO" resultType="com.pj.cherrypick.domain.ReviewVO">
@@ -76,10 +80,20 @@
 	<select id="getCafeMenu" parameterType="int" resultType="com.pj.cherrypick.domain.CafeMenuVO">
 		SELECT * FROM cafeMenu WHERE cno = #{cno}
 	</select>
-	<!--  cno로 리뷰리스트 불러오기 -->
+	<!--  cno로 리뷰리스트 불러오기 /각페이지마다 -->
 	<select id="getReview" parameterType="int" resultType="com.pj.cherrypick.domain.ReviewVO">
-		SELECT * FROM review WHERE cno = #{cno}
+		SELECT * 
+		FROM review 
+		WHERE cno = #{cno}
+		LIMIT #{displayPost}, #{postNum}
 	</select>	
+	<!-- cno로 리뷰갯수 불러오기 -->
+	<select id="cntReview" parameterType="int" resultType="int">
+		SELECT count(rno) as cnt
+		FROM review 
+		WHERE cno = #{cno}
+	</select>
+
 
 	<!-- 내가 북마크한 카페 리스트 (myPage) -->
  	<select id="getMyCafeBmk" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
