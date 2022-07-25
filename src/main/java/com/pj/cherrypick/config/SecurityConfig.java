@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.pj.cherrypick.config.auth.PrincipalDetailService;
@@ -53,21 +52,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.csrf().disable() // csrf : 정상적인 사용자가 의도치 않은 위조요청을 보내는 것을 방지하기 위한 토큰 생성을 비활성화 (테스트시 걸어두는 게 좋음)
-			.authorizeRequests()
-				.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/img/**", "/dummy/**", "/cafe/**", "/bizMember/**", "/error/**", "/board/**", "/upload/**")
-				.permitAll() // 위 경로는 모든 사용자 접근 허용
-				.anyRequest() // 이외의 요청들은
-				.authenticated() // 인증되어야 함
-			.and()
-				.formLogin()
-				.loginPage("/auth/loginForm") // 커스터마이징한 로그인페이지로 이동하여 로그인
-				.failureUrl("/auth/checkPwdForEditResult")
-				.loginProcessingUrl("/auth/loginProc") //  로그인 form 의 action 과 일치해야 하며, 스프링 시큐리티가 해당 주소로 요청하는 로그인을 가로채서 대신 로그인 진행
-				// 로그인 성공시 세션에 UserDetail 타입으로 저장되어야 함. 
-				// 그러나 Member Object 타입을 전달받으므로 변환과정 거쳐야 함.
-				.defaultSuccessUrl("/"); // 로그인 성공하면 index로 이동
-		
+		.csrf().disable() // csrf : 정상적인 사용자가 의도치 않은 위조요청을 보내는 것을 방지하기 위한 토큰 생성을 비활성화 (테스트시 걸어두는 게 좋음)
+		.authorizeRequests()
+			.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/img/**", "/dummy/**", "/cafe/**", "/bizMember/**", "/error/**", "/board/**", "/upload/**")
+			.permitAll() // 위 경로는 모든 사용자 접근 허용
+			.anyRequest() // 이외의 요청들은
+			.authenticated() // 인증되어야 함
+		.and()
+			.formLogin()
+			.loginPage("/auth/loginForm") // 커스터마이징한 로그인페이지로 이동하여 로그인
+			.failureUrl("/auth/checkPwdForEditResult")
+			.loginProcessingUrl("/auth/loginProc") //  로그인 form 의 action 과 일치해야 하며, 스프링 시큐리티가 해당 주소로 요청하는 로그인을 가로채서 대신 로그인 진행
+			// 로그인 성공시 세션에 UserDetail 타입으로 저장되어야 함. 
+			// 그러나 Member Object 타입을 전달받으므로 변환과정 거쳐야 함.
+			.defaultSuccessUrl("/"); // 로그인 성공하면 index로 이동
 				
 	}
 }

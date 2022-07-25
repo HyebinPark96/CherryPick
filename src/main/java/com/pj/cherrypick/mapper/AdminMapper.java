@@ -130,4 +130,7 @@ public interface AdminMapper {
 	// 특정 사업장 리뷰 1개 상세보기
 	public ReviewVO getOneReview(int rno)  throws Exception;
 	
+	// 리뷰 삭제
+	public void adminReviewDelete(int rno[]) throws Exception;
+	
 }

@@ -30,7 +30,7 @@ public class AdminApiRestController {
 	
 	@Autowired
 	AdminService adminService;
-
+	
 	@PostMapping("/admin/memberManagement")
 	public List<MemberVO> memberManagement(@RequestBody HashMap<String, String> sort) { // JSON 데이터 받으므로 @RequestBody 사용
 		
@@ -137,6 +137,14 @@ public class AdminApiRestController {
 		*/
 		
 		adminService.checkApproval(checkedApprovalArr);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
+	
+	
+	// 리뷰 삭제
+	@PostMapping("/admin/adminReviewDelete")
+	public ResponseDto<Integer> adminReviewDelete(@RequestBody int checkedAdminReviewDeleteArr[]) throws Exception {
+		adminService.adminReviewDelete(checkedAdminReviewDeleteArr);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	
