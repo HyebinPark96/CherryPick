@@ -1,1 +1,43 @@
-test.html 입니다.
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+버튼을 눌러서 request <button id="reqbtn">click</button>
+
+<script type="text/javascript">
+$('#reqbtn').on('click', function () {
+	alert('button clicked');
+	
+	var number = {number : 1};
+
+	$.ajax({
+		url: 'select',
+		type: 'GET',
+		data: number ,
+		dataType: 'json',
+		contentType:"application/json;charset=UTF-8",
+		success: function (data) {
+			alert('success!');
+			alert(data);
+			console.log(data);
+
+
+		}, error: function () {
+			alert('failed');
+			console.log(data);
+		}
+	}); 
+	
+});
+
+</script>
+
+
+
+</body>
+</html>

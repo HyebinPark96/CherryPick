@@ -56,13 +56,13 @@ $(document).ready(function() {
 		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 			
 /*		$.ajax({
-		url: url,
+		url: 'cafe/select',
 		type: 'GET', 
-		data: JSON.stringify(filter) ,
-		contentType: 'application/json',
+		data: '' ,
 		dataType: 'json', 
 		success: function(data) {
-				console.log("[ajax] sort radio success")	
+				console.log("[ajax] sort radio success")
+				console.log(data);	
 				
 
 				

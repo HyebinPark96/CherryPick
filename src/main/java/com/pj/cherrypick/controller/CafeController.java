@@ -83,31 +83,17 @@ public class CafeController {
 	
 	
 
-/*	// response for ajax request from cafe.js 
+	// response for ajax request from cafe.js 
 	@RequestMapping("cafe/select")
 	@ResponseBody
-	public int selectCafe(@RequestBody FilterVO vo) throws Exception {
+	public List<CafeVO> selectCafe(@RequestParam int number) throws Exception {
 		
 		System.out.println("ResponseBody: selectCafe--------------------------------------------");
-		System.out.println("[vo]:"+vo);
-		
-		Integer sort = vo.getSort();
-		
-		List<CafeVO> cafes = new ArrayList<>(); 
+		System.out.println(number);
+		List<CafeVO> cafes = cafeService.getCafeAll();
 				
-		if(sort==0 || sort ==null) { //최신순
-			cafes = cafeService.getCafeAll2(vo);	
-		}else if(sort==1) { // 즐겨찾기순
-			cafes = cafeService.getCafeAllByBmk(vo);	
-		}else if(sort==2) { // 별점순
-			cafes = cafeService.getCafeAllByScore(vo);	
-		}else if(sort==3) { // 리뷰많은순
-			cafes = cafeService.getCafeAllByReview(vo);	
-
-		}
-			
-		return 1;
-	}	*/
+		return cafes;
+	}	
 
 	
 	// 카페리스트 (전체카페X lino로 리스트 불러오기)

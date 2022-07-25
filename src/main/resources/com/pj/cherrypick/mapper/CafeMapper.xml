@@ -7,9 +7,6 @@
  	<select id="getCafeAll" parameterType="com.pj.cherrypick.domain.CafeVO" resultType="com.pj.cherrypick.domain.CafeVO">
  		SELECT *
  		FROM cafe c
- 		LEFT JOIN review r  
- 		ON c.cno = r.cno
- 		GROUP BY c.cno
     </select> 
 
   	<select id="getCafeAll2" parameterType="com.pj.cherrypick.domain.FilterVO" resultType="com.pj.cherrypick.domain.CafeVO">
