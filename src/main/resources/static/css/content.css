@@ -94,6 +94,7 @@
 
 .cflist-item {
 	display: flex;
+	align-items: center;
 }
 
 .cflist-thumb {

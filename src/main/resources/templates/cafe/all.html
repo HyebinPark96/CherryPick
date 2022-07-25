@@ -79,8 +79,8 @@
 			<div class="cflist container">
 				<!-- Get cafes with thymeleaf -->
 				<div class="cflist-item" th:each="cafe : ${cafes}">
-					<div class="cflist-thumb">
-						<img th:src="@{${'/img/' + cafe.cimage}}" alt="카페썸네일" width="200" />
+					<div class="cflist-thumb" style="width:150px; height:150px;" >
+						<img th:src="@{${'/img/' + cafe.cimage}}" alt="카페썸네일" style="width:150px; height: 150px; object-fit:cover;"/>
 					</div>
 	
 					<div class="d-flex">
@@ -104,7 +104,7 @@
 									</div>
 								</div>
 							</div>
-							<a th:id="${cafe.cno}" th:onclick="sendToInfo(this.getAttribute('id'))">더보기</a>
+							<a class="divBtn" th:id="${cafe.cno}" th:onclick="sendToInfo(this.getAttribute('id'))">더보기</a>
 						
 						</div>
 					<img class="displayNone" id="bmkImg" th:if="${cafe.chk == 0 }" src="/img/bmk-empty.png" height="20" >

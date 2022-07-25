@@ -184,6 +184,14 @@ textarea:focus, input:focus {
 	margin: 0;
 }
 
+.hoverimg {
+	border: 1px solid #d0d0d0;
+}
+
+.hoverimg :hover{
+	border: 3px solid black;
+}
+
 #overlay5 {
 	cursor: pointer;
 	display: flex;

@@ -15,8 +15,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.response.CherryResponseDto;
 import com.pj.cherrypick.response.ResponseDto;
 import com.pj.cherrypick.response.TempResponseDto;
+import com.pj.cherrypick.service.CafeService;
 import com.pj.cherrypick.service.StorageService;
 import com.pj.cherrypick.service.TempCafeService;
 import com.pj.cherrypick.storage.StorageFileNotFoundException;
@@ -26,6 +28,7 @@ public class tempCafeApiController {
 
 	@Autowired
 	private TempCafeService cafeService;
+	private CafeService cService;
 	
 	private final StorageService storageService;
 
@@ -104,6 +107,14 @@ public class tempCafeApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
 	}
 	
+	@PostMapping("/cafe/getAllCafeProc")
+	public CherryResponseDto<Integer> getAllCafe(){
+		List<CafeVO> result = cService.getCafeAll();
+		return new CherryResponseDto<Integer>(HttpStatus.OK.value(), result);	
+	}
+	
+	
+
 	
 
 }
