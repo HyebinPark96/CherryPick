@@ -251,6 +251,11 @@ textarea:focus, input:focus {
 	transform: translate(-50%, -50%);
 }
 
+.title-text{
+	margin-bottom: 0px !important;
+	/*부트스트랩 scss 속성 margin-bottom: 0.5rem;을 강제로 덮어씀*/
+}
+
 .title-bottom {
 	background-color: #a6434b;
 	height: 40px;
@@ -422,6 +427,7 @@ textarea:focus, input:focus {
 /*========footer 요소========*/
 .footer-logo {
 	width: 150px;
+	height: 45px;
 }
 
 .footer {
@@ -438,13 +444,16 @@ textarea:focus, input:focus {
 .footer-list-container {
 	color: #bbb;
 	display: flex;
-	align-items: top;
-	justify-content: space-evenly;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
-.footer-list-container ul {
-	padding-left: 0px;
-	list-style: none;
+.footer-list{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	gap: 15vw;
 }
 
 

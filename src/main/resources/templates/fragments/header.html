@@ -6,7 +6,7 @@
 	<div class="title-banner">
 		<div class="title-top">
 			<div class="title-top-left">
-				<img src="/img/logo.png" width="150px" onclick="goHome();">
+				<img class="divBtn" src="/img/logo.png" width="125px" onclick="goHome();">
 			</div>
 
 			<div sec:authorize="isAuthenticated()" class="title-top-right">
@@ -58,8 +58,9 @@
 
 		</div>
 		<div class="title-center">
-			<span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span>
 			<h3>CherryPick</h3>
+			<span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span>
+			
 
 			<div class="title-searchbar">
 				<div>
@@ -87,7 +88,7 @@
 <div th:fragment="header-sub">
 	<div class="sub">
 		<div class="sub-left">
-			<img class="logo-pink" src="/img/logo-pink.png" onclick="goHome();"></img>
+			<img class="divBtn logo-pink" src="/img/logo-pink.png" onclick="goHome();"></img>
 		</div>
 		<div class="sub-searchbar">
 			<div>
