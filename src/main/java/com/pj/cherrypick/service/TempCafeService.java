@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pj.cherrypick.domain.BoardVO;
 import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
+import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.mapper.TempCafeMapper;
 import com.pj.cherrypick.mapper.TempMenuMapper;
 
@@ -89,6 +90,7 @@ public class TempCafeService {
 		return -1;
 	}
 	
+
 	
 
 }

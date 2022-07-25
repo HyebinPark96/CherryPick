@@ -21,7 +21,7 @@
 					<div>&nbsp;&nbsp;&nbsp;</div>
 					<img class="back-icon" src="../img/back.png" onclick="goBack();">
 					<div>&nbsp;&nbsp;&nbsp;</div>
-					<div class="text-20">새 리스트 만들기</div>
+					<div class="divBtn text-20">새 리스트 만들기</div>
 				</div>
 
 				<div class="d-flex justify-content-end" style="text-align: right">
@@ -29,9 +29,10 @@
 
 						<div>
 							<div>
+								<b th:text="${#authentication.principal.username}">username</b>
 							</div>
-							<div>email@naver.com</div>
-							<!-- <div th:text="${member.email}">email@naver.com</div> -->
+							<div th:text="${member.email}">email@naver.com</div>
+							<!--  -->
 						</div>
 						<div>&nbsp;&nbsp;&nbsp;</div>
 						<div>&nbsp;&nbsp;&nbsp;</div>
@@ -49,32 +50,47 @@
 		<hr>
 
 		<!-- 본문 -->
-		<div class="container">
-			<div class="row">
-				<div class="col-md-2 divBtn" onclick="selectModal(0)">
-					<img id="pickBtn" src="/img/ready.png" class="hoverimg img-thumbnail">
+		<div class="container d-flex flex-column align-items-center">
+			<label class="text-20">리스트 이름</label> <input id="liname" type="text" placeholder="리스트의 이름을 입력해 주세요."
+				style="padding: 3px; border: 1px solid #ccc; border-radius: 5px; min-width: 400px;"> 
+				<div style="display:none;">
+				<input id="username" type="hidden" th:value="${#authentication.principal.username}">
+				<input class="cno" type="text"> <input class="cno" type="text"> <input class="cno" type="text"> <input class="cno" type="text"> <input class="cno" type="text">
 				</div>
-				
+			<div class="margin-top-40"></div>
+			<div class="gray">썸네일을 클릭해 카페를 추가합니다.</div>
+			<div class="margin-top-10"></div>
+			<div class="row align-items-center">
+				<div class="col-md-1"></div>
+				<div class="col-md-2 divBtn">
+					<img src="/img/ready.png" onclick="selectModal(0)"
+						class="hoverimg img-thumbnail">
+				</div>
+
 				<div class="col-md-2">
-					<img src="/img/ready.png" onclick="selectModal(1)" class="hoverimg img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(1)"
+						class="hoverimg img-thumbnail">
 				</div>
 				<div class="col-md-2">
-					<img src="/img/ready.png" onclick="selectModal(2)" class="hoverimg img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(2)"
+						class="hoverimg img-thumbnail">
 				</div>
 				<div class="col-md-2">
-					<img src="/img/ready.png" onclick="selectModal(3)" class="hoverimg img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(3)"
+						class="hoverimg img-thumbnail">
 				</div>
 				<div class="col-md-2">
-					<img src="/img/ready.png" onclick="selectModal(4)"class="hoverimg img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(4)"
+						class="hoverimg img-thumbnail">
 				</div>
-				
+				<div class="col-md-1"></div>
 
 			</div>
-			
+
 			<div class="margin-top-40"></div>
 
 
-			<table class="table">
+			<table class="table" style="text-align:center;">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
@@ -116,6 +132,7 @@
 					</tr>
 				</tbody>
 			</table>
+			<Button id="btn-addCherry" class="btn btn-primary btn-lg">등록</Button>
 		</div>
 
 
@@ -129,37 +146,42 @@
 					</div>
 					<div class="modal-body d-flex flex-column align-items-center">
 
-						<div>아무 글이나 입력하세요.</div>
+						<!-- <div>아무 글이나 입력하세요.</div>
 						<div class="input-group mb-3">
 							<input type="text" class="form-control"
 								aria-label="Amount (to the nearest dollar)">
 							<div class="input-group-append">
 								<span class="divBtn input-group-text"><b>확인</b></span>
 							</div>
-						</div>
-						
+						</div> -->
+
 						<!-- 확인을 누르면 표시되도록 -->
-						
+
 						<table class="table">
-									<thead>
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">cname</th>
-											<th scope="col">caddress</th>
-											<th scope="col">ctag</th>
-											<th scope="col"></th>
-										</tr>
-									</thead>
-									<tbody id="modal-tbody">
-										<tr>
-											<th scope="row">1</th>
-											<td class="cname">Mark</td>
-											<td class="caddress">Otto</td>
-											<td class="ctag">#mdo</td>
-											<td><img class="selectBtn divBtn icon-20" src="/img/check.png"></td>
-										</tr>
-									</tbody>
-								</table>
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">cname</th>
+									<th scope="col">caddress</th>
+									<th scope="col">ctag</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody id="modal-tbody">
+								<tr class="modal-tr">
+
+									<th class="mcno" scope="row">1</th>
+									<td class="mcname">Mark</td>
+									<td class="mcaddress">Otto</td>
+									<td class="mctag">#mdo</td>
+									<td><img class="selectBtn divBtn icon-20"
+										src="/img/check.png"></td>
+									<!-- <td class="cno" style="display:none;"> -->
+									<td class="mcimage" style="display: none;">
+								</tr>
+							</tbody>
+						</table>
+						
 
 					</div>
 				</div>
@@ -170,7 +192,7 @@
 
 		<!-- 이 팝업안에서 카페명 search는 text input만 만들어놓고 기능은 이후 추가
 하단에 출력한 내가만든리스트에는 수정 링크or버튼으로 update form으로 이동 (이때 새창 or 페이지이동은 자율), 삭제버튼  -->
-		
+
 		<!-- 모달 영역 -->
 		<div id="menuModal" class="modal fade modal-item">
 			<div class="modal-dialog modal-dialog-centered">
@@ -182,23 +204,20 @@
 					<div class="modal-body d-flex flex-column align-items-center">
 
 
-						<div>
-							<a id="mEdit" href="/member/checkPwdForEdit">회원정보 수정</a>
-						</div>
-						<div>
-							<a href="/member/myPage">나의 CherryPick</a>
-						</div>
+						<div><a id="mEdit" href="/member/checkPwdForEdit">회원정보 수정</a></div>
+						<div><a href="/member/myPage">나의 CherryPick</a></div>
+						<div><a href="/member/myAddCherry">새로운 Cherry 만들기</a></div>
 						<div class="divBtn">
-							
+							<a th:href="@{myReview(num=1)}">나의 리뷰</a>
 						</div>
-
+						
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<script src="/js/addCherry.js"></script>
-		
+
 		<script>
 			var currItem = null;
 		
@@ -214,26 +233,21 @@
 				currItem = idx;
 			}
 		</script>
-		
+
 		<script>
 		
 			
-			$(".selectBtn").click(function(event)
-				{
-				   let myparent = $(this.parentNode.parentNode); //jquery obj
+			//$(".selectBtn").click(function(event)
+			function selectItem(e){
+				   //let myparent = $(this.parentNode.parentNode);
+				   //let myparent = this.parentNode.parentNode;
+				   //jquery obj
+				   //console.log(this);
+				   console.log($(this));
+				   let myparent = $(this.parent().parent());
 				   var cname = myparent.find('.cname').text();
 				   var caddress = myparent.find('.caddress').text();
 				   var ctag = myparent.find('.ctag').text();
-				   
-				   //let parent = $(this.parentNode)[0]; //plain DOM obj
-/* 					console.log(myparent);
-					console.log(cname);
-					console.log(caddress);
-					console.log(ctag);
-					alert(cname.text());
-					alert(caddress.text());
-					alert(ctag.text());
- */					
 					
  					var r = $(".resultRow").eq(currItem);
  					
@@ -245,18 +259,24 @@
  					
  					$('#pickModal').modal('hide');
 
-				});
+				};
 			
 			$('#pickModal').on('hidden.bs.modal', function () {
 				$('.hoverimg').eq(currItem).css( 'border', '1px solid #d0d0d0' );
+				var trNum = $('.modal-tr').length;
+				
+				while(trNum > 1){
+					$('.modal-tr').eq(trNum-1).remove();
+					trNum--;
+				}
+				
 			});
 		</script>
-		
-				
+
+
 		<script type="text/javascript">
 			
 			$('#pickModal').on('shown.bs.modal', function() {
-				alert('button clicked');
 
 				var number = {
 					number : 1
@@ -285,27 +305,66 @@
 			
 
 			function writeList(arr){
-				alert('wtf we doin here');
 				for (var i = 0; i < 10; i++){
 					//임시로 10까지만.
 				
-					  alert("array index: " + i);
 					  var obj = arr[i];
 					  var cno = obj["cno"];
 					  var cname = obj["cname"];
 					  var cimage = obj["cimage"];
+					  var caddress = obj["caddress"];
 					  var ctag = obj["ctag"];
 					  
-					  $('#modal-tbody').appendChild(tr[0].cloneNode(false));
-					  }
-				
-						
+					  
+					
+				 
+				 	$('.mcno').eq(i).text(i+1);
+				 	$('.mcname').eq(i).text(cname);
+				 	$('.mcaddress').eq(i).text(caddress);
+				 	$('.mctag').eq(i).text(ctag);
+				 	$('.mcimage').eq(i).text(cimage);
+				 	if(i < 10 - 1){
+				 		$('.modal-tr').eq(0).clone().appendTo('#modal-tbody');
+				 	}
+
 				}
+
+			 	
+			 	var sBtns = document.querySelectorAll('.selectBtn');
+
+			 	sBtns.forEach(btn => {
+			 		btn.addEventListener('click', function (e) {
+			 			
+					    let myparent = e.target.parentNode.parentNode;
+					   
+					    var scname = myparent.querySelector('.mcname').textContent;
+					    var scaddress = myparent.querySelector('.mcaddress').textContent;
+					    var sctag = myparent.querySelector('.mctag').textContent;
+					    var scno = myparent.querySelector('.mcno').textContent;
+					    var scimage = myparent.querySelector('.mcimage').textContent;
+						
+	 					var r = $(".resultRow").eq(currItem);
+	 					
+	 					//console.log(r.children());
+	 					r.children().eq(1).text(scname);
+	 					r.children().eq(2).text(scaddress);
+	 					r.children().eq(3).text(sctag);
+	 					//input이 타깃일 경우, text 대신 val
+	 					
+	 					console.log(scno);
+	 					console.log(scimage);
+	 					$('.cno').eq(currItem).val(scno); 
+						$('.hoverimg').eq(currItem).attr("src", '/img/' + scimage); //img src로
+	 					 
+	 					$('#pickModal').modal('hide');
+		 	 		 });
+			 	});
+			}
 				
 			
 		</script>
-		
-		
+
+
 
 
 	</div>

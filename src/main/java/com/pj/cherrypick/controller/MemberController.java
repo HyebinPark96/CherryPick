@@ -134,7 +134,10 @@ public class MemberController {
 	
 	
 	@GetMapping("/member/myAddCherry")
-	public String myAddCherry() {
+	public String myAddCherry(@AuthenticationPrincipal PrincipalDetail principalDetail, Model model) {
+		MemberVO member = memberService.findByUsername(principalDetail.getUsername()); // 회원 정보 가져오기
+		model.addAttribute("member", member);
+		
 		return "member/myAddCherry";
 	}
 	
