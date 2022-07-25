@@ -107,14 +107,5 @@ public class tempCafeApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
 	}
 	
-	@PostMapping("/cafe/getAllCafeProc")
-	public CherryResponseDto<Integer> getAllCafe(){
-		List<CafeVO> result = cService.getCafeAll();
-		return new CherryResponseDto<Integer>(HttpStatus.OK.value(), result);	
-	}
-	
-	
-
-	
 
 }

@@ -63,6 +63,7 @@ let cindex = {
 		var cimage = $("#cimage").val().replace(/.*(\/|\\)/, '');
 		var cmenu_image = $("#cmenu_image").val().replace(/.*(\/|\\)/, '');
 		
+		
 		//tempFuncCafe.js의 hashtag 함수
 		makeHashtag(); 
 		
@@ -137,10 +138,12 @@ let cindex = {
 		var menuList = [];
 		
 		for (var i = 0; i < 3; i++) {
+			var m_img = $('.m_img').eq(i).val().replace(/.*(\/|\\)/, '');
+			
 			let data = {
 				cno: cno,
 				m_name: $('.m_name').eq(i).val(),
-				m_img: $('.m_img').eq(i).val().replace(/.*(\/|\\)/, ''),
+				m_img: m_img,
 				m_detail: $('.m_detail').eq(i).val(),
 				m_size: "",
 				m_price: $('.m_price').eq(i).val(),
@@ -179,6 +182,14 @@ let cindex = {
 		//파일명 받아오기
 		var cimage = $("#cimage").val().replace(/.*(\/|\\)/, '');
 		var cmenu_image = $("#cmenu_image").val().replace(/.*(\/|\\)/, '');
+		if(cimage==""){
+			cimage = $("#cImageBackup").val();
+		}
+		
+		if(cmenu_image==""){
+			cmenu_image = $("#cMenuImageBackup").val();
+		}
+		
 		
 		//storeRegister.html의 hashtag 함수
 		makeHashtag(); 
@@ -190,8 +201,8 @@ let cindex = {
 			return false;
 		}
 		*/
-		if(!cindex.verify("#cname", "카페 이름"))
-			return false;
+		//if(!cindex.verify("#cname", "카페 이름"))
+			//return false;
 		
 		/*
 		if(!cindex.verify("#caddress", "카페 주소"))
@@ -250,13 +261,18 @@ let cindex = {
 		var menuList = [];
 		
 		
-		
 	
 		for (var i = 0; i < 3; i++) {
+			var m_img = $('.m_img').eq(i).val().replace(/.*(\/|\\)/, '');
+			//
+			if(m_img==""){
+				m_img = $(".mImgBackup").eq(i).val();
+			}
+			
 			let data = {
 				meno: $('.meno').eq(i).val(), //meno 어떻게 받을거야? input hidden으로 준비해두자.
 				m_name: $('.m_name').eq(i).val(),
-				m_img: $('.m_img').eq(i).val().replace(/.*(\/|\\)/, ''),
+				m_img: m_img,
 				m_detail: $('.m_detail').eq(i).val(),
 				m_size: "",
 				m_price: $('.m_price').eq(i).val(),

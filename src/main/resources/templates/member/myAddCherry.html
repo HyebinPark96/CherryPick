@@ -150,7 +150,7 @@
 											<th scope="col"></th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="modal-tbody">
 										<tr>
 											<th scope="row">1</th>
 											<td class="cname">Mark</td>
@@ -251,6 +251,60 @@
 				$('.hoverimg').eq(currItem).css( 'border', '1px solid #d0d0d0' );
 			});
 		</script>
+		
+				
+		<script type="text/javascript">
+			
+			$('#pickModal').on('shown.bs.modal', function() {
+				alert('button clicked');
+
+				var number = {
+					number : 1
+				};
+
+				$.ajax({
+					url : '/cafe/select',
+					type : 'GET',
+					data : number,
+					dataType : 'json',
+					contentType : "application/json;charset=UTF-8",
+					success : function(data) {
+						//alert('success!');
+						//alert(data);
+						console.log(data);
+						writeList(data);
+
+					},
+					error : function() {
+						alert('failed');
+						console.log(data);
+					}
+				});
+
+			});
+			
+
+			function writeList(arr){
+				alert('wtf we doin here');
+				for (var i = 0; i < 10; i++){
+					//임시로 10까지만.
+				
+					  alert("array index: " + i);
+					  var obj = arr[i];
+					  var cno = obj["cno"];
+					  var cname = obj["cname"];
+					  var cimage = obj["cimage"];
+					  var ctag = obj["ctag"];
+					  
+					  $('#modal-tbody').appendChild(tr[0].cloneNode(false));
+					  }
+				
+						
+				}
+				
+			
+		</script>
+		
 		
 
 

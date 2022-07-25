@@ -15,7 +15,12 @@
 		<div id="sidebar-wrapper" class="col-md-1"
 			th:replace="fragments/bizSidebar:: sidebar"></div>
 
-		 
+		<input type="hidden" id="cImageBackup" th:value=${cafe.cimage}>
+		<input type="hidden" id="cMenuImageBackup" th:value=${cafe.cmenu_img}>
+		<input type="hidden" class="mImgBackup">
+		<input type="hidden" class="mImgBackup">
+		<input type="hidden" class="mImgBackup">
+		
 
 		<!-- 본문 -->
 		<div class="content" id="page-content-wrapper">
@@ -507,7 +512,16 @@
 			$('.m_name').eq(i).val(menuList[i].m_name);
 			$('.m_price').eq(i).val(menuList[i].m_price);
 			$('.m_detail').eq(i).val(menuList[i].m_detail); 
+			
+			$('.m_img').eq(i).val(menuList[i].m_img); 
+			//최상단 hidden input 태그
 		}		
+	</script>
+	
+	<script th:inline="javascript">
+		
+		
+		
 	</script>
 	
 </div>
