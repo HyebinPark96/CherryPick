@@ -1,3 +1,5 @@
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+
 .text-large {
 	font-size: 25px;
 	font-weight: bold;
@@ -48,7 +50,7 @@ textarea:focus, input:focus {
 }
 
 .content-top {
-	padding-left: 10px;
+	/* padding-left: 10px; */
 }
 
 .content-top-tab {
@@ -80,6 +82,7 @@ textarea:focus, input:focus {
 
 .back-icon {
 	width: 20px;
+	height: 30px;
 }
 
 
@@ -149,6 +152,10 @@ textarea:focus, input:focus {
 
 .divBtn {
 	cursor: pointer;
+}
+
+.ulBtn * :hover{
+	text-decoration: underline; 
 }
 
 .hoverbox {
@@ -441,19 +448,16 @@ textarea:focus, input:focus {
 	text-align: center;
 }
 
-.footer-list-container {
+.footer-list{
 	color: #bbb;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 }
 
-.footer-list{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	gap: 15vw;
+.contact-head{
+	font-size: 17px;
+}
+
+.contact-body{
+	font-size: 14px;
 }
 
 
@@ -508,4 +512,8 @@ textarea:focus, input:focus {
   background: rgba(0, 0, 0, 0.75);
   font-size: 14px;
   text-align: center;
+}
+
+#menuModal .modal-body{
+	gap: 20px;
 }

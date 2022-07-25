@@ -11,8 +11,10 @@
 	<div class="content" layout:fragment="content">
 	<input type="hidden" th:value="${sort}" id="sort">
 	<input type="hidden" th:value="orderByRegDate" id="orderBy">
-	<input type="hidden" th:value="${num}" id="num">
+	<input type="hidden" th:value="${page.num}" id="num">
 	<input type="hidden" value="cafe" id="cafe">
+	<input type="hidden" th:value="${searchType}" id="searchType">
+	<input type="hidden" th:value="${keyword}" id="keyword">
 
 		<!-- ==========회원관리=========== -->
 		<div class="container" id="memberManage" th:if="${sort}!='cafe'">
@@ -235,10 +237,10 @@
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
-						<span th:if="${select!=num} AND ${num}!=0" class="page-item" >
+						<span th:if="${select!=num} AND ${page.count}!=0" class="page-item" >
 							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword}, orderBy=${orderBy})}" th:text="${num}" class="page-link" ></a>
 						</span>
-						<span th:unless="${select!=num} AND ${num}!=0" class="page-item active">
+						<span th:if="${select==num} AND ${page.count}!=0" class="page-item active">
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
 						</span>
 					</th:block>
@@ -286,7 +288,7 @@
 						<thead>
 							<tr>
 								<th scope="col"><input class="form-check-input mt-0"
-								name="aCafeChkAll" type="checkbox" value="">
+								name="bCafeChkAll" type="checkbox" value="">
 								</th>
 								<th scope="col">순번</th>
 								<th scope="col">카페명</th>
@@ -298,8 +300,8 @@
 						</thead>
 						<tbody>
 							<tr th:each="cList : ${cList}">
-								<td><input class="form-check-input mt-0" name="aCafeChk"
-								type="checkbox" value=""></td>
+								<td><input class="form-check-input mt-0" name="bCafeChk"
+								type="checkbox" th:value="${cList.cno}"></td>
 								<td th:text="${cListStat.count + (page.num*10) - 10}">1,001</td>
 								<td th:text="${cList.cname}">random</td>
 								<td th:text="${cList.cphone}">placeholder</td>
@@ -309,13 +311,17 @@
 											<input type="hidden" value="1" id="num" name="num">
 											<button type="submit" >이동</button>
 									</form>
-								</td> <!-- 어울리는 이미지 변경 부탁드립니당-->
-								<td><img class="divBtn icon-15" src="/img/minus.png"></td>
+								</td>
+								<td>
+									<button name="cafeDeleteBtn" th:value="${cList.cno}">
+										<img class="divBtn icon-15" src="/img/minus.png">
+									</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<Button class="btn btn-danger">선택 삭제</Button><br><br>
+				<Button class="btn btn-danger" id="checkCafeDeleteBtn">선택 삭제</Button><br><br>
 				
 				
 				
@@ -332,10 +338,10 @@
 						<input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="Search">
 						<div class="input-group-append">
 							<button type="button" id="searchBtn" onclick="search()">
-							<div class="input-group-addon" style="background-color: #ddd; padding: 7px; border-radius: 3px;">
-								<i class="fa fa-search"></i>
-							</div>
-						</button>
+								<div class="input-group-addon" style="background-color: #ddd; padding: 7px; border-radius: 3px;">
+									<i class="fa fa-search"></i>
+								</div>
+							</button>
 						</div>
 					</div>
 				
@@ -347,10 +353,10 @@
 					</th:block>
 					
 					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
-						<span th:if="${select!=num} AND ${num}!=0" class="page-item" >
+						<span th:if="${select!=num} AND ${page.count}!=0" class="page-item" >
 							<a th:href="@{adminMain(num=${num}, sort=${sort}, searchType=${searchType}, keyword=${keyword})}" th:text="${num}" class="page-link" ></a>
 						</span>
-						<span th:unless="${select!=num} AND ${num}!=0" class="page-item active">
+						<span th:if="${select==num} AND ${page.count}!=0" class="page-item active">
 							<a th:href="@{adminMain(num=${num}, sort=${sort})}" th:text="${num}" class="page-link"></a>
 						</span>
 					</th:block>
@@ -410,7 +416,11 @@
 			$('input[name=wCafeChkAll]').on('change', function() {
 				$('input[name=wCafeChk]').prop('checked', this.checked);
 			});
-
+			
+			$('input[name=bCafeChkAll]').on('change', function() {
+				$('input[name=bCafeChk]').prop('checked', this.checked);
+			});
+			
  			//회원관리 /사업장 관리 선택
 			var mem = document.getElementById("memberManage");
 			var cafe = document.getElementById("cafeManage");
@@ -442,7 +452,7 @@
  
 			
 			//사업장 - 변수
-			var opt = 0;
+			/* var opt = 0;
 			
 			function display(){
 				switch (opt) {
@@ -455,11 +465,11 @@
 					aTbl.style.display = 'block';
 					break;
 				}	
-			} 
+			}  */
 			
 			
 			//사업장 - 라디오 버튼			
-			var wTbl = document.getElementById("watingTable");
+			/* var wTbl = document.getElementById("watingTable");
 			var aTbl = document.getElementById("approvedTable");
 			var cafeMod = document.getElementsByName("cafeRadio");
 			
@@ -484,7 +494,7 @@
 						break;
 					}
 				});
-			}
+			} */
 			
 			// 검색기능 
 			let searchBtn = document.getElementById("searchBtn");

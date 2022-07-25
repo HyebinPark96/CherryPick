@@ -3,6 +3,13 @@
 
 <mapper namespace="com.pj.cherrypick.mapper.AdminMapper" >
 
+	<!-- 관리자 username 들고오기 -->
+	<select id="getAdminUsername" resultType="String">
+		SELECT username
+		FROM member
+		WHERE role = 1
+	</select>
+
 	<!-- 1. 일반 회원 관리 -->
 	<!-- 회원 목록 가져오기 -->
 	<select id="list" resultType="com.pj.cherrypick.domain.MemberVO">
@@ -521,5 +528,26 @@
 	    </where>
 	    
 	</delete>
+	
+	
+	<!-- 개별 사업장 삭제 -->
+	<delete id="cafeDelete" parameterType="int">
+		DELETE FROM cafe
+		WHERE cno = #{cno}
+	</delete>
+	
+	<!-- 체크박스 복수선택 사업장 삭제 -->
+		<!-- 리뷰 삭제 -->
+	<delete id="checkCafeDelete" parameterType="int">
+		DELETE FROM cafe
+		
+		<where>
+		    <foreach collection="array" item="cno" open="" close="" separator="OR">
+		        (cno = #{cno})
+		    </foreach>
+	    </where>
+	    
+	</delete>
+	
 	
 </mapper>

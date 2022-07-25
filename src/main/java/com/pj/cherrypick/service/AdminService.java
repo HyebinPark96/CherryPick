@@ -19,6 +19,10 @@ public class AdminService {
 	@Autowired
 	AdminMapper adminMapper;
 	
+	public String getAdminUsername() throws Exception{
+		return adminMapper.getAdminUsername();
+	}
+	
 	public List<MemberVO> list() throws Exception{
 		return adminMapper.list();
 	};
@@ -307,5 +311,17 @@ public class AdminService {
 	public void adminReviewDelete(int rno[]) throws Exception{
 		adminMapper.adminReviewDelete(rno);
 	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public void cafeDelete(int cno) throws Exception{
+		adminMapper.cafeDelete(cno);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public void checkCafeDelete(int cno[]) throws Exception{
+		adminMapper.checkCafeDelete(cno);
+	}
+	
+	
 	
 }

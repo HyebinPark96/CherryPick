@@ -14,6 +14,9 @@ import com.pj.cherrypick.domain.ReviewVO;
 @Mapper // 매퍼 사용하면 빈으로 등록되므로 Service단에서 Autowired로 사용 가능
 public interface AdminMapper {
 	
+	// 관리자 username 들고오기 
+	public String getAdminUsername() throws Exception;
+	
 	/*1. 일반회원*/
 	// 리스트
 	public List<MemberVO> list() throws Exception;
@@ -133,4 +136,9 @@ public interface AdminMapper {
 	// 리뷰 삭제
 	public void adminReviewDelete(int rno[]) throws Exception;
 	
+	// 개별 사업장 삭제
+	public void cafeDelete(int cno) throws Exception;
+	
+	// 체크박스 복수선택 사업장 삭제
+	public void checkCafeDelete(int cno[]) throws Exception;
 }

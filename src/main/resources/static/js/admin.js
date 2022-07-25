@@ -48,6 +48,7 @@ let index = {
 			index.approval($('button[name=approvalBtn]')[idx].value);
 		});
 		
+		
 		$('#checkApprovalBtn').on("click", () => {
 			this.checkApproval();
 		});
@@ -56,6 +57,17 @@ let index = {
 			this.checkAdminReviewDelete();
 		});
 		
+		
+		let cafeDeleteBtn = $('button[name=cafeDeleteBtn]').on('click', function() {
+			let idx = cafeDeleteBtn.index(this); // <- 변경된 코드
+			// console.log(idx);
+			// console.log($('button[name=cancleApprovalBtn]')[idx].value);
+			index.cafeDelete($('button[name=cafeDeleteBtn]')[idx].value);
+		});
+		
+		$('#checkCafeDeleteBtn').on("click", () => {
+			this.checkCafeDelete();
+		});
 		
 		/*
 		$('button[name=cancleApprovalBtn]').on("click", () => {
@@ -150,6 +162,12 @@ let index = {
 			num: $("#num").val()
 		};
 		
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val()
+		}
+		
 		$.ajax({
 			type: "POST",
 			url: "/admin/cafeManagement",
@@ -176,16 +194,23 @@ let index = {
 		    checkedMemChkArr.push(checkedMemChk);
 		    // console.log(checkedMemChk);
 		})
+		
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val(),
+			orderBy: $("#orderBy").val()
+		}
 
 		$.ajax({
-			type: "POST",
+			type: "DELETE",
 			url: "/admin/withdrawalForMem",
 			data: JSON.stringify(checkedMemChkArr), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			location.href = "/admin/adminMain?num=1&sort=member";
+			location.href = "/admin/adminMain?num=" + page.num + "&sort=member&searchType=" + page.searchType + "&keyword=" + page.keyword + "&orderBy=" + page.orderBy;
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			console.log(JSON.stringify(error));
@@ -206,17 +231,22 @@ let index = {
 		    // console.log(checkedAuthBizChk);
 		})
 		
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val(),
+			orderBy: $("#orderBy").val()
+		}
+		
 		$.ajax({
-			type: "POST",
+			type: "DELETE",
 			url: "/admin/withdrawalForAuthBiz",
 			data: JSON.stringify(checkedAuthBizChkArr), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			
-			// 있었던 num값으로 이동 로직 고민해보기
-			location.href = "/admin/adminMain?num=1&sort=authBizMember";
+			location.href = "/admin/adminMain?num=" + page.num +"&sort=authBizMember&searchType=" + page.searchType + "&keyword=" + page.keyword + "&orderBy=" + page.orderBy;
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			console.log(JSON.stringify(error));
@@ -231,16 +261,23 @@ let index = {
 		let data = {
 			bid: bid
 		}
+		
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val(),
+			orderBy: $("#orderBy").val()
+		}
 
 		$.ajax({
-			type: "POST",
+			type: "PUT",
 			url: "/admin/cancleApproval",
 			data: JSON.stringify(data), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			location.href = "/admin/adminMain?num=1&sort=authBizMember";
+			location.href = "/admin/adminMain?num=" + page.num + "&sort=authBizMember&searchType=" + page.searchType + "&keyword=" + page.keyword + "&orderBy=" + page.orderBy;
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			console.log(JSON.stringify(error));
@@ -256,16 +293,23 @@ let index = {
 		let data = {
 			bid: bid
 		}
+		
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val(),
+			orderBy: $("#orderBy").val()
+		}
 
 		$.ajax({
-			type: "POST",
+			type: "PUT",
 			url: "/admin/approval",
 			data: JSON.stringify(data), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			location.href = "/admin/adminMain?num=1&sort=unauthBizMember";
+			location.href = "/admin/adminMain?num=" + page.num + "&sort=unauthBizMember&searchType=" + page.searchType + "&keyword=" + page.keyword + "&orderBy=" + page.orderBy;
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			console.log(JSON.stringify(error));
@@ -283,16 +327,23 @@ let index = {
 		    checkedApprovalArr.push(checkedApproval);
 		   	// console.log(checkedApproval);
 		})
+		
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val(),
+			orderBy: $("#orderBy").val()
+		}
 
 		$.ajax({
-			type: "POST",
-			url: "/admin/checkApproval",
+			type: "PUT", // PUT 변경
+			url: "/admin/checkApproval", // 컨트롤러도 PutMapping 변경
 			data: JSON.stringify(checkedApprovalArr), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			location.href = "/admin/adminMain?num=1&sort=unauthBizMember";
+			location.href = "/admin/adminMain?num=" + page.num + "&sort=unauthBizMember&searchType=" + page.searchType + "&keyword=" + page.keyword + "&orderBy=" + page.orderBy;
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			console.log(JSON.stringify(error));
@@ -305,7 +356,7 @@ let index = {
 
 		//빈 배열 선언 후 담아준다.
 		let checkedAdminReviewDeleteArr= [];
-		$("input[name=memChk]:checked").each(function(){
+		$("input[name=reviewChk]:checked").each(function(){
 			let checkedAdminReviewDelete = $(this).val();
 		    checkedAdminReviewDeleteArr.push(checkedAdminReviewDelete);
 		   	// console.log(checkedAdminReviewDelete);
@@ -315,23 +366,95 @@ let index = {
 			cno: $("#cno").val()
 		};
 		
-		console.log(data.cno);
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val()
+		}
 
 		$.ajax({
-			type: "POST",
-			url: "/admin/adminReviewDelete",
+			type: "DELETE", // delete로 변경 
+			url: "/admin/adminReviewDelete", // 컨트롤러도 DeleteMapping 변경
 			data: JSON.stringify(checkedAdminReviewDeleteArr), 
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(resp) {
 			// 성공한 경우 호출
-			location.href = "/admin/adminReview/" + data.cno + "?num=1";
+			location.href = "/admin/adminReview/" + data.cno + "?num=" + page.num + "&searchType=" + page.searchType + "&keyword=" + page.keyword;
 		}).fail(function(error) {
 			// 실패한 경우 호출
 			console.log(JSON.stringify(error));
 		});
 	},
+	
+	
+	
+	
+	
+	cafeDelete: function(cno) {
+		// console.log(bid);
+		
+		let data = {
+			cno: cno
+		}
+		
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val()
+		}
 
+		$.ajax({
+			type: "DELETE",
+			url: "/admin/cafeDelete",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			location.href = "/admin/adminMain?num=" + page.num + "&sort=cafe&searchType=" + page.searchType + "&keyword=" + page.keyword;
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			console.log(JSON.stringify(error));
+		});
+	},
+	
+	
+	
+	
+	
+	
+	checkCafeDelete: function() {
+
+		//빈 배열 선언 후 담아준다.
+		let checkedCafeDeleteArr= [];
+		$("input[name=cafeChk]:checked").each(function(){
+			let checkCafeDelete = $(this).val();
+		    checkedCafeDeleteArr.push(checkCafeDelete);
+		   	// console.log(checkedApproval);
+		})
+		
+		let page = {
+			num: $("#num").val(),
+			searchType: $("#searchType").val(),
+			keyword: $("#keyword").val()
+		}
+
+		$.ajax({
+			type: "DELETE", // PUT 변경
+			url: "/admin/checkCafeDelete", // 컨트롤러도 PutMapping 변경
+			data: JSON.stringify(checkedCafeDeleteArr), 
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			// 성공한 경우 호출
+			location.href = "/admin/adminMain?num=" + page.num + "&sort=cafe&searchType=" + page.searchType + "&keyword=" + page.keyword;
+		}).fail(function(error) {
+			// 실패한 경우 호출
+			console.log(JSON.stringify(error));
+		});
+	},
+	
 }
 
 index.init();
