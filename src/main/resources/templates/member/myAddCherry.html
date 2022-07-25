@@ -210,6 +210,7 @@
 				
 			function selectModal(idx){
 				$('#pickModal').modal('show');
+				$('.hoverimg').eq(idx).css( 'border', '3px solid #d0d0d0' );
 				currItem = idx;
 			}
 		</script>
@@ -235,14 +236,20 @@
  */					
 					
  					var r = $(".resultRow").eq(currItem);
- 					r.children().css( 'color', 'blue' );
+ 					
  					console.log(r.children());
  					r.children().eq(1).text(cname);
  					r.children().eq(2).text(caddress);
  					r.children().eq(3).text(ctag);
  					//input이 타깃일 경우, text 대신 val
+ 					
+ 					$('#pickModal').modal('hide');
 
 				});
+			
+			$('#pickModal').on('hidden.bs.modal', function () {
+				$('.hoverimg').eq(currItem).css( 'border', '1px solid #d0d0d0' );
+			});
 		</script>
 		
 
