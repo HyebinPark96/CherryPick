@@ -35,7 +35,7 @@
 					</div>
 			</div>
 			
-			<div>
+			<div class="divBtn">
 				<a th:href="@{myReview(num=1)}">
 					<button type="submit">내가 작성한 리뷰 보러가기</button>
 				</a>
@@ -44,20 +44,21 @@
 			<hr>
 			<div class="content-top-tab">
 
-				<div class="opt" onclick="showCafeBmk()">카페</div>
+				<div class="divBtn" onclick="showCafeBmk()">카페</div>
 				<div>|</div>
-				<div class="opt" onclick="showCafeListBmk()">리스트</div>
+				<div class="divBtn" onclick="showCafeListBmk()">리스트</div>
 			</div>
 		</div>
 		<hr>
 
-		<div style="color: gray">
+<!-- 		<div style="color: gray">
 			<b>'카페'글자와 '리스트'글자를 눌러 탭을 전환합니다.</b>
-		</div>
+		</div> -->
 
 		<div class="content container">
 
 			<div id="cfBmk" class="cflist container">
+					<div th:unless="${cafes.size}">북마크된 카페가 없습니다.</div>
 
 
 					<!-- th로 cafelist 받아오기 -->
@@ -101,8 +102,8 @@
 			<div></div>
 <!--	내가 북마크한 리스트 --> 
 			<div id="cfLiBmk" class="cflist container">
-
-				
+			
+					<div th:unless="${list.size}">북마크된 리스트가 없습니다.</div>
 					<div class="cflist-item" th:each="list : ${list}">
 						<div class="cflist-thumb" style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');"></div>
 

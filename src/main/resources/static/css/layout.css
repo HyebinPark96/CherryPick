@@ -1,3 +1,5 @@
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+
 .text-large {
 	font-size: 25px;
 	font-weight: bold;
@@ -251,6 +253,11 @@ textarea:focus, input:focus {
 	transform: translate(-50%, -50%);
 }
 
+.title-text{
+	margin-bottom: 0px !important;
+	/*부트스트랩 scss 속성 margin-bottom: 0.5rem;을 강제로 덮어씀*/
+}
+
 .title-bottom {
 	background-color: #a6434b;
 	height: 40px;
@@ -422,6 +429,7 @@ textarea:focus, input:focus {
 /*========footer 요소========*/
 .footer-logo {
 	width: 150px;
+	height: 45px;
 }
 
 .footer {
@@ -435,16 +443,16 @@ textarea:focus, input:focus {
 	text-align: center;
 }
 
-.footer-list-container {
+.footer-list{
 	color: #bbb;
-	display: flex;
-	align-items: top;
-	justify-content: space-evenly;
 }
 
-.footer-list-container ul {
-	padding-left: 0px;
-	list-style: none;
+.contact-head{
+	font-size: 17px;
+}
+
+.contact-body{
+	font-size: 14px;
 }
 
 

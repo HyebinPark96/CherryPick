@@ -10,10 +10,10 @@ function sendToListInfo(variable) {
 }
 
 
-// 문서 ready때 체크: 북마크 여부, sort&filter setting
+// 문서 ready때 체크: 1.북마크 여부(cafeInfo) 2.sort&filter(cafeList)
 $(document).ready(function() {
 		
-	let chk = document.getElementById('bmk_check').value	
+	let chk = document.getElementById('bmk_check').value 
 	const cno = $("#cno").val();
 	const username = $("#username").val();
 	const bmkImg = document.getElementById("bmkImg");
@@ -33,80 +33,45 @@ $(document).ready(function() {
 	var fpet =  $("#f_pet").val();
 	var fkids =  $("#f_kids").val();
 	var fgroup =  $("#f_group").val();
-	var sort =  $("#f_sort").val(); 
+	var sort =  $("#f_sort").val();
 	
-/*	var fpark = 0;
-	var fpet = 0;
-	var fkids = 0;
-	var fgroup = 0;
-	var sort = 0; */
-	
-	console.log(fpark);
-	console.log(fpet);
-	console.log(fkids);
-	console.log(fgroup);
-	console.log(sort);
+	console.log("fpark:"+fpark);
+	console.log("fpet:"+fpet);
+	console.log("fkids:"+fkids);
+	console.log("fgroup:"+fgroup);
+	console.log("sort:"+sort);
 					
-/*
-	for (i = 0; i < 4; i++) {
-	if (sort == i ){
-		$('#sort'+sort).attr('checked', true);
-	}
-}
-	
-	var checklist = [fpark, fpet, fkids, fgroup];
-	
-
-/*	 if(fkids == 1) {
-		$('#fkids').attr('checked', true);
-	}
-*/
-	
-
 
 	var filter = { 'fpark' : fpark, 'fpet' : fpet, 'fkids' : fkids, 'fgroup' : fgroup, 'sort' : sort}
 	
-	var url="cafe";
-	
-/*	$.ajax({
-	url: url,
-	type: 'POST', //get으로 보내면 에러남 ㅋㅋ
-	data: JSON.stringify(filter) ,
-	contentType: 'application/json',
-	dataType: 'text', 
-	
-	success: function(data) {
-	console.log("[필터링 ready 전송완료]")
-	
-	}, error: function(jqXHR, textStatus, errorThrown) {
-		console.log("[필터링 ready 전송 error]:" + textStatus + errorThrown);			
+	var url="cafe/select";
 
-	}
-}); 
-*/
-	
-		
+	/* sort 선택 -> ajax 전송 */		
 	//sort 선택시마다 바뀜
 	$("#sort0").on("click", function() {
 		if(this.checked) {
 			filter.sort = 0;
 			console.log("[checked]sort0"); 
 		}
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 			
-		$.ajax({
+/*		$.ajax({
 		url: url,
-		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
+		type: 'GET', 
 		data: JSON.stringify(filter) ,
 		contentType: 'application/json',
-		dataType: 'html', 
+		dataType: 'json', 
 		success: function(data) {
-				console.log("[ajax] sort radio success")
+				console.log("[ajax] sort radio success")	
 				
-			}, error: function() {
+
+				
+			}, error: function(error) {
 				console.log("[ajax] sort radio failed")
+				console.log(error);
 
 			}
-		}); 
+		}); */
 	});
 	
 	
@@ -115,67 +80,26 @@ $(document).ready(function() {
 			filter.sort = 1;
 			console.log("[checked]sort1"); 
 		}
-			
-		$.ajax({
-		url: url,
-		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
-		data: JSON.stringify(filter) ,
-		contentType: 'application/json',
-		dataType: 'json', 
-		success: function(data) {
-				console.log("[ajax] sort radio success")
-				
-			}, error: function() {
-				console.log("[ajax] sort radio failed")
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 
-			}
-		}); 
 	});
+	
 
 	$("#sort2").on("click", function() {
 		if(this.checked) {
 			filter.sort = 2;
 			console.log("[checked]sort2"); 
 		}
-			
-		$.ajax({
-		url: url,
-		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
-		data: JSON.stringify(filter) ,
-		contentType: 'application/json',
-		dataType: 'text', 
-		success: function(data) {
-				console.log("[ajax] sort radio success")
-				$("html").html(data);
-				
-			}, error: function() {
-				console.log("[ajax] sort radio failed")
-
-			}
-		}); 
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;			
+	 
 	});
 
 	$("#sort3").on("click", function() {
 		if(this.checked) {
 			filter.sort = 3;
-			console.log("[checked]sort1"); 
+			console.log("[checked]sort3"); 
 		}
-			
-		$.ajax({
-		url: url,
-		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
-		data: JSON.stringify(filter) ,
-		contentType: 'application/json',
-		dataType: 'text', 
-		success: function(data) {
-				console.log("[ajax] sort radio success")
-				$("html").html(data);
-				
-			}, error: function() {
-				console.log("[ajax] sort radio failed")
-
-			}
-		}); 
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;			
 	});
 
 
@@ -188,22 +112,7 @@ $(document).ready(function() {
 			filter.fpark = 0;
 			console.log("[unchecked]parking:"); 
 		}
-			
-		$.ajax({
-		url: url,
-		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
-		data: JSON.stringify(filter) ,
-		contentType: 'application/json',
-		dataType: 'text', 
-		success: function(data) {
-				console.log("[ajax] park checkbox success")
-				$("html").html(data);
-				
-			}, error: function() {
-				console.log("[ajax] park checkbox failed")
-
-			}
-		}); 
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;		
 	});
 	
 
@@ -217,22 +126,8 @@ $(document).ready(function() {
 			filter.fpet = 0;
 			console.log("[unchecked]pet");  
 		}
-		
-		$.ajax({
-		url: url,
-		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
-		data: JSON.stringify(filter) ,
-		contentType: 'application/json',
-		dataType: 'text', 
-		success: function(data) {
-				console.log("[ajax] pet checkbox success")
-				$("html").html(data);
-				
-			}, error: function() {
-				console.log("[ajax] pet checkbox failed")
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;		
 
-			}
-		}); 
 	});
 	
 	// 키즈 체크박스 바뀔때마다 전송
@@ -244,26 +139,7 @@ $(document).ready(function() {
 			filter.fkids = 0;
 			console.log("[unchecked]kids"); 
 		}
-		
-		$.ajax({
-		url: url,
-		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
-		data: JSON.stringify(filter) ,
-		contentType: 'application/json',
-		dataType: 'text', 
-		success: function(data) {
-				console.log("[ajax] kids checkbox success")
-				console.log(data);
-				$("html").html(data);
-
-				
-
-				
-			}, error: function() {
-				console.log("[ajax] kids checkbox failed")
-
-			}
-		}); 
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;	
 	});
 	
 	// 그룹 체크박스 바뀔때마다 전송
@@ -276,25 +152,11 @@ $(document).ready(function() {
 			console.log("[unchecked]group"); 
 		}
 		
-		$.ajax({
-		url: url,
-		type: 'POST', //get으로 보내면 에러남 ㅋㅋ
-		data: JSON.stringify(filter) ,
-		contentType: 'application/json',
-		dataType: 'text', 
-		success: function(data) {
-				console.log("[ajax] group checkbox success");
-	
-			}, error: function(error) {
-				console.log("[ajax] group checkbox failed");
-				console.log(error);
-
-			}
-		}); 
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup; 
 	});
 	
 	
-	// 북마크 버튼 클릭시 실행되는 코드
+	// 북마크 버튼 클릭시 실행되는 코드 cafeInfo
 	$("#bmkImg").on("click", function() {
 		$.ajax({
 			url: '/cafe/bmk/',
