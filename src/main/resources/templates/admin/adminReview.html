@@ -11,6 +11,9 @@
 	<div class="container">
 		<h3>리뷰관리&nbsp;/<span class="text-20 gray" th:text="${cafe.cname}">/업장명</span></h3>
 		<input type="hidden" th:value="${cno}" id="cno"> 
+		<input type="hidden" th:value="${page.num}" id="num">
+		<input type="hidden" th:value="${searchType}" id="searchType">
+		<input type="hidden" th:value="${keyword}" id="keyword">
 
 
 		<!-- 상단 오른쪽에 배치할 요소 

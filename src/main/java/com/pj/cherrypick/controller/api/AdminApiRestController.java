@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -82,7 +83,7 @@ public class AdminApiRestController {
 		return null;
 	}
 	
-	@PostMapping("/admin/withdrawalForMem")
+	@DeleteMapping("/admin/withdrawalForMem")
 	public ResponseDto<Integer> withdrawalForMem(@RequestBody String checkedMemChkArr[]) throws Exception {
 		
 		// 테스트
@@ -97,7 +98,7 @@ public class AdminApiRestController {
 		
 	}
 	
-	@PostMapping("/admin/withdrawalForAuthBiz")
+	@DeleteMapping("/admin/withdrawalForAuthBiz")
 	public ResponseDto<Integer> withdrawalForAuthBiz(@RequestBody String checkedAuthBizChkArr[]) throws Exception {
 		
 		// 테스트
@@ -113,21 +114,21 @@ public class AdminApiRestController {
 	}
 	
 	// 승인취소
-	@PostMapping("/admin/cancleApproval")
+	@PutMapping("/admin/cancleApproval")
 	public ResponseDto<Integer> cancleApproval(@RequestBody Map<String, String> map) throws Exception {
 		adminService.cancleApproval(map.get("bid"));
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	
 	// 승인
-	@PostMapping("/admin/approval")
+	@PutMapping("/admin/approval")
 	public ResponseDto<Integer> approval(@RequestBody Map<String, String> map) throws Exception {
 		adminService.approval(map.get("bid"));
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	
 	// 선택 승인
-	@PostMapping("/admin/checkApproval")
+	@PutMapping("/admin/checkApproval")
 	public ResponseDto<Integer> checkApproval(@RequestBody String checkedApprovalArr[]) throws Exception {
 		// 테스트
 		/*
@@ -142,9 +143,23 @@ public class AdminApiRestController {
 	
 	
 	// 리뷰 삭제
-	@PostMapping("/admin/adminReviewDelete")
+	@DeleteMapping("/admin/adminReviewDelete")
 	public ResponseDto<Integer> adminReviewDelete(@RequestBody int checkedAdminReviewDeleteArr[]) throws Exception {
 		adminService.adminReviewDelete(checkedAdminReviewDeleteArr);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
+	
+	// 개별 사업장 삭제
+	@DeleteMapping("/admin/cafeDelete")
+	public ResponseDto<Integer> cafeDelete(@RequestBody Map<String, Integer> map) throws Exception {
+		adminService.cafeDelete(map.get("cno"));
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
+	
+	// 체크박스 복수선택 사업장 삭제
+	@DeleteMapping("/admin/checkCafeDelete")
+	public ResponseDto<Integer> checkCafeDelete(@RequestBody int checkedCafeDeleteArr[]) throws Exception {
+		adminService.checkCafeDelete(checkedCafeDeleteArr);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	

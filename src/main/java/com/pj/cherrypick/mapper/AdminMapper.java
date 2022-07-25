@@ -133,4 +133,9 @@ public interface AdminMapper {
 	// 리뷰 삭제
 	public void adminReviewDelete(int rno[]) throws Exception;
 	
+	// 개별 사업장 삭제
+	public void cafeDelete(int cno) throws Exception;
+	
+	// 체크박스 복수선택 사업장 삭제
+	public void checkCafeDelete(int cno[]) throws Exception;
 }

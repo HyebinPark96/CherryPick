@@ -522,4 +522,25 @@
 	    
 	</delete>
 	
+	
+	<!-- 개별 사업장 삭제 -->
+	<delete id="cafeDelete" parameterType="int">
+		DELETE FROM cafe
+		WHERE cno = #{cno}
+	</delete>
+	
+	<!-- 체크박스 복수선택 사업장 삭제 -->
+		<!-- 리뷰 삭제 -->
+	<delete id="checkCafeDelete" parameterType="int">
+		DELETE FROM cafe
+		
+		<where>
+		    <foreach collection="array" item="cno" open="" close="" separator="OR">
+		        (cno = #{cno})
+		    </foreach>
+	    </where>
+	    
+	</delete>
+	
+	
 </mapper>

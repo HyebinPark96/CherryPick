@@ -308,4 +308,16 @@ public class AdminService {
 		adminMapper.adminReviewDelete(rno);
 	}
 	
+	@Transactional(rollbackFor = Exception.class)
+	public void cafeDelete(int cno) throws Exception{
+		adminMapper.cafeDelete(cno);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public void checkCafeDelete(int cno[]) throws Exception{
+		adminMapper.checkCafeDelete(cno);
+	}
+	
+	
+	
 }
