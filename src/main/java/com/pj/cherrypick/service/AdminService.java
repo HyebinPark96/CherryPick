@@ -19,6 +19,10 @@ public class AdminService {
 	@Autowired
 	AdminMapper adminMapper;
 	
+	public String getAdminUsername() throws Exception{
+		return adminMapper.getAdminUsername();
+	}
+	
 	public List<MemberVO> list() throws Exception{
 		return adminMapper.list();
 	};

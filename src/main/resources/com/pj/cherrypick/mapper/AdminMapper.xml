@@ -3,6 +3,13 @@
 
 <mapper namespace="com.pj.cherrypick.mapper.AdminMapper" >
 
+	<!-- 관리자 username 들고오기 -->
+	<select id="getAdminUsername" resultType="String">
+		SELECT username
+		FROM member
+		WHERE role = 1
+	</select>
+
 	<!-- 1. 일반 회원 관리 -->
 	<!-- 회원 목록 가져오기 -->
 	<select id="list" resultType="com.pj.cherrypick.domain.MemberVO">

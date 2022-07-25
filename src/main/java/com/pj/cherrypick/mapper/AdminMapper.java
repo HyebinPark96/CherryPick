@@ -14,6 +14,9 @@ import com.pj.cherrypick.domain.ReviewVO;
 @Mapper // 매퍼 사용하면 빈으로 등록되므로 Service단에서 Autowired로 사용 가능
 public interface AdminMapper {
 	
+	// 관리자 username 들고오기 
+	public String getAdminUsername() throws Exception;
+	
 	/*1. 일반회원*/
 	// 리스트
 	public List<MemberVO> list() throws Exception;
