@@ -28,8 +28,7 @@
 					<div class="d-flex">
 
 						<div>
-							<div>
-							</div>
+							<div></div>
 							<div>email@naver.com</div>
 							<!-- <div th:text="${member.email}">email@naver.com</div> -->
 						</div>
@@ -49,32 +48,45 @@
 		<hr>
 
 		<!-- 본문 -->
-		<div class="container">
-			<div class="row">
-				<div class="col-md-2 divBtn" onclick="selectModal(0)">
-					<img id="pickBtn" src="/img/ready.png" class="hoverimg img-thumbnail">
+		<div class="container d-flex flex-column align-items-center">
+			<label></label>
+			<input id="liname" type="text" placeholder="리스트의 이름을 입력해 주세요." style="padding: 3px; border: 1px solid #ccc; border-radius:5px; min-width: 400px;">
+			<input class="cno" type="text"> <input class="cno"
+				type="text"> <input class="cno" type="text"> <input
+				class="cno" type="text"> <input class="cno" type="text">
+			<div class="gray">썸네일을 클릭해 카페를 추가합니다.</div>
+			<div class="margin-top-20"></div>
+			<div class="row align-items-center">
+				<div class="col-md-1"></div>
+				<div class="col-md-2 divBtn">
+					<img src="/img/ready.png" onclick="selectModal(0)"
+						class="hoverimg img-thumbnail">
 				</div>
-				
+
 				<div class="col-md-2">
-					<img src="/img/ready.png" onclick="selectModal(1)" class="hoverimg img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(1)"
+						class="hoverimg img-thumbnail">
 				</div>
 				<div class="col-md-2">
-					<img src="/img/ready.png" onclick="selectModal(2)" class="hoverimg img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(2)"
+						class="hoverimg img-thumbnail">
 				</div>
 				<div class="col-md-2">
-					<img src="/img/ready.png" onclick="selectModal(3)" class="hoverimg img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(3)"
+						class="hoverimg img-thumbnail">
 				</div>
 				<div class="col-md-2">
-					<img src="/img/ready.png" onclick="selectModal(4)"class="hoverimg img-thumbnail">
+					<img src="/img/ready.png" onclick="selectModal(4)"
+						class="hoverimg img-thumbnail">
 				</div>
-				
+				<div class="col-md-1"></div>
 
 			</div>
-			
+
 			<div class="margin-top-40"></div>
 
 
-			<table class="table">
+			<table class="table" style="text-align:center;">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
@@ -116,6 +128,7 @@
 					</tr>
 				</tbody>
 			</table>
+			<Button id="btn-addCherry" class="btn btn-primary btn-lg">등록</Button>
 		</div>
 
 
@@ -129,37 +142,42 @@
 					</div>
 					<div class="modal-body d-flex flex-column align-items-center">
 
-						<div>아무 글이나 입력하세요.</div>
+						<!-- <div>아무 글이나 입력하세요.</div>
 						<div class="input-group mb-3">
 							<input type="text" class="form-control"
 								aria-label="Amount (to the nearest dollar)">
 							<div class="input-group-append">
 								<span class="divBtn input-group-text"><b>확인</b></span>
 							</div>
-						</div>
-						
+						</div> -->
+
 						<!-- 확인을 누르면 표시되도록 -->
-						
+
 						<table class="table">
-									<thead>
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">cname</th>
-											<th scope="col">caddress</th>
-											<th scope="col">ctag</th>
-											<th scope="col"></th>
-										</tr>
-									</thead>
-									<tbody id="modal-tbody">
-										<tr class="modal-tr">
-											<th class="no" scope="row">1</th>
-											<td class="cname">Mark</td>
-											<td class="caddress">Otto</td>
-											<td class="ctag">#mdo</td>
-											<td><img class="selectBtn divBtn icon-20" src="/img/check.png"></td>
-										</tr>
-									</tbody>
-								</table>
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">cname</th>
+									<th scope="col">caddress</th>
+									<th scope="col">ctag</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody id="modal-tbody">
+								<tr class="modal-tr">
+
+									<th class="mcno" scope="row">1</th>
+									<td class="mcname">Mark</td>
+									<td class="mcaddress">Otto</td>
+									<td class="mctag">#mdo</td>
+									<td><img class="selectBtn divBtn icon-20"
+										src="/img/check.png"></td>
+									<!-- <td class="cno" style="display:none;"> -->
+									<td class="mcimage" style="display: none;">
+								</tr>
+							</tbody>
+						</table>
+						
 
 					</div>
 				</div>
@@ -170,7 +188,7 @@
 
 		<!-- 이 팝업안에서 카페명 search는 text input만 만들어놓고 기능은 이후 추가
 하단에 출력한 내가만든리스트에는 수정 링크or버튼으로 update form으로 이동 (이때 새창 or 페이지이동은 자율), 삭제버튼  -->
-		
+
 		<!-- 모달 영역 -->
 		<div id="menuModal" class="modal fade modal-item">
 			<div class="modal-dialog modal-dialog-centered">
@@ -188,17 +206,15 @@
 						<div>
 							<a href="/member/myPage">나의 CherryPick</a>
 						</div>
-						<div class="divBtn">
-							
-						</div>
+						<div class="divBtn"></div>
 
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<script src="/js/addCherry.js"></script>
-		
+
 		<script>
 			var currItem = null;
 		
@@ -214,7 +230,7 @@
 				currItem = idx;
 			}
 		</script>
-		
+
 		<script>
 		
 			
@@ -253,8 +269,8 @@
 				
 			});
 		</script>
-		
-				
+
+
 		<script type="text/javascript">
 			
 			$('#pickModal').on('shown.bs.modal', function() {
@@ -289,7 +305,6 @@
 				for (var i = 0; i < 10; i++){
 					//임시로 10까지만.
 				
-					  //alert("array index: " + i);
 					  var obj = arr[i];
 					  var cno = obj["cno"];
 					  var cname = obj["cname"];
@@ -298,54 +313,45 @@
 					  var ctag = obj["ctag"];
 					  
 					  
-					  /* var newTr = $('.modal-tr').eq(0).clone();    
-					  alert(newTr);
-					  console.log(newTr);
-					  $('#modal-tbody').html(newTr);
-				 */
+					
 				 
-				 	$('.no').eq(i).text(cno);
-				 	//$('.cno').eq(i).text(cno); //input으로
-				 	$('.cname').eq(i).text(cname);
-				 	$('.cimage').eq(i).text(cimage); //img src로
-				 	$('.caddress').eq(i).text(caddress);
-				 	$('.ctag').eq(i).text(ctag);
+				 	$('.mcno').eq(i).text(i+1);
+				 	$('.mcname').eq(i).text(cname);
+				 	$('.mcaddress').eq(i).text(caddress);
+				 	$('.mctag').eq(i).text(ctag);
+				 	$('.mcimage').eq(i).text(cimage);
 				 	if(i < 10 - 1){
 				 		$('.modal-tr').eq(0).clone().appendTo('#modal-tbody');
 				 	}
-				 	
-				 	/* $('.selectBtn').each(function (){
-				 		this.addEventListener("click", function() { selectItem(); }, false);
-				 	}); */
+
 				}
-				
-				/* var sBtns = document.getElementsByClassName('.selectBtn');
-			 	//[i].addEventListener("click", selectItem);
-			 	sBtns.forEach(function(btn) {
-			 		btn.addEventListener("click", function() {
-			 			selectItem();
-			 	    });
-			 	}); */
+
 			 	
 			 	var sBtns = document.querySelectorAll('.selectBtn');
 
 			 	sBtns.forEach(btn => {
 			 		btn.addEventListener('click', function (e) {
 			 			
-					   let myparent = e.target.parentNode.parentNode;
+					    let myparent = e.target.parentNode.parentNode;
 					   
-					    var cname = myparent.querySelector('.cname').textContent;
-					    
-					   var caddress = myparent.querySelector('.caddress').textContent;
-					   var ctag = myparent.querySelector('.ctag').textContent;
+					    var scname = myparent.querySelector('.mcname').textContent;
+					    var scaddress = myparent.querySelector('.mcaddress').textContent;
+					    var sctag = myparent.querySelector('.mctag').textContent;
+					    var scno = myparent.querySelector('.mcno').textContent;
+					    var scimage = myparent.querySelector('.mcimage').textContent;
 						
 	 					var r = $(".resultRow").eq(currItem);
 	 					
 	 					//console.log(r.children());
-	 					r.children().eq(1).text(cname);
-	 					r.children().eq(2).text(caddress);
-	 					r.children().eq(3).text(ctag);
+	 					r.children().eq(1).text(scname);
+	 					r.children().eq(2).text(scaddress);
+	 					r.children().eq(3).text(sctag);
 	 					//input이 타깃일 경우, text 대신 val
+	 					
+	 					console.log(scno);
+	 					console.log(scimage);
+	 					$('.cno').eq(currItem).val(scno); 
+						$('.hoverimg').eq(currItem).attr("src", '/img/' + scimage); //img src로
 	 					 
 	 					$('#pickModal').modal('hide');
 		 	 		 });
@@ -354,8 +360,8 @@
 				
 			
 		</script>
-		
-		
+
+
 
 
 	</div>
