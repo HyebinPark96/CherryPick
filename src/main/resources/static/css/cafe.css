@@ -24,3 +24,14 @@
 	display: flex;
 	justify-content: space-around;
 }
+
+.review-card{
+	display: block;
+	width: 40rem;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.review-card-sep {
+	display: flex;
+}

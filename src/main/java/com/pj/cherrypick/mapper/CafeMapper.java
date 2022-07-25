@@ -36,8 +36,12 @@ public interface CafeMapper {
 	// 특정카페(cno) 메뉴판 불러오기
 	List<CafeMenuVO> getCafeMenu(int cno);
 	
-	// 특정카페(cno) 리뷰 전체리스트로 불러오기
-	List<ReviewVO> getReview(int cno);
+	// 특정카페(cno) 리뷰 리스트불러오기 (페이징)
+	List<ReviewVO> getReview(int cno, int displayPost, int postNum);
+	
+	// 특정카페(cno) 리뷰 총 갯수 불러오기
+	int cntReview(int cno);
+	
 	
 	// 내(username)가 북마크한 카페 리스트 불러오기
 	List<CafeVO> getMyCafeBmk(String username);

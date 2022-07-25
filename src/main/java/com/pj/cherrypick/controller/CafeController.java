@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +18,7 @@ import com.pj.cherrypick.domain.CafeMenuVO;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.FilterVO;
 import com.pj.cherrypick.domain.ListVO;
+import com.pj.cherrypick.domain.Page;
 import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.BookmarkService;
 import com.pj.cherrypick.service.CafeService;
@@ -42,8 +42,8 @@ public class CafeController {
 			@RequestParam(required=false, defaultValue="0") Integer fkids, Model model) throws Exception {
 		
 
-		System.out.println("controller:getCafeList---------------------------------------");
-		System.out.println("[sort]: "+sort+"  [fpark]: "+fpark+" [fgroup]:"+fgroup+" [fpet]:"+fpet+" [fkids]:"+fkids);
+		//System.out.println("controller:getCafeList---------------------------------------");
+		//System.out.println("[sort]: "+sort+"  [fpark]: "+fpark+" [fgroup]:"+fgroup+" [fpet]:"+fpet+" [fkids]:"+fkids);
 		
 		String username = "aaa";
 		//String username = principalDetail.getUsername();
@@ -112,7 +112,8 @@ public class CafeController {
 	
 	// 카페리스트 (전체카페X lino로 리스트 불러오기)
 	@GetMapping("cafe/list/{lino}")
-	public String getEachList(@AuthenticationPrincipal PrincipalDetail principalDetail, @PathVariable int lino, Model model) throws Exception {
+	public String getEachList(@AuthenticationPrincipal PrincipalDetail principalDetail,
+			@PathVariable int lino, Model model) throws Exception {
 	
 		String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
 		model.addAttribute("username", username);
@@ -145,19 +146,33 @@ public class CafeController {
 
 	// 개별카페 상세정보
 	@GetMapping("/cafe/info/{cno}")
-	public String getCafe(@AuthenticationPrincipal PrincipalDetail principalDetail, @PathVariable int cno, Model model) throws Exception {
+	public String getCafe(@AuthenticationPrincipal PrincipalDetail principalDetail, 
+			@PathVariable int cno, @RequestParam(defaultValue="1") int num, Model model) throws Exception {
 		
-		String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
-		model.addAttribute("username", username);
+		//int num = 페이징
+		Page page = new Page();
+		
+		 String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
 		//시큐리티
 		//String username = principalDetail.getUsername();
+		model.addAttribute("username", username);
 		
 		CafeVO cafe = cafeService.getCafeInfo(cno); // cno로 해당하는 카페 info 출력
 		List<CafeMenuVO> menu = cafeService.getCafeMenu(cno); // cno로 해당하는 카페 menu 출력 
-		List<ReviewVO> review = cafeService.getReview(cno); // cno로 해당하는 카페 review 출력
+		List<ReviewVO> review = cafeService.getReview(cno, page.getDisplayPost(), page.getPostNum()); // cno로 해당하는 카페 review 출력
+		
+		
+		// 페이징
+		
+		page.setNum(num);
+		page.setCount(cafeService.cntReview(cno)); // 총게시글수 = 리뷰목록 길이
+
+		
 		model.addAttribute("cafe", cafe);
 		model.addAttribute("menu", menu);
 		model.addAttribute("review", review);
+		model.addAttribute("page", page);
+		model.addAttribute("select", num); // 현재 페이지 (현재 페이지가 아닌 페이지와 구분하기 위해 값 전달)
 		
 		// 현재 로그인 유저가 이 카페 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
 		bookmarkService.checkCafeBmk(username, cno);  

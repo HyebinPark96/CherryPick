@@ -46,8 +46,8 @@ public class CafeService {
 		return cafeMapper.getCafeMenu(cno);
 	}
 	
-	public List<ReviewVO> getReview(int cno) {
-		return cafeMapper.getReview(cno);
+	public List<ReviewVO> getReview(int cno, int displayPost, int postNum) {
+		return cafeMapper.getReview(cno, displayPost, postNum);
 	}
 	
 	public List<CafeVO> getMyCafeBmk(String username) {
@@ -69,6 +69,10 @@ public class CafeService {
 
 	public List<CafeVO> getCafeAllByBmk(FilterVO filter) {
 		return cafeMapper.getCafeAllByBmk(filter);
+	}
+	
+	public int cntReview(int cno) {
+		return cafeMapper.cntReview(cno);
 	}
 	
 }
