@@ -4,9 +4,8 @@
 	layout:decorate="~{/layout/layout-main}">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>CherryPick</title>
-</head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</head> 
 
 <body>
 	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
@@ -14,7 +13,7 @@
 
 	<div class="content" layout:fragment="content">
 
-		<div class="content-top">
+		<!-- <div class="content-top">
 			<div class="row">
 				<div class="col-md-1">
 					<img class="back-icon" src="../img/back.png" onclick="goBack();">
@@ -25,105 +24,167 @@
 			</div>
 			<hr>
 		</div>
+		 -->
+		<div class="d-flex align-items-center row">
+			<div class="d-flex justify-content-between align-items-center">
+				<div class="d-flex">
+					<div>&nbsp;&nbsp;&nbsp;</div>
+					<img class="back-icon" src="../img/back.png" onclick="goBack();">
+					<div>&nbsp;&nbsp;&nbsp;</div>
+					<div class="text-20">나의 리뷰</div>
+				</div>
+
+				<div class="d-flex justify-content-end" style="text-align: right">
+					<div class="d-flex">
+
+						<div>
+							<div>
+								<b th:text="${#authentication.principal.username}">username님</b>
+							</div>
+							<div>email@naver.com</div>
+							<!-- <div th:text="${member.email}">email@naver.com</div> -->
+						</div>
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<div id="menuBtn" class="divBtn">
+							<img class="icon-30" src="../img/menu.png">
+						</div>
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<div>&nbsp;&nbsp;&nbsp;</div>
+						<!-- 메뉴버튼 액션은 하단의 script 태그에 -->
+					</div>
+					<!-- <a id="mEdit" href="/member/checkPwdForEdit"><img class="icon-20" src="../img/edit.png"></a> -->
+				</div>
+			</div>
+
+
+
+		</div>
+		<hr>
 
 		<div class="container">
 
 			<th:block th:each="list : ${list}">
-			<!-- <h1 th:text="${listStat.size}"></h1> -->
-				<div class="myreview-item">
+				<!-- <h1 th:text="${listStat.size}"></h1> -->
+				<div class="myreview-item" >
 
-					<div class="">
-						<div th:each="CafeVO, iter:${list.CafeVO}"> <!-- -->
-							<span style="font-size: 25px; font-weight: bold;">
-								<label th:text="${CafeVO.cname}">카페 이름</label> <!-- -->
-							</span> 
-							<span class="">
-								<label th:text="${list.score}">리뷰 점수</label> <!-- -->
-							</span><br> 
-							<span style="color: gray;" th:each="CafeVO, iter:${list.CafeVO}"> <!-- -->
-								<label th:text="${CafeVO.caddress}">카페 주소</label> <!-- -->
-							</span>
+
+					<div class="" style="width:100%;">
+						<div class="d-flex justify-content-between">
+							<div th:each="CafeVO, iter:${list.CafeVO}">
+								<!-- -->
+								<span class="text-large"> <label th:text="${CafeVO.cname}">카페
+										이름</label> <!-- -->
+								</span>
+								<!-- <i class="fa fa-star" style="color: #999;"></i> 
+								<span style="color: #999;" class=""> <label th:text="${list.score}">리뷰
+										점수</label>  -->
+								</span><br> <span style="color: gray;"
+									th:each="CafeVO, iter:${list.CafeVO}"> <!-- --> <label
+									th:text="${CafeVO.caddress}">카페 주소</label> <!-- -->
+								</span>
+							</div>
+							<div style="color: gray;" th:text="${list.date}">작성 날짜</div>
 						</div>
 						<br>
 						<div>
-							<div style="color: gray;" th:text="${list.date}">작성 날짜</div><!-- -->
-							<div>
-								<b>
-									나의 별점 : <label th:text="${list.score}"></label> <!-- -->
-								</b>
+							
+							<!-- -->
+							<div class="container myreview-content">
+								<label th:utext="${list.content}"></label>
+								<!---->
 							</div>
-							<div>
-								<label th:utext="${list.content}"></label> <!---->
-							</div>
+							<br>
 							
-							(heart) : 
-							<span>
-								<b th:if="${list.HeartVO.size}>1" th:text="${#lists.size(list.HeartVO)}"></b>
-							</span>
-							
-							<span th:each="HeartVO : ${list.HeartVO}">
-							
-								<span th:if="${HeartVO.hno}!=0">
-									<b th:if="${HeartVOStat.size}==1" th:text="${HeartVOStat.count}"></b>
-								</span>
-								
-								<span th:unless="${HeartVO.hno}!=0">
-									<b th:text="${HeartVOStat.index}"></b>
-								</span>
 
-							</span><br>
+
+							<div class="margin-top-10"></div>
 							
-							<div th:each="CafeVO, iter:${list.CafeVO}">
-								<form th:action="@{/review/updateReview}" th:method="PUT" style="display:inline-block">
-									<button class="btn btn-secondary">수정</button>
-									<input type="hidden" name="_method" value="PUT">
-									<input type="hidden" name="rno" th:value="${list.rno}">
-									<input type="hidden" name="cname" th:value="${CafeVO.cname}">
-									<input type="hidden" name="num" th:value="${page.num}">
-								</form>
+							<div class="d-flex justify-content-between align-items-center">
+								<div>
+									<div>
+										<b> 나의 별점 : <i class="fa fa-star" style="color: #a6434b"></i><label th:text="${list.score}"></label> <!-- -->
+										</b>
+									</div>
+									<div class="margin-top-10"></div>
+									<span> <img class="icon-20" src="/img/heart.png">&nbsp;<b
+										th:if="${list.HeartVO.size}>1"
+										th:text="${#lists.size(list.HeartVO)}"></b>
+									</span> <span th:each="HeartVO : ${list.HeartVO}"> <span
+										th:if="${HeartVO.hno}!=0"> <b
+											th:if="${HeartVOStat.size}==1" th:text="${HeartVOStat.count}"></b>
+									</span> <span th:unless="${HeartVO.hno}!=0"> <b
+											th:text="${HeartVOStat.index}"></b>
+									</span>
+		
+									</span>
+								</div>
 								
-								<form th:action="@{/review/deleteReview}" th:method="DELETE" style="display:inline-block">
-									<button class="btn btn-danger">삭제</button>
-									<input type="hidden" name="_method" value="DELETE">
-									<input type="hidden" name="rno" th:value="${list.rno}">
-									<input type="hidden" name="num" th:value="${page.num}">
-								</form>
-								
+	
+								<div th:each="CafeVO, iter:${list.CafeVO}">
+									<form th:action="@{/review/updateReview}" th:method="PUT"
+										style="display: inline-block">
+										<button class="btn btn-secondary">수정</button>
+										<input type="hidden" name="_method" value="PUT"> <input
+											type="hidden" name="rno" th:value="${list.rno}"> <input
+											type="hidden" name="cname" th:value="${CafeVO.cname}">
+										<input type="hidden" name="num" th:value="${page.num}">
+									</form>
+	
+									<form th:action="@{/review/deleteReview}" th:method="DELETE"
+										style="display: inline-block">
+										<button class="btn btn-danger">삭제</button>
+										<input type="hidden" name="_method" value="DELETE"> <input
+											type="hidden" name="rno" th:value="${list.rno}"> <input
+											type="hidden" name="num" th:value="${page.num}">
+									</form>
+	
+								</div>
 							</div>
 						</div>
 					</div>
-<!-- 					<div
+					<!-- 					<div
 						style="width: 300px; background-image: url('https://images.pexels.com/photos/7541176/pexels-photo-7541176.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load');">
 					</div> -->
 
 				</div>
-				<hr>
+				
+				<hr style="margin-bottom:50px;">
+				
 			</th:block>
-			
+
 			<div class="pagination">
-					<th:block th:if="${page.prev}">
-						<span class="page-item" ><a th:href="@{myReview(num=${page.startPageNum - 1})}" class="page-link">이전</a> </span>
-					</th:block>
-					
-					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
-						<span th:if="${select!=num} AND ${page.count!=0}" class="page-item" >
-							<a th:href="@{myReview(num=${num})}" th:text="${num}" class="page-link" ></a>
-						</span>
-						<span th:if="${select==num} AND ${page.count!=0}" class="page-item active">
-							<a th:href="@{myReview(num=${num})}" th:text="${num}" class="page-link"></a>
-						</span>
-						<span th:if="${num==0}">
-							<label>아직 한 건의 리뷰도 작성하지 않았습니다!</label>
-						</span>
-					</th:block>
-					
-					<th:block th:if="${page.next}">
-						<span class="page-item"><a th:href="@{myReview(num=${page.endPageNum + 1})}" class="page-link">다음</a></span>
-					</th:block>
-				</div>
+				<th:block th:if="${page.prev}">
+					<span class="page-item"><a
+						th:href="@{myReview(num=${page.startPageNum - 1})}"
+						class="page-link">이전</a> </span>
+				</th:block>
+
+				<th:block
+					th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
+					<span th:if="${select!=num} AND ${page.count!=0}" class="page-item">
+						<a th:href="@{myReview(num=${num})}" th:text="${num}"
+						class="page-link"></a>
+					</span>
+					<span th:if="${select==num} AND ${page.count!=0}"
+						class="page-item active"> <a
+						th:href="@{myReview(num=${num})}" th:text="${num}"
+						class="page-link"></a>
+					</span>
+					<span th:if="${num==0}"> <label>아직 한 건의 리뷰도 작성하지
+							않았습니다!</label>
+					</span>
+				</th:block>
+
+				<th:block th:if="${page.next}">
+					<span class="page-item"><a
+						th:href="@{myReview(num=${page.endPageNum + 1})}"
+						class="page-link">다음</a></span>
+				</th:block>
+			</div>
 
 			<!-- === 숨어있는 영역 ====  -->
-<!-- 			
+			<!-- 			
 			<th:block th:each="num : ${#numbers.sequence(1,5)}">
 			<div class="nextBlock">
 				<th:block th:each="num : ${#numbers.sequence(1,3)}">
@@ -168,41 +229,41 @@
 
 
 		</div>
+		
+		<!-- 모달 영역 -->
+		<div id="menuModal" class="modal fade modal-item">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">회원 메뉴</h5>
+						<button type="button" data-bs-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body d-flex flex-column align-items-center">
 
-		<!-- ======스크립트====== 
-		<script type="text/javascript">
-			var seeMoreBtn = document.getElementById("seeMoreBtn");
-			var hideBtn = document.getElementById("hideBtn");
-			var totalBlocks = document.getElementsByClassName("nextBlock");
-			var currBlocks = 0;
-			
-			for (var i = 0, len = totalBlocks.length; i < len; i++) {
-				totalBlocks[i].style.display = 'none';
-			}
-			
-			hideBtn.style.display = 'none';
-			
-			
-			function seeMore(){
-				totalBlocks[currBlocks].style.display = 'block';
-				currBlocks++;
-				if(currBlocks==totalBlocks.length-1){
-					seeMoreBtn.style.display = 'none';
-					hideBtn.style.display = 'block';
-				}
-			}
-			
-			
-			function hideAll(){
-				for (var i = 0, len = totalBlocks.length; i < len; i++) {
-					totalBlocks[i].style.display = 'none';
-					currBlocks = 0;
-				}
-				seeMoreBtn.style.display = 'block';
-				hideBtn.style.display = 'none';
-			}
+
+						<div><a id="mEdit" href="/member/checkPwdForEdit">회원정보 수정</a></div>
+						<div><a href="/member/myPage">나의 CherryPick</a></div>
+						<div class="divBtn">
+							<a th:href="@{myReview(num=1)}">나의 리뷰</a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$(
+			'#menuBtn').on('click', function() {
+				$('#menuModal').modal('show');
+			});
 		</script>
-		-->
+		
+		
+	<script type="text/javascript" src="/js/jquery.rateyo.js"></script>
+	<!-- 별점 스크립트 -->
+	
+	
 	</div>
 </body>
 </html>

@@ -94,6 +94,7 @@
 
 .cflist-item {
 	display: flex;
+	align-items: center;
 }
 
 .cflist-thumb {
@@ -312,6 +313,11 @@
 
 .rv-rating *{
 	color: gray;
+}
+
+/*나의 리뷰페이지(회원)*/
+.myreview-content{
+	background-color: #EAE4E4; border-radius: 10px; min-height: 100px; padding: 10px;
 }
 
 

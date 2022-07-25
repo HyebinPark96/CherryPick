@@ -132,4 +132,10 @@ public class MemberController {
 		return "member/withdrawal";
 	}
 	
+	
+	@GetMapping("/member/myAddCherry")
+	public String myAddCherry() {
+		return "member/myAddCherry";
+	}
+	
 }

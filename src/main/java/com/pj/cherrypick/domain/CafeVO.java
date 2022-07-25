@@ -36,5 +36,8 @@ public class CafeVO {
 	//북마크체크용
 	private Integer chk;
 	
+	//평균 별점, 웨이팅 
+	private int avgwait;
+	private int avgscore;
 	
 }
