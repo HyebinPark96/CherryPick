@@ -83,6 +83,7 @@
 		FROM review 
 		WHERE cno = #{cno}
 		LIMIT #{displayPost}, #{postNum}
+		ORDER BY date DESC
 	</select>	
 	<!-- cno로 리뷰갯수 불러오기 -->
 	<select id="cntReview" parameterType="int" resultType="int">
