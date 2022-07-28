@@ -60,7 +60,8 @@
 				
 	    	</form>
 	    	
-	    	<button type="button" id="reviewUpdateBtn">수정하기</button>
+	    	<button th:if="${flag}==null" type="button" id="reviewUpdateBtn">수정하기</button>
+	    	<button th:unless="${flag}==null" type="button" id="reviewUpdateFromCafeBtn">수정하기</button>
 	    	
 	    </div>
 	    

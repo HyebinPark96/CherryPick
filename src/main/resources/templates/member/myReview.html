@@ -122,10 +122,10 @@
 								
 	
 								<div th:each="CafeVO, iter:${list.CafeVO}">
-									<form th:action="@{/review/updateReview}" th:method="PUT"
+									<form th:action="@{/review/updateReview}" th:method="GET"
 										style="display: inline-block">
 										<button class="btn btn-secondary">수정</button>
-										<input type="hidden" name="_method" value="PUT"> <input
+										<input
 											type="hidden" name="rno" th:value="${list.rno}"> <input
 											type="hidden" name="cname" th:value="${CafeVO.cname}">
 										<input type="hidden" name="num" th:value="${page.num}">

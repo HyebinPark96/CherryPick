@@ -38,7 +38,7 @@ public class ReviewController {
 		return "review/writeReview";
 	}
 	
-	@PutMapping("/review/updateReview")
+	@GetMapping("/review/updateReview")
 	public String updateReview(@RequestParam("rno") int rno, @RequestParam("cname") String cname, 
 			@RequestParam("num") int num, Model model) throws Exception {
 		
@@ -57,9 +57,25 @@ public class ReviewController {
 		return "review/updateReview";
 	}
 	
-	@DeleteMapping("/review/deleteReview")
-	public String deleteReview(@RequestParam("rno") int rno, @RequestParam("num") int num) throws Exception {
-		reviewService.deleteReviewProc(rno);
-		return "redirect:/member/myReview?num=" + num;
+	@GetMapping("/review/updateReviewFromCafe")
+	public String updateReviewFromCafe(@RequestParam("rno") int rno, @RequestParam("cname") String cname, 
+			@RequestParam("num") int num, Model model) throws Exception {
+		
+		// System.out.println("rno : " + rno);
+		
+		ReviewVO review = new ReviewVO();
+		
+		if(reviewService.getOneReviewForUpdate(rno) != null) {
+			review = reviewService.getOneReviewForUpdate(rno);
+		};
+		
+		model.addAttribute("review", review);
+		model.addAttribute("cname", cname);
+		model.addAttribute("num", num);
+		model.addAttribute("flag", "updateReviewFromCafe");
+		
+		return "review/updateReview";
 	}
+	
+
 }
