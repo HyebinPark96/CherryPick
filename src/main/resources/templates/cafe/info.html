@@ -223,7 +223,9 @@
 
 
 		<div class="cf-review">
-			<div class="cf-review-item" th:each="review, j : ${review}">
+			<th:block th:each="review : ${review}">
+			<div class="cf-review-item">
+				
 				<div class="cf-review-writer">
 					<div class="cf-review-profile"></div>
 					<div th:text="${review.username}" style="font-weight: bold">리뷰작성자</div>
@@ -231,7 +233,7 @@
 
 				<div class="cf-review-detail">
 					<div>
-						<span class="text-20" th:text="${review.title}">리뷰제목</span> <span th:text="${review.date}"
+						<span class="text-20" th:text="${review.title}">리뷰제목</span><span th:text="${review.date}"
 							style="color: gray">5일 전</span>
 					</div>
 
@@ -268,6 +270,7 @@
 				</div>
 				<!-- <hr class="hr-dotted">th:if="!${i.last}" -->
 			</div>
+			</th:block>
 		</div>
 
 					<div class="pagination">
