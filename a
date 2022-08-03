@@ -1,0 +1,257 @@
+[33mcommit 67d722d6609b43a86d1c51297dbe4097d1c13345[m[33m ([m[1;36mHEAD -> [m[1;32mseoha[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: 201f5a5 3362369
+Author: EC2 Default User <ec2-user@ip-172-31-32-171.ap-northeast-2.compute.internal>
+Date:   Wed Aug 3 17:58:14 2022 +0900
+
+    Merge remote-tracking branch 'origin/seoha'
+
+[33mcommit 201f5a5e737cf8175c301aa54579b30ca5ed8372[m
+Author: EC2 Default User <ec2-user@ip-172-31-32-171.ap-northeast-2.compute.internal>
+Date:   Wed Aug 3 17:35:37 2022 +0900
+
+    [0803/seoha] fixed
+
+[33mcommit 336236915c5720d7e51fbef1973103a6efc3081b[m[33m ([m[1;31morigin/seoha[m[33m, [m[1;32mmain[m[33m)[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Aug 2 02:24:16 2022 +0900
+
+    [0802/seoha] cafeinfo review list fixed
+
+[33mcommit 1579990742279186eccecf1fabda65608f2f97b1[m
+Merge: 83bd755 e86e739
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Thu Jul 28 23:27:24 2022 +0900
+
+    [0728/seoha] cafeinfo conflicts fixed
+
+[33mcommit 83bd755f30053e7ddd8fd1c420d2f71c899e108b[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Thu Jul 28 23:23:33 2022 +0900
+
+    [0728/seoha] cafeinfo.html review updated
+
+[33mcommit e86e73907d8706f12d379afcae420acf1cb30774[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Thu Jul 28 22:54:49 2022 +0900
+
+    [0728/chb] fileupload problem solved
+
+[33mcommit 18f32c4e7d118cc47a2650cc8245bf94e1a8ef2e[m
+Author: seoha-dev <97898227+seoha-dev@users.noreply.github.com>
+Date:   Tue Jul 26 14:01:53 2022 +0900
+
+    [0726/seoha] cafeinfo.getReview sql updated
+
+[33mcommit 476a05631610c9ac6bb59b45f59fac0d2ee3cf23[m
+Author: HyebinPark96 <bini2718@naver.com>
+Date:   Tue Jul 26 11:03:26 2022 +0900
+
+    [0726/hyebin] add cafe info my reveiw update/delete func
+
+[33mcommit 354770eb448844a5788dd10c403f1147c8cba183[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Jul 26 04:00:09 2022 +0900
+
+    [0726/seoha] layout-main route fixed on templates
+
+[33mcommit 4d5362ef79d8a8be0505fafa94b4232ae926dc5f[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Jul 26 03:47:31 2022 +0900
+
+    [0726/seoha] thymeleaf layout route fixed
+
+[33mcommit d8c976068893c699509bf5571a6f3c5a72ff9996[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Jul 26 03:34:24 2022 +0900
+
+    [0726/seoha] dependency duplicate fixed
+
+[33mcommit e7455cd6409ebc140569ec4547cf46a046378746[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Jul 26 03:28:50 2022 +0900
+
+    [0726/seoha] pom.xml dependency duplicate fix
+
+[33mcommit 842ae5173d207098cfb6c21c494bb01b558ba465[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Jul 26 03:21:49 2022 +0900
+
+    [0726/seoha] error fixed
+
+[33mcommit 6aa2904c7353d13a45d91f8e3731aa8a33b22d26[m
+Merge: f2a771f 0e452d0
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Jul 26 02:59:51 2022 +0900
+
+    Merge branch 'main' of https://github.com/HyebinPark96/CherryPick into seoha
+
+[33mcommit f2a771fedb5d6cdfa65b32a5557f894e1d081659[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Jul 26 02:59:43 2022 +0900
+
+    [0726/seoha] server port 80 -> 8080
+
+[33mcommit 0e452d05ebadd53ad29496f173d88533ef534759[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Tue Jul 26 02:45:10 2022 +0900
+
+    [0726/chb] addCherry Complete (2)
+
+[33mcommit 8f39d3c13650231ced0d08099e5f9dbb740db783[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Tue Jul 26 02:37:10 2022 +0900
+
+    [0726/chb] addCherry Complete
+
+[33mcommit 44facfe45bfbf82180f75c580b39a77b9ecd8a2b[m
+Merge: a6fe913 4b81c2a
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Tue Jul 26 02:00:04 2022 +0900
+
+    Merge branch 'main' of https://github.com/HyebinPark96/CherryPick into chb
+
+[33mcommit a6fe9138be72346359834a9915ae819e30941180[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Tue Jul 26 01:59:56 2022 +0900
+
+    [0726/chb] all data display succeded
+
+[33mcommit 4b81c2a3633c18f5b6496c88b29cbcf51547e2e7[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Tue Jul 26 01:03:49 2022 +0900
+
+    [0726/seoha] tomcat dependency added
+
+[33mcommit eaa9fae3854e182c222c8cde2e08672f2207fc53[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Tue Jul 26 00:45:21 2022 +0900
+
+    [0726/chb] data to table success
+
+[33mcommit 21b85f5ecc46252f353aec04ebd7f891560f61a7[m
+Merge: 83221ca 09c5468
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 23:12:14 2022 +0900
+
+    Merge branch 'main' of https://github.com/HyebinPark96/CherryPick into chb
+
+[33mcommit 83221ca446fe634c8d2a9eb32dd137d69c5841ea[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 23:12:10 2022 +0900
+
+    [0725/chb] storeManagement fixed
+
+[33mcommit 09c5468b6607cd4026332f6205beee95c3e6b253[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Mon Jul 25 23:07:43 2022 +0900
+
+    [0725/seoha] cafe/list.html layout fixed
+
+[33mcommit f25463538995e453bb8010dd24c9c0d43e2e4f98[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Mon Jul 25 22:17:18 2022 +0900
+
+    [0725/seoha] header CS->HELP, myPage.html layout fixed
+
+[33mcommit ed808fcf6aa0a263b7ed5c91f034f0d94fe6b357[m
+Merge: 32c377f 88926ae
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Mon Jul 25 21:46:49 2022 +0900
+
+    [0725/seoha] img conflicts fixed
+
+[33mcommit 32c377fc8a86c51620f3a32b4bfad3c517e2c91b[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Mon Jul 25 21:45:10 2022 +0900
+
+    [0725/seoha] cafe/test.html getCafeALL
+
+[33mcommit 88926ae0386d85542f49734ea4f9ae7cef1edcef[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 21:35:08 2022 +0900
+
+    [0726/chb] click img and set border
+
+[33mcommit 90b56c58aaf37266bb8c53a1345a8a6d08f29f88[m
+Merge: 3524b2e c9b0242
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 21:26:21 2022 +0900
+
+    Merge branch 'main' of https://github.com/HyebinPark96/CherryPick into chb
+
+[33mcommit 3524b2ecee497b31570f386a5426d2a1f430d5b7[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 21:26:15 2022 +0900
+
+    [0726/chb] data input from modal to table
+
+[33mcommit c9b0242944ed0298e58527e85adc7e3e46f59568[m
+Author: HyebinPark96 <bini2718@naver.com>
+Date:   Mon Jul 25 21:09:33 2022 +0900
+
+    [0725/hyebin] delete naver login
+
+[33mcommit dcf9db392557e1248ae08cc63841e745a03067f4[m
+Merge: 3c7fdb5 952655d
+Author: HyebinPark96 <bini2718@naver.com>
+Date:   Mon Jul 25 20:49:06 2022 +0900
+
+    Merge branch 'main' of https://github.com/HyebinPark96/CherryPick into hyebin
+
+[33mcommit 3c7fdb5fdf49dbac763fe329f4d38e2fe094c1f9[m
+Author: HyebinPark96 <bini2718@naver.com>
+Date:   Mon Jul 25 20:49:02 2022 +0900
+
+    [0725/hyebin] naver login test
+
+[33mcommit 952655d0e506a7666c3adab6f51291973b1a191f[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 19:46:00 2022 +0900
+
+    [0725/chb] image size fixed
+
+[33mcommit 42a2996712883ca90cada60dd44813607cdde51b[m
+Merge: f1b92b7 636c6d3
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 19:01:00 2022 +0900
+
+    Merge branch 'main' of https://github.com/HyebinPark96/CherryPick into chb
+
+[33mcommit f1b92b7af1fabb82c8dce6ef3dadb66cb082a6a0[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 19:00:56 2022 +0900
+
+    [0725/chb] myAddCherrypick built
+
+[33mcommit 636c6d3649e12890e2f529cdc58122e7d13f9afe[m
+Merge: 9be24fe ed7cf88
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Mon Jul 25 18:27:32 2022 +0900
+
+    Merge branch 'main' of https://github.com/HyebinPark96/CherryPick into seoha
+
+[33mcommit 9be24feb3b77da1240ddab95ad0a256054559420[m
+Author: seoha-dev <seoha.dev@gmail.com>
+Date:   Mon Jul 25 18:27:27 2022 +0900
+
+    [0725/seoha] cafeinfo.html page, review summary updated
+
+[33mcommit ed7cf88b95a95fefbcbdc89fdb576c7868fa121e[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 18:08:44 2022 +0900
+
+    [0725/chb] checkbox
+
+[33mcommit fa2d25e8718683571e89f269219aa21cb8480c67[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 17:37:07 2022 +0900
+
+    [0725/chb] review page design update (2)
+
+[33mcommit 1a28704f6eaf48ff84813ed1a277e266e94e6eaf[m
+Author: AtomicLiquors <gyqls234@gmail.com>
+Date:   Mon Jul 25 17:32:03 2022 +0900
+
+    [0725/chb] review page design update
+
+[33mcommit e09a07b8515a0386342c27d1c8303a
