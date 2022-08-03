@@ -200,30 +200,32 @@
 		<b>리뷰(<span style="font-size: 16px;" th:text="${page.count}">000</span>)</b>
 
 
-<div class="review-card">
-<div class="review-card-sep">
-  <div class="card-body">
-    <h4 class="card-title">평균 별점</h4>
-    <h5 class="card-text"><span th:text="${cafe.avgscore}">5.0</span>점</h5>
+		<div class="review-card">
+			<div class="review-card-sep">
+				<div class="card-body">
+					<h4 class="card-title">평균 별점</h4>
+					<h5 class="card-text"><span th:text="${cafe.avgscore}">5.0</span>점</h5>
 
-  </div>
-  <div class="card-body">
-  	<h4 class="card-title">평균 웨이팅</h4>
-    <h5 class="card-text"><span th:text="${cafe.avgwait}">평균웨이팅</span>분</h5>
-  </div>
-  </div>
-  <form>
-  <input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
-  <a th:href="@{/review/writeReview/{cno}(cno=${cafe.cno})}" class="btn btn-primary">리뷰 작성</a>
-  </form>
-</div>
-
-
+				</div>
+				<div class="card-body">
+					<h4 class="card-title">평균 웨이팅</h4>
+					<h5 class="card-text"><span th:text="${cafe.avgwait}">평균웨이팅</span>분</h5>
+				</div>
+			</div>
+			<form>
+				<input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
+				<a th:href="@{/review/writeReview/{cno}(cno=${cafe.cno})}" class="btn btn-primary">리뷰 작성</a>
+			</form>
+		</div>
 
 
-		
+
+
+
 		<div class="cf-review">
-			<div class="cf-review-item" th:each="review, j : ${review}">
+			<th:block th:each="review : ${review}">
+			<div class="cf-review-item">
+				
 				<div class="cf-review-writer">
 					<div class="cf-review-profile"></div>
 					<div th:text="${review.username}" style="font-weight: bold">리뷰작성자</div>
@@ -231,31 +233,55 @@
 
 				<div class="cf-review-detail">
 					<div>
-						<span class="text-20" th:text="${review.title}">리뷰제목</span> <span th:text="${review.date}"
+						<span class="text-20" th:text="${review.title}">리뷰제목</span><span th:text="${review.date}"
 							style="color: gray">5일 전</span>
 					</div>
 
-					<div th:text="${review.content}">리뷰 영역을 나타내는 더미 데이터입니다.</div>
+					<div th:utext="${review.content}">리뷰 영역을 나타내는 더미 데이터입니다.</div>
 					<div>
 						<b><img class="heart-icon" src="/img/heart-empty.png">
 							0</b>
 					</div>
-
+					
+					<div sec:authorize="isAuthenticated()">
+						<span>
+							<form th:action="@{/review/updateReviewFromCafe}" th:method="GET"
+								style="display: inline-block" th:if="${review.username} == ${#authentication.principal.username}">
+								<button class="btn btn-secondary">수정</button>
+								<input type="hidden" name="rno" th:value="${review.rno}"> 
+								<input type="hidden" name="cname" th:value="${cafe.cname}">
+								<input type="hidden" name="num" th:value="${page.num}">
+							</form>
+						</span>
+						
+						<span>
+							<form th:action="@{/review/deleteReviewFromCafe}" th:method="DELETE"
+								style="display: inline-block" th:if="${review.username} == ${#authentication.principal.username}">
+								<button class="btn btn-danger">삭제</button>
+								<input type="hidden" name="_method" value="DELETE"> 
+								<input type="hidden" name="rno" th:value="${review.rno}"> 
+								<input type="hidden" name="num" th:value="${page.num}">
+								<input type="hidden" name="cno" th:value="${cafe.cno}">
+							</form>
+						</span>
+					
+					</div>
+				
 				</div>
 				<!-- <hr class="hr-dotted">th:if="!${i.last}" -->
 			</div>
+			</th:block>
 		</div>
-		
 
 					<div class="pagination">
 						<th:block th:if="${page.prev}">
 							<span class="page-item"><a th:href="@{{cno}(cno=${cafe.cno},num=${page.startPageNum - 1})}" class="page-link">이전</a> </span>
 						</th:block>
 						<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
-							<span th:if="${select!=num} AND ${num!=0}" class="page-item">
+							<span th:if="${select!=num} AND ${page.count!=0}" class="page-item">
 								<a th:href="@{{cno}(cno=${cafe.cno}, num=${num})}" th:text="${num}" class="page-link"></a>
 							</span>
-							<span th:unless="${select!=num} AND ${num!=0}" class="page-item active">
+							<span th:if="${select==num} AND ${page.count!=0}" class="page-item active">
 								<a th:href="@{info/${cafe.cno}(num=${num})}" th:text="${num}" class="page-link"></a>
 							</span>
 							<span th:if="${num==0}">
@@ -267,8 +293,7 @@
 						</th:block>
 					</div> 
 
-		
-		
+
 		<!-- <button type="button" id="seeMoreBtn" class="btn btn-outline-secondary col-md-12">더보기</button> -->
 		<!-- onclick="seeMore()" -->
 

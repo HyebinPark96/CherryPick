@@ -6,8 +6,9 @@
 	<title>CherryPick</title>
 </head>
 <body> -->
-	<script src="../js/cafe.js" async></script>
-	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
+
+<script src="../js/cafe.js" async></script>
+<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
 
 <div>
 
@@ -16,221 +17,223 @@
 			<div class="cflist-label">
 				<div>등록된 카페 수: <span th:text="${#lists.size(cafes)}">카페 수</span>개</div>
 				<div class="cflist-sort">
-				
-				<input type="hidden" id="f_park" th:value="${filter.fpark}">
-				<input type="hidden" id="f_pet" th:value="${filter.fpet}">
-				<input type="hidden" id="f_kids" th:value="${filter.fkids}">
-				<input type="hidden" id="f_group" th:value="${filter.fgroup}">
-				<input type="hidden" id="f_sort" th:value="${filter.sort}">  
-				
-<!-- Select sorting -->				
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sort" id="sort0" value="option1"
-   th:checked="${filter.sort}==0">
-  <label class="form-check-label" for="sort0" checked>최신순</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sort" id="sort1" value="option2"
-  th:checked="${filter.sort}==1">
-  <label class="form-check-label" for="sort1">즐겨찾기순</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sort" id="sort2" value="option3"
-  th:checked="${filter.sort}==2">
-  <label class="form-check-label" for="sort2">별점높은순</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sort" id="sort3" value="option4"
-  th:checked="${filter.sort}==3">
-  <label class="form-check-label" for="sort3">리뷰많은순</label>
-</div>		
+
+					<input type="hidden" id="f_park" th:value="${filter.fpark}">
+					<input type="hidden" id="f_pet" th:value="${filter.fpet}">
+					<input type="hidden" id="f_kids" th:value="${filter.fkids}">
+					<input type="hidden" id="f_group" th:value="${filter.fgroup}">
+					<input type="hidden" id="f_sort" th:value="${filter.sort}">
+
+					<!-- Select sorting -->
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="sort" id="sort0" value="option1"
+							th:checked="${filter.sort}==0">
+						<label class="form-check-label" for="sort0" checked>최신순</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="sort" id="sort1" value="option2"
+							th:checked="${filter.sort}==1">
+						<label class="form-check-label" for="sort1">즐겨찾기순</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="sort" id="sort2" value="option3"
+							th:checked="${filter.sort}==2">
+						<label class="form-check-label" for="sort2">별점높은순</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="sort" id="sort3" value="option4"
+							th:checked="${filter.sort}==3">
+						<label class="form-check-label" for="sort3">리뷰많은순</label>
+					</div>
 				</div>
 			</div> <!-- cflist-label end -->
-			<hr> <!--- Devider -->
-			
-<!-- Cafe Checkbox(=filter) Start -->		
-<div class="filter-table">			
-<div class="form-check form-switch">
-  <input class="form-check-input" name="filter_park" type="checkbox" role="switch" id="fpark"
-   th:checked="${filter.fpark}==1">
-  <label class="form-check-label" for="flexSwitchCheck_parking">주차 가능</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" name="filter_pet" type="checkbox" role="switch" id="fpet" 
-  	th:checked="${filter.fpet}==1">
-  <label class="form-check-label" for="flexSwitchCheck_pet">애견동반 가능</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" name="filter_kids" type="checkbox" role="switch" id="fkids"
-   th:checked="${filter.fkids}==1">
-  <label class="form-check-label" for="flexSwitchCheck_kids">유아동반 가능</label>
-</div>
-<div class="form-check form-switch">
-  <input class="form-check-input" name="filter_group" type="checkbox" role="switch" id="fgroup"
-   th:checked="${filter.fgroup}==1">
-  <label class="form-check-label" for="flexSwitchCheck_group">단체석</label>
-</div>
-</div>
-<!-- Cafe Checkbox(=filter) End -->
+			<hr>
+			<!--- Devider -->
 
-	</div> <!-- Item End -->
+			<!-- Cafe Checkbox(=filter) Start -->
+			<div class="filter-table">
+				<div class="form-check form-switch">
+					<input class="form-check-input" name="filter_park" type="checkbox" role="switch" id="fpark"
+						th:checked="${filter.fpark}==1">
+					<label class="form-check-label" for="flexSwitchCheck_parking">주차 가능</label>
+				</div>
+				<div class="form-check form-switch">
+					<input class="form-check-input" name="filter_pet" type="checkbox" role="switch" id="fpet"
+						th:checked="${filter.fpet}==1">
+					<label class="form-check-label" for="flexSwitchCheck_pet">애견동반 가능</label>
+				</div>
+				<div class="form-check form-switch">
+					<input class="form-check-input" name="filter_kids" type="checkbox" role="switch" id="fkids"
+						th:checked="${filter.fkids}==1">
+					<label class="form-check-label" for="flexSwitchCheck_kids">유아동반 가능</label>
+				</div>
+				<div class="form-check form-switch">
+					<input class="form-check-input" name="filter_group" type="checkbox" role="switch" id="fgroup"
+						th:checked="${filter.fgroup}==1">
+					<label class="form-check-label" for="flexSwitchCheck_group">단체석</label>
+				</div>
+			</div>
+			<!-- Cafe Checkbox(=filter) End -->
 
-			<!-- CafeList Start -->
-			<div class="cflist container">
-				<!-- Get cafes with thymeleaf -->
-				<div class="cflist-item" th:each="cafe : ${cafes}">
-					<div class="cflist-thumb" style="width:150px; height:150px;" >
-						<img th:src="@{${'/img/' + cafe.cimage}}" alt="카페썸네일" style="width:150px; height: 150px; object-fit:cover;"/>
-					</div>
-	
-					<div class="d-flex">
-						<div class="col p-4 d-flex flex-column position-static">
-							<strong class="d-inline-block mb-2 text-success" 
-							th:text="${cafe.cname}">카페이름</strong>
-							
-							<div th:text="${cafe.ctag}">카페 해시태그</div>
-							<div class="mb-1 text-muted" th:text="${cafe.caddress}">부산광역시 경상남도 서울시</div>
-	
-	
-							<div class="cflist-review">
-								<div class="cflist-review-profile"></div>
-								<div>
+		</div> <!-- Item End -->
+
+		<!-- CafeList Start -->
+		<div class="cflist container">
+			<!-- Get cafes with thymeleaf -->
+			<div class="cflist-item" th:each="cafe : ${cafes}">
+				<div class="cflist-thumb" style="width:150px; height:150px;">
+					<img th:src="@{${'/img/' + cafe.cimage}}" alt="카페썸네일"
+						style="width:150px; height: 150px; object-fit:cover;" />
+				</div>
+
+				<div class="d-flex">
+					<div class="col p-4 d-flex flex-column position-static">
+						<strong class="d-inline-block mb-2 text-success" th:text="${cafe.cname}">카페이름</strong>
+
+						<div th:text="${cafe.ctag}">카페 해시태그</div>
+						<div class="mb-1 text-muted" th:text="${cafe.caddress}">부산광역시 경상남도 서울시</div>
+
+
+						<div class="cflist-review">
+							<div class="cflist-review-profile"></div>
+							<div>
 								<!-- username for review -->
-									<b th:text="${cafe.username}">username</b>&nbsp;
-									<div>
-										<!-- title of first review -->
-										<span th:if="${cafe.title != null}" th:text="${cafe.title}"></span>
-										<span th:if="${cafe.title == null}">등록된 리뷰가 없습니다.</span>
-									</div>
+								<b th:text="${cafe.username}">username</b>&nbsp;
+								<div>
+									<!-- title of first review -->
+									<span th:if="${cafe.title != null}" th:text="${cafe.title}"></span>
+									<span th:if="${cafe.title == null}">등록된 리뷰가 없습니다.</span>
 								</div>
 							</div>
-							<a class="divBtn" th:id="${cafe.cno}" th:onclick="sendToInfo(this.getAttribute('id'))">더보기</a>
-						
 						</div>
-					<img class="displayNone" id="bmkImg" th:if="${cafe.chk == 0 }" src="/img/bmk-empty.png" height="20" >
-					<img class="displayNone" id="bmkImg" th:if="${cafe.chk != 0 }" src="/img/bmk.png" height="20"> 
-						<input type="hidden" name="bmk-list" id="bmk_check" th:if="${cafe.chk == 0}" th:value="0">
-						<input type="hidden" name="bmk-list" id="bmk_check" th:if="${cafe.chk != 0}" th:value="1"> 
- 
+						<a class="divBtn" th:id="${cafe.cno}" th:onclick="sendToInfo(this.getAttribute('id'))">더보기</a>
+
 					</div>
-					
-						
-											
+					<img class="displayNone" id="bmkImg" th:if="${cafe.chk == 0 }" src="/img/bmk-empty.png" height="20">
+					<img class="displayNone" id="bmkImg" th:if="${cafe.chk != 0 }" src="/img/bmk.png" height="20">
+					<input type="hidden" name="bmk-list" id="bmk_check" th:if="${cafe.chk == 0}" th:value="0">
+					<input type="hidden" name="bmk-list" id="bmk_check" th:if="${cafe.chk != 0}" th:value="1">
 
-						<!--send this info to cafe.js -->
-						<input id="username" type="hidden" th:value="${username}">
-						<input id="cno" type="hidden" th:value="${cafe.cno}"> 
-					
-					
-				
-
-					
-				</div> <!-- CafeList end -->
-
-	</div> <!-- content-container end -->
-
-				<div class="sharebar input-group mb-3">
-					<input type="text" value="https://sampletext.com">
-					<button class="btn btn-outline-secondary" type="button"
-						id="button-addon2">공유하기</button>
 				</div>
-				
-			 <!--Map Start-->
-			<div id="map" style="width:80%;height:350px;"></div>
-<!-- 지도 출력 스크립트 (타임리프 변수를 사용하기 때문에 외부 js파일로 못 뺌 ㅠ) -->
-<script th:inline="javascript">
 
-	/*<![CDATA[*/
 
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-		mapOption = {
-			center: new kakao.maps.LatLng(35.15306, 129.06623), // 지도의 중심좌표 (전포역)
-			level: 3 // 지도의 확대 레벨
-		};
 
-	// 지도생성
-	var map = new kakao.maps.Map(mapContainer, mapOption);
 
-	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+				<!--send this info to cafe.js -->
+				<input id="username" type="hidden" th:value="${username}">
+				<input id="cno" type="hidden" th:value="${cafe.cno}">
 
-	/*	var positions = [
-			{
-				content: '<div>카카오</div>',
-				latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-			},
-			{
-				content: '<div>생태연못</div>',
-				latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-			},
-			{
-				content: '<div>텃밭</div>',
-				latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-			},
-			{
-				content: '<div>근린공원</div>',
-				latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+
+
+
+
+			</div> <!-- CafeList end -->
+
+		</div> <!-- cflist-container end -->
+
+		<div class="sharebar input-group mb-3">
+			<input type="text" value="https://sampletext.com">
+			<button class="btn btn-outline-secondary" type="button" id="button-addon2">공유하기</button>
+		</div>
+
+		<!--Map Start-->
+		<div id="map" style="width:80%;height:350px;"></div>
+>
+		<!-- 지도 출력 스크립트 (타임리프 변수를 사용하기 때문에 외부 js파일로 못 뺌 ㅠ) -->
+		<script th:inline="javascript">
+
+			/*<![CDATA[*/
+
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+				mapOption = {
+					center: new kakao.maps.LatLng(35.15306, 129.06623), // 지도의 중심좌표 (전포역)
+					level: 3 // 지도의 확대 레벨
+				};
+
+			// 지도생성
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+
+			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+
+			/*	var positions = [
+					{
+						content: '<div>카카오</div>',
+						latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+					},
+					{
+						content: '<div>생태연못</div>',
+						latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+					},
+					{
+						content: '<div>텃밭</div>',
+						latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+					},
+					{
+						content: '<div>근린공원</div>',
+						latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+					}
+				]; */
+
+			var positions = [];
+
+			/*[# th:each="cafe : ${cafes}"]*/
+			var data = {};
+			data.content = /*[[${cafe.cname}]]*/
+				data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/"", /*[[${cafe.c_long}]]*/);
+			positions.push(data);
+			var cno = /*[[${cafe.cno}]]*/"";
+			var cimage = /*[[${cafe.cimage}]]*/"";
+			//console.log("cno", cno);
+			//console.log("data:", data);
+			//console.log("positions:", positions);
+			//console.log(cimage);
+			/*[/]*/
+
+
+
+			for (var i = 0; i < positions.length; i++) {
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					map: map, // 마커를 표시할 지도
+					position: positions[i].latlng // 마커의 위치
+				});
+
+				// 마커에 표시할 인포윈도우를 생성합니다 
+				var infowindow = new kakao.maps.InfoWindow({
+					content: positions[i].content // 인포윈도우에 표시할 내용
+				});
+
+				// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+				// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+				// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+				kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+				kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 			}
-		]; */
 
-	var positions = [];
+			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+			function makeOverListener(map, marker, infowindow) {
+				return function () {
+					infowindow.open(map, marker);
+				};
+			}
 
-	/*[# th:each="cafe : ${cafes}"]*/
-	var data = {};
-	data.content = /*[[${cafe.cname}]]*/
-		data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/"", /*[[${cafe.c_long}]]*/);
-	positions.push(data);
-	var cno = /*[[${cafe.cno}]]*/"";
-	var cimage = /*[[${cafe.cimage}]]*/"";
-	//console.log("cno", cno);
-	//console.log("data:", data);
-	//console.log("positions:", positions);
-	//console.log(cimage);
-	/*[/]*/
+			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+			function makeOutListener(infowindow) {
+				return function () {
+					infowindow.close();
+				};
+			}
 
+			/*]]>*/
+		</script>
+		<!--지도 영역 끝 -->
 
-
-	for (var i = 0; i < positions.length; i++) {
-		// 마커를 생성합니다
-		var marker = new kakao.maps.Marker({
-			map: map, // 마커를 표시할 지도
-			position: positions[i].latlng // 마커의 위치
-		});
-
-		// 마커에 표시할 인포윈도우를 생성합니다 
-		var infowindow = new kakao.maps.InfoWindow({
-			content: positions[i].content // 인포윈도우에 표시할 내용
-		});
-
-		// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-		// 이벤트 리스너로는 클로저를 만들어 등록합니다 
-		// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-		kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-		kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-	}
-
-	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-	function makeOverListener(map, marker, infowindow) {
-		return function () {
-			infowindow.open(map, marker);
-		};
-	}
-
-	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-	function makeOutListener(infowindow) {
-		return function () {
-			infowindow.close();
-		};
-	} 
-
-	/*]]>*/
-</script> 
-<!--지도 영역 끝 -->
-
-</div>
+	</div>
 </div>
 
 
 <!-- </body> -->
+
 </html>
 
 

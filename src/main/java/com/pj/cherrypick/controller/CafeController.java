@@ -39,13 +39,13 @@ public class CafeController {
 			@RequestParam(required=false, defaultValue="0") Integer fpark, 
 			@RequestParam(required=false, defaultValue="0") Integer fgroup,
 			@RequestParam(required=false, defaultValue="0") Integer fpet,
-			@RequestParam(required=false, defaultValue="0") Integer fkids, Model model) throws Exception {
+			@RequestParam(required=false, defaultValue="0") Integer fkids,
+			String username, Model model) throws Exception {
 		
 
 		//System.out.println("controller:getCafeList---------------------------------------");
 		//System.out.println("[sort]: "+sort+"  [fpark]: "+fpark+" [fgroup]:"+fgroup+" [fpet]:"+fpet+" [fkids]:"+fkids);
-		
-		String username = "aaa";
+		//String username = "aaa"; //테스트용
 		//String username = principalDetail.getUsername();
 		model.addAttribute("username", username);
 		
@@ -74,7 +74,7 @@ public class CafeController {
 			model.addAttribute("cafes", cafes);	
 		}
 				
-		//System.out.println("[username]:"+username);
+		System.out.println("[username]:"+username);
 		//System.out.println("[cafes]:"+cafes);
 		//System.out.println("[model]:"+model);	
 		
@@ -138,21 +138,19 @@ public class CafeController {
 		//int num = 페이징
 		Page page = new Page();
 		
-		 String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
+		String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
 		//시큐리티
 		//String username = principalDetail.getUsername();
 		model.addAttribute("username", username);
 		
 		CafeVO cafe = cafeService.getCafeInfo(cno); // cno로 해당하는 카페 info 출력
 		List<CafeMenuVO> menu = cafeService.getCafeMenu(cno); // cno로 해당하는 카페 menu 출력 
-		List<ReviewVO> review = cafeService.getReview(cno, page.getDisplayPost(), page.getPostNum()); // cno로 해당하는 카페 review 출력
-		
 		
 		// 페이징
-		
 		page.setNum(num);
 		page.setCount(cafeService.cntReview(cno)); // 총게시글수 = 리뷰목록 길이
 
+		List<ReviewVO> review = cafeService.getReview(cno, page.getDisplayPost(), page.getPostNum()); // cno로 해당하는 카페 review 출력
 		
 		model.addAttribute("cafe", cafe);
 		model.addAttribute("menu", menu);
@@ -160,12 +158,17 @@ public class CafeController {
 		model.addAttribute("page", page);
 		model.addAttribute("select", num); // 현재 페이지 (현재 페이지가 아닌 페이지와 구분하기 위해 값 전달)
 		
+		//System.out.println("num:"+num);
+		
 		// 현재 로그인 유저가 이 카페 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
 		bookmarkService.checkCafeBmk(username, cno);  
 		int bmk = bookmarkService.checkCafeBmk(username, cno);
-		// System.out.println(bmk);
+		//System.out.println("bmk:"+bmk);
 		model.addAttribute("bmk", bmk);
-	
+		//System.out.println("displayPost:"+page.getDisplayPost());
+		//System.out.println("postNum:"+page.getPostNum());
+		//System.out.println(review);
+		
 		return "cafe/info";
 	}
 		
