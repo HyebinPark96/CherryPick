@@ -5,7 +5,7 @@ jdk:
 # 1
 branches:
   only:
-    - master
+    - main
 
 # Travis CI 서버의 Home
 # 2
@@ -18,6 +18,24 @@ before_install:
 
 # 3
 script: "sudo ./mvnw clean package"
+
+before_deploy:
+  - zip -r cherrypick *
+  - mkdir -p deploy
+  - mv cherrypick.zip deploy/cherrypick.zip
+  
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: cherrypick-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
+    on: 
+      all_branches: true #해당 라인 추가
 
 # CI 실행 완료시 메일로 알람
 # 4
