@@ -43,7 +43,7 @@ deploy:
     bucket: cherrypick-build
     bundle_type: zip
     application: cherrypick
-    deployment-group: cherrypick-group
+    deployment_group: cherrypick-group
     region: ap-northeast-2
     wait-until-deployed: true
     
