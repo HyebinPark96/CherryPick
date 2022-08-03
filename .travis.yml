@@ -41,6 +41,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: cherrypick-build
+    key: cherrypick.zip
     bundle_type: zip
     application: cherrypick
     deployment_group: cherrypick-group
