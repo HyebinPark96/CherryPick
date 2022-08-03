@@ -20,9 +20,12 @@ before_install:
 script: "sudo ./mvnw clean package"
 
 before_deploy:
-  - zip -r cherrypick *
-  - mkdir -p deploy
-  - mv cherrypick.zip deploy/cherrypick.zip
+  - mkdir -p before-deploy
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cd before-deploy && zip -r before-deploy *
+  - cd ../ && mkdir -p deploy
+  - mv before-deploy/before-deploy.zip deploy/cherrypick.zip
   
 deploy:
   - provider: s3
