@@ -26,4 +26,4 @@ echo "> $JAR_NAME에 실행권한 추가"
 chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
-nohup sudo java -jar $REPOSITORY/$JAR_NAME 2>&1 &
+nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &
