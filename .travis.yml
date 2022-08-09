@@ -17,7 +17,7 @@ before_install:
   - chmod +x mvnw
 
 # 3
-script: "sudo ./mvnw clean package"
+script: "./mvnw clean package"
 
 before_deploy:
   - mkdir -p before-deploy
