@@ -1,0 +1,73 @@
+server:
+  port: 8082
+  servlet: 
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  error:
+    path: /error
+    whitelabel:
+      enabled: false
+          
+spring: 
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: seoha.mailing@gmail.com
+    password: aoijcapvqagydtep
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  datasource: 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+   # 공유디비
+    
+    url: jdbc:mysql://database-1.cygkapxxez80.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
+    username: cherrypick
+    password: F}$IG2"s{{^^H+%}
+
+  sql:
+    init:
+      mode: never
+      
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  
+  #파일첨부
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+      
+mybatis: 
+    configuration:    
+        multiple-result-sets-enabled: false    
+        map-underscore-to-camel-case: true    
+        call-setters-on-nulls: true        
+        jdbc-type-for-null: varchar    
+        default-fetch-size: 500  
+    mapper-locations: com.pj.cherrypick/mapper/*.xml
+    #type-aliases-package: com.pj.cherrypick.domain
+
+
+        
+        
