@@ -68,6 +68,15 @@ mybatis:
     mapper-locations: com.pj.cherrypick/mapper/*.xml
     #type-aliases-package: com.pj.cherrypick.domain
 
-
-        
-        
+#스프링 환경별로 포트지정
+---
+spring:
+  profiles: real1
+server:
+  port: 8081     
+     
+---
+spring:
+  profiles: real2
+server:
+  port: 8082
