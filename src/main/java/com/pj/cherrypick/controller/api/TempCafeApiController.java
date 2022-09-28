@@ -25,25 +25,24 @@ import com.pj.cherrypick.service.TempCafeService;
 import com.pj.cherrypick.storage.StorageFileNotFoundException;
 
 @RestController
-public class tempCafeApiController {
+public class TempCafeApiController {
 
 	@Autowired
 	private TempCafeService cafeService;
 	
 	private final StorageService storageService;
 
-	@Autowired
-	public tempCafeApiController(StorageService storageService) {
+	public TempCafeApiController(StorageService storageService) {
 		this.storageService = storageService;
 	}
 	
 	@RequestMapping("/cafe/uploadProc")
 	public String upload(MultipartHttpServletRequest request) {
-		System.out.println("upload on");
+		//System.out.println("upload on");
 		List<MultipartFile> files = request.getFiles("files");
 
 		for (MultipartFile file : files) {
-			System.out.println(file.getOriginalFilename() + ":" + file.getSize());
+			//System.out.println(file.getOriginalFilename() + ":" + file.getSize());
 			storageService.store(file);
 		}
 
@@ -58,7 +57,7 @@ public class tempCafeApiController {
 	@PostMapping("/cafe/regCafeProc")
 	public TempResponseDto<Integer> save(@RequestBody CafeVO cafe) {
 		//리턴 값 하나가 추가된 TempResponseDto를 사용한다.
-		System.out.println("tempCaf On");
+		//System.out.println("tempCaf On");
 		int result = cafeService.createCafe(cafe);
 		int cno = cafeService.getCafeNo();
 		return new TempResponseDto<Integer>(HttpStatus.OK.value(), result, cno);
@@ -67,7 +66,7 @@ public class tempCafeApiController {
 	
 	@PostMapping("/cafe/updateCafeProc")
 	public ResponseDto<Integer> updateCafe(@RequestBody CafeVO cafe) throws Exception{
-		System.out.println("upCaf On");
+		//System.out.println("upCaf On");
 		int result = cafeService.updateCafe(cafe);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
 	}

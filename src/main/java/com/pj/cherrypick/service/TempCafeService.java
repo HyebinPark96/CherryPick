@@ -19,8 +19,7 @@ public class TempCafeService {
 	@Autowired
 	private TempCafeMapper cafeMapper;
 	
-	
-	//검토 : @Transactional 어노테이션이 굳이 필요한가?
+
 	
 	@Transactional
 	public int createCafe(CafeVO cafe) {
