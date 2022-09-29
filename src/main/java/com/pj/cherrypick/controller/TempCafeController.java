@@ -18,7 +18,7 @@ import com.pj.cherrypick.domain.ReviewVO;
 import com.pj.cherrypick.service.TempCafeService;
 
 @Controller
-public class tempCafeController {
+public class TempCafeController {
 
 	@Autowired
 	TempCafeService cafeService;

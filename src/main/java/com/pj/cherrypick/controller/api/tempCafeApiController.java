@@ -25,14 +25,14 @@ import com.pj.cherrypick.service.TempCafeService;
 import com.pj.cherrypick.storage.StorageFileNotFoundException;
 
 @RestController
-public class TempCafeApiController {
+public class tempCafeApiController {
 
 	@Autowired
 	private TempCafeService cafeService;
 	
 	private final StorageService storageService;
 
-	public TempCafeApiController(StorageService storageService) {
+	public tempCafeApiController(StorageService storageService) {
 		this.storageService = storageService;
 	}
 	
