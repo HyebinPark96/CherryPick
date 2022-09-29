@@ -1,37 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <div th:fragment="header-title" class="title">
 	<div class="title-banner">
 		<div class="title-top">
 			<div class="title-top-left">
-				<img class="divBtn" src="/img/logo.png" width="125px" onclick="goHome();">
+				<img class="divBtn" src="/img/logo.png" width="125px"
+					onclick="goHome();">
 			</div>
 
 			<div sec:authorize="isAuthenticated()" class="title-top-right">
 				<!-- 관리자 -->
 				<div>
-					<a th:href="@{admin/adminMain(num=1, sort='member')}" sec:authorize="hasRole('ROLE_1')">Admin</a>
+					<a th:href="@{admin/adminMain(num=1, sort='member')}"
+						sec:authorize="hasRole('ROLE_1')">Admin</a>
 				</div>
 				<div sec:authorize="hasRole('ROLE_1')">&nbsp;|&nbsp;</div>
 				<div>
-					<a href="#" th:href="@{/logout}" sec:authorize="hasRole('ROLE_1')">Sign out</a>
+					<a href="#" th:href="@{/logout}" sec:authorize="hasRole('ROLE_1')">Sign
+						out</a>
 				</div>
 
 
 				<!-- 회원 -->
 				<div>
-					<a th:href="@{member/myPage}" sec:authorize="!hasRole('ROLE_1')">My Page</a>
+					<a th:href="@{member/myPage}" sec:authorize="!hasRole('ROLE_1')">My
+						Page</a>
 				</div>
 				<div sec:authorize="!hasRole('ROLE_1')">&nbsp;|&nbsp;</div>
 				<div>
-					<a href="#" th:href="@{/logout}" sec:authorize="!hasRole('ROLE_1')">Sign out</a>
+					<a href="#" th:href="@{/logout}" sec:authorize="!hasRole('ROLE_1')">Sign
+						out</a>
 				</div>
 			</div>
 
 			<!-- 비회원 -->
-			<div sec:authorize-expr="!isAuthenticated()" th:if="${bizMember == null}" class="title-top-right">
+			<div sec:authorize-expr="!isAuthenticated()"
+				th:if="${bizMember == null}" class="title-top-right">
 				<div>
 					<a href="/auth/loginForm">Sign in</a>
 				</div>
@@ -42,7 +49,8 @@
 			</div>
 
 			<!-- 사업자 -->
-			<div sec:authorize-expr="!isAuthenticated()" th:if="${bizMember != null}" class="title-top-right">
+			<div sec:authorize-expr="!isAuthenticated()"
+				th:if="${bizMember != null}" class="title-top-right">
 				<form th:action="@{bizMember/storeList}" method="post">
 					<button type="submit">My Store</button>
 				</form>
@@ -59,15 +67,18 @@
 		</div>
 		<div class="title-center">
 			<h3>CherryPick</h3>
-			<span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span>
-			
-
+			<div><span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span></div>
+		
 			<div class="title-searchbar">
-				<div>
-					<a href="search">&nbsp;&nbsp;<img src="/img/search-w.png" style="height: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-				</div>
-				<input id="title-search-input" placeholder="가고 싶은 카페를 찾아보세요. #인스타 #핫플 #스터디"></input>
+				<form action = "search" method = "get">
+					<div class="d-flex align-items-center">
+						&nbsp;&nbsp;<input type = "image" src="/img/search-w.png" style="height: 20px;" alt="">&nbsp;&nbsp;|&nbsp;&nbsp;
+						<input style="width: 90vw" id="title-search-input" name="keyword" placeholder="가고 싶은 카페를 찾아보세요. #인스타 #핫플 #스터디"></input>				
+					</div>
+					
+				</form>
 			</div>
+			
 
 		</div>
 	</div>
@@ -88,13 +99,16 @@
 <div th:fragment="header-sub">
 	<div class="sub">
 		<div class="sub-left">
-			<img class="divBtn logo-pink" src="/img/logo-pink.png" onclick="goHome();"></img>
+			<img class="divBtn logo-pink" src="/img/logo-pink.png"
+				onclick="goHome();"></img>
 		</div>
 		<div class="sub-searchbar">
-			<div>
-				<a href="search">&nbsp;&nbsp;<img src="/img/search-b.png" style="height: 20px;">&nbsp;&nbsp;</a>|&nbsp;&nbsp;
-			</div>
-			<input id="mainsearch" placeholder="#인스타 #핫플 #스터디"></input>
+			<form action = "search" method = "get">
+				<div class="d-flex align-items-center">
+					&nbsp;&nbsp;<input type = "image" src="/img/search-b.png" style="height: 20px;" alt="">&nbsp;&nbsp;|&nbsp;&nbsp;				
+					<input style="width: 70%;"name="keyword" placeholder="#인스타 #핫플 #스터디"></input>
+				</div>
+			</form>
 		</div>
 	</div>
 

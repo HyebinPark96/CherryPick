@@ -29,6 +29,7 @@ public class SearchController {
 	// CafeList
 	@GetMapping("/search")
 	public String getCafeList(@AuthenticationPrincipal PrincipalDetail principalDetail, 
+			@RequestParam(value = "keyword") String keyword, 
 			@RequestParam(required=false, defaultValue="0") Integer sort, 
 			@RequestParam(required=false, defaultValue="0") Integer fpark, 
 			@RequestParam(required=false, defaultValue="0") Integer fgroup,
@@ -45,7 +46,7 @@ public class SearchController {
 		model.addAttribute("username", username);
 		*/
 		
-		String username = principalDetail.getUsername();
+		//String username = principalDetail.getUsername();
 		
 		List<CafeVO> cafes = new ArrayList<>(); 
 		FilterVO filter = new FilterVO();
@@ -55,25 +56,19 @@ public class SearchController {
 		filter.setFkids(fkids);
 		filter.setFpark(fpark);
 		filter.setFpet(fpet);
+		System.out.println("fpark : " + fpark);
 		
-		model.addAttribute("filter", filter);
-						
-		if(sort==0) { //최신순
-			cafes = searchService.getCafeByName("kkk", filter);	
-			model.addAttribute("cafes", cafes);	
-		}else if(sort==1) { // 즐겨찾기순
-			cafes = cafeService.getCafeAllByBmk(filter);	
-			model.addAttribute("cafes", cafes);	
-		}else if(sort==2) { // 별점순
-			cafes = cafeService.getCafeAllByScore(filter);	
-			model.addAttribute("cafes", cafes);
-		}else if(sort==3) { // 리뷰많은순
-			cafes = cafeService.getCafeAllByReview(filter);	
-			model.addAttribute("cafes", cafes);	
-		}
-				
+
+		
+		
+		cafes = searchService.getCafeByName(keyword, filter);	
+		model.addAttribute("cafes", cafes);			
+		
+		
 		System.out.println("[cafes]:"+cafes);
 		System.out.println("[model]:"+model);	
+		
+		model.addAttribute("filter", filter);
 		
 		return "search/search";
 	}	

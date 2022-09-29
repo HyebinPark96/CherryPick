@@ -10,6 +10,7 @@
  		ON c.cno = r.cno
  		<where>
  		c.cname LIKE CONCAT('%', #{keyword}, '%')
+ 		<!-- 
  		<if test="fpark == 1">
  		AND c.parking = 1
  		</if>
@@ -21,7 +22,7 @@
  		</if> 	
  		<if test="fgroup == 1">
  		AND c.group = 1
- 		</if> 
+ 		</if> --> 
  		</where>
  		GROUP BY c.cno
 	</select> 

@@ -258,6 +258,10 @@ textarea:focus, input:focus {
 }
 
 .title-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
 	color: white;
 	position: absolute;
 	width: 100%;
@@ -287,8 +291,7 @@ textarea:focus, input:focus {
 	color: white;
 	display: flex;
 	align-items: center;
-	margin-left: 25px;
-	margin-right: 25px;
+	width: 90%;
 	min-height: 30px;
 	border: 5px solid #a6434b;
 	border-radius: 50px;
@@ -297,7 +300,6 @@ textarea:focus, input:focus {
 #title-search-input {
 	color: white;
 	height: 100%;
-	width: 80%;
 	background-color: transparent;
 	border: none;
 }
