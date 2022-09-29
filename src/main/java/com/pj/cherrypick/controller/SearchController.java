@@ -3,6 +3,8 @@ package com.pj.cherrypick.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.pj.cherrypick.config.auth.PrincipalDetail;
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.FilterVO;
+import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.service.CafeService;
 import com.pj.cherrypick.service.SearchService;
 
@@ -28,7 +31,7 @@ public class SearchController {
 
 	// CafeList
 	@GetMapping("/search")
-	public String getCafeList(@AuthenticationPrincipal PrincipalDetail principalDetail, 
+	public String getCafeList(@AuthenticationPrincipal PrincipalDetail principalDetail, HttpServletRequest req,
 			@RequestParam(value = "keyword") String keyword, 
 			@RequestParam(required=false, defaultValue="0") Integer sort, 
 			@RequestParam(required=false, defaultValue="0") Integer fpark, 
@@ -40,15 +43,11 @@ public class SearchController {
 		//System.out.println("controller:getCafeList---------------------------------------");
 		//System.out.println("[sort]: "+sort+"  [fpark]: "+fpark+" [fgroup]:"+fgroup+" [fpet]:"+fpet+" [fkids]:"+fkids);
 		
-		/*
-		String username = "aaa";
-		
-		model.addAttribute("username", username);
-		*/
-		
-		//String username = principalDetail.getUsername();
 		
 		List<CafeVO> cafes = new ArrayList<>(); 
+		List<CafeVO> taggedCafes = new ArrayList<>();
+		List<ListVO> lists = new ArrayList<>();
+		
 		FilterVO filter = new FilterVO();
 		
 		filter.setSort(sort);
@@ -56,19 +55,25 @@ public class SearchController {
 		filter.setFkids(fkids);
 		filter.setFpark(fpark);
 		filter.setFpet(fpet);
-		System.out.println("fpark : " + fpark);
 		
-
+		cafes = searchService.getCafeByName(keyword, filter);
+		lists = searchService.getListByName(keyword, filter);
+		taggedCafes = searchService.getCafeByTag(keyword, filter);
 		
-		
-		cafes = searchService.getCafeByName(keyword, filter);	
 		model.addAttribute("cafes", cafes);			
-		
-		
-		System.out.println("[cafes]:"+cafes);
-		System.out.println("[model]:"+model);	
+		model.addAttribute("taggedCafes", taggedCafes);
+		model.addAttribute("lists", lists);			
+		//System.out.println("[cafes]:"+cafes);
+		//System.out.println("[model]:"+model);	
 		
 		model.addAttribute("filter", filter);
+		
+		model.addAttribute("keyword", keyword);
+		
+		System.out.println(taggedCafes);
+		System.out.println(lists);
+		
+		
 		
 		return "search/search";
 	}	

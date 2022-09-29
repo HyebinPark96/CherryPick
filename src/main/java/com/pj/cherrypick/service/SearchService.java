@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.pj.cherrypick.domain.CafeVO;
 import com.pj.cherrypick.domain.FilterVO;
+import com.pj.cherrypick.domain.ListVO;
 import com.pj.cherrypick.mapper.SearchMapper;
 
 @Service
@@ -22,11 +23,11 @@ public class SearchService {
 		return searchMapper.getCafeByTag(keyword, filter);
 	}
 	
-	/*
-	public List<ListVO> getListByName(FilterVO filter) {
-		return searchMapper.getListByName(filter);
+	
+	public List<ListVO> getListByName(String keyword, FilterVO filter) {
+		return searchMapper.getListByName(keyword, filter);
 	}
-	*/
+	
 	
 	
 }

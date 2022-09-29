@@ -70,10 +70,10 @@
 			<div><span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span></div>
 		
 			<div class="title-searchbar">
-				<form action = "search" method = "get">
+				<form action = "/search" method = "get">
 					<div class="d-flex align-items-center">
-						&nbsp;&nbsp;<input type = "image" src="/img/search-w.png" style="height: 20px;" alt="">&nbsp;&nbsp;|&nbsp;&nbsp;
-						<input style="width: 90vw" id="title-search-input" name="keyword" placeholder="가고 싶은 카페를 찾아보세요. #인스타 #핫플 #스터디"></input>				
+						&nbsp;&nbsp;<input class="searchBtn" type = "image" src="/img/search-w.png" style="height: 20px;" alt="" disabled>&nbsp;&nbsp;|&nbsp;&nbsp;
+						<input style="width: 90vw" id="title-search-input" class="searchBar" name="keyword" placeholder="가고 싶은 카페를 찾아보세요. #인스타 #핫플 #스터디" ></input>				
 					</div>
 					
 				</form>
@@ -103,10 +103,10 @@
 				onclick="goHome();"></img>
 		</div>
 		<div class="sub-searchbar">
-			<form action = "search" method = "get">
+			<form action = "/search" method = "get">
 				<div class="d-flex align-items-center">
-					&nbsp;&nbsp;<input type = "image" src="/img/search-b.png" style="height: 20px;" alt="">&nbsp;&nbsp;|&nbsp;&nbsp;				
-					<input style="width: 70%;"name="keyword" placeholder="#인스타 #핫플 #스터디"></input>
+					&nbsp;&nbsp;<input class="searchBtn" type = "image" src="/img/search-b.png" style="height: 20px;" alt="" disabled>&nbsp;&nbsp;|&nbsp;&nbsp;				
+					<input style="width: 70%;"  class="searchBar" name="keyword" placeholder="#인스타 #핫플 #스터디"></input>
 				</div>
 			</form>
 		</div>
