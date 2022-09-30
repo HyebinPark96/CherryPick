@@ -50,7 +50,11 @@
 
 
 		<div class="item">
-
+			<div class="d-flex flex-column align-items-center" th:if="${#lists.size(cafes) + #lists.size(lists) + #lists.size(taggedCafes)} == 0">
+				<img width="300px" src="/img/cherry-line.png">
+				<h4>검색 결과가 없습니다.</h4>
+				<button class="btn btn-primary" onclick="javascript:history.back();">이전 페이지로</button>
+			</div>
 			<!--구분선-->
 			<div class="cflist container" th:unless="${#lists.isEmpty(cafes)}">
 				<hr>
