@@ -7,15 +7,34 @@
 '22.07.11 - '22.07.26 (2주)  
 
 &nbsp;  
-### :construction_worker: 개발 인원 : 
+### :construction_worker: 개발 인원
 #### [총 3명 : 김서하, 박혜빈, 최효빈]
 
 
 &nbsp;  
 ### :books: 사용스택
-- Backend : Springboot, MySQL, MyBatis, Ajax
-- Frontend : Thymeleaf, CSS, Javascript, jQuery
-- Tool : HeidiSQL, Github Desktop
+**[Backend]** 
+<div style="display:flex;">
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> 
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/ajax-F8DC75?style=for-the-badge&logo=ajax&logoColor=black">
+<img src="https://img.shields.io/badge/mybatis-092E20?style=for-the-badge&logo=mybatis&logoColor=white">
+</div>
+
+&nbsp;  
+**[Frontend]** 
+<div style="display:flex;">
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+<img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/thymeleaf-092E20?style=for-the-badge&logo=springboot&logoColor=white"> 
+</div>
+
+
+
+
+
 
 
 &nbsp;  
@@ -28,9 +47,8 @@ ___
 - bcryptpasswordencoder 로 패스워드 암호화
 - Ajax 비동기 통신을 이용한 회원가입 및 회원정보 수정 
 
-- 원하는 카페를 북마크로 지정
-- 카페들을 특정 주제로 묶어 저장한 리스트 "cherrypick"을   
-생성하거나 조회
+- 원하는 카페를 개인별 북마크로 지정
+- "cherrypick" : 카페들을 공개 리스트로 저장 및 조회  
 - SmartEditor 를 이용한 포토리뷰 및 별점 작성
 - 리뷰 데이터를 활용해 카페별 평균 웨이팅 시간 제공
 - 검색창을 통해 카페/리스트/해시태그를 검색
