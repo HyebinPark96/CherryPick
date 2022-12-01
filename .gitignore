@@ -4,8 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-spring.config.use-legacy-processing=true
-
 ### STS ###
 .apt_generated
 .classpath
