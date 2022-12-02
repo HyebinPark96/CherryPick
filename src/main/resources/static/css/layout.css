@@ -256,7 +256,7 @@ textarea:focus, input:focus {
 .title-banner {
 	height: 15rem;
 	text-align: center;
-	background-image: url("/img/cherrypick_banner_2.png");
+	background-image: url("/static/img/cherrypick_banner_2.png");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-color: #a6434b;
@@ -445,7 +445,7 @@ textarea:focus, input:focus {
 	
 	#sidebar-contents {
 		position: fixed;
-		top: 30;
+		/*top: 30;*/
 		flex-direction: column;
 		justify-content: space-between;
 		gap: 30px;
