@@ -256,7 +256,7 @@ textarea:focus, input:focus {
 .title-banner {
 	height: 15rem;
 	text-align: center;
-	background-image: url("/static/img/cherrypick_banner_2.png");
+	background-image: url("/img/cherrypick_banner_2.png");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-color: #a6434b;
