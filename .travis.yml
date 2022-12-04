@@ -53,7 +53,7 @@ deploy:
     application: cherrypick
     deployment_group: cherrypick-group
     region: ap-northeast-2
-    wait-until-deployed: true    
+    wait_until_deployed: true
     on: 
       all_branches: true #해당 라인 추가
     
