@@ -11,7 +11,8 @@ branches:
 # 2
 cache:
   directories:
-    - '$HOME/.m2'
+    - '$HOME/.m2/repository'
+    - '$HOME/.maven'
 
 before_install:
   - chmod +x mvnw
