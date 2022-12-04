@@ -309,16 +309,16 @@ textarea:focus, input:focus {
 	display: flex;
 	align-items: center;
 	min-height: 30px;
-	border: 5px solid #a6434b;
-	border-radius: 50px;
+	/*border: 5px solid #a6434b;*/
 }
 
 #title-search-input {
 	color: white;
-	width: 100%;
+	width: 50vw;
 	/* height: 100%; */
 	/* background-color: transparent; */
-	border: black;
+	/*border: black;*/
+	border-radius: 5px;
 }
 
 #title-search-input::placeholder {
