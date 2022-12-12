@@ -61,7 +61,7 @@ spring:
 
   config:
     activate:
-      on-profile: real
+      on-profile:
 mybatis: 
     configuration:    
         multiple-result-sets-enabled: false    
