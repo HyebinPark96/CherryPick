@@ -15,7 +15,7 @@ server:
           
 spring:
   profiles:
-    active: real
+    active:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
