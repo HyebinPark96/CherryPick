@@ -44,39 +44,39 @@ public class ProfileControllerUnitTest {
         assertThat(profile).isEqualTo(expectedProfile);
     }
 
-    @Test
-    public void real_profile이_없으면_real1_조회된다() {
-        //given
-        String expectedProfile = "real1";
-        MockEnvironment env = new MockEnvironment();
-
-        env.addActiveProfile(expectedProfile);
-
-        ProfileController controller = new ProfileController(env);
-
-        //when
-        String profile = controller.profile();
-
-        //then
-        assertThat(profile).isEqualTo(expectedProfile);
-    }
-
-    @Test
-    public void real_profile이_없으면_real2_조회된다() {
-        //given
-        String expectedProfile = "real2";
-        MockEnvironment env = new MockEnvironment();
-
-        env.addActiveProfile(expectedProfile);
-
-        ProfileController controller = new ProfileController(env);
-
-        //when
-        String profile = controller.profile();
-
-        //then
-        assertThat(profile).isEqualTo(expectedProfile);
-    }
+//    @Test
+//    public void real_profile이_없으면_real1_조회된다() {
+//        //given
+//        String expectedProfile = "real1";
+//        MockEnvironment env = new MockEnvironment();
+//
+//        env.addActiveProfile(expectedProfile);
+//
+//        ProfileController controller = new ProfileController(env);
+//
+//        //when
+//        String profile = controller.profile();
+//
+//        //then
+//        assertThat(profile).isEqualTo(expectedProfile);
+//    }
+//
+//    @Test
+//    public void real_profile이_없으면_real2_조회된다() {
+//        //given
+//        String expectedProfile = "real2";
+//        MockEnvironment env = new MockEnvironment();
+//
+//        env.addActiveProfile(expectedProfile);
+//
+//        ProfileController controller = new ProfileController(env);
+//
+//        //when
+//        String profile = controller.profile();
+//
+//        //then
+//        assertThat(profile).isEqualTo(expectedProfile);
+//    }
 
     @Test
     public void active_profile이_없으면_default가_조회된다() {
