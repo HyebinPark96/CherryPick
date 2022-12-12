@@ -1,5 +1,7 @@
+#default, real1, real2 공통설정
+
 server:
-  port: 8080
+  port: 8080 #defalut port
   servlet: 
     context-path: /
     encoding:
@@ -20,7 +22,6 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  
 
   mail:
     host: smtp.gmail.com
@@ -37,7 +38,7 @@ spring:
   datasource: 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-   # 공유디비
+   # 공유디비 #나중에 nginx로 숨기기
     
     url: jdbc:mysql://database-1.cygkapxxez80.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
     username: cherrypick
@@ -84,8 +85,7 @@ server:
     whitelabel:
       enabled: false
           
-spring: 
-  profiles: real1
+spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -130,7 +130,10 @@ spring:
       enabled: true
       max-file-size: 100MB
       max-request-size: 100MB
-      
+
+  config:
+    activate:
+      on-profile: real1
 mybatis: 
     configuration:    
         multiple-result-sets-enabled: false    
@@ -155,8 +158,7 @@ server:
     whitelabel:
       enabled: false
           
-spring: 
-  profiles: real2
+spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -202,7 +204,10 @@ spring:
       enabled: true
       max-file-size: 100MB
       max-request-size: 100MB
-      
+
+  config:
+    activate:
+      on-profile: real2
 mybatis: 
     configuration:    
         multiple-result-sets-enabled: false    
