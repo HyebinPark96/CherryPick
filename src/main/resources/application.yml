@@ -1,4 +1,4 @@
-#default, real1, real2 공통설정
+#real, real1, real2 공통설정
 
 server:
   port: 8080 #defalut port
@@ -13,7 +13,7 @@ server:
     whitelabel:
       enabled: false
           
-spring: 
+spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -58,7 +58,10 @@ spring:
       enabled: true
       max-file-size: 100MB
       max-request-size: 100MB
-      
+
+  config:
+    activate:
+      on-profile: real
 mybatis: 
     configuration:    
         multiple-result-sets-enabled: false    
