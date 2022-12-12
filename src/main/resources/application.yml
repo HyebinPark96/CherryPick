@@ -14,6 +14,8 @@ server:
       enabled: false
           
 spring:
+  profiles:
+    active: real
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -78,14 +80,12 @@ server:
   port: 8081
           
 spring:
-  config:
-    activate:
-      on-profile: real1
+  profiles:
+    active: real1
 ---
 server:
   port: 8082
 
 spring:
-  config:
-    activate:
-      on-profile: real2
+  profiles:
+    active: real2
