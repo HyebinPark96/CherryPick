@@ -1,6 +1,7 @@
 # [CherryPick] :cherries:
 ## Spring Boot Project
 > 지역 카페 정보를 리스트(cherrypick)로 모아보고 공유하는 웹사이트
+http://ec2-43-200-25-202.ap-northeast-2.compute.amazonaws.com/
 
 &nbsp;  
 ### :clock2: 제작 기간
