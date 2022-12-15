@@ -1,7 +1,7 @@
-#default 프로필 **공통
+#real2 프로필
 
 server:
-  # port: 8080 #defalut port
+  port: 8082
   servlet: 
     context-path:
     encoding:
@@ -14,6 +14,8 @@ server:
       enabled: false
           
 spring:
+  profiles:
+    active: real2
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html

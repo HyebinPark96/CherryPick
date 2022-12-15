@@ -40,11 +40,11 @@
 			<div sec:authorize-expr="!isAuthenticated()"
 				th:if="${bizMember == null}" class="title-top-right">
 				<div>
-					<a href="/auth/loginForm">Sign in</a>
+					<a href="/auth/loginForm">로그인</a>
 				</div>
 				<div>&nbsp;|&nbsp;</div>
 				<div>
-					<a href="/auth/joinForm">Sign up</a>
+					<a href="/auth/joinForm">회원가입</a>
 				</div>
 			</div>
 
@@ -66,14 +66,15 @@
 
 		</div>
 		<div class="title-center">
-			<h3>CherryPick</h3>
-			<div><span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span></div>
-		
+			<br><br>
+			<h3>지금, 당신의 체리를 찾아보세요</h3>
+<!--			<div><span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span></div>-->
 			<div class="title-searchbar">
 				<form action = "/search" method = "get">
 					<div class="d-flex align-items-center">
-						&nbsp;&nbsp;<input class="searchBtn" type = "image" src="/img/search-w.png" style="height: 20px;" alt="" disabled>&nbsp;&nbsp;|&nbsp;&nbsp;
-						<input style="width: 90vw" id="title-search-input" class="searchBar" name="keyword" placeholder="가고 싶은 카페를 찾아보세요. #인스타 #핫플 #스터디" ></input>				
+						&nbsp;&nbsp;
+						<input class="searchBtn" type = "image" src="/img/search-w.png" style="height: 20px;" alt="" disabled>&nbsp;&nbsp;|&nbsp;&nbsp;
+						<input id="title-search-input" class="searchBar" name="keyword" placeholder="키워드를 검색해보세요. #카공 #감성 #에그타르트" ></input>
 					</div>
 					
 				</form>

@@ -11,7 +11,8 @@ branches:
 # 2
 cache:
   directories:
-    - '$HOME/.m2'
+    - '$HOME/.m2/repository'
+    - '$HOME/.maven'
 
 before_install:
   - chmod +x mvnw
@@ -40,7 +41,7 @@ deploy:
     skip_cleanup: true
     acl: private
     local_dir: deploy
-    wait-until-deployed: true
+    wait_until_deployed: true
     on: 
       all_branches: true #해당 라인 추가
       
@@ -53,7 +54,7 @@ deploy:
     application: cherrypick
     deployment_group: cherrypick-group
     region: ap-northeast-2
-    wait-until-deployed: true    
+    wait_until_deployed: true
     on: 
       all_branches: true #해당 라인 추가
     

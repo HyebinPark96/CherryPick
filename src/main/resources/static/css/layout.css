@@ -254,10 +254,12 @@ textarea:focus, input:focus {
 }
 
 .title-banner {
-	height: 300px;
+	height: 15rem;
 	text-align: center;
-	background-image: url("/img/cherrypick_banner_1.png");
-	background-size: cover;
+	background-image: url("/img/cherrypick_banner_2.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-color: #a6434b;
 	position: relative;
 	align-items: center;
 }
@@ -302,19 +304,21 @@ textarea:focus, input:focus {
 
 .title-searchbar {
 	color: white;
+	width: 100%;
+	justify-content: center;
 	display: flex;
 	align-items: center;
-	width: 90%;
 	min-height: 30px;
-	border: 5px solid #a6434b;
-	border-radius: 50px;
+	/*border: 5px solid #a6434b;*/
 }
 
 #title-search-input {
 	color: white;
-	height: 100%;
-	background-color: transparent;
-	border: none;
+	width: 50vw;
+	/* height: 100%; */
+	/* background-color: transparent; */
+	/*border: black;*/
+	border-radius: 5px;
 }
 
 #title-search-input::placeholder {
@@ -441,7 +445,7 @@ textarea:focus, input:focus {
 	
 	#sidebar-contents {
 		position: fixed;
-		top: 30;
+		/*top: 30;*/
 		flex-direction: column;
 		justify-content: space-between;
 		gap: 30px;
