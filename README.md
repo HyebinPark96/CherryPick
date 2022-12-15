@@ -21,6 +21,11 @@ http://ec2-43-200-25-202.ap-northeast-2.compute.amazonaws.com/
 <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
 <img src="https://img.shields.io/badge/ajax-F8DC75?style=for-the-badge&logo=ajax&logoColor=black">
 <img src="https://img.shields.io/badge/mybatis-092E20?style=for-the-badge&logo=mybatis&logoColor=white">
+<img src="https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=Amazon%20EC2&logoColor=black"> <!--ec2-->
+<img src="https://img.shields.io/badge/Amazon%20RDS-527FFF?style=for-the-badge&logo=Amazon%20RDS&logoColor=black"> <!--rds-->
+<img src="https://img.shields.io/badge/Amazon%20S3-569A31?style=for-the-badge&logo=Amazon%20S3&logoColor=white"> <!--s3-->
+<img src="https://img.shields.io/badge/Travis%20CI-3EAAAF?style=for-the-badge&logo=Travis%20CI&logoColor=white"> <!--travis-->
+
 </div>
 
 &nbsp;  
