@@ -22,7 +22,7 @@ script: "./mvnw clean package"
 
 #step2
 before_deploy:
-  - zip -r cherrypick
+  - zip -r cherrypick *
   - mkdir -p deploy
   - mv cherrypick.zip deploy/cherrypick.zip
 
