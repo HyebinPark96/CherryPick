@@ -31,8 +31,8 @@
 			<span style="font-size: 20px; color:#eee;" th:text="${cafe.cname}"><b>카페
 					이름</b></span>
 			<img id="bmkImg" src="">
-			<input type="hidden" id="bmk_check" th:if="${bmk == 0}" th:value="0">
-			<input type="hidden" id="bmk_check" th:if="${bmk != 0}" th:value="1">
+			<input type="hidden" id="bmk_check" th:if="${bmk <= 0}" th:value="0">
+			<input type="hidden" id="bmk_check" th:if="${bmk > 0}" th:value="1">
 
 			<!--reviewController에 cno 보내기 -->
 			<input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">

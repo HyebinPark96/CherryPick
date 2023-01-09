@@ -13,7 +13,7 @@ function sendToListInfo(variable) {
 // 문서 ready때 체크: 1.북마크 여부(cafeInfo) 2.sort&filter(cafeList)
 $(document).ready(function() {
 		
-	let chk = document.getElementById('bmk_check').value 
+	let chk = document.getElementById('bmk_check').value
 	const cno = $("#cno").val();
 	const username = $("#username").val();
 	const bmkImg = document.getElementById("bmkImg");
@@ -21,19 +21,19 @@ $(document).ready(function() {
 	console.log("[bmk check]cno:"+cno);
 	console.log("[bmk check]chk:"+chk);
 
-	if (chk = 1 ) {
-		bmkImg.src = "/img/bmk.png";
+	if (chk <= 0 ) {
+		bmkImg.src = "/img/bmk-empty.png";
 		
 	} else {
-		bmkImg.src = "/img/bmk-empty.png";
+		bmkImg.src = "/img/bmk.png";
 	}
 		
 	//필터링 변수 가져오기
-	var fpark = $("#f_park").val();
-	var fpet =  $("#f_pet").val();
-	var fkids =  $("#f_kids").val();
-	var fgroup =  $("#f_group").val();
-	var sort =  $("#f_sort").val();
+	const fpark = $("#f_park").val();
+	const fpet =  $("#f_pet").val();
+	const fkids =  $("#f_kids").val();
+	const fgroup =  $("#f_group").val();
+	const sort =  $("#f_sort").val();
 	
 	console.log("fpark:"+fpark);
 	console.log("fpet:"+fpet);
