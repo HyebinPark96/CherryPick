@@ -101,11 +101,22 @@ public class CafeController {
 	public String getEachList(@AuthenticationPrincipal PrincipalDetail principalDetail,
 			@PathVariable int lino, Model model) throws Exception {
 	
-		String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
-		model.addAttribute("username", username);
+		//String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
 		//시큐리티
 		//String username = principalDetail.getUsername();
-		
+		//model.addAttribute("username", username);
+
+		String username = new String();
+
+		// username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
+		try {
+			username = principalDetail.getUsername();
+		}catch(Exception e) {
+			username = "guest";
+		}finally {
+			model.addAttribute("username", username);
+		}
+
 		ListVO list = cafeService.getEachList(lino);
 		List<CafeVO> cafes = cafeService.getCafeList(lino);
 		model.addAttribute("list", list);
@@ -114,7 +125,7 @@ public class CafeController {
 		// 현재 로그인 유저가 이 리스트를 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
 		bookmarkService.checkListBmk(username, lino);
 		int bmk = bookmarkService.checkListBmk(username, lino);
-		//System.out.println(bmk);
+		System.out.println(bmk);
 		model.addAttribute("bmk", bmk);
 		
 		
@@ -138,10 +149,28 @@ public class CafeController {
 		//int num = 페이징
 		Page page = new Page();
 		
-		 String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
+		// String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
+
 		//시큐리티
+		String username = new String();
 		//String username = principalDetail.getUsername();
-		model.addAttribute("username", username);
+
+		// username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
+		try {
+			username = principalDetail.getUsername();
+		}catch(Exception e) {
+			username = "guest";
+		}finally {
+			model.addAttribute("username", username);
+		}	// username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
+		try {
+			username = principalDetail.getUsername();
+		}catch(Exception e) {
+			username = "guest";
+		}finally {
+			model.addAttribute("username", username);
+		}
+		//model.addAttribute("username", username);
 		
 		CafeVO cafe = cafeService.getCafeInfo(cno); // cno로 해당하는 카페 info 출력
 		List<CafeMenuVO> menu = cafeService.getCafeMenu(cno); // cno로 해당하는 카페 menu 출력 
@@ -159,12 +188,15 @@ public class CafeController {
 		model.addAttribute("review", review);
 		model.addAttribute("page", page);
 		model.addAttribute("select", num); // 현재 페이지 (현재 페이지가 아닌 페이지와 구분하기 위해 값 전달)
-		
+
+
 		// 현재 로그인 유저가 이 카페 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
 		bookmarkService.checkCafeBmk(username, cno);  
 		int bmk = bookmarkService.checkCafeBmk(username, cno);
-		// System.out.println(bmk);
 		model.addAttribute("bmk", bmk);
+
+		System.out.println("username:"+username);
+		System.out.println("bmk:"+bmk);
 	
 		return "cafe/info";
 	}
