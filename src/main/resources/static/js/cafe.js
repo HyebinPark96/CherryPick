@@ -9,6 +9,15 @@ function sendToListInfo(variable) {
 	location.href = `/cafe/list/${variable}`;
 }
 
+// 체리픽(리스트) 만들기로 이동
+function sendToCherries() {
+	location.href = `/member/myAddCherry`;
+}
+
+// 나의 체리픽(즐겨찾기) 이동
+function sendToCherryBmk() {
+	location.href = `/member/myPage`;
+}
 
 // 문서 ready때 체크: 1.북마크 여부(cafeInfo) 2.sort&filter(cafeList)
 $(document).ready(function() {
