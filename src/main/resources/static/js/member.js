@@ -303,7 +303,12 @@ let index = {
 	function goHere(variable) {
 		window.location.href="/"+variable;
 	}
-	
+
+	// 준비중입니다
+	function ready() {
+		alert("서비스준비중입니다!");
+	}
+
 index.init();
 
 
