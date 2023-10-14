@@ -57,8 +57,8 @@ deploy:
     bucket: cherrypick-webservice-build
     key: cherrypick.zip
     bundle_type: zip
-    application: cherrypick
-    deployment_group: cherrypick-group
+    application: cherrypick-webservice
+    deployment_group: cherrypick-webservice-group
     region: ap-northeast-2
     wait_until_deployed: true
     file_exists_behavior: overwrite
