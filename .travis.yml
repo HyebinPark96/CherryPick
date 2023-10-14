@@ -43,7 +43,7 @@ deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: cherrypick-build
+    bucket: cherrypick-webservice-build
     region: ap-northeast-2
     skip_cleanup: true
     acl: private
@@ -54,7 +54,7 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: cherrypick-build
+    bucket: cherrypick-webservice-build
     key: cherrypick.zip
     bundle_type: zip
     application: cherrypick
