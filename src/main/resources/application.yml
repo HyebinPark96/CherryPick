@@ -35,14 +35,14 @@ spring:
           starttls:
             enable: true
 
-  datasource: 
+  datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
    # 공유디비 #나중에 nginx로 숨기기
     
-    url: jdbc:mysql://database-1.cygkapxxez80.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
-    username: cherrypick
-    password: F}$IG2"s{{^^H+%}
+    url: jdbc:mysql://cherrypick-db.cbu6rdfxpdjo.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
+    username: admin
+    password: x9w8SKxV9XwF5aZUNVB2
 
   sql:
     init:
