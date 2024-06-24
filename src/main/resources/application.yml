@@ -40,9 +40,9 @@ spring:
 
    # 공유디비 #나중에 nginx로 숨기기
     
-    url: jdbc:mysql://cherrypick-db.cbu6rdfxpdjo.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
-    username: admin
-    password: x9w8SKxV9XwF5aZUNVB2
+    url: jdbc:mysql://cherrypick-db.c58cka2q8d99.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
+    username: seoha
+    password: cpws1234
 
   sql:
     init:
