@@ -43,7 +43,8 @@ $(document).ready(function() {
 	const fkids =  $("#f_kids").val();
 	const fgroup =  $("#f_group").val();
 	const sort =  $("#f_sort").val();
-	
+	let page = $("#page").val();
+
 	console.log("fpark:"+fpark);
 	console.log("fpet:"+fpet);
 	console.log("fkids:"+fkids);
@@ -51,7 +52,7 @@ $(document).ready(function() {
 	console.log("sort:"+sort);
 					
 
-	var filter = { 'fpark' : fpark, 'fpet' : fpet, 'fkids' : fkids, 'fgroup' : fgroup, 'sort' : sort}
+	var filter = { 'fpark' : fpark, 'fpet' : fpet, 'fkids' : fkids, 'fgroup' : fgroup, 'sort' : sort, 'page' : page}
 	
 	var url="cafe/select";
 
