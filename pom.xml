@@ -19,7 +19,10 @@
 	
 	<dependencies>
 
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
 
 		<!-- 타임리프 라이브러리 -->
 		<dependency>
