@@ -43,7 +43,6 @@ public class CafeController {
                               @RequestParam(required = false, defaultValue = "1") Integer page,
                               Model model) throws Exception {
 
-
         //System.out.println("controller:getCafeList---------------------------------------");
         //System.out.println("[sort]: "+sort+"  [fpark]: "+fpark+" [fgroup]:"+fgroup+" [fpet]:"+fpet+" [fkids]:"+fkids);
 
@@ -51,12 +50,7 @@ public class CafeController {
         //String username = principalDetail.getUsername();
         model.addAttribute("username", username);
 
-        int totalCount = cafeService.getTotalCafeCount(); // 전체 카페 수 가져오기
-        int limit = 15; // 페이지당 보여줄 개수
-        int totalPages = (int) Math.ceil((double) totalCount / limit); // 전체 페이지 수 계산
-        int offset = (page - 1) * limit; // 시작 위치 계산
-
-        List<CafeVO> cafes = new ArrayList<>();
+        // 담아주기
         FilterVO filter = new FilterVO();
 
         filter.setSort(sort);
@@ -64,14 +58,23 @@ public class CafeController {
         filter.setFkids(fkids);
         filter.setFpark(fpark);
         filter.setFpet(fpet);
+
+        // 페이징처리
+        int totalCount = cafeService.getTotalCafeCount(filter); // 전체 카페 수 가져오기
+        int limit = 15; // 페이지당 보여줄 개수
+        int totalPages = (int) Math.ceil((double) totalCount / limit); // 전체 페이지 수 계산
+        int offset = (page - 1) * limit; // 시작 위치 계산
+        int pageGroupSize = 10; // 한 페이지 그룹에 표시할 페이지 수 (1-10 / 11-20 / 21-30)
+
+        // 페이지 그룹 계산
+        int currentGroup = (page - 1) / pageGroupSize; // 현재 페이지 그룹
+        int startPage = currentGroup * pageGroupSize + 1; // 현재 페이지 그룹의 시작 페이지
+        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages); // 현재 페이지 그룹의 끝 페이지
+
         filter.setOffset(offset);
         filter.setLimit(limit);
-        filter.setTotalcnt(totalCount);
 
-        model.addAttribute("filter", filter);
-        model.addAttribute("page", page); // 페이지 번호 모델에 추가
-        model.addAttribute("totalPages", totalPages); // 전체 페이지 수 모델에 추가
-
+        List<CafeVO> cafes = new ArrayList<>();
         if (sort == 0) { //최신순
             cafes = cafeService.getCafeAll2(filter);
         } else if (sort == 1) { // 즐겨찾기순
@@ -80,9 +83,16 @@ public class CafeController {
             cafes = cafeService.getCafeAllByScore(filter);
         } else if (sort == 3) { //   리뷰많은순
             cafes = cafeService.getCafeAllByReview(filter);
+        }else {
+            cafes = new ArrayList<>();
         }
-
+        model.addAttribute("filter", filter);
+        model.addAttribute("page", page); // 페이지 번호 모델에 추가
+        model.addAttribute("totalPages", totalPages); // 전체 페이지 수 모델에 추가
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
         model.addAttribute("cafes", cafes);
+        model.addAttribute("totalCount", totalCount); // totalCount 모델에 추가
 
         //System.out.println("[username]:"+username);
         //System.out.println("[cafes]:"+cafes);

@@ -26,7 +26,9 @@ public class CafeService {
         return cafeMapper.getCafeAll2(filter);
     }
 
-    public int getTotalCafeCount() { return cafeMapper.getTotalCafeCount();}
+    public int getTotalCafeCount(FilterVO filter) {
+        return cafeMapper.getTotalCafeCount(filter);
+    }
 
     public ReviewVO getFirstReview(int cno) {
         return cafeMapper.getFirstReview(cno);

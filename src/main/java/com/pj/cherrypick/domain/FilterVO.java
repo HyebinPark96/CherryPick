@@ -24,5 +24,4 @@ public class FilterVO {
 	private int totalcnt;
 
 	
-	
 }

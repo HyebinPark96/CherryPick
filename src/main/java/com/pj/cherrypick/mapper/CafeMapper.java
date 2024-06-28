@@ -22,7 +22,7 @@ public interface CafeMapper {
 	List<CafeVO> getCafeAll();
 
 	// 전체 카페 개수
-	Integer getTotalCafeCount();
+	Integer getTotalCafeCount(FilterVO filter);
 
 	// 전체 카페 보기
 	List<CafeVO> getCafeAll2(FilterVO filter); 

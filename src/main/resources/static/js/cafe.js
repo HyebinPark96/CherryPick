@@ -100,7 +100,7 @@ $(document).ready(function() {
 			filter.sort = 2;
 			console.log("[checked]sort2"); 
 		}
-		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;			
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup+"&page="+filter.page;
 	 
 	});
 
@@ -109,7 +109,7 @@ $(document).ready(function() {
 			filter.sort = 3;
 			console.log("[checked]sort3"); 
 		}
-		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;			
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 	});
 
 
@@ -122,7 +122,7 @@ $(document).ready(function() {
 			filter.fpark = 0;
 			console.log("[unchecked]parking:"); 
 		}
-		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;		
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 	});
 	
 
@@ -136,7 +136,7 @@ $(document).ready(function() {
 			filter.fpet = 0;
 			console.log("[unchecked]pet");  
 		}
-		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;		
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 
 	});
 	
@@ -149,7 +149,7 @@ $(document).ready(function() {
 			filter.fkids = 0;
 			console.log("[unchecked]kids"); 
 		}
-		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;	
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 	});
 	
 	// 그룹 체크박스 바뀔때마다 전송
@@ -162,7 +162,7 @@ $(document).ready(function() {
 			console.log("[unchecked]group"); 
 		}
 		
-		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup; 
+		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 	});
 	
 	
