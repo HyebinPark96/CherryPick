@@ -45,7 +45,8 @@ deploy:
     secret_access_key: $AWS_SECRET_KEY
     bucket: cherrypick-build
     region: ap-northeast-2
-    skip_cleanup: false
+    skip_cleanup: true
+    wait-until-deployed: true
     acl: private
     local_dir: deploy
     on: 
