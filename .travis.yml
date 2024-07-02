@@ -17,6 +17,17 @@ cache:
 before_install:
   - chmod +x mvnw
 
+# 환경 변수 설정
+env:
+  global:
+    - DB_USERNAME=$RDS_USERNAME
+    - DB_PASSWORD=$RDS_PASSWORD
+    - DB_URL=$RDS_URL
+
+services:
+  - mysql
+
+
 # 3
 script: "./mvnw clean package"
 
