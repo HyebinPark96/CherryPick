@@ -17,19 +17,15 @@ cache:
 before_install:
   - chmod +x mvnw
 
-before_script:
-  - mysql -h cherrypick-db.c58cka2q8d99.ap-northeast-2.rds.amazonaws.com -u $RDS_USERNAME -p$RDS_PASSWORD -e 'CREATE DATABASE IF NOT EXISTS cherrypick;'
-
-
 # 3
 script: "./mvnw clean package"
 #
 ##step2
-#before_deploy:
-#  - zip -r cherrypick *
-#  - mkdir -p deploy
-#  - mv cherrypick.zip deploy/cherrypick.zip
-#
+before_deploy:
+  - zip -r cherrypick *
+  - mkdir -p deploy
+  - mv cherrypick.zip deploy/cherrypick.zip
+
 ##step3
 ##before_deploy:
 ##  # 1
@@ -43,33 +39,34 @@ script: "./mvnw clean package"
 ##  - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동후 deploy 디렉토리 생성
 ##  - mv before-deploy/before-deploy.zip deploy/cherrypick.zip # deploy로 zip파일 이동
 #
-#deploy:
-#  - provider: s3
-#    access_key_id: $AWS_ACCESS_KEY
-#    secret_access_key: $AWS_SECRET_KEY
-#    bucket: cherrypick-build
-#    region: ap-northeast-2
-#    skip_cleanup: true
-#    wait-until-deployed: true
-#    acl: private
-#    local_dir: deploy
-#    on:
-#      all_branches: true #해당 라인 추가
-#
-#  - provider: codedeploy
-#    access_key_id: $AWS_ACCESS_KEY
-#    secret_access_key: $AWS_SECRET_KEY
-#    bucket: cherrypick-build
-#    key: cherrypick.zip
-#    bundle_type: zip
-#    application: cherrypick-webservice
-#    deployment_group: cherrypick-webservice-group
-#    region: ap-northeast-2
-#    wait_until_deployed: true
-#    file_exists_behavior: overwrite
-#    on:
-#      all_branches: true #해당 라인 추가
-#
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: cherrypick-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    wait-until-deployed: true
+    acl: private
+    local_dir: deploy
+    on:
+      all_branches: true #해당 라인 추가
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: cherrypick-build
+    key: cherrypick.zip
+    bundle_type: zip
+    application: cherrypick-webservice
+    deployment_group: cherrypick-webservice-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+    file_exists_behavior: overwrite
+    on:
+      all_branches: true #해당 라인 추가
+
 ## CI 실행 완료시 메일로 알람
 ## 4
 #notifications:

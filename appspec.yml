@@ -1,3 +1,4 @@
+#CodeDeploy
 version: 0.0
 os: linux
 files:
@@ -17,7 +18,7 @@ permissions:
 hooks:
   ApplicationStart:
     - location: deploy.sh
-      timeout: 30
+      timeout: 20
       runas: ec2-user
 #step3
 #hooks:
