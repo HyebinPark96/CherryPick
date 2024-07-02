@@ -42,6 +42,12 @@ spring:
     url: jdbc:mysql://cherrypick-db.c58cka2q8d99.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
     username: seoha
     password: cpws1234
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
 
   sql:
     init:
