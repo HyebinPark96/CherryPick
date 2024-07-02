@@ -9,10 +9,10 @@ branches:
 
 # Travis CI 서버의 Home
 # 2
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.maven'
+#cache:
+#  directories:
+#    - '$HOME/.m2/repository'
+#    - '$HOME/.maven'
 
 before_install:
   - chmod +x mvnw
