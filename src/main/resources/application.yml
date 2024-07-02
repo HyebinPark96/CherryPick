@@ -36,7 +36,7 @@ spring:
             enable: true
 
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
    # 공유디비 #나중에 nginx로 숨기기
     url: jdbc:mysql://cherrypick-db.c58cka2q8d99.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
