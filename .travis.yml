@@ -18,7 +18,7 @@ before_install:
   - chmod +x mvnw
 
 before_script:
-  - mysql -h jdbc:mysql://cherrypick-db.c58cka2q8d99.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul -u $RDS_USERNAME -p$RDS_PASSWORD -e 'CREATE DATABASE IF NOT EXISTS cherrypick;'
+  - mysql -h cherrypick-db.c58cka2q8d99.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul -u $RDS_USERNAME -p$RDS_PASSWORD -e 'CREATE DATABASE IF NOT EXISTS cherrypick;'
 
 # 3
 script: "./mvnw clean package"
