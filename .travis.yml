@@ -18,7 +18,8 @@ before_install:
   - chmod +x mvnw
 
 before_script:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS cherrypick;'
+  - mysql -h $RDS_URL -u $RDS_USERNAME -p$RDS_PASSWORD -e 'CREATE DATABASE IF NOT EXISTS cherrypick;'
+
 # 3
 script: "./mvnw clean package"
 #
