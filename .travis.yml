@@ -17,6 +17,12 @@ cache:
 before_install:
   - chmod +x mvnw
 
+before_script:
+  - echo "Current Travis CI IP addresses:"
+  - curl ifconfig.me
+  - echo "Travis CI internal IP addresses:"
+  - ip addr show
+
 # 3
 script: "./mvnw clean package"
 
