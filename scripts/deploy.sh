@@ -1,7 +1,7 @@
 ﻿#!/bin/bash
 
 REPOSITORY=/home/ec2-user/app/step2
-PROJECT_NAME=CherryPick
+PROJECT_NAME=cherrypick
 
 echo "> Build 파일 복사"
 cp $REPOSITORY/zip/*.jar $REPOSITORY/
