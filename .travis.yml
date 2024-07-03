@@ -17,9 +17,6 @@ cache:
 before_install:
   - chmod +x mvnw
 
-after_failure:
-  - cat /home/travis/build/[secure]/path_to_logs
-
 # 3
 script: "./mvnw clean package"
 
