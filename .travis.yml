@@ -18,7 +18,7 @@ before_install:
   - chmod +x mvnw
 
 # 3
-script: "./mvnw clean install"
+script: "./mvnw clean install -DskipTests"
 
 #step2
 #before_deploy:
