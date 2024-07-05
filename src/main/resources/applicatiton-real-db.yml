@@ -1,0 +1,20 @@
+#.gitignore
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://cherrypick-db.c58cka2q8d99.ap-northeast-2.rds.amazonaws.com:3306/cherrypick?serverTimezone=Asia/Seoul
+    username: seoha
+    password: cpws1234
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: seoha.mailing@gmail.com
+    password: aoijcapvqagydtep
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
