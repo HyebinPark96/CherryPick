@@ -97,10 +97,8 @@ public class FileSystemStorageService implements StorageService {
         try {
             Files.createDirectories(rootLocation);
         } catch (IOException e) {
-            // throw new StorageException("Could not initialize storage", e);
-            // ec2내 파일저장 경로문제로 일단 스킵, 추후 파일경로 설정 및 별도의 테이블생성 필요함
-            System.out.println("Could not initialize storage: " + e.getMessage());
-            return;
+            throw new StorageException("Could not initialize storage", e);
+
         }
     }
 }
