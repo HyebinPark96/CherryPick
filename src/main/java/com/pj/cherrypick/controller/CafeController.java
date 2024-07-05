@@ -26,187 +26,206 @@ import com.pj.cherrypick.service.CafeService;
 @Controller
 public class CafeController {
 
-	@Autowired
-	private CafeService cafeService;
-	@Autowired
-	private BookmarkService bookmarkService;
-	
-	
-	// CafeList
-	@RequestMapping("cafe/all")
-	public String getCafeList(@AuthenticationPrincipal PrincipalDetail principalDetail, 
-			@RequestParam(required=false, defaultValue="0") Integer sort, 
-			@RequestParam(required=false, defaultValue="0") Integer fpark, 
-			@RequestParam(required=false, defaultValue="0") Integer fgroup,
-			@RequestParam(required=false, defaultValue="0") Integer fpet,
-			@RequestParam(required=false, defaultValue="0") Integer fkids, Model model) throws Exception {
-		
-
-		//System.out.println("controller:getCafeList---------------------------------------");
-		//System.out.println("[sort]: "+sort+"  [fpark]: "+fpark+" [fgroup]:"+fgroup+" [fpet]:"+fpet+" [fkids]:"+fkids);
-		
-		String username = "aaa";
-		//String username = principalDetail.getUsername();
-		model.addAttribute("username", username);
-		
-		List<CafeVO> cafes = new ArrayList<>(); 
-		FilterVO filter = new FilterVO();
-		
-		filter.setSort(sort);
-		filter.setFgroup(fgroup);
-		filter.setFkids(fkids);
-		filter.setFpark(fpark);
-		filter.setFpet(fpet);
-		
-		model.addAttribute("filter", filter);
-						
-		if(sort==0) { //최신순
-			cafes = cafeService.getCafeAll2(filter);	
-			model.addAttribute("cafes", cafes);	
-		}else if(sort==1) { // 즐겨찾기순
-			cafes = cafeService.getCafeAllByBmk(filter);	
-			model.addAttribute("cafes", cafes);	
-		}else if(sort==2) { // 별점순
-			cafes = cafeService.getCafeAllByScore(filter);	
-			model.addAttribute("cafes", cafes);
-		}else if(sort==3) { // 리뷰많은순
-			cafes = cafeService.getCafeAllByReview(filter);	
-			model.addAttribute("cafes", cafes);	
-		}
-				
-		//System.out.println("[username]:"+username);
-		//System.out.println("[cafes]:"+cafes);
-		//System.out.println("[model]:"+model);	
-		
-		return "cafe/all";
-	}	
-	
-	
-
-	// response for ajax request from cafe.js 
-	@RequestMapping("cafe/select")
-	@ResponseBody
-	public List<CafeVO> selectCafe(@RequestParam int number) throws Exception {
-		
-		//System.out.println("ResponseBody: selectCafe--------------------------------------------");
-		//System.out.println(number);
-		List<CafeVO> cafes = cafeService.getCafeAll();
-				
-		return cafes;
-	}	
-
-	
-	// 카페리스트 (전체카페X lino로 리스트 불러오기)
-	@GetMapping("cafe/list/{lino}")
-	public String getEachList(@AuthenticationPrincipal PrincipalDetail principalDetail,
-			@PathVariable int lino, Model model) throws Exception {
-	
-		//String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
-		//시큐리티
-		//String username = principalDetail.getUsername();
-		//model.addAttribute("username", username);
-
-		String username = new String();
-
-		// username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
-		try {
-			username = principalDetail.getUsername();
-		}catch(Exception e) {
-			username = "guest";
-		}finally {
-			model.addAttribute("username", username);
-		}
-
-		ListVO list = cafeService.getEachList(lino);
-		List<CafeVO> cafes = cafeService.getCafeList(lino);
-		model.addAttribute("list", list);
-		model.addAttribute("cafes", cafes);
-		
-		// 현재 로그인 유저가 이 리스트를 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
-		bookmarkService.checkListBmk(username, lino);
-		int bmk = bookmarkService.checkListBmk(username, lino);
-		System.out.println(bmk);
-		model.addAttribute("bmk", bmk);
-		
-		
-		return "cafe/list";
-	}
-	
-	// 카페 북마크 추가 (bmk) AJAX에서 요청한 정보를 받아서 처리후 보내는 메서드
-	@RequestMapping("/cafe/bmkli")
-	public @ResponseBody int bmkli(String username, int lino) throws Exception {
-		
-		int result = bookmarkService.addBmkli(username, lino);
-		return result;
-	}	
+    @Autowired
+    private CafeService cafeService;
+    @Autowired
+    private BookmarkService bookmarkService;
 
 
-	// 개별카페 상세정보
-	@GetMapping("/cafe/info/{cno}")
-	public String getCafe(@AuthenticationPrincipal PrincipalDetail principalDetail, 
-			@PathVariable int cno, @RequestParam(defaultValue="1") int num, Model model) throws Exception {
-		
-		//int num = 페이징
-		Page page = new Page();
-		
-		// String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
+    // CafeList
+    @RequestMapping("cafe/all")
+    public String getCafeList(@AuthenticationPrincipal PrincipalDetail principalDetail,
+                              @RequestParam(required = false, defaultValue = "0") Integer sort,
+                              @RequestParam(required = false, defaultValue = "0") Integer fpark,
+                              @RequestParam(required = false, defaultValue = "0") Integer fgroup,
+                              @RequestParam(required = false, defaultValue = "0") Integer fpet,
+                              @RequestParam(required = false, defaultValue = "0") Integer fkids,
+                              @RequestParam(required = false, defaultValue = "1") Integer page,
+                              Model model) throws Exception {
 
-		//시큐리티
-		String username = new String();
-		//String username = principalDetail.getUsername();
+        //System.out.println("controller:getCafeList---------------------------------------");
+        //System.out.println("[sort]: "+sort+"  [fpark]: "+fpark+" [fgroup]:"+fgroup+" [fpet]:"+fpet+" [fkids]:"+fkids);
 
-		// username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
-		try {
-			username = principalDetail.getUsername();
-		}catch(Exception e) {
-			username = "guest";
-		}finally {
-			model.addAttribute("username", username);
-		}	// username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
-		try {
-			username = principalDetail.getUsername();
-		}catch(Exception e) {
-			username = "guest";
-		}finally {
-			model.addAttribute("username", username);
-		}
-		//model.addAttribute("username", username);
-		
-		CafeVO cafe = cafeService.getCafeInfo(cno); // cno로 해당하는 카페 info 출력
-		List<CafeMenuVO> menu = cafeService.getCafeMenu(cno); // cno로 해당하는 카페 menu 출력 
-		List<ReviewVO> review = cafeService.getReview(cno, page.getDisplayPost(), page.getPostNum()); // cno로 해당하는 카페 review 출력
-		
-		
-		// 페이징
-		
-		page.setNum(num);
-		page.setCount(cafeService.cntReview(cno)); // 총게시글수 = 리뷰목록 길이
+        String username = "aaa";
+        //String username = principalDetail.getUsername();
+        model.addAttribute("username", username);
 
-		
-		model.addAttribute("cafe", cafe);
-		model.addAttribute("menu", menu);
-		model.addAttribute("review", review);
-		model.addAttribute("page", page);
-		model.addAttribute("select", num); // 현재 페이지 (현재 페이지가 아닌 페이지와 구분하기 위해 값 전달)
+        // 담아주기
+        FilterVO filter = new FilterVO();
+
+        filter.setSort(sort);
+        filter.setFgroup(fgroup);
+        filter.setFkids(fkids);
+        filter.setFpark(fpark);
+        filter.setFpet(fpet);
+
+        // 페이징처리
+        int totalCount = cafeService.getTotalCafeCount(filter); // 전체 카페 수 가져오기
+        int limit = 15; // 페이지당 보여줄 개수
+        int totalPages = (int) Math.ceil((double) totalCount / limit); // 전체 페이지 수 계산
+        int offset = (page - 1) * limit; // 시작 위치 계산
+        int pageGroupSize = 10; // 한 페이지 그룹에 표시할 페이지 수 (1-10 / 11-20 / 21-30)
+
+        // 페이지 그룹 계산
+        int currentGroup = (page - 1) / pageGroupSize; // 현재 페이지 그룹
+        int startPage = currentGroup * pageGroupSize + 1; // 현재 페이지 그룹의 시작 페이지
+        int endPage = Math.min(startPage + pageGroupSize - 1, totalPages); // 현재 페이지 그룹의 끝 페이지
+
+        filter.setOffset(offset);
+        filter.setLimit(limit);
+
+        List<CafeVO> cafes = new ArrayList<>();
+        if (sort == 0) { //최신순
+            cafes = cafeService.getCafeAll2(filter);
+        } else if (sort == 1) { // 즐겨찾기순
+            cafes = cafeService.getCafeAllByBmk(filter);
+        } else if (sort == 2) { // 별점순
+            cafes = cafeService.getCafeAllByScore(filter);
+        } else if (sort == 3) { //   리뷰많은순
+            cafes = cafeService.getCafeAllByReview(filter);
+        }else {
+            cafes = new ArrayList<>();
+        }
+        model.addAttribute("filter", filter);
+        model.addAttribute("page", page); // 페이지 번호 모델에 추가
+        model.addAttribute("totalPages", totalPages); // 전체 페이지 수 모델에 추가
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("cafes", cafes);
+        model.addAttribute("totalCount", totalCount); // totalCount 모델에 추가
+
+        //System.out.println("[username]:"+username);
+        //System.out.println("[cafes]:"+cafes);
+        //System.out.println("[model]:"+model);
+
+        return "cafe/all";
+    }
 
 
-		// 현재 로그인 유저가 이 카페 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
-		bookmarkService.checkCafeBmk(username, cno);  
-		int bmk = bookmarkService.checkCafeBmk(username, cno);
-		model.addAttribute("bmk", bmk);
+    // response for ajax request from cafe.js
+    @RequestMapping("cafe/select")
+    @ResponseBody
+    public List<CafeVO> selectCafe(@RequestParam int number) throws Exception {
 
-		System.out.println("username:"+username);
-		System.out.println("bmk:"+bmk);
-	
-		return "cafe/info";
-	}
-		
-	// 카페 북마크 추가 (bmk) AJAX에서 요청한 정보를 받아서 처리후 보내는 메서드
-	@RequestMapping("/cafe/bmk")
-	public @ResponseBody int bmk(String username, int cno) throws Exception {
-		
-		int result = bookmarkService.addBmkc(username, cno);
-		return result;
-	}	
+        //System.out.println("ResponseBody: selectCafe--------------------------------------------");
+        //System.out.println(number);
+        List<CafeVO> cafes = cafeService.getCafeAll();
+
+        return cafes;
+    }
+
+
+    // 카페리스트 (전체카페X lino로 리스트 불러오기)
+    @GetMapping("cafe/list/{lino}")
+    public String getEachList(@AuthenticationPrincipal PrincipalDetail principalDetail,
+                              @PathVariable int lino, Model model) throws Exception {
+
+        //String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
+        //시큐리티
+        //String username = principalDetail.getUsername();
+        //model.addAttribute("username", username);
+
+        String username = new String();
+
+        // username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
+        try {
+            username = principalDetail.getUsername();
+        } catch (Exception e) {
+            username = "guest";
+        } finally {
+            model.addAttribute("username", username);
+        }
+
+        ListVO list = cafeService.getEachList(lino);
+        List<CafeVO> cafes = cafeService.getCafeList(lino);
+        model.addAttribute("list", list);
+        model.addAttribute("cafes", cafes);
+
+        // 현재 로그인 유저가 이 리스트를 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
+        bookmarkService.checkListBmk(username, lino);
+        int bmk = bookmarkService.checkListBmk(username, lino);
+        System.out.println(bmk);
+        model.addAttribute("bmk", bmk);
+
+
+        return "cafe/list";
+    }
+
+    // 카페 북마크 추가 (bmk) AJAX에서 요청한 정보를 받아서 처리후 보내는 메서드
+    @RequestMapping("/cafe/bmkli")
+    public @ResponseBody int bmkli(String username, int lino) throws Exception {
+
+        int result = bookmarkService.addBmkli(username, lino);
+        return result;
+    }
+
+
+    // 개별카페 상세정보
+    @GetMapping("/cafe/info/{cno}")
+    public String getCafe(@AuthenticationPrincipal PrincipalDetail principalDetail,
+                          @PathVariable int cno, @RequestParam(defaultValue = "1") int num, Model model) throws Exception {
+
+        //int num = 페이징
+        Page page = new Page();
+
+        // String username = "aaa"; // 테스트용 나중엔 시큐리티 적용
+
+        //시큐리티
+        String username = new String();
+        //String username = principalDetail.getUsername();
+
+        // username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
+        try {
+            username = principalDetail.getUsername();
+        } catch (Exception e) {
+            username = "guest";
+        } finally {
+            model.addAttribute("username", username);
+        }    // username을 시큐리티로 가져옵니다. 없으면 그냥 guest로 셋팅됨
+        try {
+            username = principalDetail.getUsername();
+        } catch (Exception e) {
+            username = "guest";
+        } finally {
+            model.addAttribute("username", username);
+        }
+        //model.addAttribute("username", username);
+
+        CafeVO cafe = cafeService.getCafeInfo(cno); // cno로 해당하는 카페 info 출력
+        List<CafeMenuVO> menu = cafeService.getCafeMenu(cno); // cno로 해당하는 카페 menu 출력
+        List<ReviewVO> review = cafeService.getReview(cno, page.getDisplayPost(), page.getPostNum()); // cno로 해당하는 카페 review 출력
+
+
+        // 페이징
+
+        page.setNum(num);
+        page.setCount(cafeService.cntReview(cno)); // 총게시글수 = 리뷰목록 길이
+
+
+        model.addAttribute("cafe", cafe);
+        model.addAttribute("menu", menu);
+        model.addAttribute("review", review);
+        model.addAttribute("page", page);
+        model.addAttribute("select", num); // 현재 페이지 (현재 페이지가 아닌 페이지와 구분하기 위해 값 전달)
+
+
+        // 현재 로그인 유저가 이 카페 북마크 했는지 안 했는지 (1 = 했음, 0 = 안했음)
+        bookmarkService.checkCafeBmk(username, cno);
+        int bmk = bookmarkService.checkCafeBmk(username, cno);
+        model.addAttribute("bmk", bmk);
+
+        System.out.println("username:" + username);
+        System.out.println("bmk:" + bmk);
+
+        return "cafe/info";
+    }
+
+    // 카페 북마크 추가 (bmk) AJAX에서 요청한 정보를 받아서 처리후 보내는 메서드
+    @RequestMapping("/cafe/bmk")
+    public @ResponseBody int bmk(String username, int cno) throws Exception {
+
+        int result = bookmarkService.addBmkc(username, cno);
+        return result;
+    }
 
 }

@@ -1,0 +1,6 @@
+#real 프로필
+
+spring:
+  config:
+    activate:
+      on-profile: real
