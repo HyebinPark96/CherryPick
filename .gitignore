@@ -207,4 +207,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Ignore application configuration files
+/application-real-db.yml
+
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java,maven,windows,macos

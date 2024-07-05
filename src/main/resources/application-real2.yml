@@ -7,3 +7,5 @@ spring:
   config:
     activate:
       on-profile: real2
+  profiles:
+    include: real-db
