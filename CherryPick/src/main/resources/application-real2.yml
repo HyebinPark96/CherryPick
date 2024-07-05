@@ -1,0 +1,11 @@
+#real2 프로필
+
+server:
+  port: 8082
+
+spring:
+  config:
+    activate:
+      on-profile: real2
+  profiles:
+    include: real-db

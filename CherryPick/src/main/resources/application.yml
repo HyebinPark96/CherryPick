@@ -1,0 +1,48 @@
+#default 프로필 **공통
+
+server:
+  # port: 8080 #defalut port
+  servlet: 
+    context-path:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  error:
+    path: /error
+    whitelabel:
+      enabled: false
+          
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  sql:
+    init:
+      mode: never
+      
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  
+  #파일첨부
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+mybatis: 
+    configuration:    
+        multiple-result-sets-enabled: false    
+        map-underscore-to-camel-case: true    
+        call-setters-on-nulls: true        
+        jdbc-type-for-null: varchar    
+        default-fetch-size: 500  
+    mapper-locations: com.pj.cherrypick/mapper/*.xml
+    #type-aliases-package: com.pj.cherrypick.domain

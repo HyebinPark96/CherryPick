@@ -1,0 +1,23 @@
+<!-- REST API 관점에서 바라보는 HTTP 상태 코드 -->
+<!-- 해당 페이지는 405 Method Not Allowed 상태 : 메소드 매칭이 되지 않아 생기는 오류 -->
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{./layout/layout-main}">
+
+<!-- <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head> -->
+<!-- <body> -->
+	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4-->
+	<div class="content container" layout:fragment="content">
+		<div style="text-align: center;">
+			<img src="/img/405.jpg">
+			<div>
+				<b>허용되지 않는 메서드입니다.</b>
+			</div>
+			<button class="cherrybtn" type="button" onclick="location.href = '/'">홈으로 돌아가기</button>
+		</div>
+	</div>
+<!-- </body> -->
+</html>

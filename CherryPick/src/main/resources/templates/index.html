@@ -1,0 +1,131 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{./layout/layout-main}">
+<!-- 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head>
+
+
+<body> -->
+<div layout:fragment="content">
+	<header>
+		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+
+				<div class="main-banner-tab carousel-item active">
+					<img
+						src="https://images.unsplash.com/photo-1625744494690-7a14ae606b75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80">
+
+					<div class="container">
+						<div class="carousel-caption text-start">
+							<h1>나만 몰랐던 카페</h1>
+							<p>CherryPick에서 가고 싶은 카페를 찾아보세요.</p>
+							
+						</div>
+					</div>
+				</div>
+
+				<div class="main-banner-tab carousel-item">
+					<img
+						src="https://cdn.pixabay.com/photo/2020/04/02/23/01/rain-4996916_960_720.jpg">
+
+					<div class="container">
+						<div class="carousel-caption">
+							<h1>CherryPick 여름 이벤트</h1>
+							<p>2022.08.01 - 2022.08.31</p>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="main-banner-tab carousel-item">
+					<img
+						src="https://cdn.pixabay.com/photo/2016/07/01/09/26/mobile-phones-1490691_960_720.jpg">
+
+					<div class="container">
+						<div class="carousel-caption text-end">
+							<h1>CherryPick에 나의 카페를 등록하세요</h1>
+							<p>새로운 사업자로 등록하실 수 있습니다.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#myCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#myCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</header>
+
+
+	<main class="content container">
+
+		<div>
+			<h5>오늘의 추천 리스트</h5>
+			<hr>
+		</div>
+
+		<div class="main-pick">
+			<div class="row">
+				<div class="col-md-4" th:each="today : ${today}">
+					<div class="divBtn thumbnail main-pick-item" th:id="${today.lino}" th:onclick="sendToListInfo(this.getAttribute('id'))"
+							th:style="'background-image:url(/upload/' +${today.cimage} + ');'">
+						<div th:text="${today.liname}">카페 리스트 이름을 입력해주세요.</div>
+
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+
+		<div>
+			<h5>인기 리스트</h5>
+			<hr>
+		</div>
+
+		<div class="cfresult">
+			<div class="row">
+				<div class="col-md-4" th:each="today : ${today}">
+					<div class="divBtn thumbnail main-pick-item" th:id="${today.lino}" th:onclick="sendToListInfo(this.getAttribute('id'))"
+							th:style="'background-image:url(/upload/' +${today.cimage} + ');'">
+
+						<div th:text="${today.liname}">카페 리스트 이름을 입력해주세요.</div>
+						
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</main>
+</div>
+<!-- </body> -->
+</html>
+
+
+
+
+
+
+
+
+
+

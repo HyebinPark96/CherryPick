@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace의 값은, MemberMapper.xml의 쿼리를 호출할 Mapper Class의 경로와 클래스명으로 하도록 해야한다. -->
+<mapper namespace="com.pj.cherrypick.mapper.MemberMapper" >
+
+	<!-- Mapper 인터페이스의 메소드명과 XML의 id가 같아야 함 -->
+ 	<select id="getMList" resultType="com.pj.cherrypick.domain.MemberVO">
+        SELECT * 
+        FROM member
+		ORDER BY username <!-- 이름 오름차순으로 정렬하기 -->
+    </select>
+    
+    <select id="getMListSortByRegDate" resultType="com.pj.cherrypick.domain.MemberVO">
+    	SELECT * 
+    	FROM member
+    	ORDER BY regDate DESC <!-- 가입일자 최신순으로 정렬하기 -->
+    </select>
+    
+    <insert id="signUp" parameterType="com.pj.cherrypick.domain.MemberVO">
+    	INSERT INTO member (username, password, name, phone, email, role) VALUES (#{username}, #{password}, #{name}, #{phone}, #{email}, #{role})
+    </insert>
+    
+    <select id="findByUsername" resultType="com.pj.cherrypick.domain.MemberVO">
+    	SELECT * FROM member WHERE username = #{username}
+    </select>
+    
+    <select id="findUsername" resultType="String">
+    	SELECT username FROM member WHERE name = #{name} AND email = #{email}
+    </select>
+    
+    <select id="findPasswordCheck" resultType="int">
+		SELECT COUNT(*) FROM member WHERE username = #{username} AND email = #{email}
+	</select>
+    
+    <update id="updatePassword"  parameterType="com.pj.cherrypick.domain.MemberVO">
+		UPDATE member SET password = #{password} WHERE username = #{username} AND email = #{email}
+	</update>
+	
+	<select id="findDupUsername" resultType="int">
+		SELECT COUNT(*) FROM member WHERE username = #{username}
+	</select>
+	
+	<select id="checkMemberOrAdmin" resultType="int">
+		SELECT role FROM member WHERE username = #{username}
+	</select>
+	
+	<update id="updateMember" parameterType="com.pj.cherrypick.domain.MemberVO">
+		UPDATE member SET password = #{password}, name = #{name}, phone = #{phone}, email = #{email} 
+		WHERE username = #{username}
+	</update>
+	
+	<update id="updateMemberWithoutPwd" parameterType="com.pj.cherrypick.domain.MemberVO">
+		UPDATE member SET name = #{name}, phone = #{phone}, email = #{email} 
+		WHERE username = #{username}
+	</update>
+	
+	<delete id="withdrawalProc" parameterType="String">
+		DELETE FROM member
+		WHERE username = #{username}
+	</delete>
+	
+    
+</mapper>

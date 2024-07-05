@@ -1,0 +1,23 @@
+<!-- REST API 관점에서 바라보는 HTTP 상태 코드 -->
+<!-- 해당 페이지는 400 Bad Request 상태 : 클라이언트의 잘못된 요청으로써 문법상 오류가 있어 서버가 요청사항을 이해하지 못하는 경우 ex) 잘못입력한 url인경우가 대부분! -->
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{./layout/layout-main}">
+
+<!-- <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head> -->
+<!-- <body> -->
+	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4-->
+	<div class="content container" layout:fragment="content">
+		<div style="text-align: center;">
+			<img src="/img/400.jpg">
+			<div>
+				<b>잘못된 요청입니다.</b>
+			</div>
+			<button class="cherrybtn" type="button" onclick="location.href = '/'">홈으로 돌아가기</button>
+		</div>
+	</div>
+<!-- </body> -->
+</html>

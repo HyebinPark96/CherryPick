@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.pj.cherrypick.mapper.TempCafeMapper" >
+
+    <insert id="createCafe" parameterType="com.pj.cherrypick.domain.CafeVO">
+    	INSERT INTO cafe VALUES (null, #{bid}, #{cname}, #{c_lat}, #{c_long}, #{cimage}, #{caddress}, #{cphone}, #{copen}, #{cclose}, #{parking}, #{pet}, #{kids}, #{seats}, #{group}, #{ctag}, #{cmenu_img})
+    </insert>
+
+
+	<select id="getCafeNo" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+
+	<update id="updateCafe" parameterType="com.pj.cherrypick.domain.CafeVO">
+    	UPDATE cafe SET cname = #{cname}, c_lat = #{c_lat}, c_long = #{c_long}, cimage = #{cimage}, caddress = #{caddress}, cphone = #{cphone}, copen = #{copen}, cclose = #{cclose}, parking = #{parking}, pet = #{pet}, kids = #{kids}, seats = #{seats}, `group` = #{group}, ctag = #{ctag}, cmenu_img = #{cmenu_img} WHERE cno = #{cno} 
+    </update>
+
+	<insert id="createMenu" parameterType="com.pj.cherrypick.domain.CafeMenuVO">
+    	INSERT INTO cafeMenu VALUES	(null, #{cno}, #{m_name}, #{m_img}, #{m_detail}, #{m_size}, #{m_price}, #{m_tag})
+    </insert>
+
+	<update id="updateMenu" parameterType="com.pj.cherrypick.domain.CafeMenuVO">
+    	UPDATE cafeMenu SET m_name = #{m_name}, m_img = #{m_img}, m_detail = #{m_detail}, m_size = #{m_size}, m_price = #{m_price}, m_tag = #{m_tag} WHERE meno = #{meno}
+    </update>
+
+
+    <select id="listCafe" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *
+		FROM cherrypick.cafe
+        WHERE bid = #{bid}
+	</select>
+
+    <select id="getCafe" resultType="com.pj.cherrypick.domain.CafeVO">
+		SELECT *
+		FROM cherrypick.cafe
+        WHERE cno = #{cno}
+	</select>
+
+    <select id="getCafeMenu" resultType="com.pj.cherrypick.domain.CafeMenuVO">
+		SELECT *
+		FROM cherrypick.cafeMenu
+        WHERE cno = #{cno}
+	</select>
+</mapper>
+
+
+

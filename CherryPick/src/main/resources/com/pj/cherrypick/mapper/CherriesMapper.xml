@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.pj.cherrypick.mapper.CherriesMapper" >
+
+	<!-- 새롭게 등록된 리스트 목록 불러오기 //최신순-->
+ 	<select id="getNewCherries" parameterType="com.pj.cherrypick.domain.ListVO" resultType="com.pj.cherrypick.domain.ListVO">
+		SELECT *
+		FROM list l 
+		LEFT JOIN cafe c
+		ON c.cno = l.li_cafe1
+		ORDER BY l.lino DESC
+		LIMIT 6;
+    </select> 
+
+
+</mapper>

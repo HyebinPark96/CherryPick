@@ -1,0 +1,116 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{./layout/layout-admin}">
+
+<head>
+ <!-- 별점 css -->
+    <link rel="stylesheet" href="/css/jquery.rateyo.min.css" />
+</head>
+
+<!-- <body> -->
+
+<div class="content container" layout:fragment="content">
+	<h3>리뷰 상세내용</h3>
+	
+	<!-- 카페관련 정보는 추가예정 -->
+	
+	<!-- 리뷰관련 정보 -->
+	<div class="d-flex justify-content-between">
+		<label th:text="${review.username}" style="font-weight:bold;">작성자</label>
+		&nbsp;
+		<label th:text="${review.date}" class="gray">작성일</label>
+	</div>
+	<div>
+		<label th:text="${review.title}" class="text-large">리뷰제목</label>
+		<hr>
+	</div>
+	
+	<div>
+		<label><b>작성 내용</b></label>
+		<div class="ad-review-content container" >
+			<label th:utext="${review.content}">리뷰내용</label>
+		</div>
+	</div>
+
+	<div>
+	   	<div class="text-20">별점</div>
+	   	<div class="d-flex align-items-end" style="margin-bottom: 20px">
+	   		<div id="rateYo"></div>
+	   		<div class="rv-rating align-self-end"> 
+	   			<span id="rateBar"></span>
+	   			<input id="score" type="number" step="0.5" readonly >
+	 		</div>
+	 	</div>
+ 	</div>
+ 	
+	
+	<div>
+		<div class="text-20">
+			웨이팅(분)&nbsp;<img class="icon-30" src="/img/clock.png">
+		</div>
+		<div style="width: 300px;">
+			<div class="d-flex justify-content-between" style="color: #aaa;">
+				<div>0h</div>
+				<div>1h 10m+</div>
+			</div>
+			<input style="width: 100%;" type="range" class="form-control-range"
+				id="waiting" th:value="${review.waiting}" min="0" max="70" step="10" disabled>
+			<div style="color: #555;" id="waitingLbl">대기시간을 알려주세요.</div>
+		</div>
+		
+	</div>
+	
+	
+	<script type="text/javascript" src="/js/jquery.rateyo.js"></script>
+	<!-- 별점 스크립트 -->
+	<script>
+		$("#score").val([[${review.score}]]);
+	
+		$(function() {
+			$("#rateYo").rateYo({
+				starWidth : "25px",
+				ratedFill : "#a6434b",
+				spacing : "2px",
+				rating: [[${review.score}]],
+				readOnly: true,
+
+				onSet : function(rating, rateYoInstance) {
+					$("#rateBar").text("/");
+					$("#score").val(rating);
+					//alert("Rating is set to: " + rating);
+				}
+			});
+
+		});
+	</script>
+	
+	<!-- 웨이팅 스크립트 -->
+	<script>
+		var wVal = parseInt($('#waiting').val());
+
+		switch (wVal) {
+		case 0:
+			$('#waitingLbl').html("10분 미만");
+			break
+		case 10:
+		case 20:
+		case 30:
+		case 40:
+		case 50:
+		case 60:
+
+			$('#waitingLbl').html(wVal + "분 ~" + (wVal + 10) + "분");
+			break
+
+		case 70:
+			$('#waitingLbl').html("1시간 10분 이상");
+			break
+		default:
+			$('#waitingLbl').html("올바른 값이 아닙니다.");
+			break
+		}
+	</script>
+
+</div>
+	
+	
+<!-- </body> -->
+</html>

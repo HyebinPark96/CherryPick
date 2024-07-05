@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{./layout/layout-main}">
+<head>
+<meta charset="UTF-8">
+<title>CherryPick</title>
+</head>
+<body>
+	<div class="content loginpage text-center container" layout:fragment="content">
+		<main class="form-signin w-100 m-auto">
+			<img src="/img/logo-pink.png" alt="" width="150">
+			
+			<h3>ID찾기</h3>
+			
+			<div>
+				이름과 이메일을 입력해 주세요.<br />
+			</div>
+			<br />
+			
+			<form action="/auth/findUsernameProc" method="POST">
+			
+				<div class="form-floating">
+					<input type="text" class="form-control" placeholder="이름을 입력해주세요." name="name"> 
+					<label for="floatingInput">이름을 입력해주세요.</label>
+				</div>
+				
+				<div class="form-floating">
+					<input type="email" class="form-control" placeholder="이메일을 입력해주세요." name="email"> 
+					<label for="floatingInput">이메일을 입력해주세요.</label>
+				</div>
+			
+				<button class="loginbtn w-100 btn btn-lg" id="btn-findUsername">ID찾기</button>
+
+			</form>
+		</main>
+	</div>
+	
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+
+.bzcf-form .d-flex{
+	margin-top: 5px;
+	flex-wrap: wrap;
+	align-items: center;
+	font-weight: bold;
+}
+
+.bzcf-form label{
+	width: 100px;
+}
+
+.bzcf-form input[type=text],
+.bzcf-form input[type=password]{
+	width: 150px;
+}
+
+#ctag-block{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px;
+}
+
+.ctag-item {
+  display: flex;
+  
+  align-items: center;
+  min-width: 100px;
+  height: 35px;
+  width: auto;
+  max-width: 100px;
+  background: #fff;
+  border: 1px solid #a0a0a0;
+  border-radius: 30px;
+  padding-left: 0.5rem;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.ctag-item-prefix {
+  font-weight: 300;
+  font-size: 14px;
+  color: #999;
+}
+
+.ctag-item input {
+  flex-grow: 1;
+  font-size: 14px;
+  background: #fff;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+}
+
+.ctag-item:focus-within {
+  border-color: #777;
+}
+
+#menulist-block .d-flex{
+	margin-bottom: 15px;
+}

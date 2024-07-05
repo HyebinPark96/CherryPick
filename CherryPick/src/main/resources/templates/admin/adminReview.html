@@ -1,0 +1,126 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{./layout/layout-admin}">
+
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</head> 
+
+<!-- <body> -->
+
+<div class="content" layout:fragment="content">
+
+	<div class="container">
+		<h3>리뷰관리&nbsp;/<span class="text-20 gray" th:text="${cafe.cname}">/업장명</span></h3>
+		<input type="hidden" th:value="${cno}" id="cno"> 
+		<input type="hidden" th:value="${page.num}" id="num">
+		<input type="hidden" th:value="${searchType}" id="searchType">
+		<input type="hidden" th:value="${keyword}" id="keyword">
+
+
+		<!-- 상단 오른쪽에 배치할 요소 
+		<div class="d-flex">
+			<div>번호순 | 업체명순</div>
+		</div> -->
+		<!-- 리뷰 게시판 테이블 -->
+		<div class="table-responsive">
+			<table class="table table-striped table-sm">
+				<thead>
+					<tr>
+						<th scope="col"><input class="form-check-input mt-0" name="reviewChkAll" type="checkbox" value=""></th>
+						<th scope="col">순번</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성날짜</th>
+						<th scope="col">작성자 ID</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<!-- 일반회원 리스트 -->
+					<tr th:each="rList : ${rList}">
+
+						<td>
+							<input class="form-check-input mt-0" name="reviewChk" type="checkbox" th:value="${rList.rno}">
+						</td>
+
+						<td th:text="${rListStat.count + (page.num*10) - 10}"></td>
+
+						<td><a th:href="@{'/admin/adminReviewView/' + ${cno}(rno=${rList.rno})}" th:text="${rList.title}"></a></td>
+						
+						<td th:utext="${rList.date}">data</td>
+
+						<td th:text="${rList.username}"></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+		<button class="btn btn-danger" type="button" id="adminReviewDeleteBtn">선택 삭제</button><br><br>
+		
+		<!-- fa fa-search class : font-awesome 요소(head 태그에 cdn 있음 -->
+		<div style="width: 300px;">
+			<div class="d-flex align-items-center">
+				<select name="searchType" class="custom-select mb-3">
+				    <option th:selected="${searchType == 'id'}" value="id">작성자</option>
+					<option th:selected="${searchType == 'title'}" value="title">제목</option>
+					<option th:selected="${searchType == 'content'}" value="content">내용</option>
+				</select>
+				
+				
+			    <input type="text" style="margin-left: 5px;" class="form-control" name="keyword" th:value="${keyword}"/>
+			    <div class="input-group-addon" style="background-color: #ddd; padding:7px; border-radius:3px;">
+			        <button type="button" id="searchBtn" onclick="search()"><i class="fa fa-search"></i></button>
+			    </div>
+			    
+				
+			</div>		
+		</div>
+			
+			
+		<div class="pagination">
+			<th:block th:if="${page.prev}">
+				<span class="page-item"><a th:href="@{'/admin/adminReview/' + ${cno}(num=${page.startPageNum - 1}, searchType=${searchType}, keyword=${keyword})}" class="page-link">이전</a>
+				</span>
+			</th:block>
+
+			<th:block th:each="num : ${#numbers.sequence(page.startPageNum, page.endPageNum)}">
+				
+				<span th:if="${select!=num} AND ${page.count}!=0" class="page-item"> <a th:href="@{'/admin/adminReview/' + ${cno}(num=${num}, searchType=${searchType}, keyword=${keyword})}" th:text="${num}" class="page-link"></a>
+				</span>
+				<span th:if="${select==num} AND ${page.count}!=0" class="page-item active"> <a th:href="@{'/admin/adminReview/' + ${cno}(num=${num})}"  th:text="${num}" class="page-link"></a>
+				</span>
+			</th:block>
+
+			<th:block th:if="${page.next}">
+				<span class="page-item"><a th:href="@{'/admin/adminReview/' + ${cno}(num=${page.endPageNum + 1}, searchType=${searchType}, keyword=${keyword})}" class="page-link">다음</a>
+				</span>
+			</th:block>
+		</div>
+		
+	</div>
+	<script>
+	//체크박스 전체 선택
+	$('input[name=reviewChkAll]').on('change', function() {
+		$('input[name=reviewChk]').prop('checked', this.checked);
+	});
+	
+	// 검색기능 
+	let searchBtn = document.getElementById("searchBtn");
+	function search(){
+		let searchType = document.getElementsByName('searchType')[0].value;
+
+		let keyword = document.getElementsByName('keyword')[0].value;
+
+		let cno = document.getElementById('cno').value;
+		location.href = "/admin/adminReview/" + cno + "?num=1&searchType=" + searchType + "&keyword=" + keyword;
+	};
+	</script>
+	
+</div>
+
+
+
+
+<!-- </body> -->
+</html>
+

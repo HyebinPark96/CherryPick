@@ -1,0 +1,137 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{./layout/layout-main}">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    
+    <!-- 별점 css -->
+    <link rel="stylesheet" href="/css/jquery.rateyo.min.css" />
+</head>
+
+<body>
+	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
+
+	<div layout:fragment="content">
+
+		<div class="content container">
+			<div><span class="text-large">Cafename</span><!-- th:text="${cafe.cname}" --> 
+			<span><b>/ 리뷰 남기기</b></span></div>
+			<form>
+					
+ 				<input type="hidden" id="username" th:value="${#authentication.principal.username}">
+				<input type="hidden" id="cno" th:value="${cno}"> 
+				
+				<input type="text" id="title" class="form-control form-control" placeholder="제목을 작성해주세요."><br>
+		    	<div id="content"></div><br>
+		    	
+		    	<div class="text-20">별점</div>
+		    	<div class="d-flex align-items-end" style="margin-bottom: 20px" >
+		    		<div id="rateYo"></div>
+		    		<div class="rv-rating align-self-end"> 
+		    		
+		    			<span id="rateBar">/</span>
+		    			<input id="score" type="number" step="0.5" readonly >
+		    			
+	    		</div>
+
+		    	</div>
+		    	
+		    	<div>
+		    		<div class="text-20">웨이팅(분)&nbsp;<img class="icon-30" src="/img/clock.png"></div>
+		    		<div style="width: 300px;">
+			    		<div class="d-flex justify-content-between" style="color: #aaa;">
+							<div>0h</div>
+							<div>1h 10m+</div>
+						</div>
+			    		<input style="width:100%;"type="range" class="form-control-range" id="waiting" value="0" min="0" max="70" step="10">
+					 	<div style="color:#555;"id="waitingLbl">대기시간을 알려주세요.</div>
+				 	</div>
+				</div>
+				
+	    	</form>
+	    	
+	    	<button type="button" id="reviewWriteBtn">작성하기</button>
+	    	
+	    </div>
+	    
+	    <script>
+	      $('#content').summernote({
+	        placeholder: '내용을 입력해주세요.',
+	        tabsize: 2,
+	        height: 100
+	      });
+	    </script>
+		
+		
+		<script type="text/javascript" src="/js/jquery.rateyo.js"></script>
+	
+		<!-- 별점 스크립트 -->
+		<script>
+		//별점 기본 5점
+		$("#score").val(5);
+		
+		$(function() {
+
+			$("#rateYo").rateYo({
+				halfStar : true,
+				starWidth : "25px",
+				ratedFill : "#a6434b",
+				spacing : "2px",
+				rating: 5,
+
+
+				onSet : function(rating, rateYoInstance) {
+					$("#score").val(rating);
+
+					//alert("Rating is set to: " + rating);
+				}
+			});
+
+		});
+		</script>
+			
+		<!-- 웨이팅 스크립트 -->
+		<script>
+			$(document).on('input', '#waiting', function() {
+				var wVal = parseInt($(this).val());
+				
+			    
+			    switch(wVal){
+                case 0 :
+                	$('#waitingLbl').html("10분 미만");
+                break
+                case 10 :
+                case 20 :
+                case 30 :
+                case 40 :
+                case 50 :
+                case 60 :
+                
+                	$('#waitingLbl').html(wVal + "분 ~" + (wVal + 10) +"분");
+                break
+               
+                case 70 :
+                	$('#waitingLbl').html("1시간 10분 이상");
+                break
+                default :
+                	$('#waitingLbl').html("올바른 값이 아닙니다.");
+                break
+            }
+			});
+		
+		</script>
+		
+	
+	</div>
+
+
+</body>
+</html>
