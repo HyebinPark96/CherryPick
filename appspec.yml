@@ -34,5 +34,5 @@ hooks:
       runas: ec2-user
   ValidateService:
     - location: health.sh # 새 스프링 부트가 정상적으로 실행됐는지 확인 합니다.
-      timeout: 30
+      timeout: 60
       runas: ec2-user
