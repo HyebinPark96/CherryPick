@@ -14,8 +14,6 @@ server:
       enabled: false
           
 spring:
-  profiles:
-    include: real-db
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
