@@ -17,8 +17,8 @@ cache:
 before_install:
   - chmod +x mvnw
 
-# 3 파일명에 타임스탬프
-script: "./mvnw clean install -Dmaven.build.timestamp=$(date +%Y%m%d%H%M%S)"
+# 3
+script: "./mvnw clean install"
 
 #step2
 #before_deploy:
