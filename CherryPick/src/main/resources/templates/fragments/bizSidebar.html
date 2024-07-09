@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<script>
+	stickybits('#sidebar-contents');
+</script>
+</head>
+
+<div th:fragment="sidebar">
+	<!-- 사이드바 -->
+	<div id="sidebar-wrapper">
+		<div id="sidebar-contents">
+			<div>
+				<div>
+					<!-- <b th:text="${#authentication.principal.username}+'님'"></b> -->
+					<img class="icon-30" src="/img/human-w.png"><span th:if="${session.bizMember.bid}" th:text="${session.bizMember.bid}">John Doe</span><b>님</b>
+					<hr>
+				</div>
+				<div class="d-flex">
+					<img class="icon-20" src="/img/edit-w.png">
+					<form th:action="@{/bizMember/storeList}" method="post">
+						<button type="submit">사업장 관리</button>
+					</form>
+				</div>
+				<div class="d-flex">
+					<img class="icon-20" src="/img/home-w.png">
+					<form th:action="@{/bizMember/storeRegister}" method="post">
+						<button type="submit">신규 사업장 등록</button>
+					</form>
+				</div>
+			</div>
+			 
+			
+		</div>
+		
+	</div>
+	<!-- /사이드바 -->
+
+
+
+</div>
+</html>

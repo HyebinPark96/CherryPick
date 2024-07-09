@@ -1,0 +1,11 @@
+#real1 프로필
+
+server:
+  port: 8081
+          
+spring:
+  config:
+    activate:
+      on-profile: real1
+  profiles:
+    include: real-db

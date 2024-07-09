@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.pj.cherrypick.mapper.SearchMapper" >
+
+  	<select id="getCafeByName" parameterType="com.pj.cherrypick.domain.FilterVO" resultType="com.pj.cherrypick.domain.CafeVO">
+ 		SELECT *
+ 		FROM cafe c
+ 		LEFT JOIN review r  
+ 		ON c.cno = r.cno
+ 		<where>
+ 		c.cname LIKE CONCAT('%', #{keyword}, '%')
+ 		<!-- 
+ 		<if test="fpark == 1">
+ 		AND c.parking = 1
+ 		</if>
+ 		<if test="fpet == 1">
+ 		AND c.pet = 1
+ 		</if> 	
+ 		<if test="fkids == 1">
+ 		AND c.kids = 1
+ 		</if> 	
+ 		<if test="fgroup == 1">
+ 		AND c.group = 1
+ 		</if> --> 
+ 		</where>
+ 		GROUP BY c.cno
+	</select> 
+
+
+  	<select id="getCafeByTag" parameterType="com.pj.cherrypick.domain.FilterVO" resultType="com.pj.cherrypick.domain.CafeVO">
+ 		SELECT *
+ 		FROM cafe c
+ 		LEFT JOIN review r  
+ 		ON c.cno = r.cno
+ 		<where>
+ 		c.ctag LIKE CONCAT('%', #{keyword}, '%')
+ 		</where>
+ 		GROUP BY c.cno
+	</select> 
+	
+	
+  	<select id="getListByName" parameterType="com.pj.cherrypick.domain.FilterVO" resultType="com.pj.cherrypick.domain.ListVO">
+ 		SELECT *
+		FROM list l 
+		LEFT JOIN cafe c
+		ON c.cno = l.li_cafe1
+ 		<where>
+ 		l.liname LIKE CONCAT('%', #{keyword}, '%')
+ 		</where>
+	</select> 
+
+    
+    
+</mapper>

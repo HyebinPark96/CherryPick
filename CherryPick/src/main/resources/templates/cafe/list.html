@@ -1,0 +1,162 @@
+<!--리스트 페이지입니다 -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{./layout/layout-main}">
+
+<!-- <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<script src="../js/cafe.js" async></script>
+	<title>CherryPick</title>
+</head>
+
+<body> -->
+
+	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
+	<div class="content container" layout:fragment="content">
+
+		<div class="item">
+			<div class="cflist-label2">
+				<div>
+				<span style="font-size: 12px; color: #bbb;"> 조회수 000,000회 |
+					등록일 0000-00-00 </span></div>  
+				리스트 이름: <b th:text="${list.liname}">liname</b><span>	
+			<img id="bmkliImg" src="">
+			<input type="hidden" id="bmkli_check" th:if="${bmk == 0}" th:value="0">
+			<input type="hidden" id="bmkli_check" th:if="${bmk != 0}" th:value="1"> 
+			</span><br> 
+
+				<span th:text="${list.username}">username</span>님이 만든
+				이 리스트를 <span>n</span>명이 담았습니다.
+			
+
+		
+			<!--cafe.js에 user/lino 보내기 -->
+			<input id="lino" type="hidden" th:value="${list.lino}">
+			<input id="username" type="hidden" th:value="${username}">
+			
+			
+			</div>
+			<hr>
+			<!--구분선-->
+			<div class="cflist container">
+				<!-- th로 cafeVO 받아오기 -->
+				<div class="cflist-item" th:each="cafe : ${cafes}">
+					<div class="cflist-thumb">
+						<img th:src="@{${'/img/' + cafe.cimage}}" alt="카페썸네일" style="width:150px; height: 150px; object-fit:cover;"/>
+					</div>
+					<div class="d-flex">
+						<div class="col p-4 d-flex flex-column position-static">
+							<strong class="d-inline-block mb-2 text-success" th:text="${cafe.cname}">1. 카페
+								이름</strong>
+							<div th:text="${cafe.ctag}">카페 해시태그</div>
+							<div class="mb-1 text-muted" th:text="${cafe.caddress}">부산광역시 경상남도 서울시</div>
+
+
+							<div class="cflist-review">
+								<div class="cflist-review-profile"></div>
+								<div>
+									<b th:text="${cafe.username}">username</b>&nbsp;
+									<div>
+										<span th:if="${cafe.title != null}" th:text="${cafe.title}"></span>
+										<span th:if="${cafe.title == null}">등록된 리뷰가 없습니다.</span>
+									</div>
+								</div>
+
+							</div>
+							<a th:id="${cafe.cno}" th:onclick="sendToInfo(this.getAttribute('id'))">더보기</a>
+
+						</div>
+						<div>
+					<!--		<img id="bmkImg" src="">
+							<input type="hidden" id="bmk_check" th:if="${bmk == 0}" th:value="0">
+							<input type="hidden" id="bmk_check" th:if="${bmk != 0}" th:value="1">  -->
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<div class="sharebar input-group mb-3">
+					<input type="text" value="https://sampletext.com">
+					<button class="btn btn-outline-secondary" type="button" id="button-addon2">공유하기</button>
+				</div>
+			<!-- 지도 영역 시작-->
+			<div id="map" style="width:80%;height:350px;"></div>
+			<!-- 지도 출력 스크립트 -->
+			
+<script th:inline="javascript">
+
+	/*<![CDATA[*/
+
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+		mapOption = {
+			center: new kakao.maps.LatLng(35.15306, 129.06623), // 지도의 중심좌표 (전포역)
+			level: 3 // 지도의 확대 레벨
+		};
+
+	// 지도생성
+	var map = new kakao.maps.Map(mapContainer, mapOption);
+
+	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+	var positions = [];
+
+	/*[# th:each="cafe : ${cafes}"]*/
+	var data = {};
+	data.content = /*[[${cafe.cname}]]*/
+		data.latlng = new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/"", /*[[${cafe.c_long}]]*/);
+	positions.push(data);
+	var cno = /*[[${cafe.cno}]]*/"";
+//	console.log("cno", cno);
+//	console.log("data:", data);
+//	console.log("positions:", positions);
+	var cimage = /*[[${cafe.cimage}]]*/"";
+//	console.log(cimage);
+	/*[/]*/
+
+
+
+	for (var i = 0; i < positions.length; i++) {
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+			map: map, // 마커를 표시할 지도
+			position: positions[i].latlng // 마커의 위치
+		});
+
+		// 마커에 표시할 인포윈도우를 생성합니다 
+		var infowindow = new kakao.maps.InfoWindow({
+			content: positions[i].content // 인포윈도우에 표시할 내용
+		});
+
+		// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+		// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+		// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+		kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+		kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	}
+
+	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	function makeOverListener(map, marker, infowindow) {
+		return function () {
+			infowindow.open(map, marker);
+		};
+	}
+
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function makeOutListener(infowindow) {
+		return function () {
+			infowindow.close();
+		};
+	}
+
+	/*]]>*/
+</script> 
+<!--지도 영역 끝 -->
+			</div>
+
+		</div>
+
+	</div>
+<!-- </body> -->
+
+</html>

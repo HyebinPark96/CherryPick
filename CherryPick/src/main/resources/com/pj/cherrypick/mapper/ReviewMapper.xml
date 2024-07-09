@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace의 값은, MemberMapper.xml의 쿼리를 호출할 Mapper Class의 경로와 클래스명으로 하도록 
+	해야한다. -->
+<mapper namespace="com.pj.cherrypick.mapper.ReviewMapper">
+
+	<select id="count" parameterType="String" resultType="int">
+		SELECT count(*)
+		FROM review
+		WHERE username = #{username};
+	</select>
+	
+	
+	<resultMap type="com.pj.cherrypick.domain.HeartVO" id="HeartVO">
+		<result column="hno" property="hno" />
+		<result column="rno" property="rno" />
+		<result column="username" property="username" />
+	</resultMap>
+	
+	
+	<resultMap type="com.pj.cherrypick.domain.CafeVO" id="CafeVO">
+		<result column="cno" property="cno" />
+		<result column="bid" property="bid" />
+		<result column="cname" property="cname" />
+		<result column="c_lat" property="c_lat" />
+		<result column="c_long" property="c_long" />
+		<result column="cimage" property="cimage" />
+		<result column="caddress" property="caddress" />
+		<result column="cphone" property="cphone" />
+		<result column="copen" property="copen" />
+		<result column="cclose" property="cclose" />
+		<result column="parking" property="parking" />
+		<result column="pet" property="pet" />
+		<result column="kids" property="kids" />
+		<result column="seats" property="seats" />
+		<result column="cmenu_img" property="cmenu_img" />
+	</resultMap>
+	
+	<resultMap type="com.pj.cherrypick.domain.MemberVO" id="MemberVO">
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="email" property="email" />
+		<result column="role" property="role" />
+	</resultMap>
+	
+	<resultMap type="com.pj.cherrypick.domain.ReviewVO" id="ReviewVO">
+		<result column="rno" property="rno" />
+		<result column="username" property="username" />
+		<result column="cno" property="cno" />
+		<result column="date" property="date" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="score" property="score" />
+		<result column="waiting" property="waiting" />	
+		<collection property="HeartVO" resultMap="HeartVO" />
+		<collection property="CafeVO" resultMap="CafeVO" />
+		<collection property="MemberVO" resultMap="MemberVO" />
+	</resultMap>
+	
+
+	
+	<!-- 내가 작성한 리뷰 목록 + 페이징 -->
+	<select id="getMyReviewList" resultMap="ReviewVO" parameterType="hashmap">  <!-- 주의 : 파라메터타입은 hashmap -->
+		SELECT r.*, c.*, m.*, h.*
+		FROM review r
+		LEFT JOIN cafe c
+		ON r.cno = c.cno
+		LEFT JOIN member m
+		ON r.username = m.username
+		LEFT JOIN heart h
+		ON r.rno = h.rno
+		WHERE r.username = #{username}
+		ORDER BY r.date DESC
+		LIMIT #{displayPost}, #{postNum}
+	</select>
+
+	<!-- 내가 작성한 리뷰의 좋아요 총 갯수 가져오기 -->
+	<select id="getHeartCnt" resultType="int" parameterType="int">
+		SELECT COUNT(h.rno)
+		FROM heart h
+		WHERE h.rno = (SELECT r.rno 
+								FROM review r
+								WHERE r.rno = #{rno})
+	</select>
+	
+	<!-- 리뷰 작성 (date는 디폴트로 작성시간으로 입력됨) -->
+ 	<insert id="writeReviewProc" parameterType="com.pj.cherrypick.domain.ReviewVO">
+		INSERT INTO review (username, cno, title, content, score, waiting)
+		VALUES (#{username}, #{cno}, #{title}, #{content}, #{score}, #{waiting})
+	</insert>
+	
+	<select id="getOneReviewForUpdate" parameterType="int" resultType="com.pj.cherrypick.domain.ReviewVO">
+		SELECT * 
+		FROM review
+		WHERE rno = #{rno}
+	</select>
+	
+	<update id="updateReviewProc" parameterType="com.pj.cherrypick.domain.ReviewVO">
+		UPDATE review 
+		SET title = #{title}, content = #{content}, score = #{score}, waiting = #{waiting}
+		WHERE rno = #{rno}
+	</update>
+	
+	<delete id="deleteReviewProc" parameterType="int">
+		DELETE FROM review
+		WHERE rno = #{rno}
+	</delete>
+
+
+</mapper>

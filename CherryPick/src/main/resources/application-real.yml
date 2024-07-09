@@ -1,0 +1,8 @@
+#real 프로필
+
+spring:
+  config:
+    activate:
+      on-profile: real
+  profiles:
+    include: real-db

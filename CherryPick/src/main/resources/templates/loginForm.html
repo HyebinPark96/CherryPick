@@ -1,0 +1,125 @@
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{./layout/layout-main}">
+
+
+<!-- <head>
+<meta charset="utf-8">
+
+<title>CherryPick-Login</title>
+</head> -->
+<!-- <body> -->
+	<div class="content loginpage text-center container" layout:fragment="content">
+
+		<main class="form-signin w-100 m-auto">
+			<img class="divBtn" src="/img/logo-pink.png" alt="" width="150" onclick="goHome();"><br>
+
+
+			<!-- 버튼 크기 크게 -->
+
+			<div class="btn-group login-opt-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn login-opt-btn" onclick="displayMemFrm()" id="memberBtn">회원</button>
+				<button type="button" class="btn login-opt-btn" onclick="displayBizFrm()" id="bMemberBtn">사업자</button>
+			</div>
+
+			<!-- 위 버튼과 아이디/비번찾는 구역 떨어져서 구분 쉽게-->
+
+			<!-- 회원 로그인 폼 -->
+			<form action="/auth/loginProc" method="POST" id="memberLoginFrm">
+				<h3>회원 로그인</h3>
+				<div class="form-floating">
+					<input type="text" class="form-control" placeholder="아이디를 입력해주세요." name="username"> <label for="floatingInput">아이디를 입력해주세요.</label>
+				</div>
+				<div class="form-floating">
+					<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요." name="password"> <label for="floatingPassword">비밀번호를 입력해주세요.</label>
+				</div>
+
+				<div class="checkbox mb-3">
+					<label> <input type="checkbox" value="remember-me"> Remember me
+					</label>
+				</div>
+				<label style="color:red" th:text="${alertFailMsg}"></label>
+				<button class="loginbtn w-100 btn btn-lg" id="signInBtn">로그인</button>
+			</form>
+
+
+
+			<!-- 사업자 로그인 폼 -->
+			<form action="/auth/bSignInProc" method="POST" id="bMemberLoginFrm">
+				<h3>사업자 로그인</h3>
+				<div class="form-floating">
+					<input type="text" class="form-control" placeholder="아이디를 입력해주세요." name="bid"> <label for="floatingInput">아이디를 입력해주세요.</label>
+				</div>
+				<div class="form-floating">
+					<input type="password" class="form-control" placeholder="비밀번호를 입력해주세요." name="bpwd"> <label for="floatingPassword">비밀번호를 입력해주세요.</label>
+				</div>
+
+				<div class="checkbox mb-3">
+					<label> <input type="checkbox" value="remember-me"> Remember me
+					</label>
+				</div>
+				<button class="loginbtn w-100 btn btn-lg" id="bSignInBtn">로그인</button>
+			</form>
+
+
+			<div class="loginpage-option">
+				<div>
+					<a href="/auth/selectTypeForFindId">아이디 찾기</a> &nbsp;|&nbsp; <a href="/auth/selectTypeForFindPwd">비밀번호 찾기</a>
+				</div>
+				<div>
+					<a href="/auth/joinForm">- CherryPick이 처음이신가요? [회원가입]</a>
+				</div>
+				<br>
+			</div>
+			<div>[SNS 로그인]</div>
+			<img src="https://t1.daumcdn.net/cfile/tistory/99580C465C3D7D130C" width="300px">
+			<p class="mt-5 mb-3 text-muted">&copy; Copyright 2022 CherryPick</p>
+
+		</main>
+
+
+		<!-- ===========입력폼 화면 표시 스크립트=========== -->
+
+
+		<script type="text/javascript">
+			var memberLoginFrm = document.getElementById("memberLoginFrm");
+			var bMemberLoginFrm = document.getElementById("bMemberLoginFrm");
+
+			var memberBtn = document.getElementById("memberBtn");
+			var bMemberBtn = document.getElementById("bMemberBtn");
+
+			memberLoginFrm.style.display = 'block';
+			bMemberLoginFrm.style.display = 'none';
+			memberBtn.style.backgroundColor = 'pink';
+
+			var bDisplay = true;
+
+			function displayMemFrm() {
+				if (memberLoginFrm.style.display == 'none') {
+					memberLoginFrm.style.display = 'block';
+					memberBtn.style.backgroundColor = 'pink';
+				} else {
+					memberLoginFrm.style.display = 'none';
+					memberBtn.style.backgroundColor = 'white';
+				}
+				bMemberLoginFrm.style.display = 'none';
+				bMemberBtn.style.backgroundColor = 'white';
+			}
+
+			function displayBizFrm() {
+				if (bMemberLoginFrm.style.display == 'none') {
+					bMemberLoginFrm.style.display = 'block';
+					bMemberBtn.style.backgroundColor = 'pink';
+				} else {
+					bMemberLoginFrm.style.display = 'none';
+					bMemberBtn.style.backgroundColor = 'white';
+				}
+				memberLoginFrm.style.display = 'none';
+				memberBtn.style.backgroundColor = 'white';
+			}
+		</script>
+
+	</div>
+
+<!-- </body> -->
+</html>

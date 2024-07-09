@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div th:fragment="header-title" class="title">
+	<div class="title-banner">
+		<div class="title-top">
+			<div class="title-top-left">
+				<img class="divBtn" src="/img/logo.png" width="125px"
+					onclick="goHome();">
+			</div>
+
+			<div sec:authorize="isAuthenticated()" class="title-top-right">
+				<!-- 관리자 -->
+				<div>
+					<a th:href="@{admin/adminMain(num=1, sort='member')}"
+						sec:authorize="hasRole('ROLE_1')">Admin</a>
+				</div>
+				<div sec:authorize="hasRole('ROLE_1')">&nbsp;|&nbsp;</div>
+				<div>
+					<a href="#" th:href="@{/logout}" sec:authorize="hasRole('ROLE_1')">Sign
+						out</a>
+				</div>
+
+
+				<!-- 회원 -->
+				<div>
+					<a th:href="@{member/myPage}" sec:authorize="!hasRole('ROLE_1')">My
+						Page</a>
+				</div>
+				<div sec:authorize="!hasRole('ROLE_1')">&nbsp;|&nbsp;</div>
+				<div>
+					<a href="#" th:href="@{/logout}" sec:authorize="!hasRole('ROLE_1')">Sign
+						out</a>
+				</div>
+			</div>
+
+			<!-- 비회원 -->
+			<div sec:authorize-expr="!isAuthenticated()"
+				th:if="${bizMember == null}" class="title-top-right">
+				<div>
+					<a href="/auth/loginForm">로그인</a>
+				</div>
+				<div>&nbsp;|&nbsp;</div>
+				<div>
+					<a href="/auth/joinForm">회원가입</a>
+				</div>
+			</div>
+
+			<!-- 사업자 -->
+			<div sec:authorize-expr="!isAuthenticated()"
+				th:if="${bizMember != null}" class="title-top-right">
+				<form th:action="@{bizMember/storeList}" method="post">
+					<button type="submit">My Store</button>
+				</form>
+				<div>&nbsp;|&nbsp;</div>
+				<form th:action="@{bizMember/myPage}" method="post">
+					<button type="submit">My Page</button>
+				</form>
+				<div>&nbsp;|&nbsp;</div>
+				<form th:action="@{bizMember/signOut}" method="post">
+					<button type="submit">Sign out</button>
+				</form>
+			</div>
+
+		</div>
+		<div class="title-center">
+			<br><br>
+			<h3>지금, 당신의 체리를 찾아보세요</h3>
+<!--			<div><span style="font-size: 12px; color: #ddd;">당신의 체리를 찾아보세요</span></div>-->
+			<div class="title-searchbar">
+				<form action = "/search" method = "get">
+					<div class="d-flex align-items-center">
+						&nbsp;&nbsp;
+						<input class="searchBtn" type = "image" src="/img/search-w.png" style="height: 20px;" alt="" disabled>&nbsp;&nbsp;|&nbsp;&nbsp;
+						<input id="title-search-input" class="searchBar" name="keyword" placeholder="키워드를 검색해보세요. #카공 #감성 #에그타르트" ></input>
+					</div>
+					
+				</form>
+			</div>
+			
+
+		</div>
+	</div>
+</div>
+<div th:fragment="header-navbar" class="title">
+	<nav class="title-bottom">
+		<div></div>
+		<Button onclick="goHome();">HOME</Button>
+		<Button onclick="goHere('cafe/all');">CAFES</Button>
+		<Button onclick="goHere('cafe/cherries');">CHERRIES</Button>
+		<Button onclick="ready()">REVIEW</Button>
+		<Button onclick="ready()">EVENT</Button>
+		<Button onclick="ready()">HELP</Button>
+		<div></div>
+	</nav>
+</div>
+
+<div th:fragment="header-sub">
+	<div class="sub">
+		<div class="sub-left">
+			<img class="divBtn logo-pink" src="/img/logo-pink.png"
+				onclick="goHome();"></img>
+		</div>
+		<div class="sub-searchbar">
+			<form action = "/search" method = "get">
+				<div class="d-flex align-items-center">
+					&nbsp;&nbsp;<input class="searchBtn" type = "image" src="/img/search-b.png" style="height: 20px;" alt="" disabled>&nbsp;&nbsp;|&nbsp;&nbsp;				
+					<input style="width: 70%;"  class="searchBar" name="keyword" placeholder="#인스타 #핫플 #스터디"></input>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div>
+
+</html>

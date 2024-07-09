@@ -1,0 +1,190 @@
+<!-- 더보기 기능은 레코드 갯수가 10개 미만일 때만 보이도록 하고, 이상일 때는 페이징 처리로 구현하기 -->
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{./layout/layout-main}">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head>
+
+<body>
+	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
+
+
+	<div class="content" layout:fragment="content">
+
+		<div class="content-top">
+			<div class="row">
+				<div class="col-md-1">
+					<img class="back-icon" src="../img/back.png">
+				</div>
+				<div class="col-md-11">
+					<b th:text="${#authentication.principal.username}+'님의 Review'"></b>
+				</div>
+			</div>
+			<hr>
+		</div>
+
+		<div class="container">
+
+			<th:block th:each="list : ${list}"> <!--  -->
+				<div class="myreview-item">
+
+					<div class="">
+						<div th:each="CafeVO, iter:${list.CafeVO}"> <!-- -->
+							<span style="font-size: 25px; font-weight: bold;">
+								<label th:text="${CafeVO.cname}">카페 이름</label> <!-- -->
+							</span> 
+							<span class="">
+								<label th:text="${list.score}">리뷰 점수</label> <!-- -->
+							</span><br> 
+							<span style="color: gray;" th:each="CafeVO, iter:${list.CafeVO}"> <!-- -->
+								<label th:text="${CafeVO.caddress}">카페 주소</label> <!-- -->
+							</span>
+						</div>
+						<br>
+						<div>
+							<div style="color: gray;" th:text="${list.date}">작성 날짜</div><!-- -->
+							<div>
+								<b>
+									나의 별점 : <label th:text="${list.score}"></label> <!-- -->
+								</b>
+							</div>
+							<div>
+								<label th:text="${list.content}"></label> <!---->
+							</div>
+							
+							(heart) : 
+							<div th:each="HeartVO, iter:${list.HeartVO}">
+								<span th:if="${iter.size}!=1">
+									<b th:if="${iter.index}==0" th:text="${iter.size}">2</b>
+								</span>
+								<span th:unless="${iter.size}!=1">
+									<b th:if="${iter.index}==0">0</b>
+								</span>
+							</div>
+							
+							
+						</div>
+					</div>
+					<div
+						style="width: 300px; background-image: url('https://images.pexels.com/photos/7541176/pexels-photo-7541176.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load');">
+					</div>
+
+				</div>
+				<hr>
+			</th:block>
+			
+			<div class="pagination" th:if="${list.size}>=10">
+					<th:block th:if="${page.prev}">
+						<span class="page-item" >[ <a th:href="@{myReview(num=${page.startPageNum - 1})}" class="page-link">이전</a> ]</span>
+					</th:block>
+					
+					<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
+						<span th:if="${select!=num}" class="page-item" >
+							<a th:href="@{myReview(num=${num})}" th:text="${num}" class="page-link" ></a>
+						</span>
+						<span th:unless="${select!=num}" class="page-item active">
+							<a th:href="@{myReview(num=${num})}" th:text="${num}" class="page-link"></a>
+						</span>
+					</th:block>
+					
+					<th:block th:if="${page.next}">
+						<span class="page-item">[ <a th:href="@{myReview(num=${page.endPageNum + 1})}" class="page-link">다음</a> ]</span>
+					</th:block>
+				</div>
+
+			<!-- === 숨어있는 영역 ====  -->
+<!-- 			
+			<th:block th:each="num : ${#numbers.sequence(1,5)}">
+			<div class="nextBlock">
+				<th:block th:each="num : ${#numbers.sequence(1,3)}">
+					<div class="myreview-item">
+
+						<div class="">
+							<div>
+								<span style="font-size: 25px; font-weight: bold;">카페 이름</span> <span
+									class="">별점 : 0.0</span><br> <span style="color: gray;">서울특별시
+									강남구 봉은사로</span>
+							</div>
+							<br>
+							<div>
+								<div style="color: gray;">5일 전</div>
+								<div>
+									<b>나의 별점 : 0.0</b>
+								</div>
+								<div>리뷰 영역을 나타내는 더미 데이터입니다. 걷다가 보면 항상 이렇게 너를 바라만 보던 너를
+									생각한다고 말할까 지금 집앞에 기다리고 때론 지나치고 다시 기다리는 꽃이 피는 거리에 보고파라 이밤에 걷다가 보면
+									항상 이렇게 너를 아쉬워 하다 너를 기다린다고 말할까 지금 집앞에 계속 이렇게 너를 아쉬워 하다 너를 연락했다
+									할까</div>
+								<div>
+									<b>(heart) : 0</b>
+								</div>
+							</div>
+						</div>
+						<div
+							style="width: 300px; background-image: url('https://images.pexels.com/photos/7541176/pexels-photo-7541176.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load');">
+						</div>
+
+					</div>
+					<hr>
+				</th:block>
+			</div>
+			</th:block> -->
+
+			<!-- === 더보기 버튼 ==== -->
+
+			<button type="button" id="seeMoreBtn" onclick="seeMore()" class="btn btn-outline-secondary col-md-12">더보기</button>
+			<button type="button" id="hideBtn" onclick="hideAll()" class="btn btn-outline-secondary col-md-3">▲ 리뷰 접기</button>
+
+
+
+		</div>
+
+		<!-- ======스크립트====== -->
+		<script type="text/javascript">
+			var seeMoreBtn = document.getElementById("seeMoreBtn");
+			var hideBtn = document.getElementById("hideBtn");
+			var totalBlocks = document.getElementsByClassName("nextBlock");
+			var currBlocks = 0;
+			
+			for (var i = 0, len = totalBlocks.length; i < len; i++) {
+				totalBlocks[i].style.display = 'none';
+			}
+			
+			hideBtn.style.display = 'none';
+			
+			
+			function seeMore(){
+				totalBlocks[currBlocks].style.display = 'block';
+				currBlocks++;
+				if(currBlocks==totalBlocks.length-1){
+					seeMoreBtn.style.display = 'none';
+					hideBtn.style.display = 'block';
+				}
+			}
+			
+			
+			function hideAll(){
+				for (var i = 0, len = totalBlocks.length; i < len; i++) {
+					totalBlocks[i].style.display = 'none';
+					currBlocks = 0;
+				}
+				seeMoreBtn.style.display = 'block';
+				hideBtn.style.display = 'none';
+			}
+		</script>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

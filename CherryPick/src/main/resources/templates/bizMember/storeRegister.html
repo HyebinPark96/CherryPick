@@ -1,0 +1,427 @@
+
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{./layout/layout-main}">
+<head>
+</head>
+
+<div layout:fragment="content">
+
+
+	<div id="page-wrapper" class="d-flex">
+
+		<div id="sidebar-wrapper" class="col-md-1"
+			th:replace="fragments/bizSidebar:: sidebar"></div>
+
+
+
+		<!-- 본문 -->
+		<div class="content" id="page-content-wrapper">
+			<div>
+				<!-- class="container-fluid" -->
+				<div class="text-large">신규 사업장 등록</div>
+				<hr>
+				<br>
+				<!-- 기본 정보 영역 -->
+				<div class="container">
+					<div class="text-20">
+						<b>기본 정보</b>
+					</div>
+					<input type="hidden" id="bid" th:value="${session.bizMember.bid}">
+
+					<div class="bzcf-form">
+						<div class="container">
+							<div class="d-flex">
+								<label>업체명</label> <input id="cname" value="" type="text"
+									class="form-control" placeholder="카페 이름">
+							</div>
+							<div class="d-flex">
+								<label>주소</label> <input id="caddress" value="" type="text"
+									class="form-control" placeholder="카페 주소">
+							</div>
+							<div class="d-flex">
+								<label>전화번호</label> <input id="cphone" value="" type="text"
+									class="form-control" placeholder="010-0000-0000">
+							</div>
+							<div class="margin-top-20"></div>
+							<div class="d-flex">
+								<label>영업시간</label>
+								<div class="d-flex">
+									<div>
+										<span>오픈 :</span> <input id="copen" value="09:00" type="time"
+											class="form-control" placeholder="">
+									</div>
+									<div>&nbsp;-&nbsp;</div>
+									<div>
+										<span>마감 :</span> <input id="cclose" value="22:00" type="time"
+											class="form-control" placeholder="">
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="margin-top-40"></div>
+						<div class="text-20">
+							<b>세부내용</b>
+						</div>
+						<div class="container">
+							<div class="d-flex">
+								<label>주차공간</label> <input id="parkingY"
+									class="form-check-input" type="radio" name="parking" value=1>
+								<span style="width: 50px;"> 있음</span> <input id="parkingN"
+									class="form-check-input" type="radio" name="parking" value=0
+									checked> <span> 없음 </span>
+							</div>
+							<div class="d-flex">
+								<label>애견 동반</label> <input id="petY" class="form-check-input"
+									type="radio" name="pet" value=1> <span
+									style="width: 50px;">예 </span> <input id="petN"
+									class="form-check-input" type="radio" name="pet" value=0
+									checked> <span> 아니오 </span>
+							</div>
+							<div class="d-flex">
+								<label>유아 동반</label> <input id="kidY" class="form-check-input"
+									type="radio" name="kids" value=1> <span
+									style="width: 50px;"> 예 </span> <input id="kidN"
+									class="form-check-input" type="radio" name="kids" value=0
+									checked> <span> 아니오 </span>
+							</div>
+							<div class="margin-top-20"></div>
+							<div class="d-flex">
+								<label>총 좌석 수</label> <input id="seats" value="0" type="text"
+									class="form-control" placeholder="">
+							</div>
+							<div class="d-flex">
+								<label>단체석<br>(5인 이상)
+								</label> <input id="groupY" class="form-check-input" type="radio"
+									name="group" value=1> <span style="width: 50px;">
+									있음 </span> <input id="groupN" class="form-check-input" type="radio"
+									name="group" value=0 checked> <span> 없음 </span>
+							</div>
+							<div class="margin-top-20"></div>
+							<div>
+								<b>해시태그</b> <span class="gray">/최대 5개까지 입력 가능합니다.</span>
+							</div>
+
+							<div class="margin-top-10"></div>
+							<div id="ctag-block">
+								<div class="ctag-item">
+									<span class="ctag-item-prefix">#</span> <input
+										class="ctag-item-value" name="ctag" type="text" placeholder="" />
+								</div>
+
+							</div>
+
+							<div class="margin-top-10"></div>
+							<img class="divBtn icon-30"
+								onclick="addItem('ctag-block','ctag-item', 5)"
+								src="/img/circle-plus-pink.png">
+
+						</div>
+					</div>
+				</div>
+				<div class="margin-top-20"></div>
+
+				<hr>
+
+				<!-- 이미지 등록 -->
+				<div class="container">
+					<div class="text-20">대표 이미지 등록</div>
+					<div class="margin-top-10"></div>
+					<div class="row">
+						<div id="cimage-block">
+							<div class="cimage-item">
+								<div id="cimage_Preview" style="width: 300px; height: 200px;">
+									<img class="divBtn icon-20"
+										onclick="deleteImg('#cimage', '#cimage_btn', '#cimage_Preview', 'id', 0)"
+										src="/img/x.png" style="margin: 5px;">
+								</div>
+							</div>
+							<!-- 							<div class="cimage-item  col-md-3 img-result "> -->
+							<div class="box-2 img-result hide">
+								<img style="max-width: 100%;" src="" alt="" class="cropped">
+
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div id="cimage_btn" class="divBtn hoverbox"
+								onclick="modal('#cImgModal')"
+								style="background-image: url('/img/add-image.png'); width: 300px; height: 200px; background-size: contain; background-repeat: no-repeat;">
+								<!-- OnClick="addItem('cimage-block', 'cimage-item', 3)" -->
+								<div id="overlay5">
+									<div class="hoverbox-img-caption">새 이미지 추가</div>
+									<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+
+				<!-- 메뉴 등록 영역 -->
+				<div class="container">
+					<div class="d-flex flex-column" style="gap: 10px;">
+						<div class="text-20">메뉴 등록</div>
+						<div>
+							<b>전체 메뉴판</b>
+							<div id="cmenu_preview" style="width: 300px; height: 200px;">
+								<img class="divBtn icon-20"
+									onclick="deleteImg('#cmenu', '#cmenu_btn', '#cmenu_preview', 'id', 0)"
+									src="/img/x.png" style="margin: 5px;">
+							</div>
+						</div>
+
+
+						<div id="cmenu_btn" class="divBtn hoverbox"
+							onclick="modal('#cmenuImgModal')"
+							style="background-image: url('/img/add-image.png'); width: 300px; height: 200px; background-size: contain no-repeat;">
+							<div id="overlay5">
+								<div class="hoverbox-img-caption">새 이미지 추가</div>
+								<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
+							</div>
+						</div>
+
+						<!-- <img onclick="location.href='#'" class="divBtn"
+								src="/img/samplemenu.jpg" width="250" /> -->
+
+						<div class="margin-top-20"></div>
+						<div>
+							<b>대표메뉴</b>
+						</div>
+
+						<div id="menulist-block">
+
+							<div class="menulist-item">
+								<div class="d-flex" style="gap: 10px;">
+									<div class="m_img_btn divBtn hoverbox"
+										style="background-image: url('/img/add-image.png'); width: 150px; height: 125px;">
+										<div id="overlay5">
+											<div class="hoverbox-img-caption">새 이미지 추가</div>
+											<p class="fa fa-plus-square-o fa-4x hoverbox-img-icon"></p>
+										</div>
+									</div>
+									<div class="m_img_preview" style="width: 150px; height: 125px;">
+										<img class="m_img_x divBtn icon-20" src="/img/x.png"
+											style="margin: 5px;">
+									</div>
+
+
+									<table>
+										<tr>
+											<th>메뉴명</th>
+											<td><input value="" type="text"
+												class="m_name form-control" placeholder=""></td>
+										</tr>
+
+										<tr>
+											<th>메뉴가격</th>
+											<td>
+													<!-- <span class="ctag-item-prefix">&#8361</span>  -->
+													<input value="" type="text"
+														class="m_price input-number form-control" placeholder="">
+											</td>
+										</tr>
+										<tr>
+											<th>메뉴설명</th>
+											<td><input value="" type="text"
+												class="m_detail form-control" placeholder="메뉴를 설명해주세요."></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<!-- </form> -->
+
+				<div id="cimageView"></div>
+
+
+
+				<button id="btn-register" class="btn btn-primary btn-lg btn-block">등록
+					완료</button>
+
+				<br>
+
+
+			</div>
+
+
+			<!-- 모달 영역 -->
+			<div id="cImgModal" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">카페 대표 이미지</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
+
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input id="cimage" type="file" name="files"
+												class="drop-zone__input"
+												onchange="previewImg(this, cimage_btn, cimage_Preview, 'id', 0);"
+												accept="image/*">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="cmenuImgModal" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">카페 메뉴판 이미지</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
+
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input id="cmenu_image" type="file" name="files"
+												class="drop-zone__input"
+												onchange="previewImg(this, cmenu_btn, cmenu_preview, 'id', 0);"
+												accept="image/*">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mImgModal1" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">메뉴 이미지 / 1</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
+
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input id="m_img1" class="m_img drop-zone__input" type="file"
+												name="files"
+												onchange="previewImg(this, 'm_img_btn', 'm_img_preview', 'class', 0);"
+												accept="image/*" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mImgModal2" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">메뉴 이미지 / 2</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
+
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input id="m_img2" class="m_img drop-zone__input" type="file"
+												name="files"
+												onchange="previewImg(this, 'm_img_btn', 'm_img_preview', 'class', 1);"
+												accept="image/*" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="mImgModal3" class="modal fade modal-item">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">메뉴 이미지 / 3</h5>
+							<button type="button" data-bs-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body d-flex justify-content-center">
+
+							<div class="drop-zone">
+
+								<div class="drop-zone__prompt">
+									<img src="/img/download.png" style="width: 100px;">
+									<div class="d-flex flex-wrap justify-content-center">
+										<div>파일을 드래그하거나,</div>
+										<div>
+											이곳을 클릭하세요.
+											<div></div>
+											<input type="file" name="files"
+												class="m_img drop-zone__input"
+												onchange="previewImg(this, 'm_img_btn', 'm_img_preview', 'class', 2);"
+												accept="image/*">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="/js/tempFuncCafe.js"></script>
+	<!-- DB 연결 스크립트 -->
+	<script src="/js/tempCafe.js"></script>
+
+
+
+</div>
+
+
+
+<!-- </body> -->
+
+
+
+
+</html>

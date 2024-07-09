@@ -12,7 +12,7 @@
 	<artifactId>cherrypick</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cherrypick</name>
-	<description>Final project for Spring Boot</description>
+	<description>SpringBoot Webservice</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

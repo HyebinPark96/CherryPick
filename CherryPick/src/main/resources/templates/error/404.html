@@ -1,0 +1,23 @@
+<!-- REST API 관점에서 바라보는 HTTP 상태 코드 -->
+<!-- 해당 페이지는 404 Not Found 상태 : 클라이언트가 서버와 통신할 수는 있지만 서버가 요청한 바를 찾을 수 없다는 것을 가리키는 HTTP 표준 응답 코드-->
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{./layout/layout-main}">
+
+<!-- <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CherryPick</title>
+</head>
+<body> -->
+	<!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4-->
+	<div class="content container" layout:fragment="content">
+		<div style="text-align: center;">
+			<img src="/img/404.png">
+			<div>
+				<b>요청한 페이지를 찾을 수 없습니다.</b>
+			</div>
+			<button class="cherrybtn" type="button" onclick="location.href = '/'">홈으로 돌아가기</button>
+		</div>
+	</div>
+<!-- </body> -->
+</html>
