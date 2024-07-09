@@ -73,6 +73,7 @@ public class CafeController {
 
         filter.setOffset(offset);
         filter.setLimit(limit);
+        filter.setTotalcnt(totalCount);
 
         List<CafeVO> cafes = new ArrayList<>();
         if (sort == 0) { //최신순
