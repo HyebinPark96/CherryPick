@@ -4,5 +4,4 @@ spring:
   config:
     activate:
       on-profile: real
-  profiles:
-    include: real-db
+  import: "classpath:/application-real-db.yml"
