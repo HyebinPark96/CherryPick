@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{./layout/layout-main}">
+      layout:decorate="~{./layout/layout-main}">
 
 <!-- <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,248 +13,258 @@
 <!-- 타임리프로 최상단 배경 이미지 적용  -->
 
 <head>
-	<style th:inline="text">
-		.cf-label-bg {
-			background: url([[@{https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300}]]) no-repeat center center;
-			background-size: cover;
-			min-height: 200px;
-		}
-	</style>
+    <style th:inline="text">
+        .cf-label-bg {
+            background: url([[@{https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300}]]) no-repeat center center;
+            background-size: cover;
+            min-height: 200px;
+        }
+    </style>
 </head>
 
 <!-- 부트스트랩 클래스 : container, btn, btn-outnline, container, row, col-md-4, ... -->
 <div layout:fragment="content">
-	<div class="cf-label-bg">
-		<div class="cf-label container">
+    <div class="cf-label-bg">
+        <div class="cf-label container">
 			<span style="font-size: 12px; color: #bbb;"> 조회수 000,000회 |
 				저장된 횟수 또는 즐겨찾기 수 </span><br>
-			<span style="font-size: 20px; color:#eee;" th:text="${cafe.cname}"><b>카페
+            <span style="font-size: 20px; color:#eee;" th:text="${cafe.cname}"><b>카페
 					이름</b></span>
-			<img id="bmkImg" src="">
-			<input type="hidden" id="bmk_check" th:if="${bmk <= 0}" th:value="0">
-			<input type="hidden" id="bmk_check" th:if="${bmk > 0}" th:value="1">
+            <img id="bmkImg" src="">
+            <input type="hidden" id="bmk_check" th:if="${bmk <= 0}" th:value="0">
+            <input type="hidden" id="bmk_check" th:if="${bmk > 0}" th:value="1">
 
-			<!--reviewController에 cno 보내기 -->
-			<input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
+            <!--reviewController에 cno 보내기 -->
+            <input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
 
-			<!--cafe.js에 user/cno 보내기 -->
-			<input id="cno" type="hidden" th:value="${cafe.cno}">
-			<input id="username" type="hidden" th:if="${username}!=null" th:value="${username}">
+            <!--cafe.js에 user/cno 보내기 -->
+            <input id="cno" type="hidden" th:value="${cafe.cno}">
+            <input id="username" type="hidden" th:if="${username}!=null" th:value="${username}">
 
-		</div>
-
-
-
-	</div>
-	<div class="content container">
-
-		<div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="cf-img thumbnail" OnClick="location.href ='#'"
-						style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="cf-img thumbnail" OnClick="location.href ='#'"
-						style="background-image: url('https://images.pexels.com/photos/7541175/pexels-photo-7541175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="cf-img thumbnail" OnClick="location.href ='#'"
-						style="background-image: url('https://images.pexels.com/photos/7541176/pexels-photo-7541176.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load');">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="cf-detail">
-			<table style="width: 30%">
-				<tr>
-					<th>주소</th>
-					<td th:text="${cafe.caddress}">서울특별시 강남구 봉은사로</td>
-				</tr>
-				<tr>
-					<th>전화번호</th>
-					<td th:text="${cafe.cphone}">555 77 854</td>
-				</tr>
-				<tr>
-					<th>가격대</th>
-					<td>만원대 미만</td>
-				</tr>
-				<tr>
-					<th>영업시간</th>
-					<td th:text="${cafe.copen} + '~' + ${cafe.cclose}">14:00 -
-						21:00</td>
-				</tr>
-				<tr>
-					<th>주차 여부</th>
-					<td th:if="${cafe.parking > 0}" th:text="가능"></td>
-					<td th:if="${cafe.parking == 0}" th:text="불가"></td>
-				</tr>
-				<tr>
-					<th>애견 동반</th>
-					<td th:if="${cafe.pet > 0}" th:text="가능"></td>
-					<td th:if="${cafe.pet == 0}" th:text="불가"></td>
-				</tr>
-				<tr>
-					<th>유아 동반</th>
-					<td th:if="${cafe.kids > 0}" th:text="가능"></td>
-					<td th:if="${cafe.kids == 0}" th:text="불가"></td>
-				</tr>
-				<tr>
-					<th>총 좌석 수</th>
-					<td th:text="${cafe.seats}">좌석 수</td>
-				</tr>
-				<tr>
-					<th>5인이상 단체석</th>
-					<td th:if="${cafe.group > 0}" th:text="있음"></td>
-					<td th:if="${cafe.group == 0}" th:text="없음"></td>
-				</tr>
-			</table>
-		</div>
-		<hr>
+        </div>
 
 
-		<b><span style="font-size: 16px;"> MENU </span></b>
-		<div class="cf-menu">
-			<!-- th로 cafeMenuVO 받아오기 -->
-			<div class="menulist-item" th:each="menu, i : ${menu}">
-				<div class="d-flex">
-					<div class="menulist-thumb">
-						<img th:src="@{${'/img/' + menu.m_img}}" alt="메뉴썸네일" width="150" />
-					</div>
-					<div>
-						<b><span class="text-20" th:text="${menu.m_name}">메뉴이름</span></b>
-						/ &#8361;<span th:text="${menu.m_price}">메뉴가격</span> <br> <span class="cf-menu-detail"
-							th:text="${menu.m_detail}">메뉴설명</span>
-					</div>
-				</div>
-				<hr class="hr-dotted" th:if="!${i.last}" />
-			</div>
-		</div>
-		<hr>
-		<b><span style="font-size: 16px;"> 위치 </span></b>
+    </div>
+    <div class="content container">
 
-		<!--지도영역 시작-->
-		<div id="map" style="width: 80%; height: 350px;"></div>
-		<!-- 지도 출력 스크립트 -->
-		<script th:inline="javascript">
+        <div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="cf-img thumbnail" OnClick="location.href ='#'"
+                         style="background-image: url('https://images.pexels.com/photos/5722871/pexels-photo-5722871.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=300');">
+                    </div>
+                </div>
 
-			/*<![CDATA[*/
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-				mapOption = {
-					center: new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/"", /*[[${cafe.c_long}]]*/), // 지도의 중심좌표 (카페위치)
-					level: 2 // 지도의 확대 레벨
-				};
-
-			// 지도생성
-			var map = new kakao.maps.Map(mapContainer, mapOption);
-
-			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-			var positions = [
-				{
-					content: /*[[${cafe.cname}]]*/"",
-					latlng: new kakao.maps.LatLng(/*[[${cafe.c_lat}]]*/"", /*[[${cafe.c_long}]]*/)
-				}
-			];
-
-			for (var i = 0; i < positions.length; i++) {
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					map: map, // 마커를 표시할 지도
-					position: positions[i].latlng // 마커의 위치
-				});
-
-				// 마커에 표시할 인포윈도우를 생성합니다 
-				var infowindow = new kakao.maps.InfoWindow({
-					content: positions[i].content // 인포윈도우에 표시할 내용
-				});
-
-				// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-				// 이벤트 리스너로는 클로저를 만들어 등록합니다 
-				// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-				kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-				kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-			}
-
-			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-			function makeOverListener(map, marker, infowindow) {
-				return function () {
-					infowindow.open(map, marker);
-				};
-			}
-
-			// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-			function makeOutListener(infowindow) {
-				return function () {
-					infowindow.close();
-				};
-			}
-
-			/*]]>*/
-		</script>
-		<!--지도 영역 끝 -->
-		<hr>
-		<!--구분선-->
-		<b>리뷰(<span style="font-size: 16px;" th:text="${page.count}">000</span>)</b>
+                <div class="col-md-4">
+                    <div class="cf-img thumbnail" OnClick="location.href ='#'"
+                         style="background-image: url('https://images.pexels.com/photos/7541175/pexels-photo-7541175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="cf-img thumbnail" OnClick="location.href ='#'"
+                         style="background-image: url('https://images.pexels.com/photos/7541176/pexels-photo-7541176.jpeg?auto=compress&cs=tinysrgb&w=300&lazy=load');">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cf-detail">
+            <table style="width: 30%">
+                <tr>
+                    <th>주소</th>
+                    <td th:text="${cafe.caddress}">서울특별시 강남구 봉은사로</td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td th:text="${cafe.cphone}">555 77 854</td>
+                </tr>
+                <tr>
+                    <th>가격대</th>
+                    <td>만원대 미만</td>
+                </tr>
+                <tr>
+                    <th>영업시간</th>
+                    <td th:text="${cafe.copen} + '~' + ${cafe.cclose}">14:00 -
+                        21:00
+                    </td>
+                </tr>
+                <tr>
+                    <th>주차 여부</th>
+                    <td th:if="${cafe.parking > 0}" th:text="가능"></td>
+                    <td th:if="${cafe.parking == 0}" th:text="불가"></td>
+                </tr>
+                <tr>
+                    <th>애견 동반</th>
+                    <td th:if="${cafe.pet > 0}" th:text="가능"></td>
+                    <td th:if="${cafe.pet == 0}" th:text="불가"></td>
+                </tr>
+                <tr>
+                    <th>유아 동반</th>
+                    <td th:if="${cafe.kids > 0}" th:text="가능"></td>
+                    <td th:if="${cafe.kids == 0}" th:text="불가"></td>
+                </tr>
+                <tr>
+                    <th>총 좌석 수</th>
+                    <td th:text="${cafe.seats}">좌석 수</td>
+                </tr>
+                <tr>
+                    <th>5인이상 단체석</th>
+                    <td th:if="${cafe.group > 0}" th:text="있음"></td>
+                    <td th:if="${cafe.group == 0}" th:text="없음"></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
 
 
-		<div class="review-card">
-			<div class="review-card-sep">
-				<div class="card-body">
-					<h4 class="card-title">평균 별점</h4>
-					<h5 class="card-text"><span th:text="${cafe.avgscore}">5.0</span>점</h5>
+        <b><span style="font-size: 16px;"> MENU </span></b>
+        <div class="cf-menu">
+            <!-- th로 cafeMenuVO 받아오기 -->
+            <div class="menulist-item" th:each="menu, i : ${menu}">
+                <div class="d-flex">
+                    <div class="menulist-thumb">
+                        <img th:src="@{${'/img/' + menu.m_img}}" alt="메뉴썸네일" width="150"/>
+                    </div>
+                    <div>
+                        <b><span class="text-20" th:text="${menu.m_name}">메뉴이름</span></b>
+                        / &#8361;<span th:text="${menu.m_price}">메뉴가격</span> <br> <span class="cf-menu-detail"
+                                                                                        th:text="${menu.m_detail}">메뉴설명</span>
+                    </div>
+                </div>
+                <hr class="hr-dotted" th:if="!${i.last}"/>
+            </div>
+        </div>
+        <hr>
+        <b><span style="font-size: 16px;"> 위치 </span></b>
 
-				</div>
-				<div class="card-body">
-					<h4 class="card-title">평균 웨이팅</h4>
-					<h5 class="card-text"><span th:text="${cafe.avgwait}">평균웨이팅</span>분</h5>
-				</div>
-			</div>
-			<form>
-				<input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
-				<a th:href="@{/review/writeReview/{cno}(cno=${cafe.cno})}" class="btn btn-primary">리뷰 작성</a>
-			</form>
-		</div>
+        <!--지도영역 시작-->
+        <div id="map" style="width: 80%; height: 350px;"></div>
 
 
+        <!-- 지도 출력 스크립트 -->
+        <script th:inline="javascript">
 
 
+            /*<![CDATA[*/
 
-		<div class="cf-review">
-			<div class="cf-review-item" th:each="review, j : ${review}">
-				<div class="cf-review-writer">
-					<div class="cf-review-profile"></div>
-					<div th:text="${review.username}" style="font-weight: bold">리뷰작성자</div>
-				</div>
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                mapOption = {
+                    center: new kakao.maps.LatLng(35.15306, 129.06623), // 지도의 중심좌표 (전포역)
+                    level: 3 // 지도의 확대 레벨
+                };
 
-				<div class="cf-review-detail">
-					<div>
-						<span class="text-20" th:text="${review.title}">리뷰제목</span> <span th:text="${review.date}"
-							style="color: gray">5일 전</span>
-					</div>
+            // 지도생성
+            var map = new kakao.maps.Map(mapContainer, mapOption);
 
-					<div th:utext="${review.content}">리뷰 영역을 나타내는 더미 데이터입니다.</div>
-					<div>
-						<b><img class="heart-icon" src="/img/heart-empty.png">
-							0</b>
-					</div>
-					
-					<div sec:authorize="isAuthenticated()">
+            // 카페 데이터 배열
+            var caddress = /*[['${cafe.caddress}']]*/; // 문자열로 변환
+            var cname = /*[['${cafe.cname}']]*/; // 문자열로 변환
+
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+
+            geocoder.addressSearch(caddress, function (result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+
+                    map.setCenter(coords);
+
+
+                }
+            });
+
+            // 마커에 표시할 인포윈도우를 생성합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: positions[i].content // 인포윈도우에 표시할 내용
+            });
+
+            // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+
+            // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+            function makeOverListener(map, marker, infowindow) {
+                return function () {
+                    infowindow.open(map, marker);
+                };
+            }
+
+            // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+            function makeOutListener(infowindow) {
+                return function () {
+                    infowindow.close();
+                };
+            }
+
+
+            /*]]>*/
+        </script>
+
+        <!--지도 영역 끝 -->
+        <hr>
+        <!--구분선-->
+        <b>리뷰(<span style="font-size: 16px;" th:text="${page.count}">000</span>)</b>
+
+
+        <div class="review-card">
+            <div class="review-card-sep">
+                <div class="card-body">
+                    <h4 class="card-title">평균 별점</h4>
+                    <h5 class="card-text"><span th:text="${cafe.avgscore}">5.0</span>점</h5>
+
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">평균 웨이팅</h4>
+                    <h5 class="card-text"><span th:text="${cafe.avgwait}">평균웨이팅</span>분</h5>
+                </div>
+            </div>
+            <form>
+                <input id="getCno" name="cno" type="hidden" th:value="${cafe.cno}">
+                <a th:href="@{/review/writeReview/{cno}(cno=${cafe.cno})}" class="btn btn-primary">리뷰 작성</a>
+            </form>
+        </div>
+
+
+        <div class="cf-review">
+            <div class="cf-review-item" th:each="review, j : ${review}">
+                <div class="cf-review-writer">
+                    <div class="cf-review-profile"></div>
+                    <div th:text="${review.username}" style="font-weight: bold">리뷰작성자</div>
+                </div>
+
+                <div class="cf-review-detail">
+                    <div>
+                        <span class="text-20" th:text="${review.title}">리뷰제목</span> <span th:text="${review.date}"
+                                                                                          style="color: gray">5일 전</span>
+                    </div>
+
+                    <div th:utext="${review.content}">리뷰 영역을 나타내는 더미 데이터입니다.</div>
+                    <div>
+                        <b><img class="heart-icon" src="/img/heart-empty.png">
+                            0</b>
+                    </div>
+
+                    <div sec:authorize="isAuthenticated()">
 						<span>
 							<form th:action="@{/review/updateReviewFromCafe}" th:method="GET"
-								style="display: inline-block" th:if="${review.username} == ${#authentication.principal.username}">
+                                  style="display: inline-block"
+                                  th:if="${review.username} == ${#authentication.principal.username}">
 								<button class="btn btn-secondary">수정</button>
 								<input type="hidden" name="rno" th:value="${review.rno}"> 
 								<input type="hidden" name="cname" th:value="${cafe.cname}">
 								<input type="hidden" name="num" th:value="${page.num}">
 							</form>
 						</span>
-						
-						<span>
+
+                        <span>
 							<form th:action="@{/review/deleteReviewFromCafe}" th:method="DELETE"
-								style="display: inline-block" th:if="${review.username} == ${#authentication.principal.username}">
+                                  style="display: inline-block"
+                                  th:if="${review.username} == ${#authentication.principal.username}">
 								<button class="btn btn-danger">삭제</button>
 								<input type="hidden" name="_method" value="DELETE"> 
 								<input type="hidden" name="rno" th:value="${review.rno}"> 
@@ -262,41 +272,44 @@
 								<input type="hidden" name="cno" th:value="${cafe.cno}">
 							</form>
 						</span>
-					
-					</div>
-				
-				</div>
-				<!-- <hr class="hr-dotted">th:if="!${i.last}" -->
-			</div>
-		</div>
 
-					<div class="pagination">
-						<th:block th:if="${page.prev}">
-							<span class="page-item"><a th:href="@{{cno}(cno=${cafe.cno},num=${page.startPageNum - 1})}" class="page-link">이전</a> </span>
-						</th:block>
-						<th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
+                    </div>
+
+                </div>
+                <!-- <hr class="hr-dotted">th:if="!${i.last}" -->
+            </div>
+        </div>
+
+        <div class="pagination">
+            <th:block th:if="${page.prev}">
+                <span class="page-item"><a th:href="@{{cno}(cno=${cafe.cno},num=${page.startPageNum - 1})}"
+                                           class="page-link">이전</a> </span>
+            </th:block>
+            <th:block th:each="num : ${#numbers.sequence(page.StartPageNum, page.endPageNum)}">
 							<span th:if="${select!=num} AND ${page.count!=0}" class="page-item">
-								<a th:href="@{{cno}(cno=${cafe.cno}, num=${num})}" th:text="${num}" class="page-link"></a>
+								<a th:href="@{{cno}(cno=${cafe.cno}, num=${num})}" th:text="${num}"
+                                   class="page-link"></a>
 							</span>
-							<span th:if="${select==num} AND ${page.count!=0}" class="page-item active">
+                <span th:if="${select==num} AND ${page.count!=0}" class="page-item active">
 								<a th:href="@{info/${cafe.cno}(num=${num})}" th:text="${num}" class="page-link"></a>
 							</span>
-							<span th:if="${num==0}">
+                <span th:if="${num==0}">
 								<label>아직 한 건의 리뷰도 작성하지 않았습니다!</label>
 							</span>
-						</th:block>
-						<th:block th:if="${page.next}">
-							<span class="page-item"><a th:href="@{{cno}(cno=${cafe.cno}, num=${page.endPageNum + 1})}" class="page-link">다음</a></span>
-						</th:block>
-					</div> 
+            </th:block>
+            <th:block th:if="${page.next}">
+                <span class="page-item"><a th:href="@{{cno}(cno=${cafe.cno}, num=${page.endPageNum + 1})}"
+                                           class="page-link">다음</a></span>
+            </th:block>
+        </div>
 
 
-		<!-- <button type="button" id="seeMoreBtn" class="btn btn-outline-secondary col-md-12">더보기</button> -->
-		<!-- onclick="seeMore()" -->
+        <!-- <button type="button" id="seeMoreBtn" class="btn btn-outline-secondary col-md-12">더보기</button> -->
+        <!-- onclick="seeMore()" -->
 
-		<hr>
+        <hr>
 
-	</div>
+    </div>
 
 
 </div>
