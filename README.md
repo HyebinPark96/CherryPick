@@ -11,7 +11,6 @@
 ### :construction_worker: 개발 인원
 #### [총 3명 : 김서하, 박혜빈, 최효빈]
 
-asf
 &nbsp;  
 ### :books: 사용스택
 **[Backend]** 
