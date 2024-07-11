@@ -153,8 +153,9 @@
             var map = new kakao.maps.Map(mapContainer, mapOption);
 
             // 카페 데이터 배열
-            var caddress = /*[['${cafe.caddress}']]*/ '';
-            var cname = /*[['${cafe.cname}']]*/ '';
+            var caddress = /*[[${cafe.caddress}]]*/ ''; // 템플릿 엔진이 데이터를 치환하도록 변경
+            var cname = /*[[${cafe.cname}]]*/ ''; // 템플릿 엔진이 데이터를 치환하도록 변경
+
 
             // 주소-좌표 변환 객체를 생성합니다
             var geocoder = new kakao.maps.services.Geocoder();
