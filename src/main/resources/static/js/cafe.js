@@ -21,14 +21,14 @@ function sendToCherryBmk() {
 
 // 문서 ready때 체크: 1.북마크 여부(cafeInfo) 2.sort&filter(cafeList)
 $(document).ready(function() {
-		
-	let chk = document.getElementById('bmk_check').value
+
+	let chk = $("#bmk_check").val();
 	const cno = $("#cno").val();
 	const username = $("#username").val();
 	const bmkImg = document.getElementById("bmkImg");
-	console.log("[bmk check]username:"+username);
-	console.log("[bmk check]cno:"+cno);
-	console.log("[bmk check]chk:"+chk);
+	// console.log("[bmk check]username:"+username);
+	// console.log("[bmk check]cno:"+cno);
+	// console.log("[bmk check]chk:"+chk);
 
 	if (chk <= 0 ) {
 		bmkImg.src = "/img/bmk-empty.png";
@@ -45,11 +45,11 @@ $(document).ready(function() {
 	const sort =  $("#f_sort").val();
 	let page = $("#page").val();
 
-	console.log("fpark:"+fpark);
-	console.log("fpet:"+fpet);
-	console.log("fkids:"+fkids);
-	console.log("fgroup:"+fgroup);
-	console.log("sort:"+sort);
+	// console.log("fpark:"+fpark);
+	// console.log("fpet:"+fpet);
+	// console.log("fkids:"+fkids);
+	// console.log("fgroup:"+fgroup);
+	// console.log("sort:"+sort);
 					
 
 	var filter = { 'fpark' : fpark, 'fpet' : fpet, 'fkids' : fkids, 'fgroup' : fgroup, 'sort' : sort, 'page' : page}
@@ -61,7 +61,7 @@ $(document).ready(function() {
 	$("#sort0").on("click", function() {
 		if(this.checked) {
 			filter.sort = 0;
-			console.log("[checked]sort0"); 
+			//console.log("[checked]sort0");
 		}
 		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 			
