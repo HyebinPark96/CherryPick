@@ -21,14 +21,14 @@ function sendToCherryBmk() {
 
 // 문서 ready때 체크: 1.북마크 여부(cafeInfo) 2.sort&filter(cafeList)
 $(document).ready(function() {
-		
-	let chk = document.getElementById('bmk_check').value
+
+	let chk = $("#bmk_check").val();
 	const cno = $("#cno").val();
 	const username = $("#username").val();
 	const bmkImg = document.getElementById("bmkImg");
-	console.log("[bmk check]username:"+username);
-	console.log("[bmk check]cno:"+cno);
-	console.log("[bmk check]chk:"+chk);
+	// console.log("[bmk check]username:"+username);
+	// console.log("[bmk check]cno:"+cno);
+	// console.log("[bmk check]chk:"+chk);
 
 	if (chk <= 0 ) {
 		bmkImg.src = "/img/bmk-empty.png";
@@ -45,11 +45,11 @@ $(document).ready(function() {
 	const sort =  $("#f_sort").val();
 	let page = $("#page").val();
 
-	console.log("fpark:"+fpark);
-	console.log("fpet:"+fpet);
-	console.log("fkids:"+fkids);
-	console.log("fgroup:"+fgroup);
-	console.log("sort:"+sort);
+	// console.log("fpark:"+fpark);
+	// console.log("fpet:"+fpet);
+	// console.log("fkids:"+fkids);
+	// console.log("fgroup:"+fgroup);
+	// console.log("sort:"+sort);
 					
 
 	var filter = { 'fpark' : fpark, 'fpet' : fpet, 'fkids' : fkids, 'fgroup' : fgroup, 'sort' : sort, 'page' : page}
@@ -61,7 +61,7 @@ $(document).ready(function() {
 	$("#sort0").on("click", function() {
 		if(this.checked) {
 			filter.sort = 0;
-			console.log("[checked]sort0"); 
+			//console.log("[checked]sort0");
 		}
 		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 			
@@ -117,10 +117,10 @@ $(document).ready(function() {
 	$("#fpark").on("change", function() {
 		if(this.checked) {
 			filter.fpark = 1;
-			console.log("[checked]parking"); 
+			//console.log("[checked]parking");
 		}else {
 			filter.fpark = 0;
-			console.log("[unchecked]parking:"); 
+			//console.log("[unchecked]parking:");
 		}
 		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 	});
@@ -131,10 +131,10 @@ $(document).ready(function() {
 	$("#fpet").on("change", function() {
 		if(this.checked) {
 			filter.fpet = 1;
-			console.log("[checked]pet"); 
+			//console.log("[checked]pet");
 		}else {
 			filter.fpet = 0;
-			console.log("[unchecked]pet");  
+			//console.log("[unchecked]pet");
 		}
 		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 
@@ -144,10 +144,10 @@ $(document).ready(function() {
 	$("#fkids").on("change", function() {
 		if(this.checked) {
 			filter.fkids = 1;
-			console.log("[checked]kids"); 
+			//console.log("[checked]kids");
 		}else {
 			filter.fkids = 0;
-			console.log("[unchecked]kids"); 
+			//console.log("[unchecked]kids");
 		}
 		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
 	});
@@ -156,10 +156,10 @@ $(document).ready(function() {
 	$("#fgroup").on("change", function() {
 		if(this.checked) {
 			filter.fgroup = 1;
-			console.log("[checked]group"); 
+			//console.log("[checked]group");
 		}else {
 			filter.fgroup = 0;
-			console.log("[unchecked]group"); 
+			//console.log("[unchecked]group");
 		}
 		
 		window.location.href="/cafe/all?sort="+filter.sort+"&fpark="+filter.fpark+"&fpet="+filter.fpet+"&fkids="+filter.fkids+"&fgroup="+filter.fgroup;
@@ -173,7 +173,7 @@ $(document).ready(function() {
 			type: 'POST',
 			data: { 'cno': cno, 'username': username },
 			success: function(data) {
-				console.log(data);
+				//console.log(data);
 				if (data == 1) {
 					$("#bmkImg").attr("src", "/img/bmk.png");
 				} else {
@@ -181,7 +181,7 @@ $(document).ready(function() {
 				}
 			}, error: function() {
 				$("#bmkImg").attr("src", "/img/bmk-empty.png");
-				console.log('오타')
+				//console.log('오타')
 				
 				}
 
@@ -199,13 +199,13 @@ $(document).ready(function() {
 	
 	
 //chk 1=있음 0=없음
-	let chk = document.getElementById('bmkli_check').value
+	let chk = $("#bmkli_check").val();
 	const lino = $("#lino").val();
 	const username = $("#username").val();
-	console.log("lino:"+lino);
-	console.log("username:"+username);
+	//console.log("lino:"+lino);
+	//console.log("username:"+username);
 	const bmkImg = document.getElementById("bmkliImg")
-	console.log("chk:"+chk);
+	//console.log("chk:"+chk);
 
 	if (chk == 1 ) {
 		bmkImg.src = "/img/bmk.png";
@@ -221,7 +221,7 @@ $(document).ready(function() {
 			type: 'GET',
 			data: { 'lino': lino, 'username': username },
 			success: function(data) {
-				console.log(data);
+				//console.log(data);
 				if (data == 1) {
 					$("#bmkliImg").attr("src", "/img/bmk.png");
 				} else {
@@ -229,7 +229,7 @@ $(document).ready(function() {
 				}
 			}, error: function() {
 				$("#bmkliImg").attr("src", "/img/bmk-empty.png");
-				console.log('오타')
+				//console.log('오타')
 				
 			}
 
